@@ -31,7 +31,6 @@ import {
 // import Main from './Main';
 import Search from './Search';
 import Footer from './Footer';
-import PageHead from './PageHead';
 
 const SUPPORTED_MENU_TOGGLE = {
 	CREATE: 'CREATE',
@@ -56,7 +55,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 	const { width } = useWindowSize();
 	const { pathname } = useLocation();
 
-	const { lang } = useSelector(selectLocaleSettings);
+	const { lang } = {} // useSelector(selectLocaleSettings);
 	const { firstName, lastName, organizations } = {} // useSelector(selectAuth);
 
 	const [ showMenu, setShowMenu ]  = React.useState(false);
@@ -183,7 +182,6 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 
 	return (
 		<>
-			<PageHead />
 			{(type !== 'auth') ? (
 				<div className={setMainClassName(showMenu, hasSmallScreen)}>
 					<header id="header" className="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-white">

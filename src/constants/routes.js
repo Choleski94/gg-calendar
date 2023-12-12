@@ -9,21 +9,21 @@ export const guestRoutes = [
 		path: '/',
 		element: screenElements.SignIn,
 	},
-	{
-		slug: 'sign-in',
-		path: '/signin',
-		element: screenElements.SignIn,
-	},
-	{
-		slug: 'sign-up',
-		path: '/signup',
-		element: screenElements.SignUp,
-	},
-	{
-		slug: 'forgot-password',
-		path: '/forgot_password',
-		element: screenElements.ForgotPassword,
-	},
+	// {
+	// 	slug: 'sign-in',
+	// 	path: '/signin',
+	// 	element: screenElements.SignIn,
+	// },
+	// {
+	// 	slug: 'sign-up',
+	// 	path: '/signup',
+	// 	element: screenElements.SignUp,
+	// },
+	// {
+	// 	slug: 'forgot-password',
+	// 	path: '/forgot_password',
+	// 	element: screenElements.ForgotPassword,
+	// },
 ];
 
 // // COMPLETE

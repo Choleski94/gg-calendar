@@ -428,9 +428,11 @@ export const EQUIPMENT_TYPES = {
 	WASHERDRYER_COMBO: 'Washer/Dryer Combo'
 }
 
-export default {
+const constants = {
 	...auth,
 	...jobs,
 	...layouts,
 	...accounts,
 }
+
+export default constants;

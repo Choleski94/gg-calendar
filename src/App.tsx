@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import themes from '@components/themes';
 
-import locales from './locales';
+import locales from '@locales';
 import routes from './constants/routes';
 import RenderRoutes from './components/routes/RenderRoutes';
 
@@ -16,14 +16,13 @@ const Tigado = () => {
 	return (
 		<ThemeProvider theme={themes[theme]}>
 			<IntlProvider locale={lang} messages={locales[lang]} key={lang}>
-				{/*
-				<h1>
-					Hello Tigado team
-				</h1>
-				*/}
 				<Routes>
-					{(routes.map(({ slug, element, path }) => (
-						<Route key={slug} element={element} path={path} />
+					{(routes.map(({ slug, element: Component, path }) => (
+						<Route 
+							exact 
+							key={slug} path={path} 
+							element={<Component />} 
+						/>
 					)))}
 				</Routes>
 			</IntlProvider>
