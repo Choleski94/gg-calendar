@@ -1,1 +1,1 @@
-export { default, getServerSideProps } from './forgot_password';
+export { default } from './forgot_password';

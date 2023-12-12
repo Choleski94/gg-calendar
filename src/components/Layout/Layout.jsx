@@ -1,6 +1,4 @@
-import path from 'path';
 import React from 'react';
-import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
@@ -21,7 +19,6 @@ import OrganizationInfoSettings from '@modules/OrganizationInfoSettings';
 import * as authService from '@api/auth';
 
 import {
-	Overlay,
 	hasSubMenu,
 	renderMenu,
 	setMainClassName,
@@ -31,7 +28,7 @@ import {
 	getUserDropdownClassName,
 	getUserWrapperDropdownClassName,
 } from './Layout.helpers';
-import Main from './Main';
+// import Main from './Main';
 import Search from './Search';
 import Footer from './Footer';
 import PageHead from './PageHead';
@@ -52,7 +49,7 @@ const getAcronym = (name = '') => (
 );
 
 const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, children }) => {
-	const router = useRouter();
+	const router = {};
 	const myRef = React.useRef();
 	const dispatch = useDispatch();
 

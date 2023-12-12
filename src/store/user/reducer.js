@@ -1,52 +1,37 @@
 import * as actionTypes from './types';
 
 const INITIAL_STATE = {
-	current: {},
+	id: null,
+	email: null,
+	phone: null,
+	lastName: null,
+	firstName: null,
+	loading: false,
 	isLoggedIn: false,
-	isLoading: false,
-	isSuccess: false,
 };
 
-const userReducer = (state = INITIAL_STATE, action) => {
+const authReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case actionTypes.REQUEST_LOADING:
+		case actionTypes.LOADING_REQUEST:
 			return {
 				...state,
-				isLoggedIn: false,
-				isLoading: true,
+				loading: true,
 			};
-		case actionTypes.REQUEST_FAILED:
+		case actionTypes.FAILED_REQUEST:
 			return INITIAL_STATE;
 
-		case actionTypes.REQUEST_SUCCESS:
+		case actionTypes.LOGIN_SUCCESS:
 			return {
-				current: action.payload,
+				loading: false,
 				isLoggedIn: true,
-				isLoading: false,
-				isSuccess: true,
-			};
-
-		case actionTypes.REGISTER_SUCCESS:
-			return {
-				current: null,
-				isLoggedIn: false,
-				isLoading: false,
-				isSuccess: true,
+				...action.payload,
 			};
 		case actionTypes.LOGOUT_SUCCESS:
 			return INITIAL_STATE;
-
-		case actionTypes.LOGOUT_FAILED:
-			return {
-				current: action.payload,
-				isLoggedIn: true,
-				isLoading: false,
-				isSuccess: true,
-			};
 
 		default:
 			return state;
 	}
 };
 
-export default userReducer;
+export default authReducer;

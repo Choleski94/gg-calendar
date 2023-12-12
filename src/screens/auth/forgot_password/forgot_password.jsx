@@ -8,7 +8,6 @@ import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 // import Header from '../../components/layout/Header';
 import { Input, Layout, BlockMessage } from '@components';
-import getServerSideProps from '@utils/getServerSideProps';
 import withBrowserDetect from '@utils/hocs/withBrowserDetect';
 
 const ForgotPasswordPage = ({ browser, version, OS, language }) => {
@@ -151,7 +150,5 @@ const ForgotPasswordPage = ({ browser, version, OS, language }) => {
 		</>
 	);
 };
-
-export { getServerSideProps };
 
 export default withBrowserDetect(ForgotPasswordPage);

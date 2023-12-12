@@ -1,10 +1,9 @@
 import React from 'react';
-import Head from 'next/head';
 
 import formatMessage from '@utils/formatMessage';
 
 const PageHead = ({ headTitle }) => (
-	<Head>
+	<>
 		<title>
 			{headTitle || formatMessage('meta.title.text')}
 		</title>
@@ -20,7 +19,7 @@ const PageHead = ({ headTitle }) => (
 		{/* CSS Front Template */}
 		<link rel="stylesheet" href="/assets/css/theme.min.css%3Fv=1.0.css"/>
 		<link rel="preload" href="/assets/css/style.css" as="style"/>
-	</Head>
+	</>
 );
 
 export default PageHead;

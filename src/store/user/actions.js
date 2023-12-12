@@ -1,157 +1,44 @@
+// import history from '@utils/history';
+import * as authService from '@api/auth';
+
 import * as actionTypes from './types';
-import * as userService from '@/user';
-import { request } from '@/request';
 
-export const login =
-	({ loginData }) =>
-	async (dispatch) => {
-		dispatch({
-			type: actionTypes.REQUEST_LOADING,
-		});
-		const data = await userService.login({ loginData });
-
-		if (data.success === true) {
-			const user_state = {
-				current: data.result,
-				isLoggedIn: true,
-				isLoading: false,
-				isSuccess: true,
-			};
-			window.localStorage.setItem('user', JSON.stringify(user_state));
-			window.localStorage.removeItem('isLogout');
-			dispatch({
-				type: actionTypes.REQUEST_SUCCESS,
-				payload: data.result,
-			});
-		} else {
-			dispatch({
-				type: actionTypes.REQUEST_FAILED,
-			});
-		}
-	};
-
-export const register =
-	({ registerData }) =>
-	async (dispatch) => {
-		dispatch({
-			type: actionTypes.REQUEST_LOADING,
-		});
-		const data = await userService.register({ registerData });
-
-		if (data.success === true) {
-			dispatch({
-				type: actionTypes.REGISTER_SUCCESS,
-			});
-		} else {
-			dispatch({
-				type: actionTypes.REQUEST_FAILED,
-			});
-		}
-	};
-
-export const verify =
-	({ userId, emailToken }) =>
-	async (dispatch) => {
-		dispatch({
-			type: actionTypes.REQUEST_LOADING,
-		});
-		const data = await userService.verify({ userId, emailToken });
-
-		if (data.success === true) {
-			const user_state = {
-				current: data.result,
-				isLoggedIn: true,
-				isLoading: false,
-				isSuccess: true,
-			};
-			window.localStorage.setItem('user', JSON.stringify(user_state));
-			window.localStorage.removeItem('isLogout');
-			dispatch({
-				type: actionTypes.REQUEST_SUCCESS,
-				payload: data.result,
-			});
-		} else {
-			dispatch({
-				type: actionTypes.REQUEST_FAILED,
-			});
-		}
-	};
-
-export const resetPassword =
-	({ resetPasswordData }) =>
-	async (dispatch) => {
-		dispatch({
-			type: actionTypes.REQUEST_LOADING,
-		});
-		const data = await userService.resetPassword({ resetPasswordData });
-
-		if (data.success === true) {
-			const user_state = {
-				current: data.result,
-				isLoggedIn: true,
-				isLoading: false,
-				isSuccess: true,
-			};
-			window.localStorage.setItem('user', JSON.stringify(user_state));
-			window.localStorage.removeItem('isLogout');
-			dispatch({
-				type: actionTypes.REQUEST_SUCCESS,
-				payload: data.result,
-			});
-		} else {
-			dispatch({
-				type: actionTypes.REQUEST_FAILED,
-			});
-		}
-	};
-
-export const logout = () => async (dispatch) => {
+export const login = ({ loginData }) => async (dispatch) => {
 	dispatch({
-		type: actionTypes.LOGOUT_SUCCESS,
+		type: actionTypes.LOADING_REQUEST,
+		payload: { loading: true },
 	});
-	const result = window.localStorage.getItem('user');
-	const tmpAuth = JSON.parse(result);
-	const settings = window.localStorage.getItem('settings');
-	const tmpSettings = JSON.parse(settings);
-	window.localStorage.removeItem('user');
-	window.localStorage.removeItem('settings');
-	window.localStorage.setItem('isLogout', JSON.stringify({ isLogout: true }));
-	const data = await userService.logout();
-	if (data.success === false) {
-		const user_state = {
-			current: tmpAuth,
-			isLoggedIn: true,
-			isLoading: false,
-			isSuccess: true,
-		};
-		window.localStorage.setItem('user', JSON.stringify(user_state));
-		window.localStorage.setItem('settings', JSON.stringify(tmpSettings));
-		window.localStorage.removeItem('isLogout');
+
+	const data = await authService.login({ loginData });
+
+	if (data.success === true) {
+		if (typeof window !== 'undefined') {
+			window.localStorage.setItem('isLoggedIn', true);
+			window.localStorage.setItem('user', JSON.stringify(data.result));
+		}
+
 		dispatch({
-			type: actionTypes.LOGOUT_FAILED,
+			type: actionTypes.LOGIN_SUCCESS,
 			payload: data.result,
 		});
+
+		return true;
 	} else {
-		// on lgout success
+		dispatch({
+			type: actionTypes.FAILED_REQUEST,
+			payload: data,
+		});
+
+		return false;
 	}
 };
 
-export const updateProfile =
-	({ entity, jsonData }) =>
-	async (dispatch) => {
-		let data = await request.updateAndUpload({ entity, id: '', jsonData });
+export const logout = () => async (dispatch) => {
+	authService.logout();
 
-		if (data.success === true) {
-			dispatch({
-				type: actionTypes.REQUEST_SUCCESS,
-				payload: data.result,
-			});
-			const user_state = {
-				current: data.result,
-				isLoggedIn: true,
-				isLoading: false,
-				isSuccess: true,
-			};
-			window.localStorage.setItem('user', JSON.stringify(user_state));
-		}
-	};
+	dispatch({
+		type: actionTypes.LOGOUT_SUCCESS,
+	});
+
+	return true;
+};

@@ -1,0 +1,21 @@
+'use strict';
+
+
+/*
+ * UI supported layouts
+ */
+
+const LAYOUT_VERTICAL = 'VERTICAL';
+
+const LAYOUT_HORIZONTAL = 'HORIZONTAL';
+
+const SUPPORTED_LAYOUTS = {
+	VERTICAL: LAYOUT_VERTICAL,
+	HORIZONTAL: LAYOUT_HORIZONTAL,
+}
+
+export default {
+	LAYOUT_VERTICAL,
+	LAYOUT_HORIZONTAL,
+	SUPPORTED_LAYOUTS,
+}

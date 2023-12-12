@@ -1,6 +1,4 @@
 import React from 'react';
-// import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -12,7 +10,6 @@ import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 // import Header from '@components/layout/Header';
 import { Input, Layout, BlockMessage } from '@components';
-import getServerSideProps from '@utils/getServerSideProps';
 import useLocalStorage from '@utils/hooks/useLocalStorage';
 import withBrowserDetect from '@utils/hocs/withBrowserDetect';
 
@@ -28,7 +25,7 @@ const DEFAULT_REGISTER_DATA = {
 };
 
 const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
-	const router = useRouter();
+	const router = {};
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -319,7 +316,5 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 		</>
 	);
 };
-
-export { getServerSideProps };
 
 export default withBrowserDetect(SignUpPage);

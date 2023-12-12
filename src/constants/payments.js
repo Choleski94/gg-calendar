@@ -1,0 +1,12 @@
+'use strict';
+
+export const SUPPORTED_PAYMENT_STATUSES = {
+	PAID: 'PAID',
+	UNPAID: 'UNPAID',
+	OVERDUE: 'OVERDUE',
+	PARTIALLY_PAID: 'PARTIALLY_PAID',
+};
+
+export default {
+	SUPPORTED_PAYMENT_STATUSES,
+}

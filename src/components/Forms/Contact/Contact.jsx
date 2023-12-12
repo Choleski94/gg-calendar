@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import formatMessage from '@utils/formatMessage';
 import { Country, State, City }  from 'country-state-city';
 import { trimString, parseSelectOptionValues, formatOptionValueType } from '@utils';

@@ -1,0 +1,28 @@
+'use strict';
+
+import { MENU_USER_OBJ, MENU_ADMIN_OBJ } from './menus';
+
+/*
+ * Supported accounts.
+ */
+
+const ACCOUNT_ADMIN = 'ADMIN';
+
+const ACCOUNT_USER = 'USER';
+
+const SUPPORTED_ACCOUNTS = {
+	USER: ACCOUNT_USER,
+	ADMIN: ACCOUNT_ADMIN,
+}
+
+const SUPPORTED_ACCOUNTS_MENUS = {
+	USER: MENU_USER_OBJ,
+	ADMIN: MENU_ADMIN_OBJ,
+}
+
+export default {
+	ACCOUNT_USER,
+	ACCOUNT_ADMIN,
+	SUPPORTED_ACCOUNTS,
+	SUPPORTED_ACCOUNTS_MENUS,
+}

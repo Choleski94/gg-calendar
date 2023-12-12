@@ -1,164 +1,126 @@
+import { request } from '@utils/request';
+
 import * as actionTypes from './types';
-import { request } from '@/request';
 
 const dispatchSettingsData = (datas) => {
-  const settingsCategory = {};
+	const settingsCategory = {};
 
-  datas.map((data) => {
-    settingsCategory[data.settingCategory] = {
-      ...settingsCategory[data.settingCategory],
-      [data.settingKey]: data.settingValue,
-    };
-  });
+	datas.map((data) => {
+		settingsCategory[data.settingCategory] = {
+			...settingsCategory[data.settingCategory],
+			[data.settingKey]: data.settingValue,
+		};
+	});
 
-  return settingsCategory;
+	return settingsCategory;
 };
 
 export const settingsAction = {
-  resetState: () => (dispatch) => {
-    dispatch({
-      type: actionTypes.RESET_STATE,
-    });
-  },
-  update:
-    ({ entity, settingKey, jsonData }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-      });
-      let data = await request.patch({
-        entity: entity + '/updateBySettingKey/' + settingKey,
-        jsonData,
-      });
+	resetState: () => (dispatch) => {
+		dispatch({
+			type: actionTypes.RESET_STATE,
+		});
+	},
+	update: ({ entity, settingKey, jsonData }) => async (dispatch) => {
+		dispatch({
+			type: actionTypes.REQUEST_LOADING,
+		});
 
-      if (data.success === true) {
-        dispatch({
-          type: actionTypes.REQUEST_LOADING,
-        });
+		let data = await request.patch({
+			entity: entity + '/updateBySettingKey/' + settingKey,
+			jsonData,
+		});
 
-        let data = await request.listAll({ entity });
+		if (data.success === true) {
+			dispatch({
+				type: actionTypes.REQUEST_LOADING,
+			});
 
-        if (data.success === true) {
-          const payload = dispatchSettingsData(data.result);
-          window.localStorage.setItem(
-            'settings',
-            JSON.stringify(dispatchSettingsData(data.result))
-          );
-          dispatch({
-            type: actionTypes.REQUEST_SUCCESS,
-            payload,
-          });
-        } else {
-          dispatch({
-            type: actionTypes.REQUEST_FAILED,
-          });
-        }
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
-        });
-      }
-    },
-  updateMany:
-    ({ entity, jsonData }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-      });
-      let data = await request.patch({
-        entity: entity + '/updateManySetting',
-        jsonData,
-      });
+			let data = await request.listAll({ entity });
 
-      if (data.success === true) {
-        dispatch({
-          type: actionTypes.REQUEST_LOADING,
-        });
+			if (data.success === true) {
+				const payload = dispatchSettingsData(data.result);
 
-        let data = await request.listAll({ entity });
+				if (typeof window !== 'undefined') {
+					window.localStorage.setItem(
+						'settings',
+						JSON.stringify(dispatchSettingsData(data.result))
+					);
+				}
 
-        if (data.success === true) {
-          const payload = dispatchSettingsData(data.result);
-          window.localStorage.setItem(
-            'settings',
-            JSON.stringify(dispatchSettingsData(data.result))
-          );
-          dispatch({
-            type: actionTypes.REQUEST_SUCCESS,
-            payload,
-          });
-        } else {
-          dispatch({
-            type: actionTypes.REQUEST_FAILED,
-          });
-        }
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
-        });
-      }
-    },
-  list:
-    ({ entity }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-      });
+				dispatch({
+					type: actionTypes.REQUEST_SUCCESS,
+					payload,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.REQUEST_FAILED,
+				});
+			}
+		} else {
+			dispatch({
+				type: actionTypes.REQUEST_FAILED,
+			});
+		}
+	},
+	updateMany: ({ entity, jsonData }) => async (dispatch) => {
+		dispatch({
+			type: actionTypes.REQUEST_LOADING,
+		});
 
-      let data = await request.listAll({ entity });
+		let data = await request.patch({
+			entity: entity + '/updateManySetting',
+			jsonData,
+		});
 
-      if (data.success === true) {
-        const payload = dispatchSettingsData(data.result);
-        window.localStorage.setItem('settings', JSON.stringify(dispatchSettingsData(data.result)));
-        dispatch({
-          type: actionTypes.REQUEST_SUCCESS,
-          payload,
-        });
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
-        });
-      }
-    },
-  upload:
-    ({ entity, settingKey, jsonData }) =>
-    async (dispatch) => {
-      dispatch({
-        type: actionTypes.REQUEST_LOADING,
-      });
+		if (data.success === true) {
+			dispatch({
+				type: actionTypes.REQUEST_LOADING,
+			});
 
-      let data = await request.upload({
-        entity: entity,
-        id: settingKey,
-        jsonData,
-      });
+			let data = await request.listAll({ entity });
 
-      if (data.success === true) {
-        dispatch({
-          type: actionTypes.REQUEST_LOADING,
-        });
+			if (data.success === true) {
+				const payload = dispatchSettingsData(data.result);
+				window.localStorage.setItem(
+					'settings',
+					JSON.stringify(dispatchSettingsData(data.result))
+				);
 
-        let data = await request.listAll({ entity });
+				dispatch({
+					type: actionTypes.REQUEST_SUCCESS,
+					payload,
+				});
+			} else {
+				dispatch({
+					type: actionTypes.REQUEST_FAILED,
+				});
+			}
+		} else {
+			dispatch({
+				type: actionTypes.REQUEST_FAILED,
+			});
+		}
+	},
+	list: ({ entity }) => async (dispatch) => {
+		dispatch({
+			type: actionTypes.REQUEST_LOADING,
+		});
 
-        if (data.success === true) {
-          const payload = dispatchSettingsData(data.result);
-          window.localStorage.setItem(
-            'settings',
-            JSON.stringify(dispatchSettingsData(data.result))
-          );
-          dispatch({
-            type: actionTypes.REQUEST_SUCCESS,
-            payload,
-          });
-        } else {
-          dispatch({
-            type: actionTypes.REQUEST_FAILED,
-          });
-        }
-      } else {
-        dispatch({
-          type: actionTypes.REQUEST_FAILED,
-        });
-      }
-    },
+		let data = await request.listAll({ entity });
+
+		if (data.success === true) {
+			const payload = dispatchSettingsData(data.result);
+			window.localStorage.setItem('settings', JSON.stringify(dispatchSettingsData(data.result)));
+
+			dispatch({
+				type: actionTypes.REQUEST_SUCCESS,
+				payload,
+			});
+		} else {
+			dispatch({
+				type: actionTypes.REQUEST_FAILED,
+			});
+		}
+	},
 };

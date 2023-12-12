@@ -8,7 +8,6 @@ import { Input, Layout } from '@components';
 // import AuthBranding from '@views/AuthBranding';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-import getServerSideProps from '@utils/getServerSideProps';
 import useLocalStorage from '@utils/hooks/useLocalStorage';
 import withBrowserDetect from '@utils/hocs/withBrowserDetect';
 
@@ -242,7 +241,5 @@ const SignInPage = ({ browser, version, OS, language }) => {
 		</>
 	);
 };
-
-export { getServerSideProps };
 
 export default withBrowserDetect(SignInPage);
