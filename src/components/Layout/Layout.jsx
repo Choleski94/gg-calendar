@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 // import { useStore } from '@store';
@@ -9,7 +9,7 @@ import { FALLBACK_LOCALES } from '@locales';
 import { getYear, onlyUnique } from '@utils';
 import InvitePeople from '@modules/InvitePeople';
 import formatMessage from '@utils/formatMessage';
-import { selectAuth } from '@store/auth/selectors';
+// import { selectAuth } from '@store/auth/selectors';
 import useWindowSize from '@utils/hooks/useWindowSize';
 import errorHandler from '@utils/request/errorHandler';
 import useClickOutside from '@utils/hooks/useClickOutside';
@@ -51,13 +51,13 @@ const getAcronym = (name = '') => (
 const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, children }) => {
 	const router = {};
 	const myRef = React.useRef();
-	const dispatch = useDispatch();
+	const dispatch = {} // useDispatch();
 
 	const { width } = useWindowSize();
 	const { pathname } = useLocation();
 
 	const { lang } = useSelector(selectLocaleSettings);
-	const { firstName, lastName, organizations } = useSelector(selectAuth);
+	const { firstName, lastName, organizations } = {} // useSelector(selectAuth);
 
 	const [ showMenu, setShowMenu ]  = React.useState(false);
 	const [ menuToggle, setMenuToggle ] = React.useState('');

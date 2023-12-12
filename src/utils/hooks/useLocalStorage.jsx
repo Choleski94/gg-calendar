@@ -1,6 +1,6 @@
 import React from 'react';
 
-const isValidJson = (jsonString: string) => {
+const isValidJson = (jsonString) => {
 	// Check empty input
 	if (jsonString.trim() === '') {
 		return false;
@@ -14,11 +14,11 @@ const isValidJson = (jsonString: string) => {
 	}
 }
 
-const setValueToString = (value: string) => typeof value === 'string' ? value : JSON.stringify(value);
+const setValueToString = (value) => typeof value === 'string' ? value : JSON.stringify(value);
 
-const useLocalStorage = (key: string, initValue) => {
+const useLocalStorage = (key, initValue) => {
 
-	const initialize = (key: string) => {
+	const initialize = (key) => {
 		try {
 			const item = localStorage.getItem(key);
 			if (item && item !== 'undefined') {
