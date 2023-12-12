@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AUTH_KEY } from '@constants/auth';
@@ -23,47 +23,45 @@ const DEFAULT_AUTH_DATA = {
 
 const SignInPage = ({ browser, version, OS, language }) => {
 	// const router = {};
-	// // const navigate = useNavigate();
-	// // const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const [ errors, setErrors ] = React.useState({});
-	// const [ auth, setAuth ] = useLocalStorage('user', '');
-	// const [ browserInfo, setBrowserInfo ] = React.useState({});
+	const [ auth, setAuth ] = useLocalStorage('user', '');
+	const [ browserInfo, setBrowserInfo ] = React.useState({});
 	const [ data, setData ] = React.useState(DEFAULT_AUTH_DATA);
-	// const [ localToken, setLocalToken ] = useLocalStorage(AUTH_KEY, '');
-	// const [ isLoggedIn, setIsLoggedIn ] = useLocalStorage('isLoggedIn', '');
+	const [ localToken, setLocalToken ] = useLocalStorage(AUTH_KEY, '');
+	const [ isLoggedIn, setIsLoggedIn ] = useLocalStorage('isLoggedIn', '');
 
-	// React.useEffect(() => {
-	// 	// setBrowserInfo({
-	// 	// 	browser, version, OS, language
-	// 	// });
-	// }, []);
+	React.useEffect(() => setBrowserInfo({
+		browser, version, OS, language
+	}), []);
 
-	// const errorMessages = {
-	// 	empty: formatMessage('form.validation.empty.error.text'),
-	// 	email: formatMessage('form.validation.email.error.text')
-	// };
+	const errorMessages = {
+		empty: formatMessage('form.validation.empty.error.text'),
+		email: formatMessage('form.validation.email.error.text')
+	};
 
-	// const validate = (data = {}) => {
-	// 	const errs = {};
+	const validate = (data = {}) => {
+		const errs = {};
 
-	// 	// Check for empty email.
-	// 	if (!data?.email) {
-	// 		errs.email = errorMessages.empty;
-	// 	}
+		// Check for empty email.
+		if (!data?.email) {
+			errs.email = errorMessages.empty;
+		}
 
-	// 	// Check for empty password.
-	// 	if (!data?.password) {
-	// 		errs.password = errorMessages.empty;
-	// 	}
+		// Check for empty password.
+		if (!data?.password) {
+			errs.password = errorMessages.empty;
+		}
 
-	// 	// Verify Email.
-	// 	if (data.email && !validateEmail(data.email)) {
-	// 		errs.email = errorMessages.email;
-	// 	}
+		// Verify Email.
+		if (data.email && !validateEmail(data.email)) {
+			errs.email = errorMessages.email;
+		}
 
-	//         return errs;
-	// };
+	        return errs;
+	};
 
 	const onChange = (e) => setData({
 		...data, [e.target?.name]: (
@@ -73,58 +71,59 @@ const SignInPage = ({ browser, version, OS, language }) => {
 	});
 
 	const onSubmit = (e) => {
-	// 	e.preventDefault();
+		e.preventDefault();
 
-	// 	// Check if we have error(s).
-	// 	const errs = validate(data);
+		// Check if we have error(s).
+		const errs = validate(data);
 
-	// 	setErrors(errs);
+		setErrors(errs);
 
-	// 	if (Object.keys(errs).length) return null;
+		if (Object.keys(errs).length) return null;
 
-	// 	// // Set loading state.
-	// 	// dispatch({
-	// 	// 	type: actionTypes.LOADING_REQUEST,
-	// 	// 	payload: { loading: true },
-	// 	// });
+		// // Set loading state.
+		// dispatch({
+		// 	type: actionTypes.LOADING_REQUEST,
+		// 	payload: { loading: true },
+		// });
 
-	// 	// api.auth.login(data).then((response) => {
-	// 	// 	const { status, data } = response;
+		api.auth.login(data).then((response) => {
+			const { status, data } = response;
 
-	// 	// 	if (data.success === true) {
-	// 	// 		// Success network request
-	// 	// 		setIsLoggedIn(true);
-	// 	// 		console.log('DATA:::', data?.result);
+			if (data.success === true) {
+				// Success network request
+				setIsLoggedIn(true);
+				console.log('DATA:::', data?.result);
 
-	// 	// 		setLocalToken(data?.result.token);
-	// 	// 		setAuth(JSON.stringify(data?.result));
+				setLocalToken(data?.result.token);
+				setAuth(JSON.stringify(data?.result));
 
-	// 	// 		// Set sucess toast.
-	// 	// 		dispatch({
-	// 	// 			type: actionTypes.LOGIN_SUCCESS,
-	// 	// 			payload: data?.result,
-	// 	// 		});
+				// Set sucess toast.
+				dispatch({
+					type: actionTypes.LOGIN_SUCCESS,
+					payload: data?.result,
+				});
 
-	// 	// 		successHandler(
-	// 	// 			{ data, status },
-	// 	// 			{
-	// 	// 				notifyOnSuccess: false,
-	// 	// 				notifyOnFailed: true,
-	// 	// 			}
-	// 	// 		);
+				successHandler(
+					{ data, status },
+					{
+						notifyOnSuccess: false,
+						notifyOnFailed: true,
+					}
+				);
 
-	// 	// 		// Reload application now our user is authenticated.
-	// 	// 		router.reload();
-	// 	// 	} else {
-	// 	// 		// Failed network request
-	// 	// 		dispatch({
-	// 	// 			type: actionTypes.FAILED_REQUEST,
-	// 	// 			payload: data,
-	// 	// 		});
-	// 	// 	}
-	// 	// }).catch((error) => {
-	// 	// 	// errorHandler(error, navigate);
-	// 	// });
+				console.log('ok')
+				// Reload application now our user is authenticated.
+				// router.reload();
+			} else {
+				// Failed network request
+				dispatch({
+					type: actionTypes.FAILED_REQUEST,
+					payload: data,
+				});
+			}
+		}).catch((error) => {
+			// errorHandler(error, navigate);
+		});
 	};
 
 	return (
@@ -242,5 +241,4 @@ const SignInPage = ({ browser, version, OS, language }) => {
 	);
 };
 
-// export default withBrowserDetect(SignInPage);
-export default SignInPage;
+export default withBrowserDetect(SignInPage);
