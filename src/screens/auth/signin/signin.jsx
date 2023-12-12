@@ -1,14 +1,11 @@
 import React from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AUTH_KEY } from '@constants/auth';
 import { login } from '@store/user/actions';
 import { Input, Layout } from '@components';
-import AuthBranding from '@views/AuthBranding';
-// import Header from '@components/layout/Header';
+// import AuthBranding from '@views/AuthBranding';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 import getServerSideProps from '@utils/getServerSideProps';
@@ -26,7 +23,7 @@ const DEFAULT_AUTH_DATA = {
 };
 
 const SignInPage = ({ browser, version, OS, language }) => {
-	const router = useRouter();
+	const router = {};
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -133,11 +130,13 @@ const SignInPage = ({ browser, version, OS, language }) => {
 
 	return (
 		<>
+			{/*
 			<Head>
 				<title>
 					{formatMessage('meta.signin.title.text')}
 				</title>
 			</Head>
+			*/}
 			<Layout type="auth">
 				<div className="container-fluid px-3">
 					<div className="row">
