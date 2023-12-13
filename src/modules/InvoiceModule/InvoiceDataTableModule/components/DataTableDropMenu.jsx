@@ -12,7 +12,7 @@ import { erp } from '@/redux/erp/actions';
 import { selectItemById } from '@/redux/erp/selectors';
 import { useErpContext } from '@/context/erp';
 
-import { DOWNLOAD_BASE_URL } from '@/config/serverApiConfig';
+import config from '@config';
 import uniqueId from '@/utils/uinqueId';
 import { useHistory } from 'react-router-dom';
 
@@ -39,7 +39,7 @@ export default function DataTableDropMenu({ row, entity }) {
     modal.open();
   }
   function Download() {
-    window.open(`${DOWNLOAD_BASE_URL}${entity}/${row._id}`, '_blank');
+    window.open(`${config.download.base_url}${entity}/${row._id}`, '_blank');
   }
   return (
     <Menu style={{ minWidth: 130 }}>

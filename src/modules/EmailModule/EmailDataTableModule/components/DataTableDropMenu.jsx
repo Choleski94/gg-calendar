@@ -13,7 +13,6 @@ import uniqueId from '@utils/uinqueId';
 import { erp } from '@store/erp/actions';
 import { useErpContext } from '@store/context/erp';
 import { selectItemById } from '@store/erp/selectors';
-import { DOWNLOAD_BASE_URL } from '@utils/config/serverApiConfig';
 
 const DataTableDropMenu = ({ row, entity }) => {
 	const dispatch = useDispatch();

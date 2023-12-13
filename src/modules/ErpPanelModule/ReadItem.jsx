@@ -11,13 +11,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { Button, PageHeader, Row, Col, Descriptions, Statistic, Tag } from 'antd';
 
+import config from '@config';
 import uniqueId from '@utils/uinqueId';
 import { erp } from '@store/erp/actions';
 import { useMoney } from '@utils/settings';
 import useMail from '@utils/hooks/useMail';
 import { useErpContext } from '@store/context/erp';
 import { selectCurrentItem } from '@store/erp/selectors';
-import { DOWNLOAD_BASE_URL } from '@config/serverApiConfig';
 
 const Item = ({ item }) => {
 	const { moneyFormatter } = useMoney();
@@ -146,7 +146,7 @@ const ReadItem = ({ config, selectedItem }) => {
 						onClick={() => {
 							if (typeof window !== 'undefined') {
 								window.open(
-									`${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentErp._id}.pdf`,
+									`${config.download.base_url}${entity}/${entity}-${currentErp._id}.pdf`,
 									'_blank'
 								);
 							}

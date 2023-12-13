@@ -9,11 +9,11 @@ import { Menu } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import config from '@config';
 import uniqueId from '@utils/uinqueId';
 import { erp } from '@store/erp/actions';
 import { useErpContext } from '@store/context/erp';
 import { selectItemById } from '@store/erp/selectors';
-import { DOWNLOAD_BASE_URL } from '@config/serverApiConfig';
 
 const DataTableDropMenu = ({ row, entity }) => {
 	const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const DataTableDropMenu = ({ row, entity }) => {
 	}
 
 	const Download = () => {
-		window.open(`${DOWNLOAD_BASE_URL}${entity}/${row._id}`, '_blank');
+		window.open(`${config.download.base_url}${entity}/${row._id}`, '_blank');
 	}
 
 	return (

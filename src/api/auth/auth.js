@@ -1,28 +1,29 @@
 import axios from 'axios';
 
-import { API_BASE_URL } from '@config/serverApiConfig';
+import config from '@config';
 
 const getTimestamp = () => new Date().getTime();
-
-axios.defaults.baseURL = API_BASE_URL;
 
 const auth = {
 	login: async (credentials) => {
 		axios.defaults.withCredentials = true;
+		axios.defaults.baseURL = config.api.base_url;
 
 		const timestamp = getTimestamp();
 
-		return await axios.post(`login?timestamp=${timestamp}`, credentials);
+		return await axios.post(`/login?timestamp=${timestamp}`, credentials);
 	},
 	register: async (credentials) => {
 		axios.defaults.withCredentials = true;
+		axios.defaults.baseURL = config.api.base_url;
 
 		const timestamp = getTimestamp();
 
-		return await axios.post(`register?timestamp=${timestamp}`, credentials);
+		return await axios.post(`/register?timestamp=${timestamp}`, credentials);
 	},
 	logout: async () => {
 		axios.defaults.withCredentials = true;
+		axios.defaults.baseURL = config.api.base_url;
 
 		if (typeof window !== 'undefined') {
 			window.localStorage.clear();
@@ -30,7 +31,7 @@ const auth = {
 
 		const timestamp = getTimestamp();
 
-		return await axios.post(`logout?timestamp=${timestamp}`);
+		return await axios.post(`/logout?timestamp=${timestamp}`);
 	},
 }
 

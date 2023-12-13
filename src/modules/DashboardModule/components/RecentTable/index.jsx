@@ -10,10 +10,10 @@ import {
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
+import config from '@config';
 import { request } from '@utils/request';
 import useFetch from '@utils/hooks/useFetch';
 import useResponsiveTable from '@utils/hooks/useResponsiveTable';
-import { DOWNLOAD_BASE_URL } from '@utils/config/serverApiConfig';
 
 const DropDownRowMenu = ({ row, entity }) => {
 	const history = useHistory();
@@ -28,7 +28,7 @@ const DropDownRowMenu = ({ row, entity }) => {
 
 	const Download = () => {
 		if (typeof window !== 'undefined') {
-			window.open(`${DOWNLOAD_BASE_URL}${entity}/${row._id}`, '_blank');
+			window.open(`${config.download.base_url}${entity}/${row._id}`, '_blank');
 		}
 	}
 
