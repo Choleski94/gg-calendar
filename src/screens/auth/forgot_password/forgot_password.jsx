@@ -2,12 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import api from '@api';
-import AuthBranding from '@views/AuthBranding';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-import { Input, Layout, BlockMessage } from '@components';
-import withGuestRouter from '@utils/hocs/withGuestRouter';
-import withBrowserDetect from '@utils/hocs/withBrowserDetect';
+import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
+import { AuthBranding, Input, Layout, BlockMessage } from '@components';
 
 const ForgotPasswordPage = ({ browser, version, OS, language }) => {
 

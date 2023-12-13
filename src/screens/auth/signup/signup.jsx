@@ -3,38 +3,29 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import api from '@api';
-import { AUTH_KEY } from '@constants/auth';
-import AuthBranding from '@views/AuthBranding';
+// import { AUTH_KEY } from '@constants/auth';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 import * as actionTypes from '@store/user/types';
-// import Header from '@components/layout/Header';
-import errorHandler from '@utils/request/errorHandler';
-import withGuestRouter from '@utils/hocs/withGuestRouter';
-import { Input, Layout, BlockMessage } from '@components';
-import useLocalStorage from '@utils/hooks/useLocalStorage';
-import successHandler from '@utils/request/successHandler';
-import withBrowserDetect from '@utils/hocs/withBrowserDetect';
+// import errorHandler from '@utils/request/errorHandler';
+// import useLocalStorage from '@utils/hooks/useLocalStorage';
+// import successHandler from '@utils/request/successHandler';
+import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
+import { AuthBranding, Input, Layout, BlockMessage } from '@components';
 
-const DEFAULT_REGISTER_DATA = {
-	email: '', 
-	firstName: '', lastName: '',
-	password: '', passwordC: '',
-};
 
 const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
-	const router = {};
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [ errors, setErrors ] = React.useState({});
-	const [ auth, setAuth ] = useLocalStorage('auth', '');
 	const [ loading, setLoading ] = React.useState(false);
-	const [ errorCode, setErrorCode ] = React.useState('');
 	const [ browserInfo, setBrowserInfo ] = React.useState({});
-	const [ data, setData ] = React.useState(DEFAULT_REGISTER_DATA);
-	const [ localToken, setLocalToken ] = useLocalStorage(AUTH_KEY, '');
-	const [ isLoggedIn, setIsLoggedIn ] = useLocalStorage('isLoggedIn', '');
+	const [ data, setData ] = React.useState({
+		email: '', 
+		firstName: '', lastName: '',
+		password: '', passwordC: '',
+	});
 
 	React.useEffect(() => setBrowserInfo({
 		browser, version, OS, language
@@ -108,39 +99,38 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 		});
 
 		api.auth.register(data).then((response) => {
-			const { status, data } = response;
+			// const { status, data } = response;
 
-			if (data.success === true) {
-				// Success network request
-				setIsLoggedIn(true);
-				setLocalToken(data?.result.token);
-				setAuth(JSON.stringify(data?.result));
+			// if (data.success === true) {
+			// 	// Success network request
+			// 	setLocalToken(data?.result.token);
+			// 	setAuth(JSON.stringify(data?.result));
 
-				// // Set sucess toast.
-				// dispatch({
-				// 	type: actionTypes.REGISTER_SUCCESS,
-				// 	payload: data?.result,
-				// });
+			// 	// // Set sucess toast.
+			// 	// dispatch({
+			// 	// 	type: actionTypes.REGISTER_SUCCESS,
+			// 	// 	payload: data?.result,
+			// 	// });
 
-				// successHandler(
-				// 	{ data, status },
-				// 	{
-				// 		notifyOnSuccess: false,
-				// 		notifyOnFailed: true,
-				// 	}
-				// );
+			// 	// successHandler(
+			// 	// 	{ data, status },
+			// 	// 	{
+			// 	// 		notifyOnSuccess: false,
+			// 	// 		notifyOnFailed: true,
+			// 	// 	}
+			// 	// );
 
-				// Reload application now our user is authenticated.
-				router.reload();
-			} else {
-				// Failed network request
-				dispatch({
-					type: actionTypes.FAILED_REQUEST,
-					payload: data,
-				});
-			}
+			// 	// Reload application now our user is authenticated.
+			// 	router.reload();
+			// } else {
+			// 	// Failed network request
+			// 	dispatch({
+			// 		type: actionTypes.FAILED_REQUEST,
+			// 		payload: data,
+			// 	});
+			// }
 		}).catch((error) => {
-			errorHandler(error, navigate);
+			// errorHandler(error, navigate);
 		});
 	};
 
@@ -160,7 +150,6 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 							<AuthBranding />
 						</div>
 						<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
-							{/* <Header /> */}
 							<div
 								className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
 								style={{ maxWidth: "25rem" }}

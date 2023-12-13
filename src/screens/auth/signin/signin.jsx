@@ -1,40 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
 
-import { AUTH_KEY } from '@constants/auth';
 import { login } from '@store/user/actions';
-import { Input, Layout } from '@components';
-import AuthBranding from '@views/AuthBranding';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-import withGuestRouter from '@utils/hocs/withGuestRouter';
-import useLocalStorage from '@utils/hooks/useLocalStorage';
-import withBrowserDetect from '@utils/hocs/withBrowserDetect';
-
-import api from '@api';
-import * as actionTypes from '@store/user/types';
-
-import errorHandler from '@utils/request/errorHandler';
-import successHandler from '@utils/request/successHandler';
-
-const DEFAULT_AUTH_DATA = {
-	email: '', password: '', remember: true
-};
+import { AuthBranding, Input, Layout } from '@components';
+import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
 
 const SignInPage = ({ browser, version, OS, language }) => {
-	// const router = {};
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [ errors, setErrors ] = React.useState({});
-	const [ auth, setAuth ] = useLocalStorage('user', '');
+	const [ loginData, setLoginData ] = React.useState({});
 	const [ browserInfo, setBrowserInfo ] = React.useState({});
-	const [ data, setData ] = React.useState(DEFAULT_AUTH_DATA);
-	const [ localToken, setLocalToken ] = useLocalStorage(AUTH_KEY, '');
-	const [ isLoggedIn, setIsLoggedIn ] = useLocalStorage('isLoggedIn', '');
-
-	console.log('API::', import.meta.env.VITE_BASE_API_URL)
 
 	React.useEffect(() => setBrowserInfo({
 		browser, version, OS, language
@@ -63,11 +42,11 @@ const SignInPage = ({ browser, version, OS, language }) => {
 			errs.email = errorMessages.email;
 		}
 
-	        return errs;
+		return errs;
 	};
 
-	const onChange = (e) => setData({
-		...data, [e.target?.name]: (
+	const onChange = (e) => setLoginData({
+		...loginData, [e.target?.name]: (
 			(e.target.type === 'checkbox') ? 
 			e.target.checked : e.target.value
 		)
@@ -77,67 +56,17 @@ const SignInPage = ({ browser, version, OS, language }) => {
 		e.preventDefault();
 
 		// Check if we have error(s).
-		const errs = validate(data);
+		const errs = validate(loginData);
 
 		setErrors(errs);
 
 		if (Object.keys(errs).length) return null;
 
-		// // Set loading state.
-		// dispatch({
-		// 	type: actionTypes.LOADING_REQUEST,
-		// 	payload: { loading: true },
-		// });
-
-		api.auth.login(data).then((response) => {
-			const { status, data } = response;
-
-			if (data.success === true) {
-				// Success network request
-				setIsLoggedIn(true);
-				console.log('DATA:::', data?.result);
-
-				setLocalToken(data?.result.token);
-				setAuth(JSON.stringify(data?.result));
-
-				// Set sucess toast.
-				dispatch({
-					type: actionTypes.LOGIN_SUCCESS,
-					payload: data?.result,
-				});
-
-				successHandler(
-					{ data, status },
-					{
-						notifyOnSuccess: false,
-						notifyOnFailed: true,
-					}
-				);
-
-				console.log('ok')
-				// Reload application now our user is authenticated.
-				// router.reload();
-			} else {
-				// Failed network request
-				dispatch({
-					type: actionTypes.FAILED_REQUEST,
-					payload: data,
-				});
-			}
-		}).catch((error) => {
-			// errorHandler(error, navigate);
-		});
+		dispatch(login({ loginData }));
 	};
 
 	return (
 		<>
-			{/*
-			<Head>
-				<title>
-					{formatMessage('meta.signin.title.text')}
-				</title>
-			</Head>
-			*/}
 			<Layout type="auth">
 				<div className="container-fluid px-3">
 					<div className="row">
@@ -190,9 +119,9 @@ const SignInPage = ({ browser, version, OS, language }) => {
 											id="email"
 											type="email"
 											name="email"
-											value={data?.email}
 											onChange={onChange}
 											error={errors?.email}
+											value={loginData?.email}
 											className="form-control form-control-lg"
 											label={formatMessage('page.signin.label.email.text')}
 											placeholder={formatMessage('page.signin.form.email.text')}
@@ -204,8 +133,8 @@ const SignInPage = ({ browser, version, OS, language }) => {
 											name="password"
 											type="password"
 											onChange={onChange}
-											value={data?.password}
 											error={errors?.password}
+											value={loginData?.password}
 											className="form-control form-control-lg"
 											placeholder={formatMessage('page.signin.form.password.text')}
 											label={(
@@ -225,7 +154,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 										name="remember"
 										type="checkbox"
 										onChange={onChange}
-										value={data?.remember}
+										value={loginData?.remember}
 										className="form-check-input"
 										label={formatMessage('page.signin.form.remember.text')}
 									/>

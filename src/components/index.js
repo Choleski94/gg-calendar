@@ -24,6 +24,7 @@ export { default as GetSupport } from './GetSupport';
 export { default as Breadcrumb } from './Breadcrumb';
 // export { default as StarRating } from './StarRating';
 export { default as ImageUpload } from './ImageUpload';
+export { default as AuthBranding } from './AuthBranding';
 // export { default as AvatarGroup } from './AvatarGroup';
 export { default as BlockMessage } from './BlockMessage';
 // export { default as SwitchToggle } from './SwitchToggle';
