@@ -32,6 +32,8 @@
 			"@store": ["./src/store"],
 			"@utils": ["./src/utils"],
 			"@utils/*": ["./src/utils/*"],
+			"@mocks": ["./src/mocks"],
+			"@mocks/*": ["./src/mocks/*"],
 			"@locales": ["./src/locales"],
 			"@config": ["./config"],
 			"@assets": ["./src/assets/*"],

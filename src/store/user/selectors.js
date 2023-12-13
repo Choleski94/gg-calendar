@@ -4,4 +4,4 @@ const userSelect = (state) => state.user;
 
 export const selectUser = createSelector([userSelect], (user) => user);
 
-export const isLoggedIn = createSelector([userSelect], (user) => user.isLoggedIn);
+export const isAuthenticated = createSelector([userSelect], (user) => !!user.token);

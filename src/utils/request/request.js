@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { API_BASE_URL } from '@config/serverApiConfig';
+import config from '@config';
 
 import errorHandler from './errorHandler';
 import successHandler from './successHandler';
 
-axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.withCredentials = true;
+axios.defaults.baseURL = config.api.base_url;
 
 const request = {
 	create: async ({ entity, jsonData }) => {

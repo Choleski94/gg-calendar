@@ -5,10 +5,10 @@ export { default as SignIn } from './auth/signin';
 export { default as SignUp } from './auth/signup';
 export { default as ForgotPassword } from './auth/forgot_password';
 
-// // Standalone
-// export { default as Home } from './app/home';
-// export { default as Dashboard } from './app/dashboard';
-// 
+// Standalone
+export { default as Home } from './app/home';
+export { default as Dashboard } from './app/dashboard';
+
 // // Operations
 // export { default as CrmJobs } from './app/operations/jobs';
 // export { default as Calendar } from './app/operations/calendar';

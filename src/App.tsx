@@ -3,11 +3,9 @@ import { IntlProvider } from 'react-intl';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import themes from '@components/themes';
-
 import locales from '@locales';
-import routes from './constants/routes';
-import RenderRoutes from './components/routes/RenderRoutes';
+import routes from '@constants/routes';
+import themes from '@components/themes';
 
 const Tigado = () => {
 	const lang = 'en-US';

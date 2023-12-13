@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 	lastName: null,
 	firstName: null,
 	loading: false,
-	isLoggedIn: false,
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -23,7 +22,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
 		case actionTypes.LOGIN_SUCCESS:
 			return {
 				loading: false,
-				isLoggedIn: true,
 				...action.payload,
 			};
 		case actionTypes.LOGOUT_SUCCESS:

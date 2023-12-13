@@ -2,11 +2,11 @@ import { useSelector } from 'react-redux';
 import { EditOutlined, LockOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Button, Col, Descriptions, Divider, PageHeader, Row, Space, Tag } from 'antd';
 
+import config from '@/config';
 import history from '@/utils/history';
 import uniqueId from '@/utils/uinqueId';
 import photo from '@/style/images/photo.png';
 import { selectUser } from '@/redux/auth/selectors';
-import { BASE_URL } from '@/config/serverApiConfig';
 import { useProfileContext } from '@/context/profileContext';
 import { selectCurrentItem, selectReadItem } from '@/redux/crud/selectors';
 
@@ -53,7 +53,7 @@ const AdminInfo = ({ config }) => {
 				<Col xs={{ span: 24 }} sm={{ span: 7 }} md={{ span: 5 }}>
 					<img
 						className="last left circle pad5"
-						src={`${BASE_URL}${currentAdmin?.photo}`}
+						src={`${config.api.base_url}${currentAdmin?.photo}`}
 						style={{
 							width: '100px',
 							height: '100px',

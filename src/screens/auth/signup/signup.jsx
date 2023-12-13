@@ -10,6 +10,7 @@ import formatMessage from '@utils/formatMessage';
 import * as actionTypes from '@store/user/types';
 // import Header from '@components/layout/Header';
 import errorHandler from '@utils/request/errorHandler';
+import withGuestRouter from '@utils/hocs/withGuestRouter';
 import { Input, Layout, BlockMessage } from '@components';
 import useLocalStorage from '@utils/hooks/useLocalStorage';
 import successHandler from '@utils/request/successHandler';
@@ -314,4 +315,4 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 	);
 };
 
-export default withBrowserDetect(SignUpPage);
+export default withGuestRouter(withBrowserDetect(SignUpPage));

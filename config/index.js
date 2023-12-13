@@ -10,14 +10,13 @@ const config = {
 		env: import.meta.env.APP_ENV || 'development',
 	},
 	api: {
-		base_url: import.meta.env.BASE_API_URL,
+		base_url: import.meta.env.VITE_BASE_API_URL,
 	},
-	auth: {
-		base_url: import.meta.env.BASE_AUTH_URL,
+	download: {
+		base_url: import.meta.env.VITE_BASE_API_URL + '/download',
 	},
-	static: import.meta.env.BASE_STATIC_URL,
 	services: {
-		googleMap: import.meta.env.GOOGLE_MAP_API_KEY,
+		googleMap: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
 	},
 };
 

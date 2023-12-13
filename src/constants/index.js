@@ -8,6 +8,8 @@ import accounts from './accounts';
 /* OLD STUFF */
 export const CALL_TECH_TITLE = 'FLASH';
 
+export const ACCESS_TOKEN_NAME = 'x-auth-token';
+
 export const ONE_DAY_MINUS_ONE_MILLI_SECOND = 86399999;
 
 export const FOUR_HOUR = 14400000;
@@ -433,6 +435,7 @@ const constants = {
 	...jobs,
 	...layouts,
 	...accounts,
+	ACCESS_TOKEN_NAME,
 }
 
 export default constants;

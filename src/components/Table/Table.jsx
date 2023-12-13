@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { isEven } from '@utils';
+import { Card, Input } from '@components';
 import useClickOutside from '@utils/hooks/useClickOutside';
 
 import { 
@@ -11,13 +13,8 @@ import {
 	TableQuickViewSection, 
 	TableQuickViewContainer, 
 } from './Table.styled';
-import Card from '../Card';
-import Input from '../Input';
 import { genId } from './utils';
-import Heading from './../Heading';
-import { isEven } from '../../utils';
 import Pagination from './Pagination';
-import { TTableProps } from './types.d';
 import useSortableData from './Table.controller';
 
 const DEFAULT_PAGINATION = {
@@ -66,7 +63,7 @@ const getFilterClassName = (showFilter = false) => [
 	(showFilter ? 'show' : ''),
 ].join(' ');
 
-const Table: React.FC<TTableProps> = ({ 
+const Table = ({ 
 	data = [], 
 	cta = null,
 	title = '',

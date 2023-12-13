@@ -5,13 +5,7 @@ import storePersist, { localStorageHealthCheck } from './storePersist';
 
 localStorageHealthCheck();
 
-const USER_INITIAL_STATE = {
-	isLoggedIn: false,
-	isLoading: false,
-	isSuccess: false,
-};
-
-const user_state = storePersist.get('user') ? storePersist.get('user') : USER_INITIAL_STATE;
+const user_state = storePersist.get('user') ? storePersist.get('user') : {};
 
 const initialState = { user: user_state };
 

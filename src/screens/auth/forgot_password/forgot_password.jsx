@@ -1,13 +1,12 @@
 import React from 'react';
-// import Head from 'next/head';
 import { Link } from 'react-router-dom';
 
 import api from '@api';
 import AuthBranding from '@views/AuthBranding';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-// import Header from '../../components/layout/Header';
 import { Input, Layout, BlockMessage } from '@components';
+import withGuestRouter from '@utils/hocs/withGuestRouter';
 import withBrowserDetect from '@utils/hocs/withBrowserDetect';
 
 const ForgotPasswordPage = ({ browser, version, OS, language }) => {
@@ -89,7 +88,6 @@ const ForgotPasswordPage = ({ browser, version, OS, language }) => {
 							<AuthBranding />
 						</div>
 						<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
-							{/* <Header /> */}
 							<div
 								className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
 								style={{ maxWidth: "25rem" }}
@@ -151,4 +149,4 @@ const ForgotPasswordPage = ({ browser, version, OS, language }) => {
 	);
 };
 
-export default withBrowserDetect(ForgotPasswordPage);
+export default withGuestRouter(withBrowserDetect(ForgotPasswordPage));

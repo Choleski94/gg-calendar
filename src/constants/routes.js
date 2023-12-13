@@ -49,26 +49,26 @@ export const guestRoutes = [
 // 		element: screenElements.AccountAccessLogs,
 // 	},
 // ];
-// 
-// // COMPLETE
-// export const standaloneRoutes = [
-// 	{
-// 		slug: 'home-dashboard',
-// 		path: '/',
-// 		element: screenElements.Home,
-// 	},
-// 	{
-// 		slug: 'dashboard',
-// 		path: '/dashboard',
-// 		element: screenElements.Dashboard,
-// 	},
-// 	{
-// 		slug: 'organizations',
-// 		path: '/organizations',
-// 		element: screenElements.Organizations,
-// 	},
-// ];
-// 
+
+// COMPLETE
+export const standaloneRoutes = [
+	{
+		slug: 'home-dashboard',
+		path: '/',
+		element: screenElements.Home,
+	},
+	{
+		slug: 'dashboard',
+		path: '/dashboard',
+		element: screenElements.Dashboard,
+	},
+	// {
+	// 	slug: 'organizations',
+	// 	path: '/organizations',
+	// 	element: screenElements.Organizations,
+	// },
+];
+
 // // COMPLETE
 // export const operationRoutes = [
 // 	{
@@ -437,7 +437,7 @@ const routes = [
 	// operationRoutes,
 	// inventoryRoutes,
 	// marketingRoutes,
-	// standaloneRoutes,
+	standaloneRoutes,
 	// accountingRoutes,
 	// communicationRoutes,
 ].flat();

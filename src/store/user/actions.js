@@ -1,4 +1,3 @@
-// import history from '@utils/history';
 import * as authService from '@api/auth';
 
 import * as actionTypes from './types';
@@ -13,7 +12,6 @@ export const login = ({ loginData }) => async (dispatch) => {
 
 	if (data.success === true) {
 		if (typeof window !== 'undefined') {
-			window.localStorage.setItem('isLoggedIn', true);
 			window.localStorage.setItem('user', JSON.stringify(data.result));
 		}
 
