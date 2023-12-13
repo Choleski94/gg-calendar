@@ -4,19 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import api from '@api';
 import { AUTH_KEY } from '@constants/auth';
-
 import AuthBranding from '@views/AuthBranding';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
+import * as actionTypes from '@store/user/types';
 // import Header from '@components/layout/Header';
+import errorHandler from '@utils/request/errorHandler';
 import { Input, Layout, BlockMessage } from '@components';
 import useLocalStorage from '@utils/hooks/useLocalStorage';
-import withBrowserDetect from '@utils/hocs/withBrowserDetect';
-
-import * as actionTypes from '@store/user/types';
-
-import errorHandler from '@utils/request/errorHandler';
 import successHandler from '@utils/request/successHandler';
+import withBrowserDetect from '@utils/hocs/withBrowserDetect';
 
 const DEFAULT_REGISTER_DATA = {
 	email: '', 
@@ -38,9 +35,9 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 	const [ localToken, setLocalToken ] = useLocalStorage(AUTH_KEY, '');
 	const [ isLoggedIn, setIsLoggedIn ] = useLocalStorage('isLoggedIn', '');
 
-	React.useEffect(() => {
-		setBrowserInfo({ browser, version, OS, language });
-	}, []);
+	React.useEffect(() => setBrowserInfo({
+		browser, version, OS, language
+	}), []);
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
@@ -118,19 +115,19 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 				setLocalToken(data?.result.token);
 				setAuth(JSON.stringify(data?.result));
 
-				// Set sucess toast.
-				dispatch({
-					type: actionTypes.REGISTER_SUCCESS,
-					payload: data?.result,
-				});
+				// // Set sucess toast.
+				// dispatch({
+				// 	type: actionTypes.REGISTER_SUCCESS,
+				// 	payload: data?.result,
+				// });
 
-				successHandler(
-					{ data, status },
-					{
-						notifyOnSuccess: false,
-						notifyOnFailed: true,
-					}
-				);
+				// successHandler(
+				// 	{ data, status },
+				// 	{
+				// 		notifyOnSuccess: false,
+				// 		notifyOnFailed: true,
+				// 	}
+				// );
 
 				// Reload application now our user is authenticated.
 				router.reload();

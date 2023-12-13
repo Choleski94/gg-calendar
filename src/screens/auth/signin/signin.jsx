@@ -33,6 +33,8 @@ const SignInPage = ({ browser, version, OS, language }) => {
 	const [ localToken, setLocalToken ] = useLocalStorage(AUTH_KEY, '');
 	const [ isLoggedIn, setIsLoggedIn ] = useLocalStorage('isLoggedIn', '');
 
+	console.log('API::', import.meta.env.VITE_BASE_API_URL)
+
 	React.useEffect(() => setBrowserInfo({
 		browser, version, OS, language
 	}), []);
