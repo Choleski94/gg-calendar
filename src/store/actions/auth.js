@@ -8,8 +8,9 @@ export const userLoggedIn = user => ({
 	user
 });
 
-export const userLoggedOut = () => ({
+export const userLoggedOut = user => ({
 	type: actionTypes.USER_LOGGED_OUT,
+	user
 });
 
 export const login = (credentials) => (dispatch) => (

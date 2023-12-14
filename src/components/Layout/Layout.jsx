@@ -3,18 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import constants from '@constants';
+
 import { Modal } from '@components';
 import { FALLBACK_LOCALES } from '@locales';
+import { logout } from '@store/actions/auth';
 import { getYear, onlyUnique } from '@utils';
 import InvitePeople from '@modules/InvitePeople';
 import formatMessage from '@utils/formatMessage';
 import { selectUser } from '@store/selectors/user';
+import { setLocale } from '@store/actions/settings';
 import errorHandler from '@utils/request/errorHandler';
 import { useWindowSize, useClickOutside } from '@utils/hooks';
 import { selectLocaleSettings } from '@store/selectors/settings';
 import OrganizationInfoSettings from '@modules/OrganizationInfoSettings';
-
-import * as authService from '@api/user';
 
 import {
 	hasSubMenu,
@@ -45,9 +46,10 @@ const getAcronym = (name = '') => (
 );
 
 const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, children }) => {
-	const router = {};
 	const myRef = React.useRef();
-	const dispatch = {} // useDispatch();
+
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const { width } = useWindowSize();
 	const { pathname } = useLocation();
@@ -55,8 +57,6 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 	const { lang } = useSelector(selectLocaleSettings);
 	const { firstName, lastName, organizations } = useSelector(selectUser);
 
-	console.log('LANG::', lang);
-	
 	const [ showMenu, setShowMenu ]  = React.useState(false);
 	const [ menuToggle, setMenuToggle ] = React.useState('');
 	const [ modalSection, setModalSection ]  = React.useState('');
@@ -73,10 +73,8 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 	const onSignOutClick = (e) => {
 		e.preventDefault();
 
-		authService.logout().then((response) => {
-			router.reload();
-		}).catch((error) => {
-			router.reload();
+		dispatch(logout()).then((data) => {
+			navigate('/signup');
 		});
 	}
 
@@ -117,13 +115,9 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 		e.preventDefault();
 		setMenuToggle('');
 
-		// TODO: ABED
-		// dispatch(actions.setLocale({
-		// 	lang, country: FALLBACK_LOCALES[lang],
-		// }));
-		//
-		// dipatch(setLocale({ 
-		// }))
+		dispatch(setLocale({
+			lang, country: FALLBACK_LOCALES[lang],
+		}));
 	};
 
 	React.useEffect(() => {
