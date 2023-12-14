@@ -72,10 +72,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 
 	const onSignOutClick = (e) => {
 		e.preventDefault();
-
-		dispatch(logout()).then((data) => {
-			navigate('/signup');
-		});
+		dispatch(logout());
 	}
 
 	const onMenuToggleClick = (e, currentMenu = '') => {

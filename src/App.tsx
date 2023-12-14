@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 
 import routes from '@constants/routes';
 import themes from '@components/themes';
+import { OnBoarding } from '@components';
 import { selectLocaleSettings } from '@store/selectors/settings';
 import { getLocale, constructLocale, SUPPORTED_LOCALES } from '@locales';
 
@@ -28,6 +29,9 @@ const Tigado = () => {
 						/>
 					)))}
 				</Routes>
+				{/*
+					<OnBoarding />
+				*/}
 			</IntlProvider>
 		</ThemeProvider>
 	);
