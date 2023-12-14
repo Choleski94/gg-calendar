@@ -10,7 +10,7 @@ const auth = {
 		axios.post(`/register?timestamp=${getTimestamp()}`, credentials).then((res) => res.data.result)
 	),
 	logout: () => (
-		axios.post(`/logout?timestamp=${getTimestamp}`).then((res) => res.data)
+		axios.post(`/logout?timestamp=${getTimestamp()}`)
 	),
 }
 

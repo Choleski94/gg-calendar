@@ -25,6 +25,17 @@ export const login = (credentials) => (dispatch) => (
 	})
 );
 
+export const logout = () => (dispatch) => (
+	api.auth.logout().then(() => {
+		if (typeof window !== 'undefined') {
+			window.localStorage.removeItem('tigadoJWT');
+		}
+
+		dispatch(userLoggedOut());
+	})
+);
+
+// TODO:
 export const register = (credentials) => async (dispatch) => {
 	dispatch({
 		type: actionTypes.LOADING_REQUEST,
@@ -52,14 +63,4 @@ export const register = (credentials) => async (dispatch) => {
 
 		return false;
 	}
-};
-
-export const logout = () => async (dispatch) => {
-	api.user.logout();
-
-	dispatch({
-		type: actionTypes.LOGOUT_SUCCESS,
-	});
-
-	return true;
 };

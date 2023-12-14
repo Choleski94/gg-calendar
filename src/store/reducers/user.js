@@ -12,9 +12,11 @@ const INITIAL_STATE = {
 const authReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case actionTypes.USER_LOGGED_IN:
-			return action.user;
+			return { ...state, ...action.user, loaded: true };
 		case actionTypes.USER_LOGGED_OUT:
-			return {};
+			return { ...state, ...action.user, loaded: true };
+		case actionTypes.USER_FETCHED:
+			return { ...state, ...action.user, loaded: true };
 		case actionTypes.LOADING_REQUEST:
 			return {
 				...state,
