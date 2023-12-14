@@ -14,25 +14,13 @@ const settingsReducer = (state = INITIAL_STATE, action) => {
 	const { payload = null } = action;
 
 	switch (action.type) {
-		case actionTypes.RESET_STATE:
-			return INITIAL_STATE;
-		case actionTypes.REQUEST_LOADING:
+		case actionTypes.LOCALE_SET:
 			return {
 				...state,
-				isLoading: true,
-			};
-		case actionTypes.REQUEST_FAILED:
-			return {
-				...state,
-				isLoading: false,
-				isSuccess: false,
-			};
-
-		case actionTypes.REQUEST_SUCCESS:
-			return {
-				result: payload,
-				isLoading: false,
-				isSuccess: true,
+				locale: {
+					lang: action.lang,
+					country: action.country,
+				}
 			};
 		default:
 			return state;
