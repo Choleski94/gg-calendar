@@ -15,7 +15,7 @@ const root = document.getElementById('root');
 
 const store = configureStore({
 	reducer: rootReducer,
-	preloadedState: { user: {}, organizations: [], settings: {} },
+	preloadedState: { user: {}, organizations: [] },
 	devTools: import.meta.env.PROD === false, // Enable Redux DevTools in development mode
 });
 

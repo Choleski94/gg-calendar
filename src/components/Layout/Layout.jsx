@@ -52,9 +52,11 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 	const { width } = useWindowSize();
 	const { pathname } = useLocation();
 
-	const { lang } = {} // useSelector(selectLocaleSettings);
+	const { lang } = useSelector(selectLocaleSettings);
 	const { firstName, lastName, organizations } = useSelector(selectUser);
 
+	console.log('LANG::', lang);
+	
 	const [ showMenu, setShowMenu ]  = React.useState(false);
 	const [ menuToggle, setMenuToggle ] = React.useState('');
 	const [ modalSection, setModalSection ]  = React.useState('');

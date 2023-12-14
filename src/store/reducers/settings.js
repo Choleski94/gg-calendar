@@ -1,29 +1,13 @@
 import * as actionTypes from '../types';
 
-const INITIAL_SETTINGS_STATE = {
-	crm_settings: {},
-	app_settings: {},
-	locale_settings: {
+export const INITIAL_STATE = {
+	theme: 'light',
+	currency: 'CAD',
+	timezone: 'America/Toronto',
+	locale: {
 		lang: 'en',
 		country: 'US',
 	},
-	finance_settings: {},
-	company_settings: {},
-	money_format_settings: {
-		currency: 'USD',
-		decimal_sep: '.',
-		thousand_sep: ',',
-		cent_precision: 2,
-		zero_format: false,
-		currency_symbol: '$',
-		currency_position: 'before',
-	},
-};
-
-const INITIAL_STATE = {
-	isLoading: false,
-	isSuccess: false,
-	result: INITIAL_SETTINGS_STATE,
 };
 
 const settingsReducer = (state = INITIAL_STATE, action) => {
