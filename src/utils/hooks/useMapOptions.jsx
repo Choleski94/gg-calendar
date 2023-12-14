@@ -30,7 +30,7 @@ const useMapOptions = (jobData) => {
 		if (!jobData.length) jobData;
 
 		// Step 0: Populate respective options.
-		const jobCountElts = jobData.map((currentJob: any) => currentJob.length);
+		const jobCountElts = jobData.map((currentJob) => currentJob.length);
 
 		for (let countIdx = 0; countIdx < jobCountElts.length; countIdx++) {
 

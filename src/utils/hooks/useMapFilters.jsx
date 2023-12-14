@@ -10,7 +10,7 @@ import {
 	PRIORITY_OPTIONS,
 	OFFICE_LOCATIONS,
 	DISPATCH_ZONE_OPTIONS,
-} from '../../constants';
+} from '@constants';
 
 import { onlyUnique, is2dArray, shareAtLeastOneElement, getEquipmentProps } from '../';
 
@@ -50,7 +50,7 @@ const useMapFilters = ({
 		// Check if we want to filter by techs
 		if (!jobData.length || !filterTechs?.length) return jobData;
 
-		return jobData.map((currentJobData: any) => currentJobData.filter(({ techs_assigned }) => {
+		return jobData.map((currentJobData) => currentJobData.filter(({ techs_assigned }) => {
 			// Validate job is assigned.
 			if (techs_assigned?.length) {
 				return shareAtLeastOneElement(
@@ -75,7 +75,7 @@ const useMapFilters = ({
 		// Check if we want to filter by statuses.
 		if (!filteredByZoneElts.length || !filterStatuses?.length) return filteredByZoneElts;
 
-		return filteredByZoneElts.map((currentFilteredByZone: any) => currentFilteredByZone.filter(({ status }) => 
+		return filteredByZoneElts.map((currentFilteredByZone) => currentFilteredByZone.filter(({ status }) => 
 			status?.length && filterStatuses.includes(status)
 		));
 	}, [ filteredByZoneElts, filterStatuses]);
@@ -84,8 +84,8 @@ const useMapFilters = ({
 		// Check if we want to filter by equipments.
 		if (!filteredByStatusElts.length || !filterEquipments?.length) return filteredByStatusElts;
 
-		return filteredByStatusElts.map((currentFilteredByStatus: any) => currentFilteredByStatus.filter(({ equipment }) => {
-			const equipmentTypeElts = equipment.map(({ type }: any) => {
+		return filteredByStatusElts.map((currentFilteredByStatus) => currentFilteredByStatus.filter(({ equipment }) => {
+			const equipmentTypeElts = equipment.map(({ type }) => {
 				const { categoryType } = getEquipmentProps(type);
 				return categoryType || type;
 			});
@@ -103,7 +103,7 @@ const useMapFilters = ({
 
 		let [ jobIdElts, techIdElts ] = [ new Array(arrySize).fill([]), new Array(arrySize).fill([])];
 
-		filteredByEquipmentElts?.forEach((currentFilteredByEquipment: any, arrIdx: number) => {
+		filteredByEquipmentElts?.forEach((currentFilteredByEquipment, arrIdx) => {
 			let [ tmpJobIdElts, tmpTechIdElts] = [[], []];
 
 			currentFilteredByEquipment.forEach(({ id,  techs_assigned }) => {
@@ -115,7 +115,7 @@ const useMapFilters = ({
 			techIdElts[arrIdx] = tmpTechIdElts;
 		});
 	
-		const techMarkerElts = techIdElts.map((currentTechIds: any = []) => currentTechIds.filter(onlyUnique).map((id) => ({
+		const techMarkerElts = techIdElts.map((currentTechIds = []) => currentTechIds.filter(onlyUnique).map((id) => ({
 		 	id, type: MARKER_TYPES.TECH,
 		 	color: TECH_COLORS[String(id)],
 		 	value: (
@@ -133,7 +133,7 @@ const useMapFilters = ({
 		// Check if we have data of valid length.
 		if (!filteredTechIdElts.length) return filteredTechIdElts;
 
-		filteredTechIdElts.map((currentFilteredTechId: any = []) => {
+		filteredTechIdElts.map((currentFilteredTechId = []) => {
 			const jobCountByTechIdObj = {};
 
 			currentFilteredTechId.forEach((element) => {
@@ -158,9 +158,9 @@ const useMapFilters = ({
 
 		let jobMarkerElts = new Array(arrySize).fill([]);
 
-		markers.forEach((currentMarker: any, markerIdx: number) => {
+		markers.forEach((currentMarker, markerIdx) => {
 			let tmpJobMarkerElts = [];
-			currentMarker.forEach((payload: any, jobIdx: number) => {
+			currentMarker.forEach((payload, jobIdx) => {
 				const currentFJIds = filteredJobIdElts[markerIdx];
 				if (currentFJIds.includes(String(payload?.id))) {
 					tmpJobMarkerElts.push(payload);

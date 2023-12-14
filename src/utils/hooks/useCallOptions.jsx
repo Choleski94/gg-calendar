@@ -31,7 +31,7 @@ const useCallOptions = (callData) => {
 
 		// Step 0: Populate respective options.
 		// const callCount = callData.length;
-		const callCountElts = callData.map((currentCall: any) => currentCall.length);
+		const callCountElts = callData.map((currentCall) => currentCall.length);
 
 		for (let countIdx = 0; countIdx < callCountElts.length; countIdx++) {
 

@@ -24,7 +24,12 @@ if (localStorage.tigadoJWT) {
 
 	const user = {
 		token: localStorage.tigadoJWT,
-		...payload,
+		id: payload.id,
+		phone: payload.phone,
+		email: payload.email,
+		lastName: payload.lastName,
+		firstName: payload.firstName,
+		isOnboarded: payload?.isOnboarded,
 	};
 
 	setAuthorizationHeader(localStorage.tigadoJWT);

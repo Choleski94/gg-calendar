@@ -9,9 +9,8 @@ import { getYear, onlyUnique } from '@utils';
 import InvitePeople from '@modules/InvitePeople';
 import formatMessage from '@utils/formatMessage';
 import { selectUser } from '@store/selectors/user';
-import useWindowSize from '@utils/hooks/useWindowSize';
 import errorHandler from '@utils/request/errorHandler';
-import useClickOutside from '@utils/hooks/useClickOutside';
+import { useWindowSize, useClickOutside } from '@utils/hooks';
 import { selectLocaleSettings } from '@store/selectors/settings';
 import OrganizationInfoSettings from '@modules/OrganizationInfoSettings';
 
