@@ -4,6 +4,7 @@ const INITIAL_STATE = {
 	id: null,
 	email: null,
 	phone: null,
+	token: null,
 	lastName: null,
 	firstName: null,
 	loading: false,
@@ -14,7 +15,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
 		case actionTypes.USER_LOGGED_IN:
 			return { ...state, ...action.user, loaded: true };
 		case actionTypes.USER_LOGGED_OUT:
-			return { ...state, ...action.user, loaded: true };
+			return { ...INITIAL_STATE };
 		case actionTypes.USER_FETCHED:
 			return { ...state, ...action.user, loaded: true };
 		case actionTypes.LOADING_REQUEST:
