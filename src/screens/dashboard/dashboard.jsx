@@ -2,9 +2,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectUser } from '@store/user/selectors';
+import { withPrivateRouter } from '@utils/hocs';
+import { selectUser } from '@store/selectors/user';
 import { Layout, NavPill, GetSupport } from '@components';
-import withPrivateRouter from '@utils/hocs/withPrivateRouter';
 
 import DashboardOverview from './overview';
 import DashboardSettings from './settings';

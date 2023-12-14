@@ -13,10 +13,10 @@ import formatMessage from '@utils/formatMessage';
 import useWindowSize from '@utils/hooks/useWindowSize';
 import errorHandler from '@utils/request/errorHandler';
 import useClickOutside from '@utils/hooks/useClickOutside';
-import { selectLocaleSettings } from '@store/settings/selectors';
+import { selectLocaleSettings } from '@store/selectors/settings';
 import OrganizationInfoSettings from '@modules/OrganizationInfoSettings';
 
-import * as authService from '@api/auth';
+import * as authService from '@api/user';
 
 import {
 	hasSubMenu,

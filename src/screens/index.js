@@ -1,69 +1,69 @@
 'use strict';
 
 // Authentication
-export { default as SignIn } from './auth/signin';
-export { default as SignUp } from './auth/signup';
-export { default as ForgotPassword } from './auth/forgot_password';
+export { default as SignIn } from './signin';
+export { default as SignUp } from './signup';
+export { default as ForgotPassword } from './forgot_password';
 
 // Standalone
-export { default as Home } from './app/home';
-export { default as Dashboard } from './app/dashboard';
+export { default as Home } from './home';
+export { default as Dashboard } from './dashboard';
 
 // // Operations
-// export { default as CrmJobs } from './app/operations/jobs';
-// export { default as Calendar } from './app/operations/calendar';
-// export { default as InventoryOrders } from './app/operations/orders';
-// export { default as DispatchMap } from './app/operations/dispatch-map';
+// export { default as CrmJobs } from './operations/jobs';
+// export { default as Calendar } from './operations/calendar';
+// export { default as InventoryOrders } from './operations/orders';
+// export { default as DispatchMap } from './operations/dispatch-map';
 // 
 // // HR
-// // export { default as HrChat } from './app/communication/calls';
-// // export { default as HrForum } from './app/communication/calls';
-// // export { default as HrCalls } from './app/communication/calls';
-// export { default as HrLegalParking } from './app/hr/legal/parking';
+// // export { default as HrChat } from './communication/calls';
+// // export { default as HrForum } from './communication/calls';
+// // export { default as HrCalls } from './communication/calls';
+// export { default as HrLegalParking } from './hr/legal/parking';
 // 
 // // HR Employee & Teams
-// export { default as HrEmployees } from './app/hr/employees';
+// export { default as HrEmployees } from './hr/employees';
 // 
 // 
 // // Account
-// export { default as AccountMember } from './app/account/member';
-// export { default as AccountProfile } from './app/account/profile';
-// export { default as AccountSettings } from './app/account/settings';
-// export { default as AccountAccessLogs } from './app/account/access-logs';
+// export { default as AccountMember } from './account/member';
+// export { default as AccountProfile } from './account/profile';
+// export { default as AccountSettings } from './account/settings';
+// export { default as AccountAccessLogs } from './account/access-logs';
 // 
 // // CRM
-// export { default as CrmAccess } from './app/crm/access';
-// export { default as CrmCustomers } from './app/crm/customers';
-// export { default as CrmCompanies } from './app/crm/companies';
+// export { default as CrmAccess } from './crm/access';
+// export { default as CrmCustomers } from './crm/customers';
+// export { default as CrmCompanies } from './crm/companies';
 // 
 // // Communications
-// export { default as CommunicationChat } from './app/communication/calls';
-// export { default as CommunicationForum } from './app/communication/calls';
-// export { default as CommunicationCalls } from './app/communication/calls';
-// export { default as CommunicationTasks } from './app/communication/calls';
+// export { default as CommunicationChat } from './communication/calls';
+// export { default as CommunicationForum } from './communication/calls';
+// export { default as CommunicationCalls } from './communication/calls';
+// export { default as CommunicationTasks } from './communication/calls';
 // 
 // // Inventory
-// export { default as InventoryTools } from './app/inventory/tools';
-// export { default as InventoryFleet } from './app/inventory/fleet';
-// export { default as InventoryVendors } from './app/inventory/vendors';
-// export { default as InventoryServices } from './app/inventory/services';
-// export { default as InventoryProducts } from './app/inventory/products';
-// export { default as InventorySettings } from './app/inventory/settings';
+// export { default as InventoryTools } from './inventory/tools';
+// export { default as InventoryFleet } from './inventory/fleet';
+// export { default as InventoryVendors } from './inventory/vendors';
+// export { default as InventoryServices } from './inventory/services';
+// export { default as InventoryProducts } from './inventory/products';
+// export { default as InventorySettings } from './inventory/settings';
 // 
 // // Marketing
-// export { default as MarketingReviews } from './app/marketing/review-management/Reviews';
+// export { default as MarketingReviews } from './marketing/review-management/Reviews';
 // 
 // // Accounting
-// export { default as AccountingExpenses } from './app/accounting/expenses';
-// export { default as AccountingInvoices } from './app/accounting/invoices';
-// export { default as AccountingEstimates } from './app/accounting/estimates';
+// export { default as AccountingExpenses } from './accounting/expenses';
+// export { default as AccountingInvoices } from './accounting/invoices';
+// export { default as AccountingEstimates } from './accounting/estimates';
 // 
 // // On boarding
-// export { default as OnBoarding } from './app/onboarding';
+// export { default as OnBoarding } from './onboarding';
 // 
 // // Organizations
-// export { default as Organizations } from './app/organizations';
+// export { default as Organizations } from './organizations';
 // 
 // // System
-// export { default as SystemAccess } from './app/system/access';
-// export { default as SystemConfiguration} from './app/system/configuration';
+// export { default as SystemAccess } from './system/access';
+// export { default as SystemConfiguration} from './system/configuration';

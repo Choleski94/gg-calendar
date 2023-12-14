@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import api from '@api';
+import * as actionTypes from '@store/types';
 // import { AUTH_KEY } from '@constants/auth';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-import * as actionTypes from '@store/user/types';
 // import errorHandler from '@utils/request/errorHandler';
 // import useLocalStorage from '@utils/hooks/useLocalStorage';
 // import successHandler from '@utils/request/successHandler';

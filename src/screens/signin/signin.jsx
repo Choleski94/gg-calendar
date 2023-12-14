@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { login } from '@store/user/actions';
+import { login } from '@store/actions/user';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 import { AuthBranding, Input, Layout } from '@components';
@@ -62,7 +62,10 @@ const SignInPage = ({ browser, version, OS, language }) => {
 
 		if (Object.keys(errs).length) return null;
 
-		dispatch(login({ loginData }));
+		// dispatch(login(loginData));
+		login(loginData).then((res) => {
+			console.log('redirect', res);
+		});
 	};
 
 	return (

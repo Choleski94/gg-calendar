@@ -1,18 +1,19 @@
 import api from '@api';
 
-import * as actionTypes from './types';
+import * as actionTypes from '../types';
 
-export const login = ({ loginData }) => async (dispatch) => {
+export const login = (loginData) => async (dispatch) => {
 	dispatch({
 		type: actionTypes.LOADING_REQUEST,
 		payload: { loading: true },
 	});
 
-	const data = await api.auth.login({ loginData });
+	const data = await api.user.login(loginData);
 
 	if (data.success === true) {
 		if (typeof window !== 'undefined') {
-			window.localStorage.setItem('user', JSON.stringify(data.result));
+			// window.localStorage.setItem('user', JSON.stringify(data.result));
+			window.localStorage.setItem('tigadoJWT', data.result.token);
 		}
 
 		dispatch({
@@ -31,13 +32,13 @@ export const login = ({ loginData }) => async (dispatch) => {
 	}
 };
 
-export const register = ({ registerData }) => async (dispatch) => {
+export const register = (registerData) => async (dispatch) => {
 	dispatch({
 		type: actionTypes.LOADING_REQUEST,
 		payload: { loading: true },
 	});
 
-	const data = await api.auth.register({ registerData });
+	const data = await api.user.register(registerData);
 
 	if (data.success === true) {
 		if (typeof window !== 'undefined') {
@@ -61,7 +62,7 @@ export const register = ({ registerData }) => async (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-	api.auth.logout();
+	api.user.logout();
 
 	dispatch({
 		type: actionTypes.LOGOUT_SUCCESS,

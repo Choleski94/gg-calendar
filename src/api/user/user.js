@@ -2,20 +2,35 @@ import axios from 'axios';
 
 import config from '@config';
 
-axios.defaults.baseURL = config.api.base_url;
+const getTimestamp = () => new Date().getTime();
 
-const user = {
-	// GUEST
-	login: credentials => axios.post(`/v1/users/auth`, credentials, { withCredentials: true })
-		.then(({ data }) => data?.result),
-	// confirm: token =>
-	//   axios.post(`/v1/users/confirm`, { token }).then(({ data }) => data?.result),
-	// resetPassword: data =>
-	//   axios.post(`/v1/users/recover`, data).then(({ data }) => data?.result),
-	updateCurrentUser: user =>
-		axios.put(`/v1/users/update`, { user }).then(({ data }) => data?.result),
-	fetchCurrentUser: () =>
-		axios.get(`/v1/users/account`).then(({ data }) => data?.result),
-};
+const auth = {
+	login: async (credentials) => {
+		axios.defaults.baseURL = config.api.base_url;
 
-export default user;
+		const timestamp = getTimestamp();
+
+		return await axios.post(`/login?timestamp=${timestamp}`, credentials, { withCredentials: true });
+	},
+	register: async (credentials) => {
+		axios.defaults.baseURL = config.api.base_url;
+
+		const timestamp = getTimestamp();
+
+		return await axios.post(`/register?timestamp=${timestamp}`, credentials, { withCredentials: true });
+	},
+	logout: async () => {
+		axios.defaults.withCredentials = true;
+		axios.defaults.baseURL = config.api.base_url;
+
+		if (typeof window !== 'undefined') {
+			window.localStorage.clear();
+		}
+
+		const timestamp = getTimestamp();
+
+		return await axios.post(`/logout?timestamp=${timestamp}`);
+	},
+}
+
+export default auth;

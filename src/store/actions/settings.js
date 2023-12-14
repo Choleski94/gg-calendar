@@ -1,6 +1,6 @@
 import { request } from '@utils/request';
 
-import * as actionTypes from './types';
+import * as actionTypes from '.,/types';
 
 const dispatchSettingsData = (datas) => {
 	const settingsCategory = {};
