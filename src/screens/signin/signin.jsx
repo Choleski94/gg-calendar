@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { login } from '@store/actions/auth';
 import { validateEmail } from '@utils/validate';
@@ -9,10 +9,11 @@ import { AuthBranding, Input, Layout } from '@components';
 import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
 
 const SignInPage = ({ browser, version, OS, language }) => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const [ errors, setErrors ] = React.useState({});
 	const [ data, setData ] = React.useState({});
+	const [ errors, setErrors ] = React.useState({});
 	const [ browserInfo, setBrowserInfo ] = React.useState({});
 
 	React.useEffect(() => setBrowserInfo({
@@ -62,9 +63,9 @@ const SignInPage = ({ browser, version, OS, language }) => {
 
 		if (Object.keys(errs).length) return null;
 
-		dispatch(login(data)).then((res) => {
-			console.log('redirect', res);
-		});
+		dispatch(login(data)).then((res) => (
+			navigate('/dashboard')
+		));
 	};
 
 	return (
