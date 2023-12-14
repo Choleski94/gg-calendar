@@ -1,15 +1,14 @@
 import React from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-// import { useStore } from '@store';
 import constants from '@constants';
 import { Modal } from '@components';
 import { FALLBACK_LOCALES } from '@locales';
 import { getYear, onlyUnique } from '@utils';
 import InvitePeople from '@modules/InvitePeople';
 import formatMessage from '@utils/formatMessage';
-// import { selectAuth } from '@store/auth/selectors';
+import { selectUser } from '@store/selectors/user';
 import useWindowSize from '@utils/hooks/useWindowSize';
 import errorHandler from '@utils/request/errorHandler';
 import useClickOutside from '@utils/hooks/useClickOutside';
@@ -28,7 +27,6 @@ import {
 	getUserDropdownClassName,
 	getUserWrapperDropdownClassName,
 } from './Layout.helpers';
-// import Main from './Main';
 import Search from './Search';
 import Footer from './Footer';
 
@@ -56,7 +54,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 	const { pathname } = useLocation();
 
 	const { lang } = {} // useSelector(selectLocaleSettings);
-	const { firstName, lastName, organizations } = {} // useSelector(selectAuth);
+	const { firstName, lastName, organizations } = useSelector(selectUser);
 
 	const [ showMenu, setShowMenu ]  = React.useState(false);
 	const [ menuToggle, setMenuToggle ] = React.useState('');
