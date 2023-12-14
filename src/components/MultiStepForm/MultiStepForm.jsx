@@ -40,44 +40,6 @@ const MultiStepForm = ({ id = '', options = [] }) => {
 	const onFormSubmit = (idx = 0) => {
 		console.log('Success....', idx);
 	}
-				
-	const renderPrev = () => (activeStep !== 0 ? (
-		<button
-			type="button" onClick={onPrevClick}
-			className="btn btn-ghost-secondary me-2"
-		>
-			<i className="bi-chevron-left" />
-			&nbsp;
-			Previous step
-		</button>
-
-	) : null);
-
-	const renderNext = () => (
-		<div className="ms-auto">
-			<button
-				type="button" 
-				onClick={onNextClick}
-				className="btn btn-primary"
-			>
-				Next
-				&nbsp;
-				<i className="bi-chevron-right" />
-			</button>
-		</div>
-	);
-
-	const renderOptions = options.map(({ Component }, currentIdx) => (
-		(activeStep == currentIdx) ? (
-			<Component 
-				data={{}}
-				withoutSubmit
-				prevBtn={renderPrev}
-				nextBtn={renderNext}
-				onSuccess={() => onFormSubmit(currentIdx)}
-			/>
-		) : null
-	));
 
 	return (
 		<form className="js-step-form">
@@ -98,7 +60,38 @@ const MultiStepForm = ({ id = '', options = [] }) => {
 				))}
 			</ul>
 			<div>
-				{renderOptions}
+				{options.map(({ Component }, currentIdx) => (
+					(activeStep == currentIdx) ? (
+						<Component 
+							data={{}}
+							withoutSubmit
+							onSuccess={() => onFormSubmit(currentIdx)}
+						/>
+					) : null
+				))}
+			</div>
+			<div className="d-flex align-items-center">
+				{(activeStep !== 0 ? (
+					<button
+						type="button" onClick={onPrevClick}
+						className="btn btn-ghost-secondary me-2"
+					>
+						<i className="bi-chevron-left" />
+						&nbsp;
+						Previous step
+					</button>
+				) : null)}
+				<div className="ms-auto">
+					<button
+						type="button" 
+						onClick={onNextClick}
+						className="btn btn-primary"
+					>
+						Next
+						&nbsp;
+						<i className="bi-chevron-right" />
+					</button>
+				</div>
 			</div>
 		</form>
 	);
