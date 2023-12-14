@@ -4,13 +4,13 @@ const getTimestamp = () => new Date().getTime();
 
 const auth = {
 	login: (credentials) => (
-		axios.post(`/login?timestamp=${getTimestamp()}`, credentials).then((data) => data.result)
+		axios.post(`/login?timestamp=${getTimestamp()}`, credentials).then((res) => res.data.result)
 	),
 	register: (credentials) => (
-		axios.post(`/register?timestamp=${getTimestamp()}`, credentials).then((data) => data.result)
+		axios.post(`/register?timestamp=${getTimestamp()}`, credentials).then((res) => res.data.result)
 	),
 	logout: () => (
-		axios.post(`/logout?timestamp=${getTimestamp}`).then((data) => data.result)
+		axios.post(`/logout?timestamp=${getTimestamp}`).then((res) => res.data)
 	),
 }
 

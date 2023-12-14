@@ -1,4 +1,9 @@
 // User
+export const USER_LOGGED_IN = 'USER_LOGGED_IN';
+
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
+
+// Auth ?
 export const FAILED_REQUEST = 'AUTH_FAILED_REQUEST';
 
 export const LOADING_REQUEST = 'AUTH_LOADING_REQUEST';

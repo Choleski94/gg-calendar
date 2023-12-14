@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { login } from '@store/actions/user';
+import { login } from '@store/actions/auth';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 import { AuthBranding, Input, Layout } from '@components';
@@ -12,7 +12,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 	const dispatch = useDispatch();
 
 	const [ errors, setErrors ] = React.useState({});
-	const [ loginData, setLoginData ] = React.useState({});
+	const [ data, setData ] = React.useState({});
 	const [ browserInfo, setBrowserInfo ] = React.useState({});
 
 	React.useEffect(() => setBrowserInfo({
@@ -45,8 +45,8 @@ const SignInPage = ({ browser, version, OS, language }) => {
 		return errs;
 	};
 
-	const onChange = (e) => setLoginData({
-		...loginData, [e.target?.name]: (
+	const onChange = (e) => setData({
+		...data, [e.target?.name]: (
 			(e.target.type === 'checkbox') ? 
 			e.target.checked : e.target.value
 		)
@@ -56,14 +56,13 @@ const SignInPage = ({ browser, version, OS, language }) => {
 		e.preventDefault();
 
 		// Check if we have error(s).
-		const errs = validate(loginData);
+		const errs = validate(data);
 
 		setErrors(errs);
 
 		if (Object.keys(errs).length) return null;
 
-		// dispatch(login(loginData));
-		login(loginData).then((res) => {
+		dispatch(login(data)).then((res) => {
 			console.log('redirect', res);
 		});
 	};
@@ -124,7 +123,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 											name="email"
 											onChange={onChange}
 											error={errors?.email}
-											value={loginData?.email}
+											value={data?.email}
 											className="form-control form-control-lg"
 											label={formatMessage('page.signin.label.email.text')}
 											placeholder={formatMessage('page.signin.form.email.text')}
@@ -137,7 +136,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 											type="password"
 											onChange={onChange}
 											error={errors?.password}
-											value={loginData?.password}
+											value={data?.password}
 											className="form-control form-control-lg"
 											placeholder={formatMessage('page.signin.form.password.text')}
 											label={(
@@ -157,7 +156,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 										name="remember"
 										type="checkbox"
 										onChange={onChange}
-										value={loginData?.remember}
+										value={data?.remember}
 										className="form-check-input"
 										label={formatMessage('page.signin.form.remember.text')}
 									/>
