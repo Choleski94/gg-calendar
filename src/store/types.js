@@ -1,3 +1,6 @@
+// Organization
+export const ORGANIZATION_FETCHED = 'ORGANIZATION_FETCHED';
+
 // User
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 

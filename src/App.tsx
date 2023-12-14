@@ -29,9 +29,7 @@ const Tigado = () => {
 						/>
 					)))}
 				</Routes>
-				{/*
-					<OnBoarding />
-				*/}
+				<OnBoarding />
 			</IntlProvider>
 		</ThemeProvider>
 	);
