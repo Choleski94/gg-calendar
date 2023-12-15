@@ -76,16 +76,12 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 
 	React.useEffect(() => {
 		if (isFormChanged) {
-			console.log('--->>>>');
 			// Check if we have error(s).
 			const errs = validate(payload);
 
 			setErrors(errs);
 
-			console.log('<<<----', errs);
-
 			if (!Object.keys(errs).length) {
-				console.log('<<<----');
 				setData({
 					email: payload?.email,
 					phone: payload?.phone,
@@ -298,11 +294,10 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 					type="text"
 					name="name"
 					label="Name"
-					value={payload?.name}
 					onChange={onChange}
 					error={errors?.name}
+					value={payload?.name}
 					className="form-control form-control-lg"
-					// placeholder={formatMessage('page.signin.form.name.text')}
 				/>
 			</div>
 			<div className="col-lg-5">
@@ -316,7 +311,6 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 					value={payload?.slogan}
 					secondaryLabel="(Optional)"
 					className="form-control form-control-lg"
-					// placeholder={formatMessage('page.signin.form.name.text')}
 				/>
 			</div>
 
@@ -324,32 +318,31 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 				<div className="row">
 					<div className="col-lg-3">
 						<Input
-							id="org_number"
+							id="orgNum"
 							type="text"
-							name="org_number"
+							name="orgNum"
 							onChange={onChange}
+							error={errors?.orgNum}
+							value={payload?.orgNum}
 							label="Business Number"
-							value={payload?.org_number}
-							error={errors?.org_number}
 							secondaryLabel="(Optional)"
 							className="form-control form-control-lg"
-							// placeholder={formatMessage('page.signin.form.name.text')}
 						/>
 					</div>
 					<div className="col-lg-5">
 						<Select
 							closeMenuOnSelect
-							data={payload?.type_id}
+							data={payload?.orgType}
 							label={typeLabel} options={typeOptions} 
-							onChange={(payload) => onSelectChange(payload, 'type_id')}
+							onChange={(payload) => onSelectChange(payload, 'orgType')}
 						/>
 					</div>
 					<div className="col-lg-4">
 						<Select
 							closeMenuOnSelect
-							data={payload?.sector_id}
+							data={payload?.orgSector}
 							label={sectorLabel} options={sectorOptions} 
-							onChange={(payload) => onSelectChange(payload, 'sector_id')}
+							onChange={(payload) => onSelectChange(payload, 'orgSector')}
 						/>
 					</div>
 				</div>
@@ -368,7 +361,6 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 					value={payload?.www}
 					secondaryLabel="(Optional)"
 					className="form-control form-control-lg"
-					// placeholder={formatMessage('page.signin.form.name.text')}
 				/>
 			</div>
 			<div className="col-lg-4">
@@ -405,28 +397,27 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 					<div className="col-lg-8">
 						<Input
 							type="text"
-							id="pst_number"
-							name="pst_number"
+							id="pstNum"
+							name="pstNum"
 							onChange={onChange}
 							label="PST/QST Number"
-							value={payload?.pst_number}
-							error={errors?.pst_number}
+							error={errors?.pstNum}
+							value={payload?.pstNum}
 							secondaryLabel="(Optional)"
 							className="form-control form-control-lg"
-							// placeholder={formatMessage('page.signin.form.name.text')}
 						/>
 					</div>
 					<div className="col-lg-4">
 						<Input
-							id="pst_percent"
 							type="text"
-							name="pst_percent"
+							id="pstPercent"
+							name="pstPercent"
 							label="PST/QST %"
-							value={payload?.pst_percent}
-							onChange={onChange}
-							error={errors?.pst_percent}
-							className="form-control form-control-lg"
 							placeholder="9.975"
+							onChange={onChange}
+							error={errors?.pstPercent}
+							value={payload?.pstPercent}
+							className="form-control form-control-lg"
 						/>
 					</div>
 				</div>
@@ -435,29 +426,28 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 				<div className="row">
 					<div className="col-lg-8">
 						<Input
-							id="gst_number"
+							id="gstNum"
 							type="text"
-							name="gst_number"
+							name="gstNum"
 							label="GST Number"
 							onChange={onChange}
-							error={errors?.gst_number}
-							value={payload?.gst_number}
+							error={errors?.gstNum}
+							value={payload?.gstNum}
 							secondaryLabel="(Optional)"
 							className="form-control form-control-lg"
-							// placeholder={formatMessage('page.signin.form.name.text')}
 						/>
 					</div>
 					<div className="col-lg-4">
 						<Input
-							id="gst_percent"
 							type="text"
-							name="gst_percent"
 							label="GST %"
-							value={payload?.gst_percent}
-							onChange={onChange}
-							error={errors?.gst_percent}
-							className="form-control form-control-lg"
+							id="gstPercent"
 							placeholder="5"
+							name="gstPercent"
+							onChange={onChange}
+							error={errors?.gstPercent}
+							value={payload?.gstPercent}
+							className="form-control form-control-lg"
 						/>
 					</div>
 				</div>
