@@ -1,5 +1,5 @@
 import React from 'react';
-import { Country, State, City }  from 'country-state-city';
+import { Country, State, City } from 'country-state-city';
 
 import formatMessage from '@utils/formatMessage';
 import { Button, Input, TextArea, Select, MultiInput, ImageUpload } from '@components';
