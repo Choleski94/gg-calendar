@@ -17,12 +17,17 @@ const Input = ({
 	error = null,
 	type = 'text',
 	required = '',
+	className = '',
 	secondaryLabel = '',
 	...rest
 }) => {
 	const labelClassName = React.useMemo(() => (
 		`form-label ${secondaryLabel ? '' : 'w-100'}`
 	), [ secondaryLabel ]);
+
+	const inputClassName = React.useMemo(() => (
+		error ? `${className} is-invalid` : className
+	), [ error ]);
 
 	const inputComponent = (
 		<>
@@ -41,6 +46,7 @@ const Input = ({
 			)}
 
 			<input
+				className={inputClassName}
 				required={required}
 				onChange={onChange}
 				checked={value}
@@ -49,7 +55,11 @@ const Input = ({
 				type={type}
 				{...rest}
 			/>
-			{label && type === 'checkbox' && <label className="form-label" htmlFor={name}>{label}</label>}
+			{label && type === 'checkbox' && (
+				<label className="form-label" htmlFor={name}>
+					{label}
+				</label>
+			)}
 		</>
 	);
 
