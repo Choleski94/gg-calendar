@@ -22,6 +22,8 @@ const Select = ({
 	const defaultValueOption = React.useMemo(() => {
 		let res = null;
 
+		console.log('Update value::::', value);
+
 		if (isMulti) {
 			if (value && value.length) {
 				res = options.filter((optData) => (value || []).includes(optData.value));
@@ -34,11 +36,21 @@ const Select = ({
 	}, [ value ]);
 
 	const handleChange = (payload) => {
+		let res = null;
+
 		if (!isValueChanged) {
 			setIsValueChanged(true);
 		}
 
-		onChange(payload);
+		if (isMulti) {
+			res = payload.map(({ value }) => value);
+		} else {
+			res = (payload || {}).value;
+		}
+
+		console.log('CHANGE::', res);
+
+		onChange(res);
 	}
 
 	return (
@@ -64,10 +76,10 @@ const Select = ({
 				className={className}
 				onChange={handleChange}
 				placeholder={placeholder}
+				value={defaultValueOption}
 				components={animatedComponents}
 				classNamePrefix={classNamePrefix}
 				closeMenuOnSelect={closeMenuOnSelect}
-				value={isValueChanged ? value : defaultValueOption}
 			/>
 		</>
 	);

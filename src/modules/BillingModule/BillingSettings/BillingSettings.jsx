@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { request } from '@utils/request';
-import { parseSelectOptionValues } from '@utils';
 import formatMessage from '@utils/formatMessage';
 import { Card, Input, Select } from '@components';
 import { ENTITY_INVOICE } from '@constants/invoices';

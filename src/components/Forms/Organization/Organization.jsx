@@ -3,8 +3,8 @@ import React from 'react';
 import api from '@api';
 import formatMessage from '@utils/formatMessage';
 import { Country, State, City }  from 'country-state-city';
+import { trimString, formatOptionValueType } from '@utils';
 import { Input, Select, Schedule, ImageUpload } from '@components';
-import { trimString, parseSelectOptionValues, formatOptionValueType } from '@utils';
 
 const orgId = '8fa9a6e2-d4f3-49e3-9d1c-42b227f64fd2';
 
@@ -152,7 +152,7 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 			country: trimString((payload?.country || {}).value),
 			position: trimString((payload?.position || {}).value),
 			department: trimString((payload?.department || {}).value),
-			languages: parseSelectOptionValues(payload?.languages || []),
+			languages: payload?.languages,
 		});
 	}
 

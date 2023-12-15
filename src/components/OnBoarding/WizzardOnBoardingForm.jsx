@@ -10,7 +10,13 @@ const options = [
 				Personal Information
 			</span>
 		),
-		Component: Forms.Contact,
+		Component: ({ ...rest }) => (
+			<Forms.Contact
+				withPhoto
+				withoutSubmit
+				{...rest}
+			/>
+		),
 	},
 	{
 		key: 'business-info',
@@ -19,7 +25,13 @@ const options = [
 				Business Information
 			</span>
 		),
-		Component: Forms.Organization,
+		Component: ({ ...rest }) => (
+			<Forms.Organization 
+				withPhoto
+				withoutSubmit
+				{...rest}
+			/>
+		),
 	},
 	{
 		key: 'team-info',
@@ -79,15 +91,31 @@ const WizzardOnBoardingForm = () => {
 	}
 
 	const onSetData = (payload, formIdx) => {
-		const cloneData = [ ...data ];
-		cloneData[formIdx] = { ...payload };
+		console.log('FORM ', formIdx, payload);
 
-		setData(cloneData);
-		
-		const cloneValidStep = [ ...validStep ];
-		cloneValidStep[formIdx] = true;
+		const hasValidPayload = Boolean(Object.keys(payload || {}).length);
 
-		setValidStep(cloneValidStep);
+		if (hasValidPayload) {
+			const cloneData = [ ...data ];
+			cloneData[formIdx] = { ...payload };
+
+			setData(cloneData);
+
+			const cloneValidStep = [ ...validStep ];
+			cloneValidStep[formIdx] = true;
+
+			setValidStep(cloneValidStep);
+		} else {
+			const cloneData = [ ...data ];
+			cloneData[formIdx] = {};
+
+			setData(cloneData);
+
+			const cloneValidStep = [ ...validStep ];
+			cloneValidStep[formIdx] = false;
+
+			setValidStep(cloneValidStep);
+		}
 	}
 
 	return (
@@ -112,9 +140,7 @@ const WizzardOnBoardingForm = () => {
 				{options.map(({ key, Component }, currentIdx) => (
 					(activeStep == currentIdx) ? (
 						<Component 
-							key={key}
-							withoutSubmit
-							data={data[currentIdx]}
+							key={key} data={data[currentIdx]}
 							onSuccess={() => onFormSubmit(currentIdx)}
 							setData={(payload) => onSetData(payload, activeStep)}
 						/>

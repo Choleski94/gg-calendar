@@ -1,14 +1,14 @@
 import React from 'react';
 
-const setStepItemClassName = (activeIdx = null, currentIdx = null) => [
-	'step-item',
-	(activeIdx === currentIdx ? ' active focus' : ''),
-].join(' ');
+import { setNextBtnclassName, setStepItemClassName } from './MultiStepForm.controller';
 
-const MultiStepForm = ({ id = '', options = [] }) => {
+const setComponentData = (defaultData = {}, data = {}) => ({ ...defaultData, ...data });
+
+const MultiStepForm = ({ id = '', defaultData = [], options = [] }) => {
 	const [ errors, setErrors ] = React.useState({});
+	const [ data, setData ] = React.useState([{}, {}, {}]);
+	const [ validStep, setValidStep ] = React.useState([]);
 	const [ activeStep, setActiveStep ] = React.useState(0);
-	const [ validStep, setValidStep ] = React.useState(null);
 
 	React.useEffect(() => setValidStep(
 		new Array(options.length - 1).fill(false)
@@ -41,9 +41,37 @@ const MultiStepForm = ({ id = '', options = [] }) => {
 		console.log('Success....', idx);
 	}
 
+	const onSetData = (payload, formIdx) => {
+		const hasValidPayload = Boolean(Object.keys(payload || {}).length);
+
+		if (hasValidPayload) {
+			const cloneData = [ ...data ];
+			cloneData[formIdx] = { ...payload };
+
+			setData(cloneData);
+
+			const cloneValidStep = [ ...validStep ];
+			cloneValidStep[formIdx] = true;
+
+			setValidStep(cloneValidStep);
+		} else {
+			const cloneData = [ ...data ];
+			cloneData[formIdx] = {};
+
+			setData(cloneData);
+
+			const cloneValidStep = [ ...validStep ];
+			cloneValidStep[formIdx] = false;
+
+			setValidStep(cloneValidStep);
+		}
+	}
+
+	console.log('DATA:::', data);
+
 	return (
 		<form className="js-step-form">
-			<ul id={id + '-progress'} className="js-step-progress step step-sm step-icon-sm step-inline step-item-between mb-3 mb-sm-7">
+			<ul id="on-boarding" className="js-step-progress step step-sm step-icon-sm step-inline step-item-between mb-3 mb-sm-7">
 				{options.map(({ title }, currentIdx) => (
 					<li key={title} className={setStepItemClassName(activeStep, currentIdx)}>
 						<a className="step-content-wrapper" onClick={(e) => onProgressClick(e, currentIdx)}>
@@ -60,12 +88,13 @@ const MultiStepForm = ({ id = '', options = [] }) => {
 				))}
 			</ul>
 			<div>
-				{options.map(({ Component }, currentIdx) => (
+				{options.map(({ key, Component }, currentIdx) => (
 					(activeStep == currentIdx) ? (
-						<Component 
-							data={{}}
-							withoutSubmit
+						<Component
+							key={key} 
 							onSuccess={() => onFormSubmit(currentIdx)}
+							setData={(payload) => onSetData(payload, activeStep)}
+							data={setComponentData(defaultData[currentIdx], data[currentIdx])}
 						/>
 					) : null
 				))}
@@ -83,9 +112,10 @@ const MultiStepForm = ({ id = '', options = [] }) => {
 				) : null)}
 				<div className="ms-auto">
 					<button
-						type="button" 
+						type="button"
 						onClick={onNextClick}
 						className="btn btn-primary"
+						className={setNextBtnclassName(validStep[activeStep])}
 					>
 						Next
 						&nbsp;
@@ -98,4 +128,3 @@ const MultiStepForm = ({ id = '', options = [] }) => {
 }
 
 export default MultiStepForm;
-

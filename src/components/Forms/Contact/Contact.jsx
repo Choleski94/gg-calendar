@@ -1,91 +1,45 @@
 import React from 'react';
-import moment from 'moment-timezone';
 import formatMessage from '@utils/formatMessage';
 import { Country, State, City }  from 'country-state-city';
-import { trimString, parseSelectOptionValues, formatOptionValueType } from '@utils';
 import { Button, Input, TextArea, Select, MultiInput, ImageUpload } from '@components';
 
 import {
+	initForm,
+	initPayload,
 	phoneOptions,
 	emailOptions,
+	parseBirthday,
 	genderOptions,
+	getClearOptions,
 	languageOptions,
 	positionOptions,
 	departmentOptions,
-} from './Contact.helpers';
+} from './Contact.controller';
 
-const SUPPORTED_INPUT_FORM_NAMES = [
-	'firstName', 'lastName', 'birthday', 
-	'zip', 'address', 'unit', 'buzzer', 'notes'
-];
-
-// const SUPPORTED_SELECT_FORM_NAME = [ 'gender', 'languages', 'phones', 'emails', 'country', 'state', 'city' ];
-
-/*
- * Utility helper function to clear options
- *
- * @param {Object.<string, any>} payload - Data object.
- * @param {Array.<string>} - elts element required to clear.
- *
- * @returns {Object.<string, any>} - Return cleared data object.
- */
-const getClearOptions = (payload = {}, elts = []) => {
-	const clonedPayload = { ...payload };
-
-	elts.forEach((currentKey) => {
-		clonedPayload[currentKey] = [];
-	});
-
-	return clonedPayload;
-}
-
-const parseBirthday = (dateTimeString) => (
-	moment(new Date(dateTimeString)).format('YYYY-MM-DD')
-)
-
-const Contact = ({ layout = 'VERTICAL', data = {}, setData = () => null, isEmployee, withoutSubmit = false, withNote = false, withPhoto = false, withMultiPhone = false, withMultiEmail = false, submitText = 'Save' }) => {
-
+const Contact = ({ 
+	data = {}, 
+	isEmployee, 
+	withNote = false, 
+	withPhoto = false, 
+	layout = 'VERTICAL', 
+	submitText = 'Save',
+	setData = () => null, 
+	withoutSubmit = false, 
+	withMultiPhone = false, 
+	withMultiEmail = false, 
+}) => {
 	const [ errors, setErrors ] = React.useState({});
+	const [ payload, setPayload ] = React.useState({});
 	const [ isFormChanged, setIsFormChanged ] = React.useState(false);
-	const [ payload, setPayload ] = React.useState({ orgId: 'reparation_flash' }); // TODO: Remove organization
 
+	// Initialize form with data.
 	React.useEffect(() => {
 		if (isFormChanged) return 
 
-		setPayload({
-			photo: data?.photo,
-			zip: data?.zip,
-			unit: data?.unit,
-			color: data?.color,
-			buzzer: data?.buzzer,
-			address: data?.address,
-			lastName: data.lastName,
-			birthday: data?.birthday,
-			firstName: data?.firstName,
-			city: data?.city,
-			email: data?.email,
-			phone: data?.phone,
-			state: data?.state,
-			gender: data?.gender,
-			country: data?.country,
-			position: data?.position,
-			department: data?.department,
-			languages: data?.languages,
-			...SUPPORTED_INPUT_FORM_NAMES.reduce((agg, currentKey) => {
-				const value = data[currentKey];
-
-				// Check if the value is non-empty before adding it to the aggregated object
-				if (value !== undefined && value !== null && value !== '') {
-					agg[currentKey] = value;
-				}
-
-				return agg;
-			}, {}),
-		});
-	}, [ data ]);
+		setPayload(initPayload(data));
+	}, []);
 
 	React.useEffect(() => {
-		console.log('Change detected....');
 		if (isFormChanged) {
 			// Check if we have error(s).
 			const errs = validate(payload);
@@ -93,26 +47,7 @@ const Contact = ({ layout = 'VERTICAL', data = {}, setData = () => null, isEmplo
 			setErrors(errs);
 
 			if (!Object.keys(errs).length) {
-				setData({
-					photo: payload?.photo,
-					zip: trimString(payload?.zip),
-					unit: trimString(payload?.unit),
-					color: trimString(payload?.color),
-					buzzer: trimString(payload?.buzzer),
-					address: trimString(payload?.address),
-					lastName: trimString(payload.lastName),
-					birthday: trimString(payload?.birthday),
-					firstName: trimString(payload?.firstName),
-					city: trimString((payload?.city || {}).value),
-					state: trimString((payload?.state || {}).value),
-					gender: trimString((payload?.gender || {}).value),
-					country: trimString((payload?.country || {}).value),
-					position: trimString((payload?.position || {}).value),
-					department: trimString((payload?.department || {}).value),
-					languages: parseSelectOptionValues(payload?.languages || []),
-					email: withMultiEmail ? formatOptionValueType(payload?.email) : payload?.email,
-					phone: withMultiPhone ? formatOptionValueType(payload?.phone) : payload?.phone,
-				});
+				setData(initForm(payload));
 			} else {
 				setData({});
 			}
@@ -150,31 +85,11 @@ const Contact = ({ layout = 'VERTICAL', data = {}, setData = () => null, isEmplo
 
 		if (Object.keys(errs).length) return null;
 
-		handleSubmit({
-			photo: payload?.photo,
-			zip: trimString(payload?.zip),
-			unit: trimString(payload?.unit),
-			color: trimString(payload?.color),
-			buzzer: trimString(payload?.buzzer),
-			address: trimString(payload?.address),
-			lastName: trimString(payload.lastName),
-			birthday: trimString(payload?.birthday),
-			firstName: trimString(payload?.firstName),
-			city: trimString((payload?.city || {}).value),
-			state: trimString((payload?.state || {}).value),
-			gender: trimString((payload?.gender || {}).value),
-			country: trimString((payload?.country || {}).value),
-			position: trimString((payload?.position || {}).value),
-			department: trimString((payload?.department || {}).value),
-			languages: parseSelectOptionValues(payload?.languages || []),
-			email: withMultiEmail ? formatOptionValueType(payload?.email) : payload?.email,
-			phone: withMultiPhone ? formatOptionValueType(payload?.phone) : payload?.phone,
-		});
+		handleSubmit(initForm(payload));
 	}
 
 	const onChange = (e) => {
 		if (!isFormChanged) {
-			console.log('--->>>');
 			setIsFormChanged(true);
 		}
 
@@ -222,13 +137,13 @@ const Contact = ({ layout = 'VERTICAL', data = {}, setData = () => null, isEmplo
 		},
 		state: (currentStateOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
-	
+
 			const currentPayload = getClearOptions(payload, [ 'city' ]);
 			setPayload({ ...currentPayload, state: currentStateOptions });
 		},
 		city: (currentCityOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
-		
+
 			setPayload({ ...payload, city: currentCityOptions });
 		},
 	};
