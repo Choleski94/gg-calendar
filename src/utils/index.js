@@ -570,8 +570,6 @@ export const formatOptionValueType = (options = []) => options.map(({ value, opt
 
 export const trimString = (str = '') => String(str || '').trim();
 
-export const parseSelectOptionValues = (options = []) => options.map(({ value }) => value)
-
 export const getYear = () => {
 	const d = new Date();
 	return d.getFullYear();
@@ -612,7 +610,6 @@ export default {
 	updateOrPushObject,
 	formatOptionValueType,
 	shareAtLeastOneElement,
-	parseSelectOptionValues,
 	sortAlphabeticallyByKey,
 	getEquipmentCustomField,
 	getControlsMoreClassName,
