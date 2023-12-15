@@ -85,6 +85,7 @@ const Contact = ({ layout = 'VERTICAL', data = {}, setData = () => null, isEmplo
 	}, [ data ]);
 
 	React.useEffect(() => {
+		console.log('Change detected....');
 		if (isFormChanged) {
 			// Check if we have error(s).
 			const errs = validate(payload);
@@ -112,6 +113,8 @@ const Contact = ({ layout = 'VERTICAL', data = {}, setData = () => null, isEmplo
 					email: withMultiEmail ? formatOptionValueType(payload?.email) : payload?.email,
 					phone: withMultiPhone ? formatOptionValueType(payload?.phone) : payload?.phone,
 				});
+			} else {
+				setData({});
 			}
 		}
 	}, [ payload ]);

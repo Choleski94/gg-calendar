@@ -45,11 +45,11 @@ class Modal extends React.Component {
 	};
 
 	render() {
-		const { onCloseRequest, onSaveRequest, withFooter = false, title, children, size = 'md', centered = false } = this.props;
+		const { id = 'wrapper', onCloseRequest, onSaveRequest, withFooter = false, title, children, size = 'md', centered = false } = this.props;
 
 		return (
 			<>
-				<div tabIndex={-1} role="dialog" className="modal fade show d-block">
+				<div key={`modal-${id}`} tabIndex={-1} role="dialog" className="modal fade show d-block">
 					<div role="document" ref={node => (this.modal = node)} className={`modal-dialog modal-${size} ${centered ? 'modal-dialog-centered' : ''}`}>
 						<div className="modal-content">
 							<div className="modal-header">
@@ -82,7 +82,7 @@ class Modal extends React.Component {
 						</div>
 					</div>
 				</div>
-				<div className="modal-backdrop fade show" />
+				<div key={`modal-backgrop-${id}`} className="modal-backdrop fade show" />
 			</>
 		);
 	}

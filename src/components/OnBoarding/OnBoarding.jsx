@@ -1,11 +1,40 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { Modal } from '@components';
+import { Modal, Forms } from '@components';
 import { selectUser } from '@store/selectors/user';
 import WizzardOnBoardingForm from './WizzardOnBoardingForm';
 
+const options = [
+	{
+		title: (
+			<span className="h4">
+				Personal Information
+			</span>
+		),
+		Component: Forms.Contact,
+	},
+	{
+		title: (
+			<span className="h4">
+				Business Information
+			</span>
+		),
+		Component: Forms.Organization,
+	},
+	{
+		title: (
+			<span className="h4">
+				Invite People
+			</span>
+		),
+		Component: () => 'InvitePeople',
+	},
+];
+
 const setModalSize = (isOnboarding = false) => isOnboarding ? 'xl' : 'md';
+
+const setModalId = (isOnboarding = false) => isOnboarding ? 'onboarding' : 'onboarding-get-started';
  
 const OnBoarding = () => {
 	const [ showOnBoarding, setShowOnBoarding ] = React.useState(false);
@@ -28,9 +57,14 @@ const OnBoarding = () => {
 
 	return (
 		showOnBoarding ? (
-			<Modal centered size={setModalSize(initOnboarding)} onCloseRequest={toggleShowOnBoarding}>
+			<Modal id={setModalId(initOnboarding)} centered size={setModalSize(initOnboarding)} onCloseRequest={toggleShowOnBoarding}>
 				{initOnboarding ? (
 					<WizzardOnBoardingForm />
+					// <MultiStepForm 
+					// 	defaultState={{}}
+					// 	id="createOrganization"
+					// 	options={multiStepOptions}
+					// />
 				) : (
 					<>
 						<div className="text-center">

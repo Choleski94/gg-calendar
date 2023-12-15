@@ -4,6 +4,7 @@ import { Forms } from '@components';
 
 const options = [
 	{
+		key: 'personal-info',
 		title: (
 			<span className="h4">
 				Personal Information
@@ -12,6 +13,7 @@ const options = [
 		Component: Forms.Contact,
 	},
 	{
+		key: 'business-info',
 		title: (
 			<span className="h4">
 				Business Information
@@ -20,6 +22,7 @@ const options = [
 		Component: Forms.Organization,
 	},
 	{
+		key: 'team-info',
 		title: (
 			<span className="h4">
 				Invite People
@@ -29,18 +32,14 @@ const options = [
 	},
 ];
 
-const SUPPORTED_SECTIONS = {
-	PERSONAL: 'PERSONAL',
-	BUSINESS: 'BUSINESS',
-	INVITE: 'INVITE',
-};
-
-const SECTION_INDICES = Object.keys(SUPPORTED_SECTIONS);
-
 const setStepItemClassName = (activeIdx = null, currentIdx = null) => [
 	'step-item',
 	(activeIdx === currentIdx ? ' active focus' : ''),
 ].join(' ');
+
+const setNextBtnclassName = (isActive) => (
+	isActive ? 'btn btn-primary' : 'btn btn-white'
+);
 
 const WizzardOnBoardingForm = () => {
 	const [ errors, setErrors ] = React.useState({});
@@ -81,7 +80,7 @@ const WizzardOnBoardingForm = () => {
 
 	const onSetData = (payload, formIdx) => {
 		const cloneData = [ ...data ];
-		cloneData[formIdx] = payload;
+		cloneData[formIdx] = { ...payload };
 
 		setData(cloneData);
 		
@@ -110,9 +109,10 @@ const WizzardOnBoardingForm = () => {
 				))}
 			</ul>
 			<div>
-				{options.map(({ Component }, currentIdx) => (
+				{options.map(({ key, Component }, currentIdx) => (
 					(activeStep == currentIdx) ? (
 						<Component 
+							key={key}
 							withoutSubmit
 							data={data[currentIdx]}
 							onSuccess={() => onFormSubmit(currentIdx)}
@@ -137,6 +137,7 @@ const WizzardOnBoardingForm = () => {
 						type="button" 
 						onClick={onNextClick}
 						className="btn btn-primary"
+						className={setNextBtnclassName(validStep[activeStep])}
 					>
 						Next
 						&nbsp;
