@@ -7,11 +7,14 @@ import { ThemeProvider } from 'styled-components';
 import routes from '@constants/routes';
 import themes from '@components/themes';
 import { OnBoarding } from '@components';
+import { isAuthenticated } from '@store/selectors/user';
 import { selectLocaleSettings } from '@store/selectors/settings';
 import { getLocale, constructLocale, SUPPORTED_LOCALES } from '@locales';
 
 const Tigado = () => {
 	const locale = useSelector(selectLocaleSettings);
+	const isAuth = useSelector(isAuthenticated);
+
 	const theme = 'light';
 
 	const localeISO = constructLocale(locale);
@@ -29,7 +32,9 @@ const Tigado = () => {
 						/>
 					)))}
 				</Routes>
-				<OnBoarding />
+				{isAuth && (
+					<OnBoarding />
+				)}
 			</IntlProvider>
 		</ThemeProvider>
 	);
