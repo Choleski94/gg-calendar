@@ -1,78 +1,30 @@
 import React from 'react';
+import { Country, State, City } from 'country-state-city';
 
-import api from '@api';
 import formatMessage from '@utils/formatMessage';
-import { Country, State, City }  from 'country-state-city';
-import { trimString, formatOptionValueType } from '@utils';
-import { Input, Select, Schedule, ImageUpload } from '@components';
+import { Button, Input, TextArea, Select, MultiInput, ImageUpload } from '@components';
 
-const orgId = '8fa9a6e2-d4f3-49e3-9d1c-42b227f64fd2';
-
-const typeOptions = [];
-const sectorOptions = [];
-
-const SUPPORTED_INPUT_FORM_NAMES = [ 'firstName', 'lastName', 'birthday', 'zip', 'address', 'unit', 'buzzer', 'notes'];
-
-// const SUPPORTED_SELECT_FORM_NAME = [ 'gender', 'languages', 'phones', 'emails', 'country', 'state', 'city' ];
-
-/*
- * Utility helper function to clear options
- *
- * @param {Object.<string, any>} payload - Data object.
- * @param {Array.<string>} - elts element required to clear.
- *
- * @returns {Object.<string, any>} - Return cleared data object.
- */
-const getClearOptions = (payload = {}, elts = []) => {
-	const clonedPayload = { ...payload };
-
-	elts.forEach((currentKey) => {
-		clonedPayload[currentKey] = [];
-	});
-
-	return clonedPayload;
-}
+import {
+	initForm,
+	typeOptions, 
+	initPayload,
+	phoneOptions,
+	emailOptions,
+	sectorOptions,
+	getClearOptions,
+} from './Organization.controller';
 
 const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSubmit = false }) => {
 	const [ errors, setErrors ] = React.useState({});
+	const [ payload, setPayload ] = React.useState({});
 	const [ isFormChanged, setIsFormChanged ] = React.useState(false);
-	const [ payload, setPayload ] = React.useState({ orgId: 'reparation_flash' }); // TODO: Remove organization
 
+	// Initialize form with data.
 	React.useEffect(() => {
 		if (isFormChanged) return 
 
-		setPayload({
-			photo: data?.photo,
-			zip: data?.zip,
-			unit: data?.unit,
-			color: data?.color,
-			buzzer: data?.buzzer,
-			address: data?.address,
-			lastName: data.lastName,
-			birthday: data?.birthday,
-			firstName: data?.firstName,
-			city: data?.city,
-			email: data?.email,
-			phone: data?.phone,
-			state: data?.state,
-			gender: data?.gender,
-			country: data?.country,
-			position: data?.position,
-			department: data?.department,
-			languages: data?.languages,
-			...SUPPORTED_INPUT_FORM_NAMES.reduce((agg, currentKey) => {
-				const value = data[currentKey];
-
-				// Check if the value is non-empty before adding it to the aggregated object
-				if (value !== undefined && value !== null && value !== '') {
-					agg[currentKey] = value;
-				}
-
-				return agg;
-			}, {}),
-		});
-	}, [ data ]);
-
+		// setPayload(initPayload(data));
+	}, []);
 
 	React.useEffect(() => {
 		if (isFormChanged) {
@@ -82,42 +34,31 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 			setErrors(errs);
 
 			if (!Object.keys(errs).length) {
-				setData({
-					email: payload?.email,
-					phone: payload?.phone,
-					photo: payload?.photo,
-					zip: trimString(payload?.zip),
-					name: trimString(payload.name),
-					unit: trimString(payload?.unit),
-					buzzer: trimString(payload?.buzzer),
-					address: trimString(payload?.address),
-					city: trimString((payload?.city || {}).value),
-					state: trimString((payload?.state || {}).value),
-					country: trimString((payload?.country || {}).value),
-				});
+				// setData(initForm(payload));
+			} else {
+				setData({});
 			}
 		}
 	}, [ payload ]);
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
-		email: formatMessage('form.validation.email.error.text')
 	};
 
 	const validate = (payload = {}) => {
-	        const errs = {};
+		const errs = {};
 
-		// Check for empty name.
-		if (!payload?.name) {
-			errs.name = errorMessages.empty;
+		// Check for empty firstname.
+		if (!payload?.firstName) {
+			errs.firstName = errorMessages.empty;
 		}
 
-		// // Check for empty lastname.
-		// if (!payload?.lastName) {
-		// 	errs.lastName = errorMessages.empty;
-		// }
+		// Check for empty lastname.
+		if (!payload?.lastName) {
+			errs.lastName = errorMessages.empty;
+		}
 
-	        return errs;
+		return errs;
 	};
 
 	const onSubmit = (e) => {
@@ -152,29 +93,11 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 		});
 	}
 
-	/* Labels */
-	const sectorLabel = (
-		<>
-			Sector
-			&nbsp;
-			<span className="form-label-secondary">
-				(Optional)
-			</span>
-		</>
-	);
-
-	const typeLabel = (
-		<>
-			Type
-			&nbsp;
-			<span className="form-label-secondary">
-				(Optional)
-			</span>
-		</>
-	);
-
 	const onChange = (e) => {
-		if (!isFormChanged) setIsFormChanged(true);
+		if (!isFormChanged) {
+			setIsFormChanged(true);
+		}
+
 		setPayload({
 			...payload, [e.target?.name]: (
 				(e.target.type === 'checkbox') ? 
@@ -191,25 +114,15 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 	}
 
 	const onSelectChange = {
-		gender: (currentGenderOptions) => {
+		orgType: (currentOrgTypeOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
 	
-			setPayload({ ...payload, gender: currentGenderOptions });
+			setPayload({ ...payload, orgType: currentOrgTypeOptions });
 		},
-		position: (currentPositionOptions) => {
-			if (!isFormChanged) setIsFormChanged(true);
-
-			setPayload({ ...payload, position: currentPositionOptions });
-		},
-		languages: (currentLanguageOptions) => {
+		orgSector: (currentOrgSectorOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
 	
-			setPayload({ ...payload, languages: currentLanguageOptions });
-		},
-		department: (currentDepartmentOptions) => {
-			if (!isFormChanged) setIsFormChanged(true);
-	
-			setPayload({ ...payload, department: currentDepartmentOptions });
+			setPayload({ ...payload, orgSector: currentOrgSectorOptions });
 		},
 		country: (currentCountryOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
@@ -219,13 +132,13 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 		},
 		state: (currentStateOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
-	
+
 			const currentPayload = getClearOptions(payload, [ 'city' ]);
 			setPayload({ ...currentPayload, state: currentStateOptions });
 		},
 		city: (currentCityOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
-		
+
 			setPayload({ ...payload, city: currentCityOptions });
 		},
 	};
@@ -329,19 +242,23 @@ const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSub
 							className="form-control form-control-lg"
 						/>
 					</div>
-					<div className="col-lg-5">
+					<div className="col-lg-4">
 						<Select
+							label="Type" 
 							closeMenuOnSelect
+							options={typeOptions} 
 							data={payload?.orgType}
-							label={typeLabel} options={typeOptions} 
+							secondaryLabel="(Optional)" 
 							onChange={(payload) => onSelectChange(payload, 'orgType')}
 						/>
 					</div>
-					<div className="col-lg-4">
+					<div className="col-lg-5">
 						<Select
+							label="Sector" 
 							closeMenuOnSelect
+							options={sectorOptions} 
 							data={payload?.orgSector}
-							label={sectorLabel} options={sectorOptions} 
+							secondaryLabel="(Optional)" 
 							onChange={(payload) => onSelectChange(payload, 'orgSector')}
 						/>
 					</div>
