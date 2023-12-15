@@ -1,37 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-// import { request } from '@utils/request';
-// import InvitePeople from '@modules/InvitePeople';
+import { Modal } from '@components';
 import { selectUser } from '@store/selectors/user';
-import { Modal, Forms, MultiStepForm } from '@components';
-
-const multiStepOptions = [
-	{
-		title: (
-			<span className="h4">
-				Personal Information
-			</span>
-		),
-		Component: Forms.Contact,
-	},
-	{
-		title: (
-			<span className="h4">
-				Business Information
-			</span>
-		),
-		Component: Forms.Organization,
-	},
-	{
-		title: (
-			<span className="h4">
-				Invite People
-			</span>
-		),
-		Component: () => 'InvitePeople',
-	},
-];
+import WizzardOnBoardingForm from './WizzardOnBoardingForm';
 
 const setModalSize = (isOnboarding = false) => isOnboarding ? 'xl' : 'md';
  
@@ -47,24 +19,6 @@ const OnBoarding = () => {
 		setShowOnBoarding(!isOnboarded)
 	}, [ isOnboarded ]);
 
-	const fecthUserData = () => {
-		// request.read({ entity: 'user', id: userId }).then((response) => {
-		// 	// setLoading(false);
-
-		// 	if (response.success === true) {
-		// 		setShowOnBoarding(!response.result.isOnboarded);
-		// 	}
-		// }).catch(() => {
-		// 	// setLoading(false);
-		// });
-	}
-
-	React.useEffect(() => {
-		if (!userId) return
-
-		// fecthUserData();
-	}, []);
-
 	const toggleShowOnBoarding = () => {
 		// TODO: Conditionally enable if user comple onboarding process.
 		// setShowOnBoarding(!showOnBoarding);
@@ -76,11 +30,7 @@ const OnBoarding = () => {
 		showOnBoarding ? (
 			<Modal centered size={setModalSize(initOnboarding)} onCloseRequest={toggleShowOnBoarding}>
 				{initOnboarding ? (
-					<MultiStepForm 
-						defaultState={{}}
-						id="createOrganization"
-						options={multiStepOptions}
-					/>
+					<WizzardOnBoardingForm />
 				) : (
 					<>
 						<div className="text-center">

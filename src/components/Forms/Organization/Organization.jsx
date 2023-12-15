@@ -33,7 +33,7 @@ const getClearOptions = (payload = {}, elts = []) => {
 	return clonedPayload;
 }
 
-const OrganizationForm = ({ data, handleSubmit, withoutSubmit = false }) => {
+const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSubmit = false }) => {
 	const [ errors, setErrors ] = React.useState({});
 	const [ isFormChanged, setIsFormChanged ] = React.useState(false);
 	const [ payload, setPayload ] = React.useState({ orgId: 'reparation_flash' }); // TODO: Remove organization
@@ -41,37 +41,67 @@ const OrganizationForm = ({ data, handleSubmit, withoutSubmit = false }) => {
 	React.useEffect(() => {
 		if (isFormChanged) return 
 
-		// setPayload({
-		// 	photo: data?.photo,
-		// 	zip: data?.zip,
-		// 	unit: data?.unit,
-		// 	color: data?.color,
-		// 	buzzer: data?.buzzer,
-		// 	address: data?.address,
-		// 	lastName: data.lastName,
-		// 	birthday: data?.birthday,
-		// 	firstName: data?.firstName,
-		// 	city: data?.city,
-		// 	email: data?.email,
-		// 	phone: data?.phone,
-		// 	state: data?.state,
-		// 	gender: data?.gender,
-		// 	country: data?.country,
-		// 	position: data?.position,
-		// 	department: data?.department,
-		// 	languages: data?.languages,
-		// 	...SUPPORTED_INPUT_FORM_NAMES.reduce((agg, currentKey) => {
-		// 		const value = data[currentKey];
+		setPayload({
+			photo: data?.photo,
+			zip: data?.zip,
+			unit: data?.unit,
+			color: data?.color,
+			buzzer: data?.buzzer,
+			address: data?.address,
+			lastName: data.lastName,
+			birthday: data?.birthday,
+			firstName: data?.firstName,
+			city: data?.city,
+			email: data?.email,
+			phone: data?.phone,
+			state: data?.state,
+			gender: data?.gender,
+			country: data?.country,
+			position: data?.position,
+			department: data?.department,
+			languages: data?.languages,
+			...SUPPORTED_INPUT_FORM_NAMES.reduce((agg, currentKey) => {
+				const value = data[currentKey];
 
-		// 		// Check if the value is non-empty before adding it to the aggregated object
-		// 		if (value !== undefined && value !== null && value !== '') {
-		// 			agg[currentKey] = value;
-		// 		}
+				// Check if the value is non-empty before adding it to the aggregated object
+				if (value !== undefined && value !== null && value !== '') {
+					agg[currentKey] = value;
+				}
 
-		// 		return agg;
-		// 	}, {}),
-		// });
+				return agg;
+			}, {}),
+		});
 	}, [ data ]);
+
+
+	React.useEffect(() => {
+		if (isFormChanged) {
+			console.log('--->>>>');
+			// Check if we have error(s).
+			const errs = validate(payload);
+
+			setErrors(errs);
+
+			console.log('<<<----', errs);
+
+			if (!Object.keys(errs).length) {
+				console.log('<<<----');
+				setData({
+					email: payload?.email,
+					phone: payload?.phone,
+					photo: payload?.photo,
+					zip: trimString(payload?.zip),
+					name: trimString(payload.name),
+					unit: trimString(payload?.unit),
+					buzzer: trimString(payload?.buzzer),
+					address: trimString(payload?.address),
+					city: trimString((payload?.city || {}).value),
+					state: trimString((payload?.state || {}).value),
+					country: trimString((payload?.country || {}).value),
+				});
+			}
+		}
+	}, [ payload ]);
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
@@ -81,15 +111,15 @@ const OrganizationForm = ({ data, handleSubmit, withoutSubmit = false }) => {
 	const validate = (payload = {}) => {
 	        const errs = {};
 
-		// Check for empty firstname.
-		if (!payload?.firstName) {
-			errs.firstName = errorMessages.empty;
+		// Check for empty name.
+		if (!payload?.name) {
+			errs.name = errorMessages.empty;
 		}
 
-		// Check for empty lastname.
-		if (!payload?.lastName) {
-			errs.lastName = errorMessages.empty;
-		}
+		// // Check for empty lastname.
+		// if (!payload?.lastName) {
+		// 	errs.lastName = errorMessages.empty;
+		// }
 
 	        return errs;
 	};
@@ -105,6 +135,8 @@ const OrganizationForm = ({ data, handleSubmit, withoutSubmit = false }) => {
 		if (Object.keys(errs).length) return null;
 
 		handleSubmit({
+			email: payload?.email,
+			phone: payload?.phone,
 			photo: payload?.photo,
 			zip: trimString(payload?.zip),
 			unit: trimString(payload?.unit),
@@ -121,8 +153,6 @@ const OrganizationForm = ({ data, handleSubmit, withoutSubmit = false }) => {
 			position: trimString((payload?.position || {}).value),
 			department: trimString((payload?.department || {}).value),
 			languages: parseSelectOptionValues(payload?.languages || []),
-			email: withMultiEmail ? formatOptionValueType(payload?.email) : payload?.email,
-			phone: withMultiPhone ? formatOptionValueType(payload?.phone) : payload?.phone,
 		});
 	}
 

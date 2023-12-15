@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Error = ({ text }) => (
-	<small className="text-danger form-control-feedback">
-		{ text  }
+	<small className="text-danger invalid-feedback">
+		{text}
 	</small>
 );
 

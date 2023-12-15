@@ -14,7 +14,10 @@ import {
 	departmentOptions,
 } from './Contact.helpers';
 
-const SUPPORTED_INPUT_FORM_NAMES = [ 'firstName', 'lastName', 'birthday', 'zip', 'address', 'unit', 'buzzer', 'notes'];
+const SUPPORTED_INPUT_FORM_NAMES = [
+	'firstName', 'lastName', 'birthday', 
+	'zip', 'address', 'unit', 'buzzer', 'notes'
+];
 
 // const SUPPORTED_SELECT_FORM_NAME = [ 'gender', 'languages', 'phones', 'emails', 'country', 'state', 'city' ];
 
@@ -40,7 +43,8 @@ const parseBirthday = (dateTimeString) => (
 	moment(new Date(dateTimeString)).format('YYYY-MM-DD')
 )
 
-const Contact = ({ layout = 'VERTICAL', data, handleSubmit, isEmployee, withoutSubmit = false, withNote = false, withPhoto = false, withMultiPhone = false, withMultiEmail = false, submitText = 'Save' }) => {
+const Contact = ({ layout = 'VERTICAL', data = {}, setData = () => null, isEmployee, withoutSubmit = false, withNote = false, withPhoto = false, withMultiPhone = false, withMultiEmail = false, submitText = 'Save' }) => {
+
 	const [ errors, setErrors ] = React.useState({});
 	const [ isFormChanged, setIsFormChanged ] = React.useState(false);
 	const [ payload, setPayload ] = React.useState({ orgId: 'reparation_flash' }); // TODO: Remove organization
@@ -79,6 +83,38 @@ const Contact = ({ layout = 'VERTICAL', data, handleSubmit, isEmployee, withoutS
 			}, {}),
 		});
 	}, [ data ]);
+
+	React.useEffect(() => {
+		if (isFormChanged) {
+			// Check if we have error(s).
+			const errs = validate(payload);
+
+			setErrors(errs);
+
+			if (!Object.keys(errs).length) {
+				setData({
+					photo: payload?.photo,
+					zip: trimString(payload?.zip),
+					unit: trimString(payload?.unit),
+					color: trimString(payload?.color),
+					buzzer: trimString(payload?.buzzer),
+					address: trimString(payload?.address),
+					lastName: trimString(payload.lastName),
+					birthday: trimString(payload?.birthday),
+					firstName: trimString(payload?.firstName),
+					city: trimString((payload?.city || {}).value),
+					state: trimString((payload?.state || {}).value),
+					gender: trimString((payload?.gender || {}).value),
+					country: trimString((payload?.country || {}).value),
+					position: trimString((payload?.position || {}).value),
+					department: trimString((payload?.department || {}).value),
+					languages: parseSelectOptionValues(payload?.languages || []),
+					email: withMultiEmail ? formatOptionValueType(payload?.email) : payload?.email,
+					phone: withMultiPhone ? formatOptionValueType(payload?.phone) : payload?.phone,
+				});
+			}
+		}
+	}, [ payload ]);
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
@@ -134,7 +170,11 @@ const Contact = ({ layout = 'VERTICAL', data, handleSubmit, isEmployee, withoutS
 	}
 
 	const onChange = (e) => {
-		if (!isFormChanged) setIsFormChanged(true);
+		if (!isFormChanged) {
+			console.log('--->>>');
+			setIsFormChanged(true);
+		}
+
 		setPayload({
 			...payload, [e.target?.name]: (
 				(e.target.type === 'checkbox') ? 
