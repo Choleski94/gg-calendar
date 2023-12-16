@@ -20,6 +20,10 @@ export const isEven = (n = 0) => n % 2 == 0;
 
 export const humanBoolean = (f) => f ? 'Yes' : 'No';
 
+export const hasObjectKey = (data = {}) => Boolean(
+	Object.keys(data || {}).length
+);
+
 export const parseLocaleLang = (locale = '') => {
 	const parsedLocale = (locale || '').toUpperCase();
 	const [ lang ] = parsedLocale.split('-');
@@ -589,6 +593,7 @@ export default {
 	formatDate,
 	filterData,
 	trimString,
+	hasObjectKey,
 	deleteObject,
 	colourStyles,
 	getTechColor,

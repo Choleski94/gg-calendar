@@ -14,7 +14,12 @@ import {
 	getClearOptions,
 } from './Organization.controller';
 
-const OrganizationForm = ({ data, setData = () => null, handleSubmit, withoutSubmit = false }) => {
+const OrganizationForm = ({
+	data = {}, 
+	handleSubmit, 
+	setData = () => null, 
+	withoutSubmit = false,
+}) => {
 	const [ errors, setErrors ] = React.useState({});
 	const [ payload, setPayload ] = React.useState({});
 	const [ isFormChanged, setIsFormChanged ] = React.useState(false);

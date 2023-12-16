@@ -160,18 +160,6 @@ export const sectorOptions = [
 	},
 ];
 
-export const languageOptions = [
-	{ label: 'English', value: 'en-US' }, 
-	{ label: 'Français', value: 'fr-FR' },
-	{ label: 'Español', value: 'es-ES' },
-];
-
-export const genderOptions = [
-	{ label: 'Male', value: 'MALE' },
-	{ label: 'Female', value: 'FEMALE' },
-	{ label: 'Other', value: 'OTHER' },
-];
-
 export const phoneOptions = [
 	{ label: 'Mobile', value: 'MOBILE' },
 	{ label: 'Home', value: 'HOME' },
@@ -183,19 +171,7 @@ export const emailOptions = [
 	{ label: 'Work', value: 'WORK' },
 ];
 
-export const departmentOptions = [
-	{ label: 'Office', value: 'OFFICE' }, 
-	{ label: 'Techs', value: 'TECHS' }
-];
-
-export const positionOptions = [
-	{ label: 'Sales Agent', value: 'SALES_AGENT' }, 
-	{ label: 'Recovery', value: 'RECOVERY' },
-	{ label: 'Mitigation', value: 'MITIGATION' },
-];
-
 export const SUPPORTED_INPUT_FORM_NAMES = [
-	'firstName', 'lastName', 'birthday', 
 	'zip', 'address', 'unit', 'buzzer', 'notes'
 ];
 
@@ -216,10 +192,6 @@ export const getClearOptions = (payload = {}, elts = []) => {
 
 	return clonedPayload;
 }
-
-export const parseBirthday = (dateTimeString) => (
-	moment(new Date(dateTimeString)).format('YYYY-MM-DD')
-);
 
 export const initPayload = (data = {}) => ({
 	photo: data?.photo,
@@ -278,8 +250,4 @@ export const initForm = (payload = {}, withMultiEmail = false, withMultiPhone = 
 export default {
 	phoneOptions,
 	emailOptions,
-	genderOptions,
-	languageOptions,
-	positionOptions,
-	departmentOptions,
 };

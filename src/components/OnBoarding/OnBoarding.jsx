@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { hasObjectKey } from '@utils';
 import { selectUser } from '@store/selectors/user';
 import { Modal, Forms, MultiStepForm } from '@components';
 
@@ -72,19 +73,40 @@ const abedData = {
 const OnBoarding = () => {
 	const [ optionsData, setOptionsData ] = React.useState([]);
 	const [ showOnBoarding, setShowOnBoarding ] = React.useState(false);
-	const [ initOnboarding, setInitOnboarding ] = React.useState(false);
+	const [ startOnboarding, setStartOnboarding ] = React.useState(false);
 
-	const userData = useSelector(selectUser);
+	const user = useSelector(selectUser);
 
-	const { id: userId, isOnboarded } = userData;
+	const { id: userId, isOnboarded } = user;
 
 	React.useEffect(() => {
 		setShowOnBoarding(!isOnboarded)
 	}, [ isOnboarded ]);
 
+	// Populate option data.
 	React.useEffect(() => {
-		setOptionsData([ userData, {}, {} ]);
+		console.log('Set user data....', user);
+		setOptionsData([ user, {}, {} ]);
 	}, []);
+
+	// // If we have county, state, city selection in user personal section.
+	// // initialize business country, state, city selection.
+	// React.useEffect(() => {
+	// 	console.log('----------------->>>', optionsData);
+
+	// 	const [ userData, businessData ] = [ ...optionsData ];
+
+	// 	const hasUserData = hasObjectKey(userData);
+	// 	const hasBusinessData = hasObjectKey(businessData);
+
+	// 	if (hasUserData && !hasBusinessData) {
+	// 		businessData.country = userData.country;
+	// 		businessData.state = userData.state;
+	// 		businessData.city = userData.city;
+
+	// 		setOptionsData([ userData, businessData, {} ]);
+	// 	}
+	// }, [ optionsData ]);
 
 	const toggleShowOnBoarding = () => {
 		// TODO: Conditionally enable if user comple onboarding process.
@@ -92,17 +114,22 @@ const OnBoarding = () => {
 	};
 
 	const onStartOnBoarding = () => {
-		setInitOnboarding(true);
+		setStartOnboarding(true);
+	}
+
+	const onOptionChange = (options) => {
+		setOptionsData(options);
 	}
 
 	return (
 		showOnBoarding ? (
-			<Modal id={setModalId(initOnboarding)} centered size={setModalSize(initOnboarding)} onCloseRequest={toggleShowOnBoarding}>
-				{initOnboarding ? (
+			<Modal key={setModalId(startOnboarding)} id={setModalId(startOnboarding)} centered size={setModalSize(startOnboarding)} onCloseRequest={toggleShowOnBoarding}>
+				{startOnboarding ? (
 					<MultiStepForm 
 						options={options}
 						id="createOrganization"
 						defaultData={optionsData}
+						onOptionChange={onOptionChange}
 					/>
 				) : (
 					<>
