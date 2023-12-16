@@ -22,8 +22,6 @@ const Select = ({
 	const defaultValueOption = React.useMemo(() => {
 		let res = null;
 
-		console.log('Update value::::', value);
-
 		if (isMulti) {
 			if (value && value.length) {
 				res = options.filter((optData) => (value || []).includes(optData.value));
@@ -47,8 +45,6 @@ const Select = ({
 		} else {
 			res = (payload || {}).value;
 		}
-
-		console.log('CHANGE::', res);
 
 		onChange(res);
 	}
