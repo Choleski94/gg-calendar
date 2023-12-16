@@ -4,17 +4,38 @@ import { setNextBtnclassName, setStepItemClassName } from './MultiStepForm.contr
 
 const setComponentData = (defaultData = {}, data = {}) => ({ ...defaultData, ...data });
 
-const MultiStepForm = ({ id = '', defaultData = [], options = [] }) => {
+const MultiStepForm = ({ id = '', initialData = [], options = [], onOptionChange = () => null }) => {
+	const [ data, setData ] = React.useState([]);
 	const [ errors, setErrors ] = React.useState({});
-	const [ data, setData ] = React.useState([{}, {}, {}]);
 	const [ validStep, setValidStep ] = React.useState([]);
 	const [ activeStep, setActiveStep ] = React.useState(0);
+	const [ defaultData, setDefaultData ] = React.useState([]);
 
-	React.useEffect(() => setValidStep(
-		new Array(options.length - 1).fill(false)
-	), [ options ]);
+	React.useEffect(() => {
+		console.log('Set initial data...............')
+		setDefaultData(initialData);
+	}, []);
 
-	const maxOptions = React.useMemo(() => options.length - 1, [ options ]);
+	React.useEffect(() => {
+		setDefaultData([ ...initialData ]);
+	}, [ initialData ]);
+
+	const totalOption = React.useMemo(() => {
+		let res = 0;
+
+		const optionQty = (options || []).length;
+
+		if (optionQty) {
+			res = optionQty - 1;
+		}
+
+		return res;
+	}, [ options ]);
+
+	React.useEffect(() => {
+		setData(new Array(totalOption).fill({}));
+		setValidStep(new Array(totalOption).fill(false));
+	}, [ totalOption ]);
 
 	const onProgressClick = (e, currentIdx) => {
 		e.preventDefault();
@@ -32,8 +53,10 @@ const MultiStepForm = ({ id = '', defaultData = [], options = [] }) => {
 
 	const onNextClick = (e) => {
 		e.preventDefault();
-		if (activeStep !== maxOptions && validStep[activeStep]) {
+		if (activeStep !== totalOption && validStep[activeStep]) {
 			setActiveStep(activeStep + 1);
+			const resStatus = onOptionChange(activeStep, data[activeStep]);
+			console.log('STATUS:::', resStatus);
 		}
 	};
 
@@ -66,8 +89,6 @@ const MultiStepForm = ({ id = '', defaultData = [], options = [] }) => {
 			setValidStep(cloneValidStep);
 		}
 	}
-
-	console.log('DATA:::', data);
 
 	return (
 		<form className="js-step-form">

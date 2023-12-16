@@ -38,7 +38,7 @@ const Contact = ({
 		if (isFormChanged) return 
 
 		setPayload(initPayload(data));
-	}, []);
+	}, [ data ]);
 
 	React.useEffect(() => {
 		if (isFormChanged) {
