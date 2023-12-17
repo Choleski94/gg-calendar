@@ -60,17 +60,17 @@ const FORM_SECTION_KEYS = Object.keys(FORM_SECTIONS);
 const formHandlers = {
 	[FORM_SECTIONS.PERSONAL]: (payload = {}) => {
 		// TODO:
-		console.log('update user info', payload);
+		//console.log('update user info', payload);
 		return true;
 	},
 	[FORM_SECTIONS.BUSINESS]: (payload = {}) => {
 		// TODO:
-		console.log('update business info', payload);
+		// console.log('update business info', payload);
 		return true;
 	},
 	[FORM_SECTIONS.INVITE]: (payload = {}) => {
 		// TODO:
-		console.log('update invite info', payload);
+		// console.log('update invite info', payload);
 		return true;
 	},
 }
@@ -90,7 +90,6 @@ const OnBoarding = () => {
 
 	// Populate option data.
 	React.useEffect(() => {
-		console.log('Set user data....', user);
 		setOptionsData([ user, {}, {} ]);
 	}, []);
 
@@ -101,8 +100,6 @@ const OnBoarding = () => {
 
 		// Check if we want to share location.
 		if (stepIdx == 0 && !hasObjectKey(cloneOptionData[1])) {
-			console.log('----------------->>>', payload);
-
 			cloneOptionData[1].address = payload.address;
 			cloneOptionData[1].country = payload.country;
 			cloneOptionData[1].buzzer = payload.buzzer;
@@ -133,8 +130,6 @@ const OnBoarding = () => {
 
 		return currentFormApiFn(payload);
 	}
-
-	console.log('XXX:::', optionsData);
 
 	return (
 		showOnBoarding ? (
