@@ -42,7 +42,6 @@ export const initPayload = (data = {}) => ({
 	}, {})
 });
 
-
 export const initForm = (payload = {}, withMultiEmail = false, withMultiPhone = false) => ({
 	photo: payload?.photo,
 	zip: trimString(payload?.zip),
