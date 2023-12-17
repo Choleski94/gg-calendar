@@ -54,14 +54,9 @@ const OrganizationForm = ({
 	const validate = (payload = {}) => {
 		const errs = {};
 
-		// Check for empty firstname.
-		if (!payload?.firstName) {
-			errs.firstName = errorMessages.empty;
-		}
-
-		// Check for empty lastname.
-		if (!payload?.lastName) {
-			errs.lastName = errorMessages.empty;
+		// Check for empty name.
+		if (!payload?.name) {
+			errs.name = errorMessages.empty;
 		}
 
 		return errs;

@@ -62,3 +62,7 @@ export const initForm = (payload = {}, withMultiEmail = false, withMultiPhone = 
 	email: withMultiEmail ? formatOptionValueType(payload?.email) : payload?.email,
 	phone: withMultiPhone ? formatOptionValueType(payload?.phone) : payload?.phone,
 });
+
+export default {
+	parseBirthday
+}

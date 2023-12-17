@@ -27,7 +27,6 @@ const Contact = ({
 	const {
 		phoneOptions,
 		emailOptions,
-		parseBirthday,
 		genderOptions,
 		languageOptions,
 		positionOptions,
