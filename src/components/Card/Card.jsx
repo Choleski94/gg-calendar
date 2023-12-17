@@ -26,8 +26,8 @@ Card.CTA = ({ children }) => (
 	</div>
 );
 
-Card.Body = ({ children, fullHeight = false, title = '' }) => (
-	<div className={`card-body ${fullHeight ? 'card-body-height' : ''}`}>
+Card.Body = ({ children, fullHeight = false, title = '', noHorizontalPassing = false }) => (
+	<div className={`card-body ${fullHeight ? 'card-body-height' : ''} ${noHorizontalPassing ? 'px-0' : ''}`}>
 		{title && (
 			<h6 className="card-subtitle">
 				{title}
