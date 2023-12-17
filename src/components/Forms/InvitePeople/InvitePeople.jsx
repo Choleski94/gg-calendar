@@ -46,8 +46,6 @@ const InvitePeople = () => {
 
 		if (hasObjectKey(errs)) return null;
 
-		console.log('Add item');
-
 		const cloneOptions = [ ...options ];
 		cloneOptions.push(query);
 
@@ -61,7 +59,9 @@ const InvitePeople = () => {
 		console.log('Remove item');
 	}
 
-	console.log('DATA:::', options, query, errors);
+	const hasOptions = React.useMemo(() => (
+		Boolean((options || []).length)
+	), [ options ]);
 
 	return (
 		<>
@@ -89,45 +89,47 @@ const InvitePeople = () => {
 					</span>
 				)}
 			</div>
-			<Card withoutBorder withoutHover centered>
-				{options && options.length ? (
-					<ul className="list-unstyled list-py-2">
-						{options.map((payload) => (
-							<li>
-								<div className="d-flex">
-									<div className="flex-shrink-0">
-										<span className="icon icon-soft-dark icon-sm icon-circle">
-											<i className="bi-people-fill" />
-										</span>
-									</div>
-									<div className="flex-grow-1 ms-3">
-										<div className="row align-items-center">
-											<div className="col-sm">
-												<h5 className="text-body mb-0">
-													{payload}
-												</h5>
-											</div>
-											<div className="col-sm-auto">
-												<button className="btn btn-outline-danger btn-xs" onClick={(e) => onRemoveItem(e)}>
-													<i className="bi bi-trash" />
-													&nbsp;
-													Remove
-												</button>
+			<Card withoutBorder withoutHover centered={!hasOptions}>
+				<Card.Body fullHeight>
+					{options && options.length ? (
+						<ul className="list-unstyled list-py-2">
+							{options.map((payload) => (
+								<li>
+									<div className="d-flex">
+										<div className="flex-shrink-0">
+											<span className="icon icon-soft-dark icon-sm icon-circle">
+												<i className="bi-people-fill" />
+											</span>
+										</div>
+										<div className="flex-grow-1 ms-3">
+											<div className="row align-items-center">
+												<div className="col-sm">
+													<h5 className="text-body mb-0">
+														{payload}
+													</h5>
+												</div>
+												<div className="col-sm-auto">
+													<button className="btn btn-outline-danger btn-xs" onClick={(e) => onRemoveItem(e)}>
+														<i className="bi bi-trash" />
+														&nbsp;
+														Remove
+													</button>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</li>
-						))}
-					</ul>
-				) : (
-					<Card.Body fullHeight>
-						<Illustrations.Collaboration />
-						<Card.Text>
-							Add team members to your workforce
-						</Card.Text>
-					</Card.Body>
-				)}
+								</li>
+							))}
+						</ul>
+					) : (
+						<>
+							<Illustrations.Collaboration />
+							<Card.Text>
+								Invite team members to join your workforce
+							</Card.Text>
+						</>
+					)}
+				</Card.Body>
 			</Card>
 		</>
 	);
