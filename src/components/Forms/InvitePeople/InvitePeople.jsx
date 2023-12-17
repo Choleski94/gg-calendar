@@ -1,297 +1,134 @@
 import React from 'react';
 
+import { hasObjectKey } from '@utils';
+import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
+import { Card, Input, Illustrations } from '@components';
 
 const InvitePeople = () => {
+	const [ query, setQuery ] = React.useState('');
+	const [ errors, setErrors ] = React.useState({});
+	const [ options, setOptions ] = React.useState([]);
+	const [ loading, setLoading ] = React.useState(false);
+
+	const onChange = (e) => {
+		setQuery(e.target.value);
+	};
+
+	const errorMessages = {
+		empty: formatMessage('form.validation.empty.error.text'),
+		email: formatMessage('form.validation.email.error.text'),
+	};
+
+	const validate = (payload = {}) => {
+		const errs = {};
+
+		// Check for emptyquery
+		if (!payload?.query) {
+			errs.query = errorMessages.empty;
+		}
+
+		// Verify query is a valid email.
+		if (payload.query && !validateEmail(payload.query)) {
+			errs.query = errorMessages.email;
+		}
+
+		return errs;
+	};
+
+	const onAddItem = (e) => {
+		e.preventDefault();
+
+		// Check if we have error(s).
+		const errs = validate({ query });
+
+		setErrors(errs);
+
+		if (hasObjectKey(errs)) return null;
+
+		console.log('Add item');
+
+		const cloneOptions = [ ...options ];
+		cloneOptions.push(query);
+
+		setOptions(cloneOptions);
+
+		setQuery(''); // Clear query.
+	}
+
+	const onRemoveItem = (e) => {
+		e.preventDefault();
+		console.log('Remove item');
+	}
+
+	console.log('DATA:::', options, query, errors);
+
 	return (
 		<>
 			<div className="mb-4">
-				<div className="input-group mb-2 mb-sm-0">
-					<input
+				<div className="input-group mb-4 mb-sm-0">
+					<Input
+						id="query"
 						type="text"
-						name="fullName"
-						className="form-control"
+						name="query"
+						value={query}
+						onChange={onChange}
+						className="form-control form-control-lg"
 						placeholder="Search by id, name or emails"
-						aria-label="Search by id, name or emails"
 					/>
 					<div className="input-group-append input-group-append-last-sm-down-none">
-						<div className="tom-select-custom tom-select-custom-end">
-							<select
-								className="js-select form-select tom-select-custom-form-select-invite-user tomselected ts-hidden-accessible"
-								autoComplete="off"
-								id="tomselect-4"
-								tabIndex={-1}
-							>
-								<option value="can edit">Can edit</option>
-								<option value="can comment">Can comment</option>
-								<option value="full access">Full access</option>
-								<option value="guest" selected>
-									Guest
-								</option>
-							</select>
-							<div className="ts-wrapper js-select form-select tom-select-custom-form-select-invite-user single plugin-change_listener plugin-hs_smart_position input-hidden full has-items">
-								<div className="ts-control">
-									<div data-value="guest" className="item" data-ts-item>
-										Guest
-									</div>
-								</div>
-								<div className="tom-select-custom" />
-							</div>
-						</div>
-						<a
-							className="btn btn-primary d-none d-sm-inline-block"
-							href="javascript:;"
-						>
+						<a className="btn btn-primary d-none d-sm-inline-block" onClick={onAddItem}>
+							<i className="bi bi-plus" />
 							Invite
 						</a>
 					</div>
 				</div>
-				<a className="btn btn-primary w-100 d-sm-none" href="javascript:;">
-					Invite
-				</a>
-			</div>
-			<ul className="list-unstyled list-py-2">
-				<li>
-					<div className="d-flex">
-						<div className="flex-shrink-0">
-							<span className="icon icon-soft-dark icon-sm icon-circle">
-								<i className="bi-people-fill" />
-							</span>
-						</div>
-						<div className="flex-grow-1 ms-3">
-							<div className="row align-items-center">
-								<div className="col-sm">
-									<h5 className="text-body mb-0">#digitalmarketing</h5>
-									<span className="d-block fs-6">8 members</span>
-								</div>
-								<div className="col-sm-auto">
-									<div className="tom-select-custom tom-select-custom-sm-end">
-										<select
-											className="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0 tomselected ts-hidden-accessible"
-											autoComplete="off"
-											id="tomselect-5"
-											tabIndex={-1}
-										>
-											<option value="guest">Guest</option>
-											<option value="can comment">Can comment</option>
-											<option value="full access">Full access</option>
-											<option
-												value="remove"
-												data-option-template='<div class="text-danger">Remove</div>'
-											>
-												Remove
-											</option>
-											<option value="can edit" selected>
-												Can edit
-											</option>
-										</select>
-										<div className="ts-wrapper js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items">
-											<div className="ts-control">
-												<div
-													data-value="can edit"
-													className="item"
-													data-ts-item
-												>
-													Can edit
-												</div>
-											</div>
-											<div className="tom-select-custom" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div className="d-flex">
-						<div className="flex-shrink-0">
-							<div className="avatar avatar-sm avatar-circle">
-								<img
-									className="avatar-img"
-									src="/assets/img/160x160/img3.jpg"
-									alt="Image Description"
-								/>
-							</div>
-						</div>
-						<div className="flex-grow-1 ms-3">
-							<div className="row align-items-center">
-								<div className="col-sm">
-									<h5 className="text-body mb-0">David Harrison</h5>
-									<span className="d-block fs-6">david@site.com</span>
-								</div>
-								<div className="col-sm-auto">
-									<div className="tom-select-custom tom-select-custom-sm-end">
-										<select
-											className="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0 tomselected ts-hidden-accessible"
-											autoComplete="off"
-											id="tomselect-6"
-											tabIndex={-1}
-										>
-											<option value="guest">Guest</option>
-											<option value="can comment">Can comment</option>
-											<option value="full access">Full access</option>
-											<option
-												value="remove"
-												data-option-template='<div class="text-danger">Remove</div>'
-											>
-												Remove
-											</option>
-											<option value="can edit" selected>
-												Can edit
-											</option>
-										</select>
-										<div className="ts-wrapper js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items">
-											<div className="ts-control">
-												<div
-													data-value="can edit"
-													className="item"
-													data-ts-item
-												>
-													Can edit
-												</div>
-											</div>
-											<div className="tom-select-custom" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div className="d-flex">
-						<div className="flex-shrink-0">
-							<div className="avatar avatar-sm avatar-circle">
-								<img
-									className="avatar-img"
-									src="/assets/img/160x160/img9.jpg"
-									alt="Image Description"
-								/>
-							</div>
-						</div>
-						<div className="flex-grow-1 ms-3">
-							<div className="row align-items-center">
-								<div className="col-sm">
-									<h5 className="text-body mb-0">
-										Ella Lauda{" "}
-										<i
-											className="bi-patch-check-fill text-primary"
-											data-bs-toggle="tooltip"
-											data-bs-placement="top"
-											aria-label="Top endorsed"
-											data-bs-original-title="Top endorsed"
-										/>
-									</h5>
-									<span className="d-block fs-6">Markvt@site.com</span>
-								</div>
-								<div className="col-sm-auto">
-									<div className="tom-select-custom tom-select-custom-sm-end">
-										<select
-											className="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0 tomselected ts-hidden-accessible"
-											autoComplete="off"
-											id="tomselect-7"
-											tabIndex={-1}
-										>
-											<option value="guest">Guest</option>
-											<option value="can comment">Can comment</option>
-											<option value="full access">Full access</option>
-											<option
-												value="remove"
-												data-option-template='<div class="text-danger">Remove</div>'
-											>
-												Remove
-											</option>
-											<option value="can edit" selected>
-												Can edit
-											</option>
-										</select>
-										<div className="ts-wrapper js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items">
-											<div className="ts-control">
-												<div
-													data-value="can edit"
-													className="item"
-													data-ts-item
-												>
-													Can edit
-												</div>
-											</div>
-											<div className="tom-select-custom" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div className="d-flex">
-						<div className="flex-shrink-0">
-							<span className="icon icon-soft-dark icon-sm icon-circle">
-								<i className="bi-people-fill" />
-							</span>
-						</div>
-						<div className="flex-grow-1 ms-3">
-							<div className="row align-items-center">
-								<div className="col-sm">
-									<h5 className="text-body mb-0">#conference</h5>
-									<span className="d-block fs-6">3 members</span>
-								</div>
-								<div className="col-sm-auto">
-									<div className="tom-select-custom tom-select-custom-sm-end">
-										<select
-											className="js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0 tomselected ts-hidden-accessible"
-											autoComplete="off"
-											id="tomselect-8"
-											tabIndex={-1}
-										>
-											<option value="guest">Guest</option>
-											<option value="can comment">Can comment</option>
-											<option value="full access">Full access</option>
-											<option
-												value="remove"
-												data-option-template='<div class="text-danger">Remove</div>'
-											>
-												Remove
-											</option>
-											<option value="can edit" selected>
-												Can edit
-											</option>
-										</select>
-										<div className="ts-wrapper js-select form-select form-select-borderless tom-select-custom-form-select-invite-user tom-select-form-select-ps-0 single plugin-change_listener plugin-hs_smart_position input-hidden full has-items">
-											<div className="ts-control">
-												<div
-													data-value="can edit"
-													className="item"
-													data-ts-item
-												>
-													Can edit
-												</div>
-											</div>
-											<div className="tom-select-custom" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
-			<label className="row form-check form-switch">
-				<span className="col-8 col-sm-9 ms-0">
-					<i className="bi-bell text-primary me-2" />
-					<span className="text-dark">
-						Inform all project members
+				{errors?.query && (
+					<span className="d-block text-danger text-small">
+						{errors?.query}
 					</span>
-				</span>
-				<span className="col-4 col-sm-3 text-end">
-					<input
-						type="checkbox"
-						defaultChecked
-						className="form-check-input"
-					/>
-				</span>
-			</label>
+				)}
+			</div>
+			<Card withoutBorder withoutHover centered>
+				{options && options.length ? (
+					<ul className="list-unstyled list-py-2">
+						{options.map((payload) => (
+							<li>
+								<div className="d-flex">
+									<div className="flex-shrink-0">
+										<span className="icon icon-soft-dark icon-sm icon-circle">
+											<i className="bi-people-fill" />
+										</span>
+									</div>
+									<div className="flex-grow-1 ms-3">
+										<div className="row align-items-center">
+											<div className="col-sm">
+												<h5 className="text-body mb-0">
+													{payload}
+												</h5>
+											</div>
+											<div className="col-sm-auto">
+												<button className="btn btn-outline-danger btn-xs" onClick={(e) => onRemoveItem(e)}>
+													<i className="bi bi-trash" />
+													&nbsp;
+													Remove
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						))}
+					</ul>
+				) : (
+					<Card.Body fullHeight>
+						<Illustrations.Collaboration />
+						<Card.Text>
+							Add team members to your workforce
+						</Card.Text>
+					</Card.Body>
+				)}
+			</Card>
 		</>
 	);
 };
