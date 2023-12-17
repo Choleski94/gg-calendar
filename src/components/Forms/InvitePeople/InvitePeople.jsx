@@ -76,8 +76,8 @@ const InvitePeople = () => {
 						className="form-control form-control-lg"
 						placeholder="Search by id, name or emails"
 					/>
-					<div className="input-group-append input-group-append-last-sm-down-none">
-						<a className="btn btn-primary d-none d-sm-inline-block" onClick={onAddItem}>
+					<div className="input-group-append">
+						<a className="btn btn-primary d-sm-inline-block" onClick={onAddItem}>
 							<i className="bi bi-plus" />
 							Invite
 						</a>
