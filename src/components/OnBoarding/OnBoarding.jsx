@@ -103,9 +103,13 @@ const OnBoarding = () => {
 		if (stepIdx == 0 && !hasObjectKey(cloneOptionData[1])) {
 			console.log('----------------->>>', payload);
 
+			cloneOptionData[1].address = payload.address;
 			cloneOptionData[1].country = payload.country;
+			cloneOptionData[1].buzzer = payload.buzzer;
 			cloneOptionData[1].state = payload.state;
+			cloneOptionData[1].unit = payload.unit;
 			cloneOptionData[1].city = payload.city;
+			cloneOptionData[1].zip = payload.zip;
 		}
 
 		// Update options data.
@@ -129,6 +133,8 @@ const OnBoarding = () => {
 
 		return currentFormApiFn(payload);
 	}
+
+	console.log('XXX:::', optionsData);
 
 	return (
 		showOnBoarding ? (
