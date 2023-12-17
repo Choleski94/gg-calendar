@@ -1,21 +1,12 @@
 import React from 'react';
 import { Country, State, City } from 'country-state-city';
 
+import { getClearOptions } from '@utils';
 import formatMessage from '@utils/formatMessage';
 import { Button, Input, TextArea, Select, MultiInput, ImageUpload } from '@components';
 
-import {
-	initForm,
-	initPayload,
-	phoneOptions,
-	emailOptions,
-	parseBirthday,
-	genderOptions,
-	getClearOptions,
-	languageOptions,
-	positionOptions,
-	departmentOptions,
-} from './Contact.controller';
+import useContactOptions from './useContactOptions';
+import { initForm, initPayload, parseBirthday } from './Contact.controller';
 
 const Contact = ({ 
 	data = {}, 
@@ -32,6 +23,16 @@ const Contact = ({
 	const [ errors, setErrors ] = React.useState({});
 	const [ payload, setPayload ] = React.useState({});
 	const [ isFormChanged, setIsFormChanged ] = React.useState(false);
+
+	const {
+		phoneOptions,
+		emailOptions,
+		parseBirthday,
+		genderOptions,
+		languageOptions,
+		positionOptions,
+		departmentOptions,
+	} = useContactOptions();
 
 	// Initialize form with data.
 	React.useEffect(() => {
@@ -102,12 +103,9 @@ const Contact = ({
 		});
 	}
 
-	const onOptionChange = ({ name, value }) => {
-		// TODO: FIX if (!isFormChanged) setIsFormChanged(true);
-		setPayload({
-			...payload, [name]: value
-		});
-	}
+	const onOptionChange = ({ name, value }) => setPayload({
+		...payload, [name]: value
+	});
 
 	const onSelectChange = {
 		gender: (currentGenderOptions) => {

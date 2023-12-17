@@ -2,62 +2,10 @@ import moment from 'moment-timezone';
 
 import { trimString, formatOptionValueType } from '@utils';
 
-export const languageOptions = [
-	{ label: 'English', value: 'en-US' }, 
-	{ label: 'Français', value: 'fr-FR' },
-	{ label: 'Español', value: 'es-ES' },
-];
-
-export const genderOptions = [
-	{ label: 'Male', value: 'MALE' },
-	{ label: 'Female', value: 'FEMALE' },
-	{ label: 'Other', value: 'OTHER' },
-];
-
-export const phoneOptions = [
-	{ label: 'Mobile', value: 'MOBILE' },
-	{ label: 'Home', value: 'HOME' },
-	{ label: 'Work', value: 'WORK' },
-];
-
-export const emailOptions = [
-	{ label: 'Personal', value: 'PERSONAL' },
-	{ label: 'Work', value: 'WORK' },
-];
-
-export const departmentOptions = [
-	{ label: 'Office', value: 'OFFICE' }, 
-	{ label: 'Techs', value: 'TECHS' }
-];
-
-export const positionOptions = [
-	{ label: 'Sales Agent', value: 'SALES_AGENT' }, 
-	{ label: 'Recovery', value: 'RECOVERY' },
-	{ label: 'Mitigation', value: 'MITIGATION' },
-];
-
 export const SUPPORTED_INPUT_FORM_NAMES = [
 	'firstName', 'lastName', 'birthday', 
 	'zip', 'address', 'unit', 'buzzer', 'notes'
 ];
-
-/*
- * Utility helper function to clear options
- *
- * @param {Object.<string, any>} payload - Data object.
- * @param {Array.<string>} - elts element required to clear.
- *
- * @returns {Object.<string, any>} - Return cleared data object.
- */
-export const getClearOptions = (payload = {}, elts = []) => {
-	const clonedPayload = { ...payload };
-
-	elts.forEach((currentKey) => {
-		clonedPayload[currentKey] = [];
-	});
-
-	return clonedPayload;
-}
 
 export const parseBirthday = (dateTimeString) => (
 	moment(new Date(dateTimeString)).format('YYYY-MM-DD')
@@ -115,13 +63,3 @@ export const initForm = (payload = {}, withMultiEmail = false, withMultiPhone = 
 	email: withMultiEmail ? formatOptionValueType(payload?.email) : payload?.email,
 	phone: withMultiPhone ? formatOptionValueType(payload?.phone) : payload?.phone,
 });
-
-
-export default {
-	phoneOptions,
-	emailOptions,
-	genderOptions,
-	languageOptions,
-	positionOptions,
-	departmentOptions,
-};
