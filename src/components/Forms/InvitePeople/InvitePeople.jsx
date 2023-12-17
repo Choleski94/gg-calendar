@@ -90,7 +90,7 @@ const InvitePeople = () => {
 				)}
 			</div>
 			<Card withoutBorder withoutHover centered={!hasOptions}>
-				<Card.Body fullHeight>
+				<Card.Body fullHeight noHorizontalPassing>
 					{options && options.length ? (
 						<ul className="list-unstyled list-py-2">
 							{options.map((payload) => (
