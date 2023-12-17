@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { hasObjectKey } from '@utils';
 import { selectUser } from '@store/selectors/user';
-import { Modal, Forms, MultiStepForm } from '@components';
+import { Modal, Forms, MultiStepForm, Illustrations } from '@components';
 
 import { setModalSize, setModalId } from './OnBoarding.controller';
 
@@ -45,7 +45,12 @@ const options = [
 				Invite People
 			</span>
 		),
-		Component: () => 'InvitePeople',
+		Component: ({ ...rest }) => (
+			<Forms.InvitePeople
+				withoutSubmit
+				{...rest}
+			/>
+		),
 	},
 ];
 
@@ -145,12 +150,7 @@ const OnBoarding = () => {
 					<>
 						<div className="text-center">
 							<div className="w-75 w-sm-50 mx-auto mb-4">
-								<img
-									className="img-fluid"
-									alt="Image Description"
-									data-hs-theme-appearance="default"
-									src="/assets/svg/illustrations/oc-collaboration.svg"
-								/>
+								<Illustrations.Collaboration />
 							</div>
 							<h4 className="h1">
 								Welcome to Tigado
