@@ -1,8 +1,8 @@
 import React from 'react';
 import { Country, State, City } from 'country-state-city';
 
-import { getClearOptions } from '@utils';
 import formatMessage from '@utils/formatMessage';
+import { hasObjectKey, getClearOptions } from '@utils';
 import { Button, Input, TextArea, Select, MultiInput, ImageUpload } from '@components';
 
 import useContactOptions from './useContactOptions';
@@ -47,7 +47,7 @@ const Contact = ({
 
 			setErrors(errs);
 
-			if (!Object.keys(errs).length) {
+			if (!hasObjectKey(errs)) {
 				setData(initForm(payload));
 			} else {
 				setData({});
@@ -84,7 +84,7 @@ const Contact = ({
 
 		setErrors(errs);
 
-		if (Object.keys(errs).length) return null;
+		if (hasObjectKey(errs)) return null;
 
 		handleSubmit(initForm(payload));
 	}
@@ -169,7 +169,7 @@ const Contact = ({
 
 		const { country } = payload;
 
-		const hasCountry = Boolean(Object.keys(country || {}).length);
+		const hasCountry = Boolean(hasObjectKey(country || {}));
 
 		if (hasCountry) {
 			res = State.getStatesOfCountry(country?.value || country).map(({ name, isoCode }) => ({
@@ -185,8 +185,8 @@ const Contact = ({
 
 		const { country, state } = payload;
 
-		const hasState = Boolean(Object.keys(state || {}).length);
-		const hasCountry = Boolean(Object.keys(country || {}).length);
+		const hasState = Boolean(hasObjectKey(state || {}));
+		const hasCountry = Boolean(hasObjectKey(country || {}));
 
 		if (hasState && hasCountry) {
 			res = City.getCitiesOfState(country?.value || country, state?.value || state).map(({ name }) => ({
