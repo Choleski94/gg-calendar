@@ -32,4 +32,5 @@ export { default as BlockMessage } from './BlockMessage';
 // export { default as AvatarCircle } from './AvatarCircle';
 // export { default as InputDropdown } from './InputDropdown';
 export { default as MultiStepForm } from './MultiStepForm';
+export { default as Illustrations } from './Illustrations';
 export { default as VerticalNavTab } from './VerticalNavTab';
