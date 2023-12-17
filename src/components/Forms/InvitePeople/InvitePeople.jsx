@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 
 import { hasObjectKey } from '@utils';
@@ -5,15 +6,27 @@ import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 import { Card, Input, Illustrations } from '@components';
 
-const InvitePeople = () => {
+const InvitePeople = ({ data = [], setData = () => null }) => {
 	const [ query, setQuery ] = React.useState('');
 	const [ errors, setErrors ] = React.useState({});
-	const [ options, setOptions ] = React.useState([]);
 	const [ loading, setLoading ] = React.useState(false);
+	const [ payload, setPayload ] = React.useState({ options: [] });
 
-	const onChange = (e) => {
-		setQuery(e.target.value);
-	};
+	React.useEffect(() => {
+		if (!data || !data.length) return
+
+		setPayload(data);
+	}, []);
+
+	React.useEffect(() => {
+		if (payload?.options && payload?.options.length) {
+			setData(payload);
+		} else {
+			setData({ options: [] });
+		}
+	}, [ payload ]);
+
+	const onChange = (e) => setQuery(e.target.value);
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
@@ -23,7 +36,7 @@ const InvitePeople = () => {
 	const validate = (payload = {}) => {
 		const errs = {};
 
-		// Check for emptyquery
+		// Check for empty email.
 		if (!payload?.query) {
 			errs.query = errorMessages.empty;
 		}
@@ -46,22 +59,34 @@ const InvitePeople = () => {
 
 		if (hasObjectKey(errs)) return null;
 
-		const cloneOptions = [ ...options ];
-		cloneOptions.push(query);
+		const cloneOptions = [ ...payload.options ];
 
-		setOptions(cloneOptions);
+		const newOption = ({
+			value: query,
+			id: _.uniqueId(), 
+		});
+
+		cloneOptions.push(newOption);
+
+		setPayload({ options: cloneOptions });
 
 		setQuery(''); // Clear query.
 	}
 
-	const onRemoveItem = (e) => {
+	const onRemoveItem = (e, itemId) => {
 		e.preventDefault();
-		console.log('Remove item');
+		setPayload({
+			options: [
+				...payload.options.filter((item) => (
+					item.id !== itemId
+				))
+			]
+		});
 	}
 
 	const hasOptions = React.useMemo(() => (
-		Boolean((options || []).length)
-	), [ options ]);
+		Boolean((payload.options || []).length)
+	), [ payload ]);
 
 	return (
 		<>
@@ -73,8 +98,8 @@ const InvitePeople = () => {
 						name="query"
 						value={query}
 						onChange={onChange}
+						placeholder="Invite people by email"
 						className="form-control form-control-lg"
-						placeholder="Search by id, name or emails"
 					/>
 					<div className="input-group-append">
 						<a className="btn btn-primary d-sm-inline-block" onClick={onAddItem}>
@@ -91,10 +116,10 @@ const InvitePeople = () => {
 			</div>
 			<Card withoutBorder withoutHover centered={!hasOptions}>
 				<Card.Body fullHeight noHorizontalPassing>
-					{options && options.length ? (
+					{payload?.options && payload?.options.length ? (
 						<ul className="list-unstyled list-py-2">
-							{options.map((payload) => (
-								<li>
+							{payload?.options.map(({ id, value }) => (
+								<li key={id}>
 									<div className="d-flex">
 										<div className="flex-shrink-0">
 											<span className="icon icon-soft-dark icon-sm icon-circle">
@@ -105,11 +130,11 @@ const InvitePeople = () => {
 											<div className="row align-items-center">
 												<div className="col-sm">
 													<h5 className="text-body mb-0">
-														{payload}
+														{value}
 													</h5>
 												</div>
 												<div className="col-sm-auto">
-													<button className="btn btn-outline-danger btn-xs" onClick={(e) => onRemoveItem(e)}>
+													<button className="btn btn-outline-danger btn-xs" onClick={(e) => onRemoveItem(e, id)}>
 														<i className="bi bi-trash" />
 														&nbsp;
 														Remove
