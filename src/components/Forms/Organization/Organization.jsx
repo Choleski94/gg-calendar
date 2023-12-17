@@ -1,8 +1,8 @@
 import React from 'react';
 import { Country, State, City } from 'country-state-city';
 
-import { getClearOptions } from '@utils';
 import formatMessage from '@utils/formatMessage';
+import { getClearOptions, hasObjectKey } from '@utils';
 import { Button, Input, Select, MultiInput, ImageUpload } from '@components';
 
 import useOrganizationOptions from './useOrganizationOptions';
@@ -141,7 +141,7 @@ const OrganizationForm = ({
 
 		const { country } = payload;
 
-		const hasCountry = Boolean(Object.keys(country || {}).length);
+		const hasCountry = hasObjectKey(country || {});
 
 		if (hasCountry) {
 			res = State.getStatesOfCountry(country?.value || country).map(({ name, isoCode }) => ({
@@ -157,8 +157,8 @@ const OrganizationForm = ({
 
 		const { country, state } = payload;
 
-		const hasState = Boolean(Object.keys(state || {}).length);
-		const hasCountry = Boolean(Object.keys(country || {}).length);
+		const hasState = hasObjectKey(state || {});
+		const hasCountry = hasObjectKey(country || {});
 
 		if (hasState && hasCountry) {
 			res = City.getCitiesOfState(country?.value || country, state?.value || state).map(({ name }) => ({
