@@ -169,7 +169,7 @@ const Contact = ({
 
 		const { country } = payload;
 
-		const hasCountry = Boolean(hasObjectKey(country || {}));
+		const hasCountry = hasObjectKey(country || {});
 
 		if (hasCountry) {
 			res = State.getStatesOfCountry(country?.value || country).map(({ name, isoCode }) => ({
@@ -185,8 +185,8 @@ const Contact = ({
 
 		const { country, state } = payload;
 
-		const hasState = Boolean(hasObjectKey(state || {}));
-		const hasCountry = Boolean(hasObjectKey(country || {}));
+		const hasState = hasObjectKey(state || {});
+		const hasCountry = hasObjectKey(country || {});
 
 		if (hasState && hasCountry) {
 			res = City.getCitiesOfState(country?.value || country, state?.value || state).map(({ name }) => ({
