@@ -95,7 +95,7 @@ const OrganizationForm = ({
 	const onSelectChange = {
 		orgType: (currentOrgTypeOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
-
+console.log('change----------->>>')
 			setPayload({ ...payload, orgType: currentOrgTypeOptions });
 		},
 		orgSector: (currentOrgSectorOptions) => {
@@ -227,9 +227,9 @@ const OrganizationForm = ({
 							label="Type" 
 							closeMenuOnSelect
 							options={typeOptions} 
-							data={payload?.orgType}
+							value={payload?.orgType}
 							secondaryLabel="(Optional)" 
-							onChange={(payload) => onSelectChange(payload, 'orgType')}
+							onChange={onSelectChange.orgType}
 						/>
 					</div>
 					<div className="col-lg-5">
@@ -237,9 +237,9 @@ const OrganizationForm = ({
 							label="Sector" 
 							closeMenuOnSelect
 							options={sectorOptions} 
-							data={payload?.orgSector}
+							value={payload?.gender}
 							secondaryLabel="(Optional)" 
-							onChange={(payload) => onSelectChange(payload, 'orgSector')}
+							onChange={onSelectChange.orgSector}
 						/>
 					</div>
 				</div>
@@ -362,9 +362,7 @@ const OrganizationForm = ({
 								options={countryOptions}
 								value={payload?.country}
 								secondaryLabel="(Optional)"
-								classNamePrefix="react-select"
 								onChange={onSelectChange.country}
-								className="react-select-container"
 							/>
 						</div>
 					</div>
@@ -376,9 +374,7 @@ const OrganizationForm = ({
 								options={stateOptions}
 								value={payload?.state}
 								secondaryLabel="(Optional)"
-								classNamePrefix="react-select"
 								onChange={onSelectChange.state}
-								className="react-select-container"
 							/>
 						</div>
 					</div>
@@ -390,9 +386,7 @@ const OrganizationForm = ({
 								options={cityOptions}
 								value={payload?.city}
 								secondaryLabel="(Optional)"
-								classNamePrefix="react-select"
 								onChange={onSelectChange.city}
-								className="react-select-container"
 							/>
 						</div>
 					</div>
