@@ -40,7 +40,7 @@ const OrganizationForm = ({
 			setErrors(errs);
 
 			if (!Object.keys(errs).length) {
-				// setData(initForm(payload));
+				setData(initForm(payload));
 			} else {
 				setData({});
 			}

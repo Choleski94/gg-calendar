@@ -1,8 +1,10 @@
-import React from 'react'; 
+// import React from 'react'; 
 
-const useOrganizationOptions = React.useMemo(() => {
+// import formatMessage from '@utils/formatMessage';
 
-	const typeOptions = React.useMemo(() => ([
+const useOrganizationOptions = () => {
+
+	const typeOptions = [
 		{
 			label: 'University',
 			value: 'UNI'
@@ -107,9 +109,9 @@ const useOrganizationOptions = React.useMemo(() => {
 			label: 'Other',
 			value: 'OTHER'
 		},
-	]), []);
+	];
 
-	const sectorOptions = React.useMemo(() => ([
+	const sectorOptions = [
 		{
 			label: 'Transportation and Logistics',
 			value: 'TRANSPORTATION_LOGISTICS'
@@ -158,12 +160,12 @@ const useOrganizationOptions = React.useMemo(() => {
 			label: 'Other',
 			value: 'OTHER'
 		},
-	]), []);
+	];
 
 	return {
 		typeOptions,
 		sectorOptions
 	};
-}, []);
+};
 
 export default useOrganizationOptions;
