@@ -4,7 +4,15 @@ import { setNextBtnclassName, setStepItemClassName } from './MultiStepForm.contr
 
 const setComponentData = (defaultData = {}, data = {}) => ({ ...defaultData, ...data });
 
-const MultiStepForm = ({ id = '', initialData = [], options = [], onOptionChange = () => null }) => {
+const MultiStepForm = ({
+	id = '', 
+	options = [], 
+	initialData = [], 
+	textNext = 'Next', 
+	textLastStep = 'Complete',
+	textPrev = 'Previous step', 
+	onOptionChange = () => null, 
+}) => {
 	const [ data, setData ] = React.useState([]);
 	const [ errors, setErrors ] = React.useState({});
 	const [ validStep, setValidStep ] = React.useState([]);
@@ -12,7 +20,6 @@ const MultiStepForm = ({ id = '', initialData = [], options = [], onOptionChange
 	const [ defaultData, setDefaultData ] = React.useState([]);
 
 	React.useEffect(() => {
-		console.log('Set initial data...............')
 		setDefaultData(initialData);
 	}, []);
 
@@ -56,12 +63,12 @@ const MultiStepForm = ({ id = '', initialData = [], options = [], onOptionChange
 		if (activeStep !== totalOption && validStep[activeStep]) {
 			setActiveStep(activeStep + 1);
 			const resStatus = onOptionChange(activeStep, data[activeStep]);
-			console.log('STATUS:::', resStatus);
+			// console.log('STATUS:::', resStatus);
 		}
 	};
 
 	const onFormSubmit = (idx = 0) => {
-		console.log('Success....', idx);
+		// console.log('Success....', idx);
 	}
 
 	const onSetData = (payload, formIdx) => {
@@ -128,17 +135,20 @@ const MultiStepForm = ({ id = '', initialData = [], options = [], onOptionChange
 					>
 						<i className="bi-chevron-left" />
 						&nbsp;
-						Previous step
+						{textPrev}
 					</button>
 				) : null)}
 				<div className="ms-auto">
 					<button
 						type="button"
 						onClick={onNextClick}
-						className="btn btn-primary"
-						className={setNextBtnclassName(validStep[activeStep])}
+						className={setNextBtnclassName(validStep[activeStep], totalOption)}
 					>
-						Next
+						{(activeStep < totalOption) ? (
+							textNext
+						) : (
+							textLastStep
+						)}
 						&nbsp;
 						<i className="bi-chevron-right" />
 					</button>

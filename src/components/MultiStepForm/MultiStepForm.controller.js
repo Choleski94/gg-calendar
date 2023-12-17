@@ -1,4 +1,4 @@
-export const setNextBtnclassName = (isActive) => (
+export const setNextBtnclassName = (isActive, maxStep) => (
 	isActive ? 'btn btn-primary' : 'btn btn-white'
 );
 
