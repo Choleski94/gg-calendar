@@ -1,18 +1,12 @@
 import React from 'react';
 import { Country, State, City } from 'country-state-city';
 
+import { getClearOptions } from '@utils';
 import formatMessage from '@utils/formatMessage';
-import { Button, Input, TextArea, Select, MultiInput, ImageUpload } from '@components';
+import { Button, Input, Select, MultiInput, ImageUpload } from '@components';
 
-import {
-	initForm,
-	typeOptions, 
-	initPayload,
-	phoneOptions,
-	emailOptions,
-	sectorOptions,
-	getClearOptions,
-} from './Organization.controller';
+import useOrganizationOptions from './useOrganizationOptions';
+import { initForm, initPayload } from './Organization.controller';
 
 const OrganizationForm = ({
 	data = {}, 
@@ -24,12 +18,19 @@ const OrganizationForm = ({
 	const [ payload, setPayload ] = React.useState({});
 	const [ isFormChanged, setIsFormChanged ] = React.useState(false);
 
+	const {
+		typeOptions, 
+		phoneOptions,
+		emailOptions,
+		sectorOptions,
+	} = useOrganizationOptions();
+
 	// Initialize form with data.
 	React.useEffect(() => {
 		if (isFormChanged) return 
 
-		// setPayload(initPayload(data));
-	}, []);
+		setPayload(initPayload(data));
+	}, [ data ]);
 
 	React.useEffect(() => {
 		if (isFormChanged) {
@@ -76,26 +77,7 @@ const OrganizationForm = ({
 
 		if (Object.keys(errs).length) return null;
 
-		handleSubmit({
-			email: payload?.email,
-			phone: payload?.phone,
-			photo: payload?.photo,
-			zip: trimString(payload?.zip),
-			unit: trimString(payload?.unit),
-			color: trimString(payload?.color),
-			buzzer: trimString(payload?.buzzer),
-			address: trimString(payload?.address),
-			lastName: trimString(payload.lastName),
-			birthday: trimString(payload?.birthday),
-			firstName: trimString(payload?.firstName),
-			city: trimString((payload?.city || {}).value),
-			state: trimString((payload?.state || {}).value),
-			gender: trimString((payload?.gender || {}).value),
-			country: trimString((payload?.country || {}).value),
-			position: trimString((payload?.position || {}).value),
-			department: trimString((payload?.department || {}).value),
-			languages: payload?.languages,
-		});
+		handleSubmit(initForm(payload));
 	}
 
 	const onChange = (e) => {
@@ -111,22 +93,19 @@ const OrganizationForm = ({
 		});
 	}
 
-	const onOptionChange = ({ name, value }) => {
-		// TODO: FIX if (!isFormChanged) setIsFormChanged(true);
-		setPayload({
-			...payload, [name]: value
-		});
-	}
+	const onOptionChange = ({ name, value }) => setPayload({
+		...payload, [name]: value
+	});
 
 	const onSelectChange = {
 		orgType: (currentOrgTypeOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
-	
+
 			setPayload({ ...payload, orgType: currentOrgTypeOptions });
 		},
 		orgSector: (currentOrgSectorOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
-	
+
 			setPayload({ ...payload, orgSector: currentOrgSectorOptions });
 		},
 		country: (currentCountryOptions) => {
@@ -231,7 +210,6 @@ const OrganizationForm = ({
 					className="form-control form-control-lg"
 				/>
 			</div>
-
 			<div className="col-lg-12 mt-4">
 				<div className="row">
 					<div className="col-lg-3">
@@ -331,7 +309,7 @@ const OrganizationForm = ({
 					</div>
 					<div className="col-lg-4">
 						<Input
-							type="text"
+							type="number"
 							id="pstPercent"
 							name="pstPercent"
 							label="PST/QST %"
@@ -361,7 +339,7 @@ const OrganizationForm = ({
 					</div>
 					<div className="col-lg-4">
 						<Input
-							type="text"
+							type="number"
 							label="GST %"
 							id="gstPercent"
 							placeholder="5"
