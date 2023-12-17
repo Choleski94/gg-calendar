@@ -574,6 +574,24 @@ export const formatOptionValueType = (options = []) => options.map(({ value, opt
 
 export const trimString = (str = '') => String(str || '').trim();
 
+/*
+ * Utility helper function to clear options
+ *
+ * @param {Object.<string, any>} payload - Data object.
+ * @param {Array.<string>} - elts element required to clear.
+ *
+ * @returns {Object.<string, any>} - Return cleared data object.
+ */
+export const getClearOptions = (payload = {}, elts = []) => {
+	const clonedPayload = { ...payload };
+
+	elts.forEach((currentKey) => {
+		clonedPayload[currentKey] = [];
+	});
+
+	return clonedPayload;
+}
+
 export const getYear = () => {
 	const d = new Date();
 	return d.getFullYear();
@@ -602,6 +620,7 @@ export default {
 	parseDuration,
 	convertToEpoch,
 	addLeadingZero,
+	getClearOptions,
 	parseLocaleLang,
 	getFormattedTax,
 	getJobSubStatus,
