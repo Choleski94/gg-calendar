@@ -267,12 +267,9 @@ const Contact = ({
 								label="Gender"
 								closeMenuOnSelect
 								options={genderOptions}
-								secondaryLabel="(Optional)"
-								classNamePrefix="react-select"
 								value={payload?.gender}
-								defaultValue={payload?.gender}
+								secondaryLabel="(Optional)"
 								onChange={onSelectChange.gender}
-								className="react-select-container"
 							/>
 						</div>
 					</div>
@@ -283,8 +280,6 @@ const Contact = ({
 								label="Language"
 								closeMenuOnSelect
 								options={languageOptions}
-								classNamePrefix="react-select"
-								className="react-select-container"
 								value={payload?.languages}
 								onChange={onSelectChange.languages}
 							/>
@@ -302,8 +297,6 @@ const Contact = ({
 										value={payload?.department}
 										secondaryLabel="(Optional)"
 										options={departmentOptions}
-										classNamePrefix="react-select"
-										className="react-select-container"
 										onChange={onSelectChange.department}
 									/>
 								</div>
@@ -316,9 +309,7 @@ const Contact = ({
 										value={payload?.position}
 										options={positionOptions}
 										secondaryLabel="(Optional)"
-										classNamePrefix="react-select"
 										onChange={onSelectChange.position}
-										className="react-select-container"
 									/>
 								</div>
 							</div>
@@ -382,6 +373,7 @@ const Contact = ({
 								/>
 							) : (
 								<Input
+									disabled
 									id="email"
 									type="text"
 									name="email"
@@ -405,10 +397,9 @@ const Contact = ({
 								label="Country"
 								closeMenuOnSelect
 								options={countryOptions}
-								classNamePrefix="react-select"
 								value={payload?.country}
+								secondaryLabel="(Optional)"
 								onChange={onSelectChange.country}
-								className="react-select-container"
 							/>
 						</div>
 					</div>
@@ -419,9 +410,8 @@ const Contact = ({
 								label="State/Province"
 								options={stateOptions}
 								value={payload?.state}
-								classNamePrefix="react-select"
+								secondaryLabel="(Optional)"
 								onChange={onSelectChange.state}
-								className="react-select-container"
 							/>
 						</div>
 					</div>
@@ -432,9 +422,8 @@ const Contact = ({
 								closeMenuOnSelect
 								options={cityOptions}
 								value={payload?.city}
-								classNamePrefix="react-select"
+								secondaryLabel="(Optional)"
 								onChange={onSelectChange.city}
-								className="react-select-container"
 							/>
 						</div>
 					</div>
@@ -448,6 +437,7 @@ const Contact = ({
 								onChange={onChange}
 								error={errors?.zip}
 								value={payload?.zip}
+								secondaryLabel="(Optional)"
 								className="form-control form-control-lg"
 							/>
 						</div>
@@ -462,6 +452,7 @@ const Contact = ({
 								onChange={onChange}
 								error={errors?.address}
 								value={payload?.address}
+								secondaryLabel="(Optional)"
 								className="form-control form-control-lg"
 							/>
 						</div>
