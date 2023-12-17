@@ -95,7 +95,7 @@ const OrganizationForm = ({
 	const onSelectChange = {
 		orgType: (currentOrgTypeOptions) => {
 			if (!isFormChanged) setIsFormChanged(true);
-console.log('change----------->>>')
+
 			setPayload({ ...payload, orgType: currentOrgTypeOptions });
 		},
 		orgSector: (currentOrgSectorOptions) => {
@@ -169,8 +169,6 @@ console.log('change----------->>>')
 		return res;
 	}, [ payload?.state ]);
 
-	console.log('PAYLOAD:::', payload);
-
 	return (
 		<div className="row">
 			<div className="col-lg-3">
@@ -237,7 +235,7 @@ console.log('change----------->>>')
 							label="Sector" 
 							closeMenuOnSelect
 							options={sectorOptions} 
-							value={payload?.gender}
+							value={payload?.orgSector}
 							secondaryLabel="(Optional)" 
 							onChange={onSelectChange.orgSector}
 						/>
