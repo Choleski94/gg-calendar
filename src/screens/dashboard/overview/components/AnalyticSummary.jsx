@@ -18,7 +18,6 @@ const parseDataEntity = (value = '') => {
 
 
 const SummaryCard = ({
-	id,
 	icon,
 	title,
 	prefix,
@@ -26,7 +25,7 @@ const SummaryCard = ({
 	isLoading,
 	tagContent,
 }) => (
-	<div key={id}className="col-lg-3">
+	<div className="col-lg-3">
 		<div className="d-flex">
 			<div className="flex-grow-1">
 				<h3 className="card-title text-capitalize">
@@ -73,6 +72,7 @@ const AnalyticSummary = ({ entityData }) => {
 									isLoading={isLoading}
 									title={parseDataEntity(data?.entity)}
 									id={_.uniqueId(parseDataEntity(data?.entity) + '_')}
+									key={_.uniqueId(parseDataEntity(data?.entity) + '_')}
 									tagContent={result?.total && formatCurrency(result?.total)}
 									tagColor={data?.entity === ENTITIES.INVOICE ? 'cyan' : data?.entity === ENTITIES.QUOTE ? 'purple' : 'green'}
 								/>

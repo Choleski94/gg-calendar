@@ -64,7 +64,6 @@ const DashboardOverview = () => {
 			<AnalyticSummary 
 				entityData={entityData} 
 			/>
-
 			<div className="row">
 				<div className="col-lg-4 mb-3 mb-lg-5">
 					<QuickCTA />
@@ -72,13 +71,13 @@ const DashboardOverview = () => {
 				<div className="col-lg-4 mb-3 mb-lg-5">
 					<RecentTable 
 						title="Recent Invoices" 
-						entity="invoice"
+						entity={ENTITIES.INVOICE}
 					/>
 				</div>
 				<div className="col-lg-4 mb-3 mb-lg-5">
 					<RecentTable 
 						title="Recent Estimates"
-						entity="quote"
+						entity={ENTITIES.QUOTE}
 					/>
 				</div>
 			</div>
