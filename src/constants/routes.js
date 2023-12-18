@@ -95,11 +95,11 @@ export const operationRoutes = [
 
 export const hrRoutes = [
 	// System
-// 	{
-// 		slug: 'hr-system-rewards',
-// 		path: '/hr/system/rewards',
-// 		element: screenElements.HrLegalParking,
-// 	},
+	{
+		slug: 'hr-system-rewards',
+		path: '/hr/system/rewards',
+		element: screenElements.HrLegalParking,
+	},
 	{
 		slug: 'hr-system-crew-management',
 		path: '/hr/system/crew-management',
