@@ -8,14 +8,14 @@ import * as actionTypes from '@store/types';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 // import errorHandler from '@utils/request/errorHandler';
-// import useLocalStorage from '@utils/hooks/useLocalStorage';
 // import successHandler from '@utils/request/successHandler';
 import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
 import { AuthBranding, Input, Layout, BlockMessage } from '@components';
 
+const errorCode = '';
 
 const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [ errors, setErrors ] = React.useState({});
@@ -79,7 +79,10 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 
 	const onChange = (e) => setData({
 		...data,
-		[e.target.name]: (e.target.type === 'checkbox') ? e.target.checked : e.target.value
+		[e.target.name]: (
+			(e.target.type === 'checkbox') ? 
+			e.target.checked : e.target.value
+		)
 	});
 
 	const onSubmit = (e) => {
@@ -97,6 +100,10 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 			type: actionTypes.LOADING_REQUEST,
 			payload: { loading: true },
 		});
+
+		// dispatch(register(data)).then((res) => {
+		// 	navigate('/dashboard');
+		// });
 
 		api.auth.register(data).then((response) => {
 			// const { status, data } = response;
@@ -135,172 +142,163 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 	};
 
 	return (
-		<>
-			{/*
-			<Head>
-				<title>
-					{formatMessage('meta.signup.title.text')}
-				</title>
-			</Head>
-			*/}
-			<Layout type="auth">
-				<div className="container-fluid px-3">
-					<div className="row">
-						<div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center min-vh-lg-100 position-relative bg-light px-0">
-							<AuthBranding />
-						</div>
-						<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
-							<div
-								className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
-								style={{ maxWidth: "25rem" }}
-							>
-								{errorCode && (
-									<BlockMessage
-										type="error"
-										text={formatMessage(`error.${errorCode}.text`)}
+		<Layout type="auth">
+			<div className="container-fluid px-3">
+				<div className="row">
+					<div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center min-vh-lg-100 position-relative bg-light px-0">
+						<AuthBranding />
+					</div>
+					<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
+						<div
+							className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
+							style={{ maxWidth: "25rem" }}
+						>
+							{errorCode && (
+								<BlockMessage
+									type="error"
+									text={formatMessage(`error.${errorCode}.text`)}
+								/>
+							)} 
+							<form className="js-validate needs-validation" noValidate>
+								<div className="text-center">
+									<div className="mb-5">
+										<h1 className="display-5">
+											{formatMessage('page.signup.header.text')}
+										</h1>
+										<p>
+											{formatMessage('page.signup.has-account.text')}
+											&nbsp;
+											<Link to="/signin" className="switcher-text2 link inline-text">
+												{formatMessage('page.signup.form.link.signin.text')}
+											</Link>
+										</p>
+									</div>
+									{/*
+									<div className="d-grid mb-4">
+										<a
+											className="btn btn-white btn-lg"
+											href="authentication-signup-cover.html#"
+										>
+											<span className="d-flex justify-content-center align-items-center">
+												<img
+													className="avatar avatar-xss me-2"
+													src="assets/svg/brands/google-icon.svg"
+													alt="Image Description"
+												/>
+												{formatMessage('page.signup.form.btn.signup-google.text')}
+											</span>
+										</a>
+									</div>
+									<span className="divider-center text-muted mb-4">
+										{formatMessage('page.signup.label.or.text')}
+									</span>
+									*/}
+								</div>
+								<label className="form-label" htmlFor="fullNameSrEmail">
+									{formatMessage('page.signup.form.full-name.text')}
+								</label>
+								<div className="row">
+									<div className="col-sm-6">
+										<div className="mb-4">
+											<Input
+												type="text"
+												id="firstName"
+												name="firstName"
+												onChange={onChange}
+												value={data?.firstName}
+												error={errors?.firstName}
+												className="form-control form-control-lg"
+												placeholder={formatMessage('page.signup.form.first-name.text')}
+											/>
+										</div>
+									</div>
+									<div className="col-sm-6">
+										<div className="mb-4">
+											<Input
+												type="text"
+												id="lastName"
+												name="lastName"
+												onChange={onChange}
+												value={data?.lastName}
+												error={errors?.lastName}
+												className="form-control form-control-lg"
+												placeholder={formatMessage('page.signup.form.last-name.text')}
+											/>
+										</div>
+									</div>
+								</div>
+								<div className="mb-4">
+									<Input
+										id="email"
+										type="email"
+										name="email"
+										onChange={onChange}
+										value={data?.email}
+										error={errors?.email}
+										className="form-control form-control-lg"
+										label={formatMessage('page.signup.label.email.text')}
+										placeholder={formatMessage('page.signup.form.email.text')}
 									/>
-								)} 
-								<form className="js-validate needs-validation" noValidate>
-									<div className="text-center">
-										<div className="mb-5">
-											<h1 className="display-5">
-												{formatMessage('page.signup.header.text')}
-											</h1>
-											<p>
-												{formatMessage('page.signup.has-account.text')}
-												&nbsp;
-												<Link to="/signin" className="switcher-text2 link inline-text">
-													{formatMessage('page.signup.form.link.signin.text')}
-												</Link>
-											</p>
-										</div>
-										{/*
-										<div className="d-grid mb-4">
-											<a
-												className="btn btn-white btn-lg"
-												href="authentication-signup-cover.html#"
+								</div>
+								<div className="mb-4">
+									<Input
+										id="password"
+										type="password"
+										name="password"
+										onChange={onChange}
+										value={data?.password}
+										error={errors?.password}
+										label={formatMessage('page.signup.label.password.text')}
+										className="js-toggle-password form-control form-control-lg"
+										placeholder={formatMessage('page.signup.form.password.text')}
+									/>
+								</div>
+								<div className="mb-4">
+									<Input
+										id="passwordC"
+										type="password"
+										name="passwordC"
+										onChange={onChange}
+										value={data?.passwordC}
+										error={errors?.passwordC}
+										className="js-toggle-password form-control form-control-lg"
+										label={formatMessage('page.signup.label.password-confirm.text')}
+										placeholder={formatMessage('page.signup.form.repeat-password.text')}
+									/>
+								</div>
+								<div className="mb-4">
+									{formatMessage('page.signup.form.terms-privacy.text', {
+										terms: (
+											<Link 	target="_blank" 
+												className="link" 
+												rel="noopener noreferrer"
+												to="https://www.tigado.ca/terms" 
 											>
-												<span className="d-flex justify-content-center align-items-center">
-													<img
-														className="avatar avatar-xss me-2"
-														src="assets/svg/brands/google-icon.svg"
-														alt="Image Description"
-													/>
-													{formatMessage('page.signup.form.btn.signup-google.text')}
-												</span>
-											</a>
-										</div>
-										<span className="divider-center text-muted mb-4">
-											{formatMessage('page.signup.label.or.text')}
-										</span>
-										*/}
-									</div>
-									<label className="form-label" htmlFor="fullNameSrEmail">
-										{formatMessage('page.signup.form.full-name.text')}
-									</label>
-									<div className="row">
-										<div className="col-sm-6">
-											<div className="mb-4">
-												<Input
-													type="text"
-													id="firstName"
-													name="firstName"
-													onChange={onChange}
-													value={data?.firstName}
-													error={errors?.firstName}
-													className="form-control form-control-lg"
-													placeholder={formatMessage('page.signup.form.first-name.text')}
-												/>
-											</div>
-										</div>
-										<div className="col-sm-6">
-											<div className="mb-4">
-												<Input
-													type="text"
-													id="lastName"
-													name="lastName"
-													onChange={onChange}
-													value={data?.lastName}
-													error={errors?.lastName}
-													className="form-control form-control-lg"
-													placeholder={formatMessage('page.signup.form.last-name.text')}
-												/>
-											</div>
-										</div>
-									</div>
-									<div className="mb-4">
-										<Input
-											id="email"
-											type="email"
-											name="email"
-											onChange={onChange}
-											value={data?.email}
-											error={errors?.email}
-											className="form-control form-control-lg"
-											label={formatMessage('page.signup.label.email.text')}
-											placeholder={formatMessage('page.signup.form.email.text')}
-										/>
-									</div>
-									<div className="mb-4">
-										<Input
-											id="password"
-											type="password"
-											name="password"
-											onChange={onChange}
-											value={data?.password}
-											error={errors?.password}
-											label={formatMessage('page.signup.label.password.text')}
-											className="js-toggle-password form-control form-control-lg"
-											placeholder={formatMessage('page.signup.form.password.text')}
-										/>
-									</div>
-									<div className="mb-4">
-										<Input
-											id="passwordC"
-											type="password"
-											name="passwordC"
-											onChange={onChange}
-											value={data?.passwordC}
-											error={errors?.passwordC}
-											className="js-toggle-password form-control form-control-lg"
-											label={formatMessage('page.signup.label.password-confirm.text')}
-											placeholder={formatMessage('page.signup.form.repeat-password.text')}
-										/>
-									</div>
-									<div className="mb-4">
-										{formatMessage('page.signup.form.terms-privacy.text', {
-											terms: (
-												<Link 	target="_blank" 
-													className="link" 
-													rel="noopener noreferrer"
-													to="https://www.tigado.ca/terms" 
-												>
-													{formatMessage('page.signup.link.terms.text')}
-												</Link>
-											),
-											privacy: (
-												<Link 	target="_blank" 
-													className="link" 
-													rel="noopener noreferrer"
-													to="https://www.tigado.ca/privacy" 
-												>
-													{formatMessage('page.signup.link.privacy.text')}
-												</Link>
-											)
-										})}
-									</div>
-									<div className="d-grid gap-2">
-										<button type="submit" className="btn btn-primary btn-lg" onClick={onSubmit}>
-											{formatMessage('page.signup.form.btn.signup.text')}
-										</button>
-									</div>
-								</form>
-							</div>
+												{formatMessage('page.signup.link.terms.text')}
+											</Link>
+										),
+										privacy: (
+											<Link 	target="_blank" 
+												className="link" 
+												rel="noopener noreferrer"
+												to="https://www.tigado.ca/privacy" 
+											>
+												{formatMessage('page.signup.link.privacy.text')}
+											</Link>
+										)
+									})}
+								</div>
+								<div className="d-grid gap-2">
+									<button type="submit" className="btn btn-primary btn-lg" onClick={onSubmit}>
+										{formatMessage('page.signup.form.btn.signup.text')}
+									</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
-			</Layout>
-		</>
+			</div>
+		</Layout>
 	);
 };
 
