@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { withPrivateRouter } from '@utils/hocs';
+
 import CompanyInfo from './CompanyInfo';
 import CompanyControl from './CompanyControl';
 
@@ -26,4 +28,4 @@ const CompaniesScreen = () => {
 	);
 };
 
-export default CompaniesScreen;
+export default withPrivateRouter(CompaniesScreen);

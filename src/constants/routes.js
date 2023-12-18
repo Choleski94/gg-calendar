@@ -176,11 +176,11 @@ export const crmRoutes = [
 		path: '/crm/access/:id?',
 		element: screenElements.CrmAccess,
 	},
-	// {
-	// 	slug: 'crm-companies',
-	// 	path: '/crm/companies/:id?',
-	// 	element: screenElements.CrmCompanies,
-	// },
+	{
+		slug: 'crm-companies',
+		path: '/crm/companies/:id?',
+		element: screenElements.CrmCompanies,
+	},
 ];
 
 // COMPLETE

@@ -33,7 +33,7 @@ export { default as AccountAccessLogs } from './account/access-logs';
 // CRM
 export { default as CrmAccess } from './crm/access';
 export { default as CrmCustomers } from './crm/customers';
-// export { default as CrmCompanies } from './crm/companies';
+export { default as CrmCompanies } from './crm/companies';
 
 // Communications
 export { default as CommunicationChat } from './communication/calls';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate } from 'react-router-dom';
 
 import api from '@api';
 import {
@@ -9,8 +9,7 @@ import {
 } from '@constants/jobs';
 import mockJob from '@mocks/jobs';
 import { hasPrimary } from '@utils'; 
-import Table from '@components/Table';
-import Modal from '@components/Modal';
+import { Table, Modal } from '@components';
 import formatMessage from '@utils/formatMessage';
 import { SUPPORTED_PHONE_TYPES } from '@constants/calls';
 
@@ -40,7 +39,7 @@ export const JobsCTA = ({ onClick }) => (
 );
 
 const Jobs = ({ hasActiveCta = false, toggleCta = () => null }) => {
-	const router  = useRouter();
+	const navigate  = useNavigate();
 
 	const [ options, setOptions ] = React.useState([]);
 	const [ loading, setLoading ] = React.useState(false);
@@ -80,7 +79,7 @@ const Jobs = ({ hasActiveCta = false, toggleCta = () => null }) => {
 
 	const handleJobClick = (e, payload) => {
 		if (Boolean(payload?.id)) {
-			return router.push({
+			return navigate.push({
 				pathname: '/jobs',
 				query: { id: payload?.id }
 			});
