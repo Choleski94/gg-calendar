@@ -13,7 +13,7 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 	const [ payload, setPayload ] = React.useState({ options: [] });
 
 	React.useEffect(() => {
-		if (!data || !data.length) return
+		if (!hasObjectKey(data)) return
 
 		setPayload(data);
 	}, []);
