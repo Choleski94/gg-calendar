@@ -185,26 +185,26 @@ export const crmRoutes = [
 
 // COMPLETE
 export const inventoryRoutes = [
-// 	{
-// 		slug: 'inventory-fleet',
-// 		path: '/inventory/fleet',
-// 		element: screenElements.InventoryFleet,
-// 	},
-// 	{
-// 		slug: 'inventory-vendors',
-// 		path: '/inventory/vendors',
-// 		element: screenElements.InventoryVendors,
-// 	},
+	{
+		slug: 'inventory-fleet',
+		path: '/inventory/fleet',
+		element: screenElements.InventoryFleet,
+	},
+	{
+		slug: 'inventory-vendors',
+		path: '/inventory/vendors',
+		element: screenElements.InventoryVendors,
+	},
 // 	{
 // 		slug: 'inventory-settings',
 // 		path: '/inventory/settings',
 // 		element: screenElements.InventorySettings,
 // 	},
-// 	{
-// 		slug: 'inventory-products',
-// 		path: '/inventory/products/:id?',
-// 		element: screenElements.InventoryProducts,
-// 	},
+	{
+		slug: 'inventory-products',
+		path: '/inventory/products/:id?',
+		element: screenElements.InventoryProducts,
+	},
 // 	{
 // 		slug: 'inventory-tools',
 // 		path: '/inventory/tools',

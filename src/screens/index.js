@@ -43,10 +43,10 @@ export { default as CrmCustomers } from './crm/customers';
 
 // Inventory
 // export { default as InventoryTools } from './inventory/tools';
-// export { default as InventoryFleet } from './inventory/fleet';
-// export { default as InventoryVendors } from './inventory/vendors';
+export { default as InventoryFleet } from './inventory/fleet';
+export { default as InventoryVendors } from './inventory/vendors';
 // export { default as InventoryServices } from './inventory/services';
-// export { default as InventoryProducts } from './inventory/products';
+export { default as InventoryProducts } from './inventory/products';
 // export { default as InventorySettings } from './inventory/settings';
 
 // Marketing
