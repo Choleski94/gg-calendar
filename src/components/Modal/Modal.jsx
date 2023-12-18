@@ -45,7 +45,7 @@ class Modal extends React.Component {
 	};
 
 	render() {
-		const { id = 'wrapper', onCloseRequest, onSaveRequest, withFooter = false, title, children, size = 'md', centered = false } = this.props;
+		const { id = 'wrapper', onCloseRequest, onSaveRequest, withFooter = false, hideClose = false, title, children, size = 'md', centered = false } = this.props;
 
 		return (
 			<>
@@ -58,13 +58,15 @@ class Modal extends React.Component {
 										{title}
 									</h5>
 								)}
-								<button
-									type="button"
-									aria-label="Close"
-									className="btn-close"
-									data-bs-dismiss="modal"
-									onClick={onCloseRequest}
-								/>
+								{!hideClose && (
+									<button
+										type="button"
+										aria-label="Close"
+										className="btn-close"
+										data-bs-dismiss="modal"
+										onClick={onCloseRequest}
+									/>
+								)}
 							</div>
 							<div className="modal-body">
 								{children}
