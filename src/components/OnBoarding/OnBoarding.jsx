@@ -143,7 +143,14 @@ const OnBoarding = () => {
 
 	return (
 		showOnBoarding ? (
-			<Modal key={setModalId(startOnboarding, isCompleted)} id={setModalId(startOnboarding, isCompleted)} centered size={setModalSize(startOnboarding, isCompleted)} onCloseRequest={toggleShowOnBoarding}>
+			<Modal 
+				centered 
+				hideClose={!isCompleted}
+				onCloseRequest={toggleShowOnBoarding}
+				id={setModalId(startOnboarding, isCompleted)} 
+				key={setModalId(startOnboarding, isCompleted)} 
+				size={setModalSize(startOnboarding, isCompleted)} 
+			>
 				{startOnboarding ? (
 					(!isCompleted) ? (
 						<MultiStepForm 
@@ -168,7 +175,7 @@ const OnBoarding = () => {
 								</p>
 							</div>
 							<div className="text-center mt-3 d-block">
-								<button type="button" className="text-center btn btn-outline-primary" onClick={onStartOnBoarding}>
+								<button type="button" className="text-center btn btn-outline-primary" onClick={toggleShowOnBoarding}>
 									Get Started
 								</button>
 							</div>
