@@ -43,11 +43,11 @@ export const accountRoutes = [
  		path: '/account/settings',
  		element: screenElements.AccountSettings,
  	},
-// 	{
-// 		slug: 'account-access-logs',
-// 		path: '/account/access-logs',
-// 		element: screenElements.AccountAccessLogs,
-// 	},
+	{
+		slug: 'account-access-logs',
+		path: '/account/access-logs',
+		element: screenElements.AccountAccessLogs,
+	},
 ];
 
 // COMPLETE
@@ -146,11 +146,11 @@ export const hrRoutes = [
 // 	// 	path: '/hr/employee/vacations',
 // 	// 	element: () => 'Todo...',
 // 	// },
-// 	{
-// 		slug: 'hr-employees',
-// 		path: '/hr/employees/:id?',
-// 		element: screenElements.HrEmployees,
-// 	},
+	{
+		slug: 'hr-employees',
+		path: '/hr/employees/:id?',
+		element: screenElements.HrEmployees,
+	},
 // 	// {
 // 	// 	slug: 'hr-employee-problems',
 // 	// 	path: '/hr/employee/problems',
