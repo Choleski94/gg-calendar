@@ -10,7 +10,7 @@ export { default as Home } from './home';
 export { default as Dashboard } from './dashboard';
 
 // Operations
-// export { default as CrmJobs } from './operations/jobs';
+export { default as CrmJobs } from './operations/jobs';
 // export { default as Calendar } from './operations/calendar';
 // export { default as InventoryOrders } from './operations/orders';
 // export { default as DispatchMap } from './operations/dispatch-map';
@@ -32,7 +32,7 @@ export { default as AccountAccessLogs } from './account/access-logs';
 
 // CRM
 // export { default as CrmAccess } from './crm/access';
-// export { default as CrmCustomers } from './crm/customers';
+export { default as CrmCustomers } from './crm/customers';
 // export { default as CrmCompanies } from './crm/companies';
 
 // Communications

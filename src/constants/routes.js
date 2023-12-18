@@ -86,11 +86,11 @@ export const operationRoutes = [
 // 		path: '/operations/orders/:id?',
 // 		element: screenElements.InventoryOrders,
 // 	},
-// 	{
-// 		slug: 'crm-jobs',
-// 		path: '/operations/jobs/:id?',
-// 		element: screenElements.CrmJobs,
-// 	},
+	{
+		slug: 'crm-jobs',
+		path: '/operations/jobs/:id?',
+		element: screenElements.CrmJobs,
+	},
 ];
 
 export const hrRoutes = [
