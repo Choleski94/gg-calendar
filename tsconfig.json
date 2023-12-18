@@ -29,7 +29,6 @@
 			"@app": ["./src/App.tsx"],
 			"@api": ["./src/api"],
 			"@views": ["./src/views"],
-			"@store": ["./src/store"],
 			"@utils": ["./src/utils"],
 			"@utils/*": ["./src/utils/*"],
 			"@mocks": ["./src/mocks"],

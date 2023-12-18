@@ -27,11 +27,11 @@ const Tigado = () => {
 					{(routes.map(({ slug, element: Component, path }) => (
 						<Route 
 							key={slug} path={path} 
-							element={<Component /> as JSX.Element} 
+							element={<Component />} 
 						/>
 					)))}
 				</Routes>
-				{!isAuth && (
+				{isAuth && (
 					<OnBoarding />
 				)}
 			</IntlProvider>

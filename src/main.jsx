@@ -20,7 +20,7 @@ const store = configureStore({
 });
 
 if (localStorage.tigadoJWT) {
-	const payload = jwtDecode(localStorage?.tigadoJWT) as any;
+	const payload = jwtDecode(localStorage?.tigadoJWT);
 
 	const user = {
 		token: localStorage?.tigadoJWT,
