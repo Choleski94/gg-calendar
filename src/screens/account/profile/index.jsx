@@ -1,1 +1,3 @@
-export { default, getServerSideProps } from './profile';
+'use strict';
+
+export { default } from './profile';

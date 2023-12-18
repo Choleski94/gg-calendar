@@ -28,11 +28,11 @@ export const guestRoutes = [
 
 // COMPLETE
 export const accountRoutes = [
-// 	{
-// 		slug: 'account-profile',
-// 		path: '/account/profile',
-// 		element: screenElements.AccountProfile,
-// 	},
+	{
+		slug: 'account-profile',
+		path: '/account/profile',
+		element: screenElements.AccountProfile,
+	},
 	{
 		slug: 'account-member',
 		path: '/account/:id?',
