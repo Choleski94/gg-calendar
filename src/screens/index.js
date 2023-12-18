@@ -26,7 +26,7 @@ export { default as HrEmployees } from './hr/employees';
 
 // Account
 export { default as AccountMember } from './account/member';
-// export { default as AccountProfile } from './account/profile';
+export { default as AccountProfile } from './account/profile';
 export { default as AccountSettings } from './account/settings';
 export { default as AccountAccessLogs } from './account/access-logs';
 
@@ -61,7 +61,7 @@ export { default as AccountingEstimates } from './accounting/estimates';
 // export { default as OnBoarding } from './onboarding';
 
 // Organizations
-// export { default as Organizations } from './organizations';
+export { default as Organizations } from './organizations';
 
 // System
 // export { default as SystemAccess } from './system/access';

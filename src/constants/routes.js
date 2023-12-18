@@ -62,11 +62,11 @@ export const standaloneRoutes = [
 		path: '/dashboard',
 		element: screenElements.Dashboard,
 	},
-	// {
-	// 	slug: 'organizations',
-	// 	path: '/organizations',
-	// 	element: screenElements.Organizations,
-	// },
+	{
+		slug: 'organizations',
+		path: '/organizations',
+		element: screenElements.Organizations,
+	},
 ];
 
 // COMPLETE
