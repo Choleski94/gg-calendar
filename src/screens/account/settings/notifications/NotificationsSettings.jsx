@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import api from '@api';
-import { Card, Modal } from '@components';
 import formatMessage from '@utils/formatMessage';
+import { Card, Modal, SwitchToggle } from '@components';
 
 const NotificationsSettings = () => {
 	return (
@@ -59,44 +59,17 @@ const NotificationsSettings = () => {
 								<td>New for you</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox1"
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox1"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox2"
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox2"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox3"
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox3"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 							</tr>
@@ -113,46 +86,17 @@ const NotificationsSettings = () => {
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox4"
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox4"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox5"
-											defaultChecked
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox5"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox6"
-											defaultChecked
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox6"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 							</tr>
@@ -160,47 +104,17 @@ const NotificationsSettings = () => {
 								<td>A new browser used to sign in</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox7"
-											defaultChecked
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox7"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox8"
-											defaultChecked
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox8"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox9"
-											defaultChecked
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox9"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 							</tr>
@@ -208,45 +122,17 @@ const NotificationsSettings = () => {
 								<td>A new device is linked</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox10"
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox10"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox11"
-											defaultChecked
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox11"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox12"
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox12"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 							</tr>
@@ -263,46 +149,17 @@ const NotificationsSettings = () => {
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox13"
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox13"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox14"
-											defaultChecked
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox14"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 								<td className="text-center">
 									<div className="form-check form-check-inline">
-										<input
-											className="form-check-input"
-											type="checkbox"
-											defaultValue
-											id="editUserModalAlertsCheckbox15"
-											defaultChecked
-										/>
-										<label
-											className="form-check-label"
-											htmlFor="editUserModalAlertsCheckbox15"
-										/>
+										<SwitchToggle />
 									</div>
 								</td>
 							</tr>

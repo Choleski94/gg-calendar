@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import api from '@api';
+import { withPrivateRouter } from '@utils/hocs';
 import formatMessage from '@utils/formatMessage';
 import { Layout, NavPill, GetSupport } from '@components';
 
@@ -52,5 +53,4 @@ const AccountSettings = () => {
 	);
 }
 
-export default AccountSettings;
-
+export default withPrivateRouter(AccountSettings);
