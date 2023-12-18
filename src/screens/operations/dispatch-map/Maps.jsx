@@ -3,9 +3,8 @@ import React from 'react';
 import config from '@config';
 import { Input, Layout } from '@components';
 import GoogleMap from '@components/GoogleMap';
-import { withPrivateRouter } from '@utils/hocs';
-import useLocalStorage from '@utils/hooks/useLocalStorage';
-import withGoogleMapServices from '@utils/hocs/withGoogleMapServices';
+import { useLocalStorage } from '@utils/hooks';
+import { withPrivateRouter, withGoogleMapServices } from '@utils/hocs';
 
 import MapFilter from './MapFilter';
 
