@@ -1,0 +1,23 @@
+version: '3'
+
+networks:
+  tigado-net:
+    external: true
+
+services:
+  tigado-frontend:
+    user: node
+    restart: always
+    hostname: tigado-frontend
+    container_name: tigado-frontend
+    build:
+      context: .
+    volumes:
+      - ./:/home/node:cached
+    # extra_hosts:
+    networks:
+      - tigado-net
+    ports:
+      - 3000:3000
+    expose:
+      - 3000

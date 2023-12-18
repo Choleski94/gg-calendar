@@ -26,9 +26,8 @@ const Tigado = () => {
 				<Routes>
 					{(routes.map(({ slug, element: Component, path }) => (
 						<Route 
-							exact 
 							key={slug} path={path} 
-							element={<Component />} 
+							element={<Component /> as JSX.Element} 
 						/>
 					)))}
 				</Routes>

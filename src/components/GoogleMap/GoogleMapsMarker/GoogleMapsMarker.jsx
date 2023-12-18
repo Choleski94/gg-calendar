@@ -1,7 +1,7 @@
 import React from 'react';
 
-const GoogleMapsMarker = ({ ...options }: google.maps.MarkerOptions) => {
-	const [marker, setMarker] = React.useState<google.maps.Marker>();
+const GoogleMapsMarker = ({ ...options }) => {
+	const [marker, setMarker] = React.useState();
 
 	React.useEffect(() => {
 		if (!marker) {

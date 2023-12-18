@@ -2,7 +2,7 @@ import SetingsSection from '../components/SetingsSection';
 import GeneralSettingForm from './forms/GeneralSettingForm';
 import SettingModuleLayout from '../components/SettingModuleLayout';
 
-const GeneralSettingsModule({ config }) => (
+const GeneralSettingsModule = ({ config }) => (
 	<SettingModuleLayout config={config}>
 		<SetingsSection title="Company" description="Update your company name and logo">
 			<GeneralSettingForm />

@@ -1,5 +1,5 @@
+import { Suspense } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { Suspense, lazy } from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -20,15 +20,15 @@ const store = configureStore({
 });
 
 if (localStorage.tigadoJWT) {
-	const payload = jwtDecode(localStorage.tigadoJWT);
+	const payload = jwtDecode(localStorage?.tigadoJWT) as any;
 
 	const user = {
-		token: localStorage.tigadoJWT,
-		id: payload.id,
-		phone: payload.phone,
-		email: payload.email,
-		lastName: payload.lastName,
-		firstName: payload.firstName,
+		token: localStorage?.tigadoJWT,
+		id: payload?.id,
+		phone: payload?.phone,
+		email: payload?.email,
+		lastName: payload?.lastName,
+		firstName: payload?.firstName,
 		isOnboarded: payload?.isOnboarded,
 	};
 

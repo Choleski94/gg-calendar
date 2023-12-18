@@ -43,6 +43,8 @@
 			"@modules": ["./src/modules"],
 			"@src": ["./src"],
 			"@src/*": ["./src/*"],
+			"@store": ["./src/store"],
+			"@store/*": ["./src/store/*"],
 			"@testing": ["src/test-setup"]
 		},
 		"types": ["vitest/globals"]

@@ -49,7 +49,6 @@ const Teams = () => {
 						</li>
 						<li className="nav-item" role="presentation">
 							<a
-								className="nav-link"
 								id="list-tab"
 								data-bs-toggle="tab"
 								href="#list"

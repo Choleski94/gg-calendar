@@ -1,4 +1,4 @@
-const cookieParser = (cookieString: string) => {
+const cookieParser = (cookieString) => {
 
 	if (cookieString === '') {
 		return {};
