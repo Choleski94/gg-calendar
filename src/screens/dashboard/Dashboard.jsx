@@ -6,10 +6,14 @@ import { withPrivateRouter } from '@utils/hocs';
 import { selectUser } from '@store/selectors/user';
 import { Layout, NavPill, GetSupport } from '@components';
 
+import {
+	getGreeting, 
+	NAV_TAB_OPTIONS, 
+	SUPPORTED_SCREEN_SECTIONS
+} from './Dashboard.controller';
 import DashboardOverview from './overview';
 import DashboardSettings from './settings';
 import DashboardStatistics from './statistics';
-import { getGreeting, NAV_TAB_OPTIONS, SUPPORTED_SCREEN_SECTIONS } from './dashboard.controller';
 
 const DashboardScreen = () => {
 	const userData = useSelector(selectUser);
