@@ -1,8 +1,9 @@
 import React from 'react';
-import formatMessage from '@utils/formatMessage';
 
+import { ENTITIES } from '@constants';
+import { useFetch } from '@utils/hooks';
 import { request } from '@utils/request';
-import useFetch from '@utils/hooks/useFetch';
+import formatMessage from '@utils/formatMessage';
 
 import QuickCTA from './QuickCTA';
 import RecentTable from './RecentTable';
@@ -12,48 +13,48 @@ import AnalyticSummary from './components/AnalyticSummary';
 
 const DashboardOverview = () => {
 	const { result: invoiceResult, isLoading: invoiceLoading } = useFetch(() =>
-		request.summary({ entity: 'invoice' })
+		request.summary({ entity: ENTITIES.INVOICE })
 	);
 
 	const { result: quoteResult, isLoading: quoteLoading } = useFetch(() =>
-		request.summary({ entity: 'quote' })
+		request.summary({ entity: ENTITIES.QUOTE })
 	);
 
 	const { result: offerResult, isLoading: offerLoading } = useFetch(() =>
-		request.summary({ entity: 'offer' })
+		request.summary({ entity: ENTITIES.OFFER })
 	);
 
 	const { result: paymentResult, isLoading: paymentLoading } = useFetch(() =>
-		request.summary({ entity: 'payment/invoice' })
+		request.summary({ entity: ENTITIES.PAYMENT_INVOICE })
 	);
 
 	const { result: clientResult, isLoading: clientLoading } = useFetch(() =>
-		request.summary({ entity: 'client' })
+		request.summary({ entity: ENTITIES.CLIENT })
 	);
 
 	const entityData = [
 		{
 			result: invoiceResult,
 			isLoading: invoiceLoading,
-			entity: 'invoice',
+			entity: ENTITIES.INVOICE,
 			icon: 'bi-receipt',
 		},
 		{
 			result: quoteResult,
 			isLoading: quoteLoading,
-			entity: 'quote',
+			entity: ENTITIES.QUOTE,
 			icon: 'bi-calculator',
 		},
 		{
 			result: offerResult,
 			isLoading: offerLoading,
-			entity: 'offer',
+			entity: ENTITIES.OFFER,
 			icon: 'bi-cart',
 		},
 		{
 			result: paymentResult,
 			isLoading: paymentLoading,
-			entity: 'payment',
+			entity: ENTITIES.PAYMENT_INVOICE,
 			icon: 'bi-credit-card',
 		},
 	];

@@ -1,11 +1,24 @@
+import _ from 'lodash';
 import React from 'react';
 
+import { Card } from '@components';
+import { ENTITIES } from '@constants';
 import formatMessage from '@utils/formatMessage';
 
 const formatCurrency = (value = '') => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
+const parseTagContent = (total) => {total && `$ ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+
+// TODO: Remove helper function with proper localization.
+const parseDataEntity = (value = '') => {
+	let res = (value === ENTITIES.QUOTE ? 'Estimate' : value);
+	res = (res === ENTITIES.PAYMENT_INVOICE ? 'Payments' : value);
+	return res;
+};
+
+
 const SummaryCard = ({
-	key,
+	id,
 	icon,
 	title,
 	prefix,
@@ -13,7 +26,7 @@ const SummaryCard = ({
 	isLoading,
 	tagContent,
 }) => (
-	<div className="col-lg-3" key={key}>
+	<div key={id}className="col-lg-3">
 		<div className="d-flex">
 			<div className="flex-grow-1">
 				<h3 className="card-title text-capitalize">
@@ -37,44 +50,45 @@ const SummaryCard = ({
 	</div>
 );
 
-// TODO: Change quote to estimate.
-const parseDataEntity = (value = '') => value === 'quote' ? 'esitmate' : value;
-
 const AnalyticSummary = ({ entityData }) => {
 
-	const [{ result: invoiceResult, isLoading: invoiceLoading }] = entityData.filter(({ entity }) => entity === 'invoice');
+	const [
+		{ result: invoiceResult, isLoading: invoiceLoading }
+	] = entityData.filter(({ entity }) => entity === ENTITIES.INVOICE);
 
 	return (
-		<>
-			<div className="card card-body mb-3 mb-lg-5">
-				<div className="row col-lg-divider gx-lg-6">
-					{entityData.map((data, index) => {
-						const { result, entity, isLoading } = data;
+		<div className="mb-3 mb-lg-5">
+			<Card>
+				<Card.Body>
+					<div className="row col-lg-divider gx-lg-6">
+						{entityData.map((data) => {
+							const { result, entity, isLoading } = data;
 
-						if (entity === 'offer') return null;
+							if (entity === ENTITIES.OFFER) return null;
 
-						return (
-							<SummaryCard
-								key={index}
-								icon={data?.icon}
-								prefix={'This month'}
-								isLoading={isLoading}
-								tagContent={result?.total && formatCurrency(result?.total)}
-								title={data?.entity === 'paymentInvoice' ? 'Payment' : parseDataEntity(data?.entity)}
-								tagColor={data?.entity === 'invoice' ? 'cyan' : data?.entity === 'quote' ? 'purple' : 'green'}
-							/>
-						);
-					})}
-					<SummaryCard
-						tagColor="red"
-						prefix="Not Paid"
-						title="Due Balance"
-						isLoading={invoiceLoading}
-						tagContent={invoiceResult?.total_undue && `$ ${invoiceResult?.total_undue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
-					/>
-				</div>
-			</div>
-		</>
+							return (
+								<SummaryCard
+									icon={data?.icon}
+									prefix={'This month'}
+									isLoading={isLoading}
+									title={parseDataEntity(data?.entity)}
+									id={_.uniqueId(parseDataEntity(data?.entity) + '_')}
+									tagContent={result?.total && formatCurrency(result?.total)}
+									tagColor={data?.entity === ENTITIES.INVOICE ? 'cyan' : data?.entity === ENTITIES.QUOTE ? 'purple' : 'green'}
+								/>
+							);
+						})}
+						<SummaryCard
+							tagColor="red"
+							prefix="Not Paid"
+							title="Due Balance"
+							isLoading={invoiceLoading}
+							tagContent={parseTagContent(invoiceResult?.total_undue)}
+						/>
+					</div>
+				</Card.Body>
+			</Card>
+		</div>
 	);
 }
 
