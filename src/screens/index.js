@@ -36,10 +36,10 @@ export { default as CrmCustomers } from './crm/customers';
 // export { default as CrmCompanies } from './crm/companies';
 
 // Communications
-// export { default as CommunicationChat } from './communication/calls';
-// export { default as CommunicationForum } from './communication/calls';
-// export { default as CommunicationCalls } from './communication/calls';
-// export { default as CommunicationTasks } from './communication/calls';
+export { default as CommunicationChat } from './communication/calls';
+export { default as CommunicationForum } from './communication/calls';
+export { default as CommunicationCalls } from './communication/calls';
+export { default as CommunicationTasks } from './communication/calls';
 
 // Inventory
 export { default as InventoryTools } from './inventory/tools';

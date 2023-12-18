@@ -243,11 +243,11 @@ export const accountingRoutes = [
 
 // COMPLETE
 export const communicationRoutes = [
-// 	{
-// 		slug: 'communication-calls',
-// 		path: '/communication/calls',
-// 		element: screenElements.CommunicationCalls,
-// 	},
+	{
+		slug: 'communication-calls',
+		path: '/communication/calls',
+		element: screenElements.CommunicationCalls,
+	},
 // 	{
 // 		slug: 'communication-chat',
 // 		path: '/communication/chat',
