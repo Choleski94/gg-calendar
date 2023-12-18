@@ -166,11 +166,11 @@ export const hrRoutes = [
 
 // COMPLETE
 export const crmRoutes = [
-// 	{
-// 		slug: 'crm-customers',
-// 		path: '/crm/customers/:id?',
-// 		element: screenElements.CrmCustomers,
-// 	},
+	{
+		slug: 'crm-customers',
+		path: '/crm/customers/:id?',
+		element: screenElements.CrmCustomers,
+	},
 // 	{
 // 		slug: 'crm-access',
 // 		path: '/crm/access/:id?',
