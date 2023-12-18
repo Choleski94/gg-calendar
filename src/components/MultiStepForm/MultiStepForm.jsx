@@ -119,11 +119,10 @@ const MultiStepForm = ({
 				))}
 			</ul>
 			<div>
-				{options.map(({ key, Component }, currentIdx) => (
+				{options.map(({ id, Component }, currentIdx) => (
 					(activeStep == currentIdx) ? (
 						<Component
-							key={key} 
-							// onSuccess={() => onFormSubmit(currentIdx)}
+							key={id} 
 							setData={(payload) => onSetData(payload, activeStep)}
 							data={setComponentData(defaultData[currentIdx], data[currentIdx])}
 						/>

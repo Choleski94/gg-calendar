@@ -17,7 +17,7 @@ const FORM_SECTION_KEYS = Object.keys(FORM_SECTIONS);
 
 const options = [
 	{
-		key: FORM_SECTIONS.PERSONAL,
+		id: FORM_SECTIONS.PERSONAL,
 		title: (
 			<span className="h4">
 				Personal Information
@@ -32,7 +32,7 @@ const options = [
 		),
 	},
 	{
-		key: FORM_SECTIONS.BUSINESS,
+		id: FORM_SECTIONS.BUSINESS,
 		title: (
 			<span className="h4">
 				Business Information
@@ -47,7 +47,7 @@ const options = [
 		),
 	},
 	{
-		key: FORM_SECTIONS.INVITE,
+		id: FORM_SECTIONS.INVITE,
 		title: (
 			<span className="h4">
 				Invite People
