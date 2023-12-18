@@ -1,3 +1,7 @@
-export const setModalSize = (isOnboarding = false) => isOnboarding ? 'xl' : 'md';
+export const setModalSize = (isOnboarding = false, isCompleted = false) => {
+	return isOnboarding && !isCompleted ? 'xl' : 'md';
+}
 
-export const setModalId = (isOnboarding = false) => isOnboarding ? 'onboarding' : 'onboarding-get-started';
+export const setModalId = (isOnboarding = false, isCompleted = false) => {
+	return isOnboarding && !isCompleted ? 'onboarding' : 'onboarding-get-started';
+}

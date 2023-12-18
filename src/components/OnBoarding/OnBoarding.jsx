@@ -7,9 +7,17 @@ import { Modal, Forms, MultiStepForm, Illustrations } from '@components';
 
 import { setModalSize, setModalId } from './OnBoarding.controller';
 
+const FORM_SECTIONS = {
+	PERSONAL: 'PERSONAL', 
+	BUSINESS: 'BUSINESS', 
+	INVITE: 'INVITE'
+};
+
+const FORM_SECTION_KEYS = Object.keys(FORM_SECTIONS);
+
 const options = [
 	{
-		key: 'personal-info',
+		key: FORM_SECTIONS.PERSONAL,
 		title: (
 			<span className="h4">
 				Personal Information
@@ -24,7 +32,7 @@ const options = [
 		),
 	},
 	{
-		key: 'business-info',
+		key: FORM_SECTIONS.BUSINESS,
 		title: (
 			<span className="h4">
 				Business Information
@@ -39,7 +47,7 @@ const options = [
 		),
 	},
 	{
-		key: 'team-info',
+		key: FORM_SECTIONS.INVITE,
 		title: (
 			<span className="h4">
 				Invite People
@@ -47,41 +55,33 @@ const options = [
 		),
 		Component: ({ ...rest }) => (
 			<Forms.InvitePeople
-				withoutSubmit
 				{...rest}
 			/>
 		),
 	},
 ];
 
-const FORM_SECTIONS = {
-	PERSONAL: 'PERSONAL', 
-	BUSINESS: 'BUSINESS', 
-	INVITE: 'INVITE'
-};
-
-const FORM_SECTION_KEYS = Object.keys(FORM_SECTIONS);
-
 const formHandlers = {
 	[FORM_SECTIONS.PERSONAL]: (payload = {}) => {
 		// TODO:
-		//console.log('update user info', payload);
+		console.log('update user info', payload);
 		return true;
 	},
 	[FORM_SECTIONS.BUSINESS]: (payload = {}) => {
 		// TODO:
-		// console.log('update business info', payload);
+		console.log('update business info', payload);
 		return true;
 	},
 	[FORM_SECTIONS.INVITE]: (payload = {}) => {
 		// TODO:
-		// console.log('update invite info', payload);
+		console.log('update invite info', payload);
 		return true;
 	},
 }
 
 const OnBoarding = () => {
 	const [ optionsData, setOptionsData ] = React.useState([]);
+	const [ isCompleted, setIsCompleted ] = React.useState(false);
 	const [ showOnBoarding, setShowOnBoarding ] = React.useState(false);
 	const [ startOnboarding, setStartOnboarding ] = React.useState(false);
 
@@ -119,9 +119,14 @@ const OnBoarding = () => {
 	};
 
 	const toggleShowOnBoarding = () => {
-		// TODO: Conditionally enable if user comple onboarding process.
-		// setShowOnBoarding(!showOnBoarding);
+		if (isCompleted) {
+			setShowOnBoarding(!showOnBoarding);
+		}
 	};
+
+	const onSuccess = () => {
+		setIsCompleted(true);
+	}
 
 	const onStartOnBoarding = () => {
 		setStartOnboarding(true);
@@ -130,7 +135,7 @@ const OnBoarding = () => {
 	const onOptionChange = (stepIndex, payload) => {
 		updateOptionData(stepIndex, payload);
 
-		const currentFormSection = SECTION_KEYS[stepIdx];
+		const currentFormSection = FORM_SECTION_KEYS[stepIndex];
 		const currentFormApiFn = formHandlers[currentFormSection];
 
 		return currentFormApiFn(payload);
@@ -138,14 +143,37 @@ const OnBoarding = () => {
 
 	return (
 		showOnBoarding ? (
-			<Modal key={setModalId(startOnboarding)} id={setModalId(startOnboarding)} centered size={setModalSize(startOnboarding)} onCloseRequest={toggleShowOnBoarding}>
+			<Modal key={setModalId(startOnboarding, isCompleted)} id={setModalId(startOnboarding, isCompleted)} centered size={setModalSize(startOnboarding, isCompleted)} onCloseRequest={toggleShowOnBoarding}>
 				{startOnboarding ? (
-					<MultiStepForm 
-						options={options}
-						id="createOrganization"
-						initialData={optionsData}
-						onOptionChange={onOptionChange}
-					/>
+					(!isCompleted) ? (
+						<MultiStepForm 
+							options={options}
+							onSuccess={onSuccess}
+							id="createOrganization"
+							initialData={optionsData}
+							textLastStep="Send invite(s)"
+							onOptionChange={onOptionChange}
+						/>
+					) : (
+						<>
+							<div className="text-center">
+								<div className="w-75 w-sm-50 mx-auto mb-4">
+									<Illustrations.HiFive />
+								</div>
+								<h4 className="h1">
+									Welcome to Tigado
+								</h4>
+								<p className="mb-5">
+									Congratulations! You've successfully onboarded
+								</p>
+							</div>
+							<div className="text-center mt-3 d-block">
+								<button type="button" className="text-center btn btn-outline-primary" onClick={onStartOnBoarding}>
+									Get Started
+								</button>
+							</div>
+						</>
+					)
 				) : (
 					<>
 						<div className="text-center">
