@@ -86,7 +86,7 @@ const Contact = ({
 
 		if (hasObjectKey(errs)) return null;
 
-		handleSubmit(initForm(payload));
+		setData(initForm(payload));
 	}
 
 	const onChange = (e) => {
