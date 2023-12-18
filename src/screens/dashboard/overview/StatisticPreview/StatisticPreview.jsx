@@ -1,5 +1,7 @@
+import _ from 'lodash';
 import React from 'react';
 
+import { ENTITIES } from '@constants';
 import { Card, Progress } from '@components';
 import formatMessage from '@utils/formatMessage';
 
@@ -54,18 +56,19 @@ const StatisticPreview = ({ entityData }) => {
 			<div className="card-body">
 				<div className="row">
 					{previewKeyElts.map((currentKey) => (
-						<div className="col-lg-4 mb-3 mb-lg-5">
+						<div key={_.uniqueId(currentKey + '_')} className="col-lg-4 mb-3 mb-lg-5">
 							<h4 className="card-header-title mb-3">
 								<span className="text-capitalize">
-									{currentKey === 'quote' ? 'estimate' : currentKey}
+									{currentKey === ENTITIES.QUOTE ? 'Estimate' : currentKey}
 								</span>
 								&nbsp;
 								Preview
 							</h4>
-							{Object.keys(statisticObj[currentKey] || {}).map((subKey, idx) => (
+							{Object.keys(statisticObj[currentKey] || {}).map((subKey) => (
 								<div className="mb-2 mb-lg-2">
 									<Progress 
 										withPercent
+										key={_.uniqueId(currentKey + '_' + subKey + '_')}
 										percent={statisticObj[currentKey][subKey]['value']} 
 										type={statisticObj[currentKey][subKey]['type']} 
 										title={(
