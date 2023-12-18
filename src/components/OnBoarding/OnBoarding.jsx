@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { ENTITIES } from '@constants';
 import { hasObjectKey } from '@utils';
+import { request } from '@utils/request';
 import { selectUser } from '@store/selectors/user';
 import { Modal, Forms, MultiStepForm, Illustrations } from '@components';
 
@@ -62,17 +64,21 @@ const options = [
 ];
 
 const formHandlers = {
-	[FORM_SECTIONS.PERSONAL]: (payload = {}) => {
-		// TODO:
-		console.log('update user info', payload);
-		return true;
-	},
-	[FORM_SECTIONS.BUSINESS]: (payload = {}) => {
+	[FORM_SECTIONS.PERSONAL]: (userId, payload = {}) => (
+		request.patch({
+			entity: 'user/update/' + userId, 
+			jsonData: {
+				...payload,
+				isOnboarded: true,
+			}
+		})
+	),
+	[FORM_SECTIONS.BUSINESS]: (userId, payload = {}) => {
 		// TODO:
 		console.log('update business info', payload);
 		return true;
 	},
-	[FORM_SECTIONS.INVITE]: (payload = {}) => {
+	[FORM_SECTIONS.INVITE]: (userId, payload = {}) => {
 		// TODO:
 		console.log('update invite info', payload);
 		return true;
@@ -138,7 +144,7 @@ const OnBoarding = () => {
 		const currentFormSection = FORM_SECTION_KEYS[stepIndex];
 		const currentFormApiFn = formHandlers[currentFormSection];
 
-		return currentFormApiFn(payload);
+		return currentFormApiFn(userId, payload);
 	}
 
 	return (
