@@ -2,7 +2,6 @@ import React from 'react';
 
 import { 
 	TIME_PERIODS,
-	JOB_EQUIPMENTS, 
 	JOB_CATEGORIES, 
 	CARACTERISTIC_TAGS, 
 } from '@constants';

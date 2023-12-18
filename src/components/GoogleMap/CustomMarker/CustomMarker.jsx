@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import { CARACTERISTIC_TAGS, JOB_EQUIPMENTS, JOB_CATEGORIES, TIME_PERIODS, MARKER_TYPES } from '@constants';
+import { CARACTERISTIC_TAGS, JOB_CATEGORIES, TIME_PERIODS, MARKER_TYPES } from '@constants';
 
 import OverlayView from '../OverlayView';
 import { Marker } from './CustomMarker.styled';
