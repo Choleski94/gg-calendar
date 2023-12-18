@@ -1,10 +1,7 @@
 import React from 'react';
 
-import Card from '@components/Card';
-import Table from '@components/Table';
-import Layout from '@components/Layout';
-import NavPill from '@components/NavPill';
-import Breadcrumb from '@components/Breadcrumb';
+import { withPrivateRouter } from '@utils/hocs';
+import { Card, Table, Layout, NavPill, Breadcrumb } from '@components';
 
 const SERVICES_BREADCRUMB_OPTIONS = [
 	{
@@ -295,4 +292,4 @@ const SettingsScreen = () => {
 	);
 };
 
-export default SettingsScreen;
+export default withPrivateRouter(SettingsScreen);

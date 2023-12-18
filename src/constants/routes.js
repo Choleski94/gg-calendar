@@ -195,26 +195,26 @@ export const inventoryRoutes = [
 		path: '/inventory/vendors',
 		element: screenElements.InventoryVendors,
 	},
-// 	{
-// 		slug: 'inventory-settings',
-// 		path: '/inventory/settings',
-// 		element: screenElements.InventorySettings,
-// 	},
+	{
+		slug: 'inventory-settings',
+		path: '/inventory/settings',
+		element: screenElements.InventorySettings,
+	},
 	{
 		slug: 'inventory-products',
 		path: '/inventory/products/:id?',
 		element: screenElements.InventoryProducts,
 	},
-// 	{
-// 		slug: 'inventory-tools',
-// 		path: '/inventory/tools',
-// 		element: screenElements.InventoryTools,
-// 	},
-// 	{
-// 		slug: 'inventory-services',
-// 		path: '/inventory/services/:id?',
-// 		element: screenElements.InventoryServices,
-// 	},
+	{
+		slug: 'inventory-tools',
+		path: '/inventory/tools',
+		element: screenElements.InventoryTools,
+	},
+	{
+		slug: 'inventory-services',
+		path: '/inventory/services/:id?',
+		element: screenElements.InventoryServices,
+	},
 ];
 
 // COMPLETE

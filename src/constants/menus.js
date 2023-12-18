@@ -176,30 +176,33 @@ export const MENU_INVENTORY = [
 	{
 		slug: 'nav.inventory.text',
 	},
-	// {
-	// 	slug: 'nav.inventory.fleet.text',
-	// 	link: '/inventory/fleet',
-	// 	badge: {
-	// 		type: 'warning',
-	// 		value: '-',
-	// 	},
-	// },
-	// {
-	// 	slug: 'nav.inventory.vendors.text',
-	// 	link: '/inventory/vendors',
-	// 	badge: {
-	// 		type: 'warning',
-	// 		value: '-',
-	// 	},
-	// },
-	// {
-	// 	slug: 'nav.inventory.settings.text',
-	// 	link: '/inventory/settings',
-	// 	badge: {
-	// 		type: 'danger',
-	// 		value: '-',
-	// 	},
-	// },
+	{
+		slug: 'nav.inventory.fleet.text',
+		link: '/inventory/fleet',
+		icon: 'bi bi-car-front',
+		badge: {
+			type: 'secondary',
+			value: '-',
+		},
+	},
+	{
+		slug: 'nav.inventory.vendors.text',
+		link: '/inventory/vendors',
+		icon: 'bi bi-cart4',
+		badge: {
+			type: 'secondary',
+			value: '-',
+		},
+	},
+	{
+		slug: 'nav.inventory.settings.text',
+		link: '/inventory/settings',
+		icon: 'bi bi-sliders2-vertical',
+		badge: {
+			type: 'secondary',
+			value: '-',
+		},
+	},
 	{
 		slug: 'nav.inventory.product.text',
 		link: '/inventory/products',
@@ -209,14 +212,15 @@ export const MENU_INVENTORY = [
 			value: '-',
 		},
 	},
-	// {
-	// 	slug: 'nav.inventory.tool.text',
-	// 	link: '/inventory/tools',
-	// 	badge: {
-	// 		type: 'warning',
-	// 		value: '-',
-	// 	},
-	// },
+	{
+		slug: 'nav.inventory.tool.text',
+		link: '/inventory/tools',
+		icon: 'bi bi-tools',
+		badge: {
+			type: 'secondary',
+			value: '-',
+		},
+	},
 	{
 		slug: 'nav.inventory.catalog.text',
 		link: '/inventory/services',

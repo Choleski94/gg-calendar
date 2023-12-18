@@ -32,7 +32,7 @@ const Tigado = () => {
 						/>
 					)))}
 				</Routes>
-				{isAuth && (
+				{!isAuth && (
 					<OnBoarding />
 				)}
 			</IntlProvider>
