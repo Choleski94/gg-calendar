@@ -386,7 +386,7 @@ const Table = ({
 									<tr role="row">
 										{headers.filter(({ key }) => activeKeys.includes(key)).map(({ key, label }, colIdx = 0) => (
 											<th
-												key={`header-${key}`} rowSpan="1" colspan="1" onClick={(e) => onFilter(e, key)}
+												key={`header-${key}`} rowSpan="1" colSpan="1" onClick={(e) => onFilter(e, key)}
 												className={[
 													// (colIdx > 0 ? 'sorting' : ''), 
 													(colIdx > 0 ? 'table-column-ps-0' : '')
@@ -404,7 +404,7 @@ const Table = ({
 							<tbody>
 								{loading ? (
 									<tr className="odd">
-										<td valign="top" colspan="12" className="dataTables_empty">
+										<td valign="top" colSpan="12" className="dataTables_empty">
 											<div className="text-center p-4">
 												<div
 													role="status"
