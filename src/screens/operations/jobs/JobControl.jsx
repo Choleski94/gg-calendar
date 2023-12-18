@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Layout, NavPill, Breadcrumb, GetSupport, StickyNav } from '@components';
+import { Layout, NavPill, Breadcrumb, GetSupport } from '@components';
 
 import {
 	NAV_TAB_OPTIONS,

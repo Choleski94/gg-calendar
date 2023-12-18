@@ -1,11 +1,10 @@
 import React from 'react';
-import Link from 'next/link';
 
 import api from '@api';
 import { Modal } from '@components';
 import mockFiles from '@mocks/files';
+import { useClickOutside } from '@utils/hooks';
 import formatMessage from '@utils/formatMessage';
-import useClickOutside from '@utils/hooks/useClickOutside';
 
 import { FileMenuDropdown } from './Files.controller';
 
