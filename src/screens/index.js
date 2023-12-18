@@ -16,10 +16,10 @@ export { default as InventoryOrders } from './operations/orders';
 export { default as DispatchMap } from './operations/dispatch-map';
 
 // HR
-// // export { default as HrChat } from './communication/calls';
-// // export { default as HrForum } from './communication/calls';
-// // export { default as HrCalls } from './communication/calls';
-// export { default as HrLegalParking } from './hr/legal/parking';
+// export { default as HrChat } from './communication/calls';
+// export { default as HrForum } from './communication/calls';
+// export { default as HrCalls } from './communication/calls';
+export { default as HrLegalParking } from './hr/legal/parking';
 
 // HR Employee & Teams
 export { default as HrEmployees } from './hr/employees';

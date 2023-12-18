@@ -248,11 +248,11 @@ export const communicationRoutes = [
 		path: '/communication/calls',
 		element: screenElements.CommunicationCalls,
 	},
-// 	{
-// 		slug: 'communication-chat',
-// 		path: '/communication/chat',
-// 		element: screenElements.CommunicationChat,
-// 	},
+	{
+		slug: 'communication-chat',
+		path: '/communication/chat',
+		element: screenElements.CommunicationChat,
+	},
 	{
 		slug: 'communication-forum',
 		path: '/communication/forum',
