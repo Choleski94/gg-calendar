@@ -13,7 +13,7 @@ export { default as Dashboard } from './dashboard';
 export { default as CrmJobs } from './operations/jobs';
 // export { default as Calendar } from './operations/calendar';
 // export { default as InventoryOrders } from './operations/orders';
-// export { default as DispatchMap } from './operations/dispatch-map';
+export { default as DispatchMap } from './operations/dispatch-map';
 
 // HR
 // // export { default as HrChat } from './communication/calls';

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import config from '@config';
-import Input from '@components/Input';
-import Layout from '@components/Layout';
+import { Input, Layout } from '@components';
 import GoogleMap from '@components/GoogleMap';
+import { withPrivateRouter } from '@utils/hocs';
 import useLocalStorage from '@utils/hooks/useLocalStorage';
 import withGoogleMapServices from '@utils/hocs/withGoogleMapServices';
 
@@ -18,22 +18,22 @@ const [ techMarkers, jobMarkers, officeMarkers, partMarkers, searchMarkers ] = n
 
 const MapsScreen = () => {
 	const [ data, setData ] = React.useState({});
+	const [ zoom, setZoom ] = React.useState(11);
 	const [ errors, seErrors ] = React.useState({});
-	const [ zoom, setZoom ] = React.useState<number>(11);
-	const [ filterMarkers, setFilterMarkers ] = React.useState<string[]>([]);
-	const [ highlightedJob, setHighlightedJob ] = React.useState<any | null>(null);
-	const [ center, setCenter ] = React.useState<google.maps.LatLngLiteral>(DEFAULT_LOCATION);
+	const [ filterMarkers, setFilterMarkers ] = React.useState([]);
+	const [ center, setCenter ] = React.useState(DEFAULT_LOCATION);
+	const [ highlightedJob, setHighlightedJob ] = React.useState(null);
 	const [ caracteristics, setCaracteristics ] = useLocalStorage('tigado_map_caracteristics', []);
 
-	const onIdle = (map: google.maps.Map) => {
-		setZoom(map.getZoom()!);
-		const nextCenter = map.getCenter();
+	const onIdle = (map = { getZoom: () => null, getCenter: () => null }) => {
+		setZoom(map?.getZoom());
+		const nextCenter = map?.getCenter();
 		if (nextCenter) {
 			setCenter(nextCenter.toJSON());
 		}
 	};
 
-	const fetchAndPrepareResultItem = (jobId: string) => {
+	const fetchAndPrepareResultItem = (jobId) => {
 		const hasDetail = Object.keys(detail).length;
 		if (!hasDetail || (jobId !== detail.jobId)) {
 			setLoading(true);
@@ -155,4 +155,4 @@ const MapsScreen = () => {
 	);
 };
 
-export default withGoogleMapServices(MapsScreen);
+export default withPrivateRouter(withGoogleMapServices(MapsScreen));

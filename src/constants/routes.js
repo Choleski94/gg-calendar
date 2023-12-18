@@ -76,11 +76,11 @@ export const operationRoutes = [
 // 		path: '/operations/calendar',
 // 		element: screenElements.Calendar,
 // 	},
-// 	{
-// 		slug: 'dispatch-map',
-// 		path: '/operations/dispatch-map',
-// 		element: screenElements.DispatchMap,
-// 	},
+	{
+		slug: 'dispatch-map',
+		path: '/operations/dispatch-map',
+		element: screenElements.DispatchMap,
+	},
 // 	{
 // 		slug: 'inventory-orders',
 // 		path: '/operations/orders/:id?',
