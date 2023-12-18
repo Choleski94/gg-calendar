@@ -50,7 +50,7 @@ export { default as InventoryProducts } from './inventory/products';
 export { default as InventorySettings } from './inventory/settings';
 
 // Marketing
-// export { default as MarketingReviews } from './marketing/review-management/Reviews';
+export { default as MarketingReviews } from './marketing/review-management';
 
 // Accounting
 export { default as AccountingExpenses } from './accounting/expenses';

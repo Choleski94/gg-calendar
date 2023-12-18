@@ -360,46 +360,46 @@ export const rdRoutes = [
 
 // COMPLETE
 export const marketingRoutes = [
-// 	{
-// 		slug: 'marketing',
-// 		path: '/marketing/dashboard',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'marketing-goals',
-// 		path: '/marketing/goals',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'marketing-seo',
-// 		path: '/marketing/seo',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'marketing-smo',
-// 		path: '/marketing/smo',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'marketing-sem',
-// 		path: '/marketing/sem',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'marketing-traditional',
-// 		path: '/marketing/traditional',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'marketing-reviews',
-// 		path: '/marketing/reviews',
-// 		element: screenElements.MarketingReviews,
-// 	},
-// 	{
-// 		slug: 'marketing-customer-email-broadcast',
-// 		path: '/marketing/customer-email-broadcast',
-// 		element: () => 'Todo...',
-// 	},
+	{
+		slug: 'marketing',
+		path: '/marketing/dashboard',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'marketing-goals',
+		path: '/marketing/goals',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'marketing-seo',
+		path: '/marketing/seo',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'marketing-smo',
+		path: '/marketing/smo',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'marketing-sem',
+		path: '/marketing/sem',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'marketing-traditional',
+		path: '/marketing/traditional',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'marketing-reviews',
+		path: '/marketing/reviews',
+		element: screenElements.MarketingReviews,
+	},
+	{
+		slug: 'marketing-customer-email-broadcast',
+		path: '/marketing/customer-email-broadcast',
+		element: () => 'Todo...',
+	},
 ];
 
 // COMPLETE
