@@ -25,8 +25,15 @@ const SignInPage = ({ browser, version, OS, language }) => {
 		email: formatMessage('form.validation.email.error.text')
 	};
 
-	const validate = (data = {}) => {
+	const validate = (data = {}, ignoreKeys = []) => {
 		const errs = {};
+
+		// Check for empty input(s).
+		Object.keys(data).map(inputSlug => {
+			if (!ignoreKeys.includes(inputSlug) && !data[inputSlug].length) {
+				errs[inputSlug] = errorMessages.empty;
+			}
+		});
 
 		// Check for empty email.
 		if (!data?.email) {
@@ -57,7 +64,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 		e.preventDefault();
 
 		// Check if we have error(s).
-		const errs = validate(data);
+		const errs = validate(data, ['OS', 'browser', 'language']);
 
 		setErrors(errs);
 
@@ -77,7 +84,6 @@ const SignInPage = ({ browser, version, OS, language }) => {
 							<AuthBranding />
 						</div>
 						<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
-							{/* <Header /> */}
 							<div
 								className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
 								style={{ maxWidth: "25rem" }}
