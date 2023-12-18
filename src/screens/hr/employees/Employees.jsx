@@ -7,7 +7,7 @@ import {
 	NAV_TAB_OPTIONS,
 	SUPPORTED_SCREEN_SECTIONS, 
 	CUSTOMERS_BREADCRUMB_OPTIONS, 
-} from './EmplyeesScreen.controller';
+} from './Employees.controller';
 import WorkforceOverview from './overview';
 import WorkforceSettings from './settings';
 import WorkforceStatistics from './statistics';

@@ -9,61 +9,60 @@ export { default as ForgotPassword } from './forgot_password';
 export { default as Home } from './home';
 export { default as Dashboard } from './dashboard';
 
-// // Operations
+// Operations
 // export { default as CrmJobs } from './operations/jobs';
 // export { default as Calendar } from './operations/calendar';
 // export { default as InventoryOrders } from './operations/orders';
 // export { default as DispatchMap } from './operations/dispatch-map';
-// 
-// // HR
+
+// HR
 // // export { default as HrChat } from './communication/calls';
 // // export { default as HrForum } from './communication/calls';
 // // export { default as HrCalls } from './communication/calls';
 // export { default as HrLegalParking } from './hr/legal/parking';
-// 
-// // HR Employee & Teams
-// export { default as HrEmployees } from './hr/employees';
-// 
-// 
-// // Account
+
+// HR Employee & Teams
+export { default as HrEmployees } from './hr/employees';
+
+// Account
 // export { default as AccountMember } from './account/member';
 // export { default as AccountProfile } from './account/profile';
-// export { default as AccountSettings } from './account/settings';
-// export { default as AccountAccessLogs } from './account/access-logs';
-// 
-// // CRM
+export { default as AccountSettings } from './account/settings';
+export { default as AccountAccessLogs } from './account/access-logs';
+
+// CRM
 // export { default as CrmAccess } from './crm/access';
 // export { default as CrmCustomers } from './crm/customers';
 // export { default as CrmCompanies } from './crm/companies';
-// 
-// // Communications
+
+// Communications
 // export { default as CommunicationChat } from './communication/calls';
 // export { default as CommunicationForum } from './communication/calls';
 // export { default as CommunicationCalls } from './communication/calls';
 // export { default as CommunicationTasks } from './communication/calls';
-// 
-// // Inventory
+
+// Inventory
 // export { default as InventoryTools } from './inventory/tools';
 // export { default as InventoryFleet } from './inventory/fleet';
 // export { default as InventoryVendors } from './inventory/vendors';
 // export { default as InventoryServices } from './inventory/services';
 // export { default as InventoryProducts } from './inventory/products';
 // export { default as InventorySettings } from './inventory/settings';
-// 
-// // Marketing
+
+// Marketing
 // export { default as MarketingReviews } from './marketing/review-management/Reviews';
-// 
-// // Accounting
+
+// Accounting
 // export { default as AccountingExpenses } from './accounting/expenses';
 // export { default as AccountingInvoices } from './accounting/invoices';
 // export { default as AccountingEstimates } from './accounting/estimates';
-// 
-// // On boarding
+
+// On boarding
 // export { default as OnBoarding } from './onboarding';
-// 
-// // Organizations
+
+// Organizations
 // export { default as Organizations } from './organizations';
-// 
-// // System
+
+// System
 // export { default as SystemAccess } from './system/access';
 // export { default as SystemConfiguration} from './system/configuration';

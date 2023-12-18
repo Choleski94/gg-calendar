@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { request } from '@utils/request';
 import formatMessage from '@utils/formatMessage';
 import { Table, Modal, Forms } from '@components';
-import { trimString, parseSelectOptionValues, formatOptionValueType } from '@utils';
+import { trimString, formatOptionValueType } from '@utils';
 import { ENTITY_EMPLOYEE, DEFAULT_TABLE_HEADER, DEFAULT_ACTIVE_HEADER_KEYS } from '@constants/employees';
 
 import { parseOptions } from './Members.helpers';
+
+const parseSelectOptionValues = () => null;
 
 const pagination = {};
 

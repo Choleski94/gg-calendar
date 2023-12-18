@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import type { NextPage } from 'next';
 
 import api from '@api';
 import config from '@config';
@@ -24,7 +23,7 @@ const setLinkClassName = (activeSection, currentSection) => [
 	(currentSection === activeSection ? ' active' : '')
 ].join('');
 
-const Profile: NextPage = () => {
+const Profile = () => {
 
 	const [data, setData] = React.useState({});
 	const [optionMode, setOptionMode] = React.useState(false);
