@@ -1,5 +1,5 @@
 // export { default as useQuery } from './useQuery';
-// export { default as useFetch } from './useFetch';
+export { default as useFetch } from './useFetch';
 // export { default as useNetwork } from './useNetwork';
 // export { default as useOnFetch } from './useOnFetch';
 // export { default as useCallCount } from './useCallCount'; 

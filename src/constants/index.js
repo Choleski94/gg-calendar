@@ -5,6 +5,15 @@ import jobs from './jobs';
 import layouts from './layouts';
 import accounts from './accounts';
 
+
+export const ENTITIES = {
+	QUOTE: 'quote',
+	OFFER: 'offer',
+	CLIENT: 'client',
+	INVOICE: 'invoice',
+	PAYMENT_INVOICE: 'payment/invoice',
+};
+
 /* OLD STUFF */
 export const CALL_TECH_TITLE = 'FLASH';
 
@@ -435,6 +444,7 @@ const constants = {
 	...jobs,
 	...layouts,
 	...accounts,
+	ENTITIES,
 	ACCESS_TOKEN_NAME,
 }
 
