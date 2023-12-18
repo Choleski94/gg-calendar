@@ -219,26 +219,26 @@ export const inventoryRoutes = [
 
 // COMPLETE
 export const accountingRoutes = [
-// 	{
-// 		slug: 'accounting-invoices-create',
-// 		path: '/accounting/invoices/:id?',
-// 		element: screenElements.AccountingInvoices,
-// 	},
-// 	{
-// 		slug: 'accounting-expenses-add',
-// 		path: '/accounting/expenses/:id?',
-// 		element: screenElements.AccountingExpenses,
-// 	},
-// 	{
-// 		slug: 'accounting-estimate-create',
-// 		path: '/accounting/estimates/:id?',
-// 		element: screenElements.AccountingEstimates,
-// 	},
-// 	// {
-// 	// 	slug: 'accounting-loans',
-// 	// 	path: '/accounting/loans',
-// 	// 	element: () => 'Todo...',
-// 	// },
+ 	{
+ 		slug: 'accounting-invoices-create',
+ 		path: '/accounting/invoices/:id?',
+ 		element: screenElements.AccountingInvoices,
+ 	},
+	{
+		slug: 'accounting-expenses-add',
+		path: '/accounting/expenses/:id?',
+		element: screenElements.AccountingExpenses,
+	},
+	{
+		slug: 'accounting-estimate-create',
+		path: '/accounting/estimates/:id?',
+		element: screenElements.AccountingEstimates,
+	},
+	// {
+	// 	slug: 'accounting-loans',
+	// 	path: '/accounting/loans',
+	// 	element: () => 'Todo...',
+	// },
 ];
 
 // COMPLETE

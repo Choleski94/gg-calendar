@@ -53,9 +53,9 @@ export { default as InventorySettings } from './inventory/settings';
 // export { default as MarketingReviews } from './marketing/review-management/Reviews';
 
 // Accounting
-// export { default as AccountingExpenses } from './accounting/expenses';
-// export { default as AccountingInvoices } from './accounting/invoices';
-// export { default as AccountingEstimates } from './accounting/estimates';
+export { default as AccountingExpenses } from './accounting/expenses';
+export { default as AccountingInvoices } from './accounting/invoices';
+export { default as AccountingEstimates } from './accounting/estimates';
 
 // On boarding
 // export { default as OnBoarding } from './onboarding';
