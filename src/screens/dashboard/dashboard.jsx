@@ -9,43 +9,7 @@ import { Layout, NavPill, GetSupport } from '@components';
 import DashboardOverview from './overview';
 import DashboardSettings from './settings';
 import DashboardStatistics from './statistics';
-
-const SUPPORTED_SCREEN_SECTIONS = {
-	OVERVIEW: 'OVERVIEW',
-	SETTINGS: 'SETTINGS',
-	STATISTICS: 'STATISTICS',
-};
-
-const NAV_TAB_OPTIONS = [
-	{
-		key: SUPPORTED_SCREEN_SECTIONS.OVERVIEW,
-		value: 'Overview',
-	},
-	{
-		key: SUPPORTED_SCREEN_SECTIONS.STATISTICS,
-		value: 'Statistics',
-	},
-	{
-		key: SUPPORTED_SCREEN_SECTIONS.SETTINGS,
-		value: 'Settings',
-	},
-];
-
-const getGreeting = () => {
-	let res = '';
-
-	const currentHour = new Date().getHours();
-
-	if (currentHour >= 5 && currentHour < 12) {
-		res = 'morning';
-	} else if (currentHour >= 12 && currentHour < 18) {
-		res = 'afternoon';
-	} else {
-		res = 'evening';
-	}
-
-	return res;
-}
+import { getGreeting, NAV_TAB_OPTIONS, SUPPORTED_SCREEN_SECTIONS } from './dashboard.controller';
 
 const DashboardScreen = () => {
 	const userData = useSelector(selectUser);
