@@ -1,13 +1,12 @@
 import React from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
-
-import InvoiceView from './Invoice.View';
-import InvoiceCreate from './Invoice.Create';
+import { Link } from 'react-router-dom';
 
 import api from '@api';
 import { Modal } from '@components';
 import formatMessage from '@utils/formatMessage';
+
+import InvoiceView from './Invoice.View';
+import InvoiceCreate from './Invoice.Create';
 
 const INVOICE_SECTIONS = {
 	VIEW: 'VIEW',

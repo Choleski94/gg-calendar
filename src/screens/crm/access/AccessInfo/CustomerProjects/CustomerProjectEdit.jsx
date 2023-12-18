@@ -1,8 +1,8 @@
 import React from 'react';
 
-import api from '../../../../api';
-import Modal from '../../../../components/Modal';
-import formatMessage from '../../../../utils/formatMessage';
+import api from '@api';
+import { Modal } from '@components';
+import formatMessage from '@utils/formatMessage';
 
 export const CustomerProjectEditsCTA = () => {
 	return (

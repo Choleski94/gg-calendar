@@ -171,16 +171,16 @@ export const crmRoutes = [
 		path: '/crm/customers/:id?',
 		element: screenElements.CrmCustomers,
 	},
-// 	{
-// 		slug: 'crm-access',
-// 		path: '/crm/access/:id?',
-// 		element: screenElements.CrmAccess,
-// 	},
-// 	{
-// 		slug: 'crm-companies',
-// 		path: '/crm/companies/:id?',
-// 		element: screenElements.CrmCompanies,
-// 	},
+	{
+		slug: 'crm-access',
+		path: '/crm/access/:id?',
+		element: screenElements.CrmAccess,
+	},
+	// {
+	// 	slug: 'crm-companies',
+	// 	path: '/crm/companies/:id?',
+	// 	element: screenElements.CrmCompanies,
+	// },
 ];
 
 // COMPLETE
@@ -409,11 +409,11 @@ export const systemRoutes = [
 // 		path: '/system/configuration',
 // 		element: screenElements.SystemConfiguration,
 // 	},
-// 	{
-// 		slug: 'system-access',
-// 		path: '/system/access/:id?',
-// 		element: screenElements.SystemAccess,
-// 	},
+	{
+		slug: 'system-access',
+		path: '/system/access/:id?',
+		element: screenElements.SystemAccess,
+	},
 	{
 		slug: 'system-templates',
 		path: '/system/templates',

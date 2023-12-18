@@ -1,8 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
-import api from '../../../../api';
-import formatMessage from '../../../../utils/formatMessage';
+import api from '@api';
+import formatMessage from '@utils/formatMessage';
 
 const CreateInvoice = ({ id = '' }) => {
 	return (

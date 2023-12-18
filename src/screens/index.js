@@ -31,7 +31,7 @@ export { default as AccountSettings } from './account/settings';
 export { default as AccountAccessLogs } from './account/access-logs';
 
 // CRM
-// export { default as CrmAccess } from './crm/access';
+export { default as CrmAccess } from './crm/access';
 export { default as CrmCustomers } from './crm/customers';
 // export { default as CrmCompanies } from './crm/companies';
 
@@ -64,5 +64,5 @@ export { default as AccountingEstimates } from './accounting/estimates';
 export { default as Organizations } from './organizations';
 
 // System
-// export { default as SystemAccess } from './system/access';
+export { default as SystemAccess } from './system/access';
 // export { default as SystemConfiguration} from './system/configuration';
