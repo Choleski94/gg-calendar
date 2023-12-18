@@ -100,68 +100,68 @@ export const hrRoutes = [
 // 		path: '/hr/system/rewards',
 // 		element: screenElements.HrLegalParking,
 // 	},
-// 	{
-// 		slug: 'hr-system-crew-management',
-// 		path: '/hr/system/crew-management',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'hr-system-company-information',
-// 		path: '/hr/system/company-information',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'hr-system-meetings',
-// 		path: '/hr/system/meetings',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'hr-system-contracts',
-// 		path: '/hr/system/contracts',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'hr-system-goals-management',
-// 		path: '/hr/system/goals-management',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'hr-system-recommendations',
-// 		path: '/hr/system/recommendations',
-// 		element: () => 'Todo...',
-// 	},
-// 	// Employee
-// 	// {
-// 	// 	slug: 'hr-employee-problems',
-// 	// 	path: '/hr/employee/problems',
-// 	// 	element: () => 'Todo...',
-// 	// },
-// 	// {
-// 	// 	slug: 'hr-employee-hiring',
-// 	// 	path: '/hr/employee/hiring',
-// 	// 	element: () => 'Todo...',
-// 	// },
-// 	// {
-// 	// 	slug: 'hr-employee-vacations',
-// 	// 	path: '/hr/employee/vacations',
-// 	// 	element: () => 'Todo...',
-// 	// },
+	{
+		slug: 'hr-system-crew-management',
+		path: '/hr/system/crew-management',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'hr-system-company-information',
+		path: '/hr/system/company-information',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'hr-system-meetings',
+		path: '/hr/system/meetings',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'hr-system-contracts',
+		path: '/hr/system/contracts',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'hr-system-goals-management',
+		path: '/hr/system/goals-management',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'hr-system-recommendations',
+		path: '/hr/system/recommendations',
+		element: () => 'Todo...',
+	},
+	// Employee
+	{
+		slug: 'hr-employee-problems',
+		path: '/hr/employee/problems',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'hr-employee-hiring',
+		path: '/hr/employee/hiring',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'hr-employee-vacations',
+		path: '/hr/employee/vacations',
+		element: () => 'Todo...',
+	},
 	{
 		slug: 'hr-employees',
 		path: '/hr/employees/:id?',
 		element: screenElements.HrEmployees,
 	},
-// 	// {
-// 	// 	slug: 'hr-employee-problems',
-// 	// 	path: '/hr/employee/problems',
-// 	// 	element: () => 'Todo...',
-// 	// },
-// 	// Legal
-// 	// {
-// 	// 	slug: 'hr-legal-parking-tickets',
-// 	// 	path: '/hr/legal/parking-tickets',
-// 	// 	element: () => 'Todo...',
-// 	// },
+	{
+		slug: 'hr-employee-problems',
+		path: '/hr/employee/problems',
+		element: () => 'Todo...',
+	},
+	// Legal
+	{
+		slug: 'hr-legal-parking-tickets',
+		path: '/hr/legal/parking-tickets',
+		element: () => 'Todo...',
+	},
 ];
 
 // COMPLETE
@@ -234,11 +234,11 @@ export const accountingRoutes = [
 		path: '/accounting/estimates/:id?',
 		element: screenElements.AccountingEstimates,
 	},
-	// {
-	// 	slug: 'accounting-loans',
-	// 	path: '/accounting/loans',
-	// 	element: () => 'Todo...',
-	// },
+	{
+		slug: 'accounting-loans',
+		path: '/accounting/loans',
+		element: () => 'Todo...',
+	},
 ];
 
 // COMPLETE
@@ -253,109 +253,109 @@ export const communicationRoutes = [
 // 		path: '/communication/chat',
 // 		element: screenElements.CommunicationChat,
 // 	},
-// 	{
-// 		slug: 'communication-forum',
-// 		path: '/communication/forum',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'communication-tasks',
-// 		path: '/communication/tasks',
-// 		element: () => 'Todo...',
-// 	},
+	{
+		slug: 'communication-forum',
+		path: '/communication/forum',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'communication-tasks',
+		path: '/communication/tasks',
+		element: () => 'Todo...',
+	},
 ];
 
 // COMPLETE
 export const itRoutes = [
-// 	{
-// 		slug: 'it-company-preferences',
-// 		path: '/it/company-preferences',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'it-tags-management',
-// 		path: '/it/tags-management',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'it-api',
-// 		path: '/it/api',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'it-language-settings',
-// 		path: '/it/language-settings',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'it-invoice-management-settings',
-// 		path: '/it/invoice-management-settings',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'it-system-recommendations',
-// 		path: '/it/system-recommendations',
-// 		element: () => 'Todo...',
-// 	},
+	{
+		slug: 'it-company-preferences',
+		path: '/it/company-preferences',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'it-tags-management',
+		path: '/it/tags-management',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'it-api',
+		path: '/it/api',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'it-language-settings',
+		path: '/it/language-settings',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'it-invoice-management-settings',
+		path: '/it/invoice-management-settings',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'it-system-recommendations',
+		path: '/it/system-recommendations',
+		element: () => 'Todo...',
+	},
 ];
 
 // COMPLETE
 export const rdRoutes = [
-// 	{
-// 		slug: 'research-reports',
-// 		path: '/research/reports',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-projects',
-// 		path: '/research/projects',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-databases-employees',
-// 		path: '/research/databases/employees',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-databases-references',
-// 		path: '/research/databases/references',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-databases-important-people',
-// 		path: '/research/databases/important-people',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-databases-association',
-// 		path: '/research/databases/association',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-databases-competitors',
-// 		path: '/research/databases/competitors',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-databases-postal-code',
-// 		path: '/research/databases/postal-code',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-databases-machine-management',
-// 		path: '/research/databases/machine-management',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-databases-job-status',
-// 		path: '/research/databases/job-status',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'research-analytics-project-items',
-// 		path: '/research/analytics/project-items',
-// 		element: () => 'Todo...',
-// 	},
+	{
+		slug: 'research-reports',
+		path: '/research/reports',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-projects',
+		path: '/research/projects',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-databases-employees',
+		path: '/research/databases/employees',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-databases-references',
+		path: '/research/databases/references',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-databases-important-people',
+		path: '/research/databases/important-people',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-databases-association',
+		path: '/research/databases/association',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-databases-competitors',
+		path: '/research/databases/competitors',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-databases-postal-code',
+		path: '/research/databases/postal-code',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-databases-machine-management',
+		path: '/research/databases/machine-management',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-databases-job-status',
+		path: '/research/databases/job-status',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'research-analytics-project-items',
+		path: '/research/analytics/project-items',
+		element: () => 'Todo...',
+	},
 ];
 
 // COMPLETE
@@ -414,16 +414,16 @@ export const systemRoutes = [
 // 		path: '/system/access/:id?',
 // 		element: screenElements.SystemAccess,
 // 	},
-// 	{
-// 		slug: 'system-templates',
-// 		path: '/system/templates',
-// 		element: () => 'Todo...',
-// 	},
-// 	{
-// 		slug: 'system-payments',
-// 		path: '/system/payments',
-// 		element: () => 'Todo...',
-// 	},
+	{
+		slug: 'system-templates',
+		path: '/system/templates',
+		element: () => 'Todo...',
+	},
+	{
+		slug: 'system-payments',
+		path: '/system/payments',
+		element: () => 'Todo...',
+	},
 ];
 
 const routes = [
