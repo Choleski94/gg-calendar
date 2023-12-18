@@ -3,21 +3,14 @@ import { createPortal } from 'react-dom';
 
 import { createOverlay } from './Overlay';
 
-type OverlayProps = React.PropsWithChildren<{
-	position: google.maps.LatLng | google.maps.LatLngLiteral;
-	pane?: keyof google.maps.MapPanes;
-	map: google.maps.Map;
-	zIndex?: number;
-}>;
-
-const OverlayView = ({ map, zIndex, children, position, pane = 'floatPane' }: OverlayProps) => {
+const OverlayView = ({ map, zIndex, children, position, pane = 'floatPane' }) => {
 	const container = React.useMemo(() => {
 		const div = document.createElement('div');
 		div.style.position = 'absolute';
 		return div;
 	}, []);
 
-	const getPixelPositionOffset = React.useCallback((width: number, height: number) => ({
+	const getPixelPositionOffset = React.useCallback((width, height) => ({
 		x: -width / 2,
 		y: -height
 	}), []);

@@ -1,13 +1,12 @@
 import React from 'react';
-import type { EffectCallback } from 'react';
 import { createCustomEqual, deepEqual } from 'fast-equals';
 
-export const useDeepCompareEffectForMaps = (callback: EffectCallback, dependencies: any[]) => {
+export const useDeepCompareEffectForMaps = (callback, dependencies) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	React.useEffect(callback, dependencies.map(useDeepCompareMemorize))
 }
 
-const useDeepCompareMemorize = (value: any) => {
+const useDeepCompareMemorize = (value) => {
 	const ref = React.useRef()
 
 	if (!deepCompareEqualsForMaps(value, ref.current)) {
@@ -18,7 +17,7 @@ const useDeepCompareMemorize = (value: any) => {
 }
 
 // https://github.com/googlemaps/js-typescript-guards/blob/main/src/lat-lng.ts
-const isLatLngLiteral = (obj: any): obj is google.maps.LatLngLiteral => obj != null && typeof obj === 'object' && Number.isFinite(obj.lat) && Number.isFinite(obj.lng)
+const isLatLngLiteral = (obj) => obj != null && typeof obj === 'object' && Number.isFinite(obj.lat) && Number.isFinite(obj.lng)
 
 const deepCompareEqualsForMaps = createCustomEqual((options) => ({
 	areObjectsEqual(a, b) {

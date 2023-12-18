@@ -1,5 +1,4 @@
 import React from 'react';
-import type { ReactNode } from 'react';
 
 import mapStyle from './mapStyle';
 import { useDeepCompareEffectForMaps } from './useDeepCompareEffectForMaps';
@@ -14,9 +13,9 @@ const polygonCoords = [
 
 const Map = ({ className, onClick, onIdle, children, ...options }) => {
 
-	const ref = React.useRef<HTMLDivElement>(null);
+	const ref = React.useRef(null);
 
-	const [map, setMap] = React.useState<google.maps.Map>();
+	const [map, setMap] = React.useState();
 
 	React.useEffect(() => {
 		if (ref.current && map === undefined) {

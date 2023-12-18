@@ -1,16 +1,10 @@
-export const createOverlay = (container: HTMLElement, pane: keyof google.maps.MapPanes, position: google.maps.LatLng | google.maps.LatLngLiteral, getPixelPositionOffset: (width: number, height: number) => google.maps.Point = () => new google.maps.Point(0, 0)) => {
+export const createOverlay = (container, pane, position, getPixelPositionOffset) => {
 	class Overlay extends google.maps.OverlayView {
-
-		container: HTMLElement;
-		pane: keyof google.maps.MapPanes;
-		position: google.maps.LatLng | google.maps.LatLngLiteral;
-		getPixelPositionOffset: (width: number, height: number) => google.maps.Point;
-
 		constructor(
-			container: HTMLElement,
-			pane: keyof google.maps.MapPanes,
-			position: google.maps.LatLng | google.maps.LatLngLiteral,
-			 getPixelPositionOffset: (width: number, height: number) => google.maps.Point
+			container,
+			pane,
+			position,
+			getPixelPositionOffset
 		) {
 			super();
 			this.pane = pane;
@@ -19,12 +13,12 @@ export const createOverlay = (container: HTMLElement, pane: keyof google.maps.Ma
 			this.getPixelPositionOffset = getPixelPositionOffset;
 		}
 
-		onAdd(): void {
+		onAdd() {
 			const pane = this.getPanes()?.[this.pane];
 			pane?.appendChild(this.container);
 		}
 
-		draw(): void {
+		draw() {
 			const projection = this.getProjection();
 			const point = projection.fromLatLngToDivPixel(this.position);
 
@@ -41,7 +35,7 @@ export const createOverlay = (container: HTMLElement, pane: keyof google.maps.Ma
 			this.container.style.transform = `translate(${x}px, ${y}px)`;
 		}
 
-		onRemove(): void {
+		onRemove() {
 			if (this.container.parentNode !== null) {
 				this.container.parentNode.removeChild(this.container);
 			}

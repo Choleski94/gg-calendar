@@ -1,127 +1,127 @@
 const style = [
 	{
-		"featureType": "poi.attraction",
-		"elementType": "all",
-		"stylers": [
+		'featureType': 'poi.attraction',
+		'elementType': 'all',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.attraction",
-		"elementType": "labels",
-		"stylers": [
+		'featureType': 'poi.attraction',
+		'elementType': 'labels',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.attraction",
-		"elementType": "labels.icon",
-		"stylers": [
+		'featureType': 'poi.attraction',
+		'elementType': 'labels.icon',
+		'stylers': [
 			{
-				"visibility": "simplified"
+				'visibility': 'simplified'
 			}
 		]
 	},
 	{
-		"featureType": "poi.business",
-		"elementType": "all",
-		"stylers": [
+		'featureType': 'poi.business',
+		'elementType': 'all',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.business",
-		"elementType": "labels.icon",
-		"stylers": [
+		'featureType': 'poi.business',
+		'elementType': 'labels.icon',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.government",
-		"elementType": "labels.icon",
-		"stylers": [
+		'featureType': 'poi.government',
+		'elementType': 'labels.icon',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.medical",
-		"elementType": "labels.icon",
-		"stylers": [
+		'featureType': 'poi.medical',
+		'elementType': 'labels.icon',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.park",
-		"elementType": "labels.icon",
-		"stylers": [
+		'featureType': 'poi.park',
+		'elementType': 'labels.icon',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.place_of_worship",
-		"elementType": "labels",
-		"stylers": [
+		'featureType': 'poi.place_of_worship',
+		'elementType': 'labels',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.place_of_worship",
-		"elementType": "labels.icon",
-		"stylers": [
+		'featureType': 'poi.place_of_worship',
+		'elementType': 'labels.icon',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.school",
-		"elementType": "labels",
-		"stylers": [
+		'featureType': 'poi.school',
+		'elementType': 'labels',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.school",
-		"elementType": "labels.icon",
-		"stylers": [
+		'featureType': 'poi.school',
+		'elementType': 'labels.icon',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.sports_complex",
-		"elementType": "labels",
-		"stylers": [
+		'featureType': 'poi.sports_complex',
+		'elementType': 'labels',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	},
 	{
-		"featureType": "poi.sports_complex",
-		"elementType": "labels.icon",
-		"stylers": [
+		'featureType': 'poi.sports_complex',
+		'elementType': 'labels.icon',
+		'stylers': [
 			{
-				"visibility": "off"
+				'visibility': 'off'
 			}
 		]
 	}
