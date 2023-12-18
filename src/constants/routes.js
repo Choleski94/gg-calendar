@@ -404,11 +404,11 @@ export const marketingRoutes = [
 
 // COMPLETE
 export const systemRoutes = [
-// 	{
-// 		slug: 'system-configuration',
-// 		path: '/system/configuration',
-// 		element: screenElements.SystemConfiguration,
-// 	},
+	{
+		slug: 'system-configuration',
+		path: '/system/configuration',
+		element: screenElements.SystemConfiguration,
+	},
 	{
 		slug: 'system-access',
 		path: '/system/access/:id?',

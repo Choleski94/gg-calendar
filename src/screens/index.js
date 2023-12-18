@@ -65,4 +65,4 @@ export { default as Organizations } from './organizations';
 
 // System
 export { default as SystemAccess } from './system/access';
-// export { default as SystemConfiguration} from './system/configuration';
+export { default as SystemConfiguration} from './system/configuration';

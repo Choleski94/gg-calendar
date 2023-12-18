@@ -1,6 +1,7 @@
 import React from 'react';
 
 import api from '@api';
+import { withPrivateRouter } from '@utils/hocs';
 import formatMessage from '@utils/formatMessage';
 import { Layout, NavPill, GetSupport } from '@components';
 
@@ -71,4 +72,4 @@ const SystemConfiguration = () => {
 	);
 }
 
-export default SystemConfiguration;
+export default withPrivateRouter(SystemConfiguration);
