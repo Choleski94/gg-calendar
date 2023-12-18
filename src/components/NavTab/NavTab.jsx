@@ -3,13 +3,9 @@ import React from 'react';
 import {
 	setNavTabItem,
 	setNavTabLink,
+	setNavTabClassName,
 	setNavTabLinkClassName 
 } from './NavTab.controller';
-
-const setNavTabClassName = (withoutPageHeader) => [
-	'nav nav-tabs',
-	(withoutPageHeader ? '' : 'page-header-tabs'),
-].join(' ');
 
 const NavTab = ({ id = '', options = [], withPageHeader = false, defaultValue = null, handleTabClick = () => null }) => {
 	const [ activeTab, setActiveTab ] = React.useState(null);

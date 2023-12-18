@@ -11,7 +11,7 @@ export { default as Button } from './Button';
 export { default as Select } from './Select';
 export { default as Layout } from './Layout';
 export { default as Counter } from './Counter';
-// export { default as NavTab } from './NavTab';
+export { default as NavTab } from './NavTab';
 export { default as NavPill } from './NavPill';
 export { default as PieChart } from './PieChart';
 export { default as Schedule } from './Schedule';

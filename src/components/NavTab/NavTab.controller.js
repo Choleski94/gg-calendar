@@ -15,3 +15,8 @@ export const setNavTabLinkClassName = (activeTab = '', currentTab = '') => [
 	'nav-link',
 	(activeTab === currentTab ? ' active' : '')
 ].join('');
+
+export const setNavTabClassName = (withoutPageHeader) => [
+	'nav nav-tabs',
+	(withoutPageHeader ? '' : 'page-header-tabs'),
+].join(' ');
