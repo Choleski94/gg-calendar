@@ -71,21 +71,21 @@ export const standaloneRoutes = [
 
 // COMPLETE
 export const operationRoutes = [
-// 	{
-// 		slug: 'calendar',
-// 		path: '/operations/calendar',
-// 		element: screenElements.Calendar,
-// 	},
+	{
+		slug: 'calendar',
+		path: '/operations/calendar',
+		element: screenElements.Calendar,
+	},
 	{
 		slug: 'dispatch-map',
 		path: '/operations/dispatch-map',
 		element: screenElements.DispatchMap,
 	},
-// 	{
-// 		slug: 'inventory-orders',
-// 		path: '/operations/orders/:id?',
-// 		element: screenElements.InventoryOrders,
-// 	},
+	{
+		slug: 'inventory-orders',
+		path: '/operations/orders/:id?',
+		element: screenElements.InventoryOrders,
+	},
 	{
 		slug: 'crm-jobs',
 		path: '/operations/jobs/:id?',

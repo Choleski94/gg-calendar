@@ -11,8 +11,8 @@ export { default as Dashboard } from './dashboard';
 
 // Operations
 export { default as CrmJobs } from './operations/jobs';
-// export { default as Calendar } from './operations/calendar';
-// export { default as InventoryOrders } from './operations/orders';
+export { default as Calendar } from './operations/calendar';
+export { default as InventoryOrders } from './operations/orders';
 export { default as DispatchMap } from './operations/dispatch-map';
 
 // HR
