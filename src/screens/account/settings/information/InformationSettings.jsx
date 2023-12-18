@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import api from '@api';
+import { ENTITIES } from '@constants';
 import { request } from '@utils/request';
 import formatMessage from '@utils/formatMessage';
 import { selectUser } from '@store/selectors/user';
@@ -23,7 +24,7 @@ const InformationSettings = () => {
 	const { id: userId } = userData;
 
 	const fecthUserData = () => {
-		request.read({ entity: 'user', id: userId }).then((response) => {
+		request.read({ entity: ENTITIES.USER, id: userId }).then((response) => {
 			setLoading(false);
 
 			if (response.success === true) {
@@ -143,7 +144,7 @@ const InformationSettings = () => {
 					<Forms.Contact 
 						withPhoto
 						data={payload}
-						handleSubmit={handleSubmit}
+						setData={handleSubmit}
 					/>
 				</Card.Body>
 			</Card>

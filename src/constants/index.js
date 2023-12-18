@@ -7,6 +7,7 @@ import accounts from './accounts';
 
 
 export const ENTITIES = {
+	USER: 'user',
 	QUOTE: 'quote',
 	OFFER: 'offer',
 	CLIENT: 'client',
