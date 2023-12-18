@@ -56,7 +56,7 @@ const StatisticPreview = ({ entityData }) => {
 			<div className="card-body">
 				<div className="row">
 					{previewKeyElts.map((currentKey) => (
-						<div key={_.uniqueId(currentKey + '_')} className="col-lg-4 mb-3 mb-lg-5">
+						<div className="col-lg-4 mb-3 mb-lg-5" key={_.uniqueId(currentKey + '_progress_')}>
 							<h4 className="card-header-title mb-3">
 								<span className="text-capitalize">
 									{currentKey === ENTITIES.QUOTE ? 'Estimate' : currentKey}
@@ -65,12 +65,12 @@ const StatisticPreview = ({ entityData }) => {
 								Preview
 							</h4>
 							{Object.keys(statisticObj[currentKey] || {}).map((subKey) => (
-								<div className="mb-2 mb-lg-2">
+								<div className="mb-2 mb-lg-2" key={_.uniqueId(currentKey + '_' + subKey + '_')}>
 									<Progress 
 										withPercent
-										key={_.uniqueId(currentKey + '_' + subKey + '_')}
-										percent={statisticObj[currentKey][subKey]['value']} 
+										key={_.uniqueId(currentKey + '_' + subKey + '_progress_')}
 										type={statisticObj[currentKey][subKey]['type']} 
+										percent={statisticObj[currentKey][subKey]['value']} 
 										title={(
 											<span className="text-capitalize">
 												{subKey}
