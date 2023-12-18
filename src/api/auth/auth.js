@@ -3,10 +3,10 @@ import axios from 'axios';
 const getTimestamp = () => new Date().getTime();
 
 const auth = {
-	login: (credentials) => (
+	signin: (credentials) => (
 		axios.post(`/login?timestamp=${getTimestamp()}`, credentials).then((res) => res.data.result)
 	),
-	register: (credentials) => (
+	signup: (credentials) => (
 		axios.post(`/register?timestamp=${getTimestamp()}`, credentials).then((res) => res.data.result)
 	),
 	logout: () => (

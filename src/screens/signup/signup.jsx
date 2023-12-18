@@ -2,13 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import api from '@api';
-import * as actionTypes from '@store/types';
-// import { AUTH_KEY } from '@constants/auth';
+import { signup } from '@store/actions/auth';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-// import errorHandler from '@utils/request/errorHandler';
-// import successHandler from '@utils/request/successHandler';
 import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
 import { AuthBranding, Input, Layout, BlockMessage } from '@components';
 
@@ -95,50 +91,9 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 
 		if (Object.keys(errs).length) return null;
 
-		// Set loading state.
-		dispatch({
-			type: actionTypes.LOADING_REQUEST,
-			payload: { loading: true },
-		});
-
-		// dispatch(register(data)).then((res) => {
-		// 	navigate('/dashboard');
-		// });
-
-		api.auth.register(data).then((response) => {
-			// const { status, data } = response;
-
-			// if (data.success === true) {
-			// 	// Success network request
-			// 	setLocalToken(data?.result.token);
-			// 	setAuth(JSON.stringify(data?.result));
-
-			// 	// // Set sucess toast.
-			// 	// dispatch({
-			// 	// 	type: actionTypes.REGISTER_SUCCESS,
-			// 	// 	payload: data?.result,
-			// 	// });
-
-			// 	// successHandler(
-			// 	// 	{ data, status },
-			// 	// 	{
-			// 	// 		notifyOnSuccess: false,
-			// 	// 		notifyOnFailed: true,
-			// 	// 	}
-			// 	// );
-
-			// 	// Reload application now our user is authenticated.
-			// 	router.reload();
-			// } else {
-			// 	// Failed network request
-			// 	dispatch({
-			// 		type: actionTypes.FAILED_REQUEST,
-			// 		payload: data,
-			// 	});
-			// }
-		}).catch((error) => {
-			// errorHandler(error, navigate);
-		});
+		dispatch(signup(data)).then((res) => (
+			navigate('/dashboard')
+		));
 	};
 
 	return (

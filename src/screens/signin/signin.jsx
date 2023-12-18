@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { login } from '@store/actions/auth';
+import { signin } from '@store/actions/auth';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 import { AuthBranding, Input, Layout } from '@components';
@@ -70,7 +70,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 
 		if (Object.keys(errs).length) return null;
 
-		dispatch(login(data)).then((res) => (
+		dispatch(signin(data)).then((res) => (
 			navigate('/dashboard')
 		));
 	};
