@@ -26,8 +26,8 @@ export const guestRoutes = [
 	},
 ];
 
-// // COMPLETE
-// export const accountRoutes = [
+// COMPLETE
+export const accountRoutes = [
 // 	{
 // 		slug: 'account-profile',
 // 		path: '/account/profile',
@@ -38,17 +38,17 @@ export const guestRoutes = [
 // 		path: '/account/:id?',
 // 		element: screenElements.AccountMember,
 // 	},
-// 	{
-// 		slug: 'account-settings',
-// 		path: '/account/settings',
-// 		element: screenElements.AccountSettings,
-// 	},
+ 	{
+ 		slug: 'account-settings',
+ 		path: '/account/settings',
+ 		element: screenElements.AccountSettings,
+ 	},
 // 	{
 // 		slug: 'account-access-logs',
 // 		path: '/account/access-logs',
 // 		element: screenElements.AccountAccessLogs,
 // 	},
-// ];
+];
 
 // COMPLETE
 export const standaloneRoutes = [
@@ -69,8 +69,8 @@ export const standaloneRoutes = [
 	// },
 ];
 
-// // COMPLETE
-// export const operationRoutes = [
+// COMPLETE
+export const operationRoutes = [
 // 	{
 // 		slug: 'calendar',
 // 		path: '/operations/calendar',
@@ -91,10 +91,10 @@ export const standaloneRoutes = [
 // 		path: '/operations/jobs/:id?',
 // 		element: screenElements.CrmJobs,
 // 	},
-// ];
-// 
-// export const hrRoutes = [
-// 	// System
+];
+
+export const hrRoutes = [
+	// System
 // 	{
 // 		slug: 'hr-system-rewards',
 // 		path: '/hr/system/rewards',
@@ -162,10 +162,10 @@ export const standaloneRoutes = [
 // 	// 	path: '/hr/legal/parking-tickets',
 // 	// 	element: () => 'Todo...',
 // 	// },
-// ];
-// 
-// // COMPLETE
-// export const crmRoutes = [
+];
+
+// COMPLETE
+export const crmRoutes = [
 // 	{
 // 		slug: 'crm-customers',
 // 		path: '/crm/customers/:id?',
@@ -181,10 +181,10 @@ export const standaloneRoutes = [
 // 		path: '/crm/companies/:id?',
 // 		element: screenElements.CrmCompanies,
 // 	},
-// ];
-// 
-// // COMPLETE
-// export const inventoryRoutes = [
+];
+
+// COMPLETE
+export const inventoryRoutes = [
 // 	{
 // 		slug: 'inventory-fleet',
 // 		path: '/inventory/fleet',
@@ -215,10 +215,10 @@ export const standaloneRoutes = [
 // 		path: '/inventory/services/:id?',
 // 		element: screenElements.InventoryServices,
 // 	},
-// ];
-// 
-// // COMPLETE
-// export const accountingRoutes = [
+];
+
+// COMPLETE
+export const accountingRoutes = [
 // 	{
 // 		slug: 'accounting-invoices-create',
 // 		path: '/accounting/invoices/:id?',
@@ -239,10 +239,10 @@ export const standaloneRoutes = [
 // 	// 	path: '/accounting/loans',
 // 	// 	element: () => 'Todo...',
 // 	// },
-// ];
-// 
-// // COMPLETE
-// export const communicationRoutes = [
+];
+
+// COMPLETE
+export const communicationRoutes = [
 // 	{
 // 		slug: 'communication-calls',
 // 		path: '/communication/calls',
@@ -263,10 +263,10 @@ export const standaloneRoutes = [
 // 		path: '/communication/tasks',
 // 		element: () => 'Todo...',
 // 	},
-// ];
-// 
-// // COMPLETE
-// export const itRoutes = [
+];
+
+// COMPLETE
+export const itRoutes = [
 // 	{
 // 		slug: 'it-company-preferences',
 // 		path: '/it/company-preferences',
@@ -297,10 +297,10 @@ export const standaloneRoutes = [
 // 		path: '/it/system-recommendations',
 // 		element: () => 'Todo...',
 // 	},
-// ];
-// 
-// // COMPLETE
-// export const rdRoutes = [
+];
+
+// COMPLETE
+export const rdRoutes = [
 // 	{
 // 		slug: 'research-reports',
 // 		path: '/research/reports',
@@ -356,10 +356,10 @@ export const standaloneRoutes = [
 // 		path: '/research/analytics/project-items',
 // 		element: () => 'Todo...',
 // 	},
-// ];
-// 
-// // COMPLETE
-// export const marketingRoutes = [
+];
+
+// COMPLETE
+export const marketingRoutes = [
 // 	{
 // 		slug: 'marketing',
 // 		path: '/marketing/dashboard',
@@ -400,10 +400,10 @@ export const standaloneRoutes = [
 // 		path: '/marketing/customer-email-broadcast',
 // 		element: () => 'Todo...',
 // 	},
-// ];
-// 
-// // COMPLETE
-// export const systemRoutes = [
+];
+
+// COMPLETE
+export const systemRoutes = [
 // 	{
 // 		slug: 'system-configuration',
 // 		path: '/system/configuration',
@@ -424,22 +424,22 @@ export const standaloneRoutes = [
 // 		path: '/system/payments',
 // 		element: () => 'Todo...',
 // 	},
-// ];
+];
 
 const routes = [
-	// itRoutes,
-	// rdRoutes,
-	// hrRoutes,
-	// crmRoutes,
+	itRoutes,
+	rdRoutes,
+	hrRoutes,
+	crmRoutes,
 	guestRoutes,
-	// systemRoutes,
-	// accountRoutes,
-	// operationRoutes,
-	// inventoryRoutes,
-	// marketingRoutes,
+	systemRoutes,
+	accountRoutes,
+	operationRoutes,
+	inventoryRoutes,
+	marketingRoutes,
 	standaloneRoutes,
-	// accountingRoutes,
-	// communicationRoutes,
+	accountingRoutes,
+	communicationRoutes,
 ].flat();
 
 export default routes;
