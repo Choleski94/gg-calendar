@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { hasObjectKey } from '@utils';
 import { setNextBtnclassName, setStepItemClassName } from './MultiStepForm.controller';
 
 const setComponentData = (defaultData = {}, data = {}) => ({ ...defaultData, ...data });
@@ -9,6 +10,7 @@ const MultiStepForm = ({
 	options = [], 
 	initialData = [], 
 	textNext = 'Next', 
+	onSuccess = () => null,
 	textLastStep = 'Complete',
 	textPrev = 'Previous step', 
 	onOptionChange = () => null, 
@@ -60,19 +62,20 @@ const MultiStepForm = ({
 
 	const onNextClick = (e) => {
 		e.preventDefault();
-		if (activeStep !== totalOption && validStep[activeStep]) {
+
+		if (!validStep[activeStep]) return;
+
+		if (activeStep !== totalOption) {
 			setActiveStep(activeStep + 1);
-			const resStatus = onOptionChange(activeStep, data[activeStep]);
-			// console.log('STATUS:::', resStatus);
 		}
+
+		const resStatus = onOptionChange(activeStep, data[activeStep]);
+
+		if (activeStep === totalOption) return onSuccess();
 	};
 
-	const onFormSubmit = (idx = 0) => {
-		// console.log('Success....', idx);
-	}
-
 	const onSetData = (payload, formIdx) => {
-		const hasValidPayload = Boolean(Object.keys(payload || {}).length);
+		const hasValidPayload = hasObjectKey(payload || {});
 
 		if (hasValidPayload) {
 			const cloneData = [ ...data ];
@@ -120,7 +123,7 @@ const MultiStepForm = ({
 					(activeStep == currentIdx) ? (
 						<Component
 							key={key} 
-							onSuccess={() => onFormSubmit(currentIdx)}
+							// onSuccess={() => onFormSubmit(currentIdx)}
 							setData={(payload) => onSetData(payload, activeStep)}
 							data={setComponentData(defaultData[currentIdx], data[currentIdx])}
 						/>
