@@ -25,7 +25,7 @@ export { default as DispatchMap } from './operations/dispatch-map';
 export { default as HrEmployees } from './hr/employees';
 
 // Account
-// export { default as AccountMember } from './account/member';
+export { default as AccountMember } from './account/member';
 // export { default as AccountProfile } from './account/profile';
 export { default as AccountSettings } from './account/settings';
 export { default as AccountAccessLogs } from './account/access-logs';

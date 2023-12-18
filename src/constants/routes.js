@@ -33,11 +33,11 @@ export const accountRoutes = [
 // 		path: '/account/profile',
 // 		element: screenElements.AccountProfile,
 // 	},
-// 	{
-// 		slug: 'account-member',
-// 		path: '/account/:id?',
-// 		element: screenElements.AccountMember,
-// 	},
+	{
+		slug: 'account-member',
+		path: '/account/:id?',
+		element: screenElements.AccountMember,
+	},
  	{
  		slug: 'account-settings',
  		path: '/account/settings',

@@ -1,11 +1,10 @@
 import React from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
-import api from '../../../api';
-import config from '../../../../config';
-import Modal from '../../../components/Modal';
-import NavTab from '../../../components/NavTab';
-import formatMessage from '../../../utils/formatMessage';
+import api from '@api';
+import config from '@config';
+import { Modal, NavTab } from '@components';
+import formatMessage from '@utils/formatMessage';
 
 const SUPPORTED_SECTIONS = {
 	TEAMS: 'TEAMS',

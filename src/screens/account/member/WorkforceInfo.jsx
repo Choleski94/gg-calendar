@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { withPrivateRouter } from '@utils/hocs';
 import formatMessage from '@utils/formatMessage';
 import { Layout, NavTab, Breadcrumb, GetSupport } from '@components';
 
@@ -239,4 +240,4 @@ const WorkforceInfo = () => {
 	);
 };
 
-export default WorkforceInfo;
+export default withPrivateRouter(WorkforceInfo);

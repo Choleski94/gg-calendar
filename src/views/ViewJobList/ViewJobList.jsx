@@ -11,8 +11,8 @@ import {
 	SUPPORTED_JOB_PRIORITIES,
 } from '../../constants/jobs';
 
-import Table from '../../components/Table';
-import formatMessage from '../../../utils/formatMessage';
+import { Table } from '@components';
+import formatMessage from '@utils/formatMessage';
 
 const DEFAULT_JOBS_TABLE_HEADER = [
 	// { key: 'id', label: 'ID' }, // FOR DEBUGGING PURPOSES ONLY

@@ -1,13 +1,11 @@
 import React from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
+import { Link } from 'react-router-dom';
 
 import api from '@api';
 import config from '@config';
-import Modal from '@components/Modal';
-import Layout from '@components/Layout';
+import { Modal, Layout } from '@components';
+import { withPrivateRouter } from '@utils/hocs';
 import formatMessage from '@utils/formatMessage';
-// import getServerSideProps from '@utils/getServerSideProps';
 
 const SUPPORTED_SECTIONS = {
 	TEAMS: 'TEAMS',
@@ -15,8 +13,6 @@ const SUPPORTED_SECTIONS = {
 	PROJECTS: 'PROJECTS',
 	CONNECTIONS: 'CONNECTIONS',
 };
-
-// className="nav-link disabled"
 
 const setLinkClassName = (activeSection, currentSection) => [
 	'nav-link',
@@ -55,11 +51,6 @@ const Profile = () => {
 
 	return (
 		<>
-			<Head>
-				<title>
-					{formatMessage("meta.title.text")}
-				</title>
-			</Head>
 			<Layout>
 				<div className="content container-fluid">
 					<div className="row justify-content-lg-center">
@@ -8409,11 +8400,4 @@ const Profile = () => {
 	);
 }
 
-// export { getServerSideProps };
-export const getServerSideProps = () => {
-	return {
-		props: {}
-	}
-};
-
-export default Profile;
+export default withPrivateRouter(Profile);
