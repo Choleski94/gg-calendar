@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { withPrivateRouter } from '@utils/hocs';
 import { Layout, NavPill, Breadcrumb, GetSupport } from '@components';
 
 import CalendarOverview from './CalendarOverview';
@@ -89,5 +90,4 @@ const CalendarScreen = ({ customrId, setCalendarId }) => {
 	);
 };
 
-export default CalendarScreen;
-
+export default withPrivateRouter(CalendarScreen);

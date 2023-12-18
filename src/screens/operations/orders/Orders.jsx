@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { withPrivateRouter } from '@utils/hocs';
+
 import OrderInfo from './OrderInfo';
 import OrderControl from './OrderControl';
 
@@ -26,4 +28,4 @@ const OrdersScreen = () => {
 	);
 };
 
-export default OrdersScreen;
+export default withPrivateRouter(OrdersScreen);
