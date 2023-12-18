@@ -1,3 +1,4 @@
+# Tigado Frontend
 # React + TypeScript + Vite + Vitest
 
 This template provides a minimal setup to get React working in Vite with HMR, path aliases, testing, automation and some ESLint rules.
