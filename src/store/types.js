@@ -1,16 +1,19 @@
 // Organization
 export const ORGANIZATION_FETCHED = 'ORGANIZATION_FETCHED';
 
+// App
+export const APP_LOADING = 'APP_LOADING';
+
 // User
+export const USER_FETCHED = 'USER_FETCHED';
+
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 
-export const USER_FETCHED = 'USER_FETCHED';
-
+// Auth ?
 export const REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';
 
-// Auth ?
 export const FAILED_REQUEST = 'AUTH_FAILED_REQUEST';
 
 // Settings
