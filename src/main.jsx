@@ -7,15 +7,15 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import App from '@app';
 import { Loader } from '@components';
-import rootReducer from '@store/rootReducer';
 import { userLoggedIn } from '@store/actions/auth';
+import rootReducer, { preloadedState } from '@store/rootReducer';
 import setAuthorizationHeader from '@utils/setAuthorizationHeader';
 
 const root = document.getElementById('root');
 
 const store = configureStore({
+	preloadedState,
 	reducer: rootReducer,
-	preloadedState: { user: {}, organization: {} },
 	devTools: import.meta.env.PROD === false, // Enable Redux DevTools in development mode
 });
 

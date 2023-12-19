@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ENTITIES } from '@constants';
 import { hasObjectKey } from '@utils';
 import { request } from '@utils/request';
-import { selectUser } from '@store/selectors/user';
+import { fetchUser } from '@store/actions/user';
+import { selectUser, isAuthenticated } from '@store/selectors/user';
 import { Modal, Forms, MultiStepForm, Illustrations } from '@components';
 
 import { setModalSize, setModalId } from './OnBoarding.controller';
@@ -88,16 +89,18 @@ const formHandlers = {
 const OnBoarding = () => {
 	const [ optionsData, setOptionsData ] = React.useState([]);
 	const [ isCompleted, setIsCompleted ] = React.useState(false);
-	const [ showOnBoarding, setShowOnBoarding ] = React.useState(false);
 	const [ startOnboarding, setStartOnboarding ] = React.useState(false);
 
+	const dispatch = useDispatch();
+
 	const user = useSelector(selectUser);
+	const isUserAuth = useSelector(isAuthenticated);
 
 	const { id: userId, isOnboarded } = user;
 
 	React.useEffect(() => {
-		setShowOnBoarding(!isOnboarded)
-	}, [ isOnboarded ]);
+		dispatch(fetchUser(userId));
+	}, []);
 
 	// Populate option data.
 	React.useEffect(() => {
@@ -126,7 +129,7 @@ const OnBoarding = () => {
 
 	const toggleShowOnBoarding = () => {
 		if (isCompleted) {
-			setShowOnBoarding(!showOnBoarding);
+			console.log('---------->>>');
 		}
 	};
 
@@ -147,68 +150,68 @@ const OnBoarding = () => {
 		return currentFormApiFn(userId, payload);
 	}
 
+	if (isOnboarded || !isUserAuth) return null;
+
 	return (
-		showOnBoarding ? (
-			<Modal 
-				centered 
-				hideClose={!isCompleted}
-				onCloseRequest={toggleShowOnBoarding}
-				id={setModalId(startOnboarding, isCompleted)} 
-				key={setModalId(startOnboarding, isCompleted)} 
-				size={setModalSize(startOnboarding, isCompleted)} 
-			>
-				{startOnboarding ? (
-					(!isCompleted) ? (
-						<MultiStepForm 
-							options={options}
-							onSuccess={onSuccess}
-							id="createOrganization"
-							initialData={optionsData}
-							textLastStep="Send invite(s)"
-							onOptionChange={onOptionChange}
-						/>
-					) : (
-						<>
-							<div className="text-center">
-								<div className="w-75 w-sm-50 mx-auto mb-4">
-									<Illustrations.HiFive />
-								</div>
-								<h4 className="h1">
-									Welcome to Tigado
-								</h4>
-								<p className="mb-5">
-									Congratulations! You've successfully onboarded
-								</p>
-							</div>
-							<div className="text-center mt-3 d-block">
-								<button type="button" className="text-center btn btn-outline-primary" onClick={toggleShowOnBoarding}>
-									Get Started
-								</button>
-							</div>
-						</>
-					)
+		<Modal 
+			centered 
+			hideClose={!isCompleted}
+			onCloseRequest={toggleShowOnBoarding}
+			id={setModalId(startOnboarding, isCompleted)} 
+			key={setModalId(startOnboarding, isCompleted)} 
+			size={setModalSize(startOnboarding, isCompleted)} 
+		>
+			{startOnboarding ? (
+				!isCompleted ? (
+					<MultiStepForm 
+						options={options}
+						onSuccess={onSuccess}
+						id="createOrganization"
+						initialData={optionsData}
+						textLastStep="Send invite(s)"
+						onOptionChange={onOptionChange}
+					/>
 				) : (
 					<>
 						<div className="text-center">
 							<div className="w-75 w-sm-50 mx-auto mb-4">
-								<Illustrations.Collaboration />
+								<Illustrations.HiFive />
 							</div>
 							<h4 className="h1">
 								Welcome to Tigado
 							</h4>
 							<p className="mb-5">
-								We're happy to see you in our community.
+								Congratulations! You've successfully onboarded
 							</p>
 						</div>
 						<div className="text-center mt-3 d-block">
-							<button type="button" className="text-center btn btn-outline-primary" onClick={onStartOnBoarding}>
+							<button type="button" className="text-center btn btn-outline-primary" onClick={toggleShowOnBoarding}>
 								Get Started
 							</button>
 						</div>
 					</>
-				)}
-			</Modal>
-		) : null
+				)
+			) : (
+				<>
+					<div className="text-center">
+						<div className="w-75 w-sm-50 mx-auto mb-4">
+							<Illustrations.Collaboration />
+						</div>
+						<h4 className="h1">
+							Welcome to Tigado
+						</h4>
+						<p className="mb-5">
+							We're happy to see you in our community.
+						</p>
+					</div>
+					<div className="text-center mt-3 d-block">
+						<button type="button" className="text-center btn btn-outline-primary" onClick={onStartOnBoarding}>
+							Get Started
+						</button>
+					</div>
+				</>
+			)}
+		</Modal>
 	);
 };
 
