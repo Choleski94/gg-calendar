@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { IntlProvider } from 'react-intl';
-import { Routes, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import routes from '@constants/routes';
 import themes from '@components/themes';
@@ -11,11 +11,11 @@ import { isAuthenticated } from '@store/selectors/user';
 import { selectLocaleSettings } from '@store/selectors/settings';
 import { getLocale, constructLocale, SUPPORTED_LOCALES } from '@locales';
 
-const Tigado = () => {
-	const locale = useSelector(selectLocaleSettings);
-	const isAuth = useSelector(isAuthenticated);
+const theme = 'light';
 
-	const theme = 'light';
+const Tigado = () => {
+	const isAuth = useSelector(isAuthenticated);
+	const locale = useSelector(selectLocaleSettings);
 
 	const localeISO = constructLocale(locale);
 	const localeMessage = getLocale(localeISO);
@@ -30,6 +30,7 @@ const Tigado = () => {
 							element={<Component />} 
 						/>
 					)))}
+					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
 				{isAuth && (
 					<OnBoarding />
