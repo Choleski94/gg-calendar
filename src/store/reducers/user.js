@@ -19,10 +19,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
 		case actionTypes.USER_FETCHED:
 			return { ...state, ...action.user, loaded: true };
 		case actionTypes.LOADING_REQUEST:
-			return {
-				...state,
-				loading: true,
-			};
+			return { ...state, loading: true };
 		case actionTypes.FAILED_REQUEST:
 			return INITIAL_STATE;
 		default:

@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const getTimestamp = () => new Date().getTime();
+import { ENTITIES } from '@constants';
 
 const user = {
-	fetchUser: () => (
-		axios.post(`/login?timestamp=${getTimestamp()}`, credentials).then((res) => res.data.result)
+	fetchUser: (userId) => (
+		axios.get(ENTITIES.USER + '/read/' + userId).then((res) => res.data.result)
 	),
 }
 
