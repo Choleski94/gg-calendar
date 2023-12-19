@@ -1,6 +1,6 @@
 import * as actionTypes from '../types';
 
-const INITIAL_STATE = {
+export const organizationState = {
 	id: null,
 	isInit: false,
 	name: null,
@@ -17,7 +17,7 @@ const INITIAL_STATE = {
 	tax_gst_percent: null,
 };
 
-const organizationReducer = (state = INITIAL_STATE, action) => {
+const organizationReducer = (state = organizationState, action) => {
 	switch (action.type) {
 		case actionTypes.ORGANIZATION_FETCHED:
 			return { ...state, ...action.organization, loaded: true };
@@ -27,7 +27,7 @@ const organizationReducer = (state = INITIAL_STATE, action) => {
 				loading: true,
 			};
 		case actionTypes.FAILED_REQUEST:
-			return INITIAL_STATE;
+			return organizationState;
 		default:
 			return state;
 	}

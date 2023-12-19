@@ -1,6 +1,6 @@
 import * as actionTypes from '../types';
 
-export const INITIAL_STATE = {
+export const settingsState = {
 	theme: 'light',
 	currency: 'CAD',
 	timezone: 'America/Toronto',
@@ -10,7 +10,7 @@ export const INITIAL_STATE = {
 	},
 };
 
-const settingsReducer = (state = INITIAL_STATE, action) => {
+const settingsReducer = (state = settingsState, action) => {
 	const { payload = null } = action;
 
 	switch (action.type) {

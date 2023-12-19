@@ -13,8 +13,6 @@ export const REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';
 // Auth ?
 export const FAILED_REQUEST = 'AUTH_FAILED_REQUEST';
 
-export const LOADING_REQUEST = 'AUTH_LOADING_REQUEST';
-
 // Settings
 export const LOCALE_SET = 'LOCALE_SET';
 

@@ -1,8 +1,15 @@
 import { combineReducers } from 'redux';
 
-import userReducer from './reducers/user';
-import settingsReducer from './reducers/settings';
-import organizationReducer from './reducers/organization';
+import userReducer, { userState } from './reducers/user';
+import settingsReducer, { settingsState } from './reducers/settings';
+import organizationReducer, { organizationState } from './reducers/organization';
+
+export const preloadedState = {
+	// app: {},
+	user: userState,
+	settings: settingsState,
+	organization: organizationState,
+};
 
 // Combine all reducers.
 const rootReducer = combineReducers({

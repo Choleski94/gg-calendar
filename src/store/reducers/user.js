@@ -1,27 +1,26 @@
 import * as actionTypes from '../types';
 
-const INITIAL_STATE = {
+export const userState = {
 	id: null,
 	email: null,
 	phone: null,
 	token: null,
+	loading: false,
 	lastName: null,
 	firstName: null,
-	loading: false,
+	isOnboarded: true,
 };
 
-const userReducer = (state = INITIAL_STATE, action) => {
+const userReducer = (state = userState, action) => {
 	switch (action.type) {
 		case actionTypes.USER_LOGGED_IN:
-			return { ...state, ...action.user, loaded: true };
+			return { ...state, ...action.user };
 		case actionTypes.USER_LOGGED_OUT:
-			return { ...INITIAL_STATE };
+			return { ...userState };
 		case actionTypes.USER_FETCHED:
-			return { ...state, ...action.user, loaded: true };
-		case actionTypes.LOADING_REQUEST:
-			return { ...state, loading: true };
+			return { ...state, ...action.user };
 		case actionTypes.FAILED_REQUEST:
-			return INITIAL_STATE;
+			return userState;
 		default:
 			return state;
 	}
