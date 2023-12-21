@@ -3,6 +3,7 @@
 // Authentication
 export { default as SignIn } from './signin';
 export { default as SignUp } from './signup';
+export { default as Activate } from './activate';
 export { default as ForgotPassword } from './forgot_password';
 
 // Standalone

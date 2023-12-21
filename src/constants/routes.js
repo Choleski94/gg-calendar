@@ -20,6 +20,11 @@ export const guestRoutes = [
 		element: screenElements.SignUp,
 	},
 	{
+		slug: 'activate',
+		path: '/activate',
+		element: screenElements.Activate,
+	},
+	{
 		slug: 'forgot-password',
 		path: '/forgot_password',
 		element: screenElements.ForgotPassword,
