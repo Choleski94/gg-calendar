@@ -13,6 +13,20 @@ export const userLoggedOut = user => ({
 	user
 });
 
+// TODO
+export const activate = (credentials) => (dispatch) => (
+	api.auth.signin(credentials).then((user) => {
+		const authToken = user.token;
+
+		if (typeof window !== 'undefined') {
+			window.localStorage.setItem('tigadoJWT', authToken);
+		}
+
+		setAuthorizationHeader(authToken);
+		dispatch(userLoggedIn(user));
+	})
+);
+
 export const signin = (credentials) => (dispatch) => (
 	api.auth.signin(credentials).then((user) => {
 		const authToken = user.token;
