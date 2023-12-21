@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Error = ({ text }) => (
+const InlineError = ({ text }) => (
 	<small className="text-danger invalid-feedback">
 		{text}
 	</small>
 );
 
-export default Error;
+export default InlineError;
