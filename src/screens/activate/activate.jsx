@@ -8,6 +8,8 @@ import formatMessage from '@utils/formatMessage';
 import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
 import { AuthBranding, Input, Layout, Forms, InlineError } from '@components';
 
+const oneNumberRegex = /^[0-9\b]+$/;
+
 const ActivatePage = ({ browser, version, OS, language }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -43,20 +45,47 @@ const ActivatePage = ({ browser, version, OS, language }) => {
 	};
 
 	const onChange = (index, value) => {
+
+		if (!value || !value.length) return
+
 		// Clear existing errors.
 		if (hasObjectKey(errors)) setErrors({});
 
-		if (value.length === 1 && index < inputRefs.length - 1) {
+		// If the user is typing and not at the last input, focus on the next input.
+		if (index < inputRefs.length - 1) {
 			const nextInput = inputRefs[index + 1];
 			if (nextInput) {
-				inputRefs[index + 1].current.focus();
+				nextInput.current.focus();
 			}
 		}
 
-		setData((prevData) => ({
-			...prevData,
-			[`n${index}`]: value,
-		}));
+		// Update the inputRefs array with the new value.
+		const newInputRefs = [...inputRefs];
+
+		newInputRefs[index] = value + '';
+		inputRefs[index].current.value = value;
+	};
+
+	const handleKeyDown = (index, keyCode) => {
+		// Clear existing errors.
+		if (hasObjectKey(errors)) setErrors({});
+
+		// Validate Backspace key pressed.
+		if (keyCode != 8) return
+
+		// Handle Backspace key press
+		if (index > 0) {
+			const prevInput = inputRefs[index - 1];
+			if (prevInput) {
+				prevInput.current.focus();
+			}
+		}
+
+		// Update the inputRefs array with the new value.
+		const newInputRefs = [...inputRefs];
+
+		newInputRefs[index] = '';
+		inputRefs[index].current.value = '';
 	};
 
 	const onSubmit = (e) => {
@@ -116,7 +145,7 @@ const ActivatePage = ({ browser, version, OS, language }) => {
 								</label>
 								<div className="row g-3">
 									{Array.from({ length: 6 }, (_, index) => (
-										<div className="col" key={index}>
+										<div className="col" key={`n${index}`}>
 											<Input
 												type="text"
 												maxLength={1} 
@@ -124,10 +153,11 @@ const ActivatePage = ({ browser, version, OS, language }) => {
 												name={`n${index}`}
 												autoComplete="off"
 												ref={inputRefs[index]}
-												value={data[`n${index}`]}
+												value={inputRefs[index].current}
 												className="form-control form-control-lg"
 												error={errors[`n${index}`] ? ' ' : null}
 												onChange={(e) => onChange(index, e.target.value)}
+												onKeyDown={(e) => handleKeyDown(index, e.keyCode)}
 											/>
 										</div>
 									))}
