@@ -9,7 +9,7 @@ const CheckboxWrapper = ({ children }) => (
 	</div>
 );
 
-const Input = ({
+const Input = React.forwardRef(({
 	onChange,
 	name = '',
 	value = '',
@@ -20,7 +20,7 @@ const Input = ({
 	className = '',
 	secondaryLabel = '',
 	...rest
-}) => {
+}, ref) => {
 	const labelClassName = React.useMemo(() => (
 		`form-label ${secondaryLabel ? '' : 'w-100'}`
 	), [ secondaryLabel ]);
@@ -53,6 +53,7 @@ const Input = ({
 				value={value}
 				name={name}
 				type={type}
+				ref={ref}
 				{...rest}
 			/>
 			{label && type === 'checkbox' && (
@@ -78,6 +79,6 @@ const Input = ({
 			</>
 		)
 	);
-}
+});
 
 export default Input;
