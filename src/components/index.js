@@ -25,6 +25,7 @@ export { default as OnBoarding } from './OnBoarding';
 export { default as ActionMenu } from './ActionMenu';
 export { default as GetSupport } from './GetSupport';
 export { default as Breadcrumb } from './Breadcrumb';
+export { default as InlineError } from './InlineError';
 export { default as RatingStars } from './RatingStars';
 export { default as ImageUpload } from './ImageUpload';
 export { default as ButtonToggle } from './ButtonToggle';
