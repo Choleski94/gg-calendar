@@ -57,3 +57,5 @@ const Confirm = () => {
 		</form>
 	);
 }
+
+export default Confirm;
