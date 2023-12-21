@@ -8,8 +8,6 @@ import formatMessage from '@utils/formatMessage';
 import { AuthBranding, Input, Layout, Forms } from '@components';
 import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
 
-const needActivation = true;
-
 const SignInPage = ({ browser, version, OS, language }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -89,95 +87,91 @@ const SignInPage = ({ browser, version, OS, language }) => {
 							className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
 							style={{ maxWidth: "25rem" }}
 						>
-							{needActivation ? (
-								<Forms.Confirm />
-							) : (
-								<form className="js-validate needs-validation" method="post" onSubmit={onSubmit}>
-									<div className="text-center">
-										<div className="mb-5">
-											<h1 className="display-5">
-												{formatMessage('page.signin.header.text')}
-											</h1>
-											<p>
-												{formatMessage('page.signin.no-account.text')}
-												&nbsp;
-												<Link to="/signup" className="link">
-													{formatMessage('page.signin.form.link.signup.text')}
-												</Link>
-											</p>
-										</div>
-										{/*
-										<div className="d-grid mb-4">
-											<a
-												className="btn btn-white btn-lg"
-												href="authentication-signin-cover.html#"
-											>
-												<span className="d-flex justify-content-center align-items-center">
-													<img
-														className="avatar avatar-xss me-2"
-														src="assets/svg/brands/google-icon.svg"
-														alt="Image Description"
-													/>
-													{formatMessage('page.signin.form.btn.signin-google.text')}
-												</span>
-											</a>
-										</div>
-										<span className="divider-center text-muted mb-4">
-											{formatMessage('page.signin.label.or.text')}
-										</span>
-										*/}
+							<form className="js-validate needs-validation" method="post" onSubmit={onSubmit}>
+								<div className="text-center">
+									<div className="mb-5">
+										<h1 className="display-5">
+											{formatMessage('page.signin.header.text')}
+										</h1>
+										<p>
+											{formatMessage('page.signin.no-account.text')}
+											&nbsp;
+											<Link to="/signup" className="link">
+												{formatMessage('page.signin.form.link.signup.text')}
+											</Link>
+										</p>
 									</div>
-									<div className="mb-4">
-										<Input
-											id="email"
-											type="email"
-											name="email"
-											onChange={onChange}
-											error={errors?.email}
-											value={data?.email}
-											className="form-control form-control-lg"
-											label={formatMessage('page.signin.label.email.text')}
-											placeholder={formatMessage('page.signin.form.email.text')}
-										/>
+									{/*
+									<div className="d-grid mb-4">
+										<a
+											className="btn btn-white btn-lg"
+											href="authentication-signin-cover.html#"
+										>
+											<span className="d-flex justify-content-center align-items-center">
+												<img
+													className="avatar avatar-xss me-2"
+													src="assets/svg/brands/google-icon.svg"
+													alt="Image Description"
+												/>
+												{formatMessage('page.signin.form.btn.signin-google.text')}
+											</span>
+										</a>
 									</div>
-									<div className="mb-4">
-										<Input
-											id="password"
-											name="password"
-											type="password"
-											onChange={onChange}
-											error={errors?.password}
-											value={data?.password}
-											className="form-control form-control-lg"
-											placeholder={formatMessage('page.signin.form.password.text')}
-											label={(
-												<span className="d-flex justify-content-between align-items-center">
-													<span>
-														{formatMessage('page.signin.label.password.text')}
-													</span>
-													<Link to="/forgot_password" className="form-label-link mb-0">
-														{formatMessage('page.signin.form.link.forgot.text')}
-													</Link>
-												</span>
-											)}
-										/>
-									</div>
+									<span className="divider-center text-muted mb-4">
+										{formatMessage('page.signin.label.or.text')}
+									</span>
+									*/}
+								</div>
+								<div className="mb-4">
 									<Input
-										id="remember"
-										name="remember"
-										type="checkbox"
+										id="email"
+										type="email"
+										name="email"
 										onChange={onChange}
-										value={data?.remember}
-										className="form-check-input"
-										label={formatMessage('page.signin.form.remember.text')}
+										error={errors?.email}
+										value={data?.email}
+										className="form-control form-control-lg"
+										label={formatMessage('page.signin.label.email.text')}
+										placeholder={formatMessage('page.signin.form.email.text')}
 									/>
-									<div className="d-grid mt-3">
-										<button type="submit" className="btn btn-primary btn-lg" onClick={onSubmit}>
-											{formatMessage('page.signin.form.btn.signin.text')}
-										</button>
-									</div>
-								</form>
-							)}
+								</div>
+								<div className="mb-4">
+									<Input
+										id="password"
+										name="password"
+										type="password"
+										onChange={onChange}
+										error={errors?.password}
+										value={data?.password}
+										className="form-control form-control-lg"
+										placeholder={formatMessage('page.signin.form.password.text')}
+										label={(
+											<span className="d-flex justify-content-between align-items-center">
+												<span>
+													{formatMessage('page.signin.label.password.text')}
+												</span>
+												<Link to="/forgot_password" className="form-label-link mb-0">
+													{formatMessage('page.signin.form.link.forgot.text')}
+												</Link>
+											</span>
+										)}
+									/>
+								</div>
+								<Input
+									id="remember"
+									name="remember"
+									type="checkbox"
+									onChange={onChange}
+									value={data?.remember}
+									className="form-check-input"
+									label={formatMessage('page.signin.form.remember.text')}
+								/>
+								<div className="d-grid mt-3">
+									<button type="submit" className="btn btn-primary btn-lg" onClick={onSubmit}>
+										{formatMessage('page.signin.form.btn.signin.text')}
+									</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
