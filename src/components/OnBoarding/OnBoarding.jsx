@@ -65,19 +65,21 @@ const options = [
 ];
 
 const formHandlers = {
-	[FORM_SECTIONS.PERSONAL]: (userId, payload = {}) => (
+	[FORM_SECTIONS.PERSONAL]: (userId, jsonData = {}) => (
 		request.patch({
-			entity: 'user/update/' + userId, 
-			jsonData: {
-				...payload,
-				isOnboarded: true,
-			}
+			entity: 'user/update/' + userId, jsonData,
 		})
 	),
-	[FORM_SECTIONS.BUSINESS]: (userId, payload = {}) => {
-		// TODO:
-		console.log('update business info', payload);
-		return true;
+	[FORM_SECTIONS.BUSINESS]: (orgId, jsonData = {}) => {
+		if (orgId && orgId.length) {
+			return request.patch({
+				entity: 'organization/update/' + orgId, jsonData,
+			})
+		} else {
+			return request.create({
+				entity: 'organization', jsonData,
+			})
+		}
 	},
 	[FORM_SECTIONS.INVITE]: (userId, payload = {}) => {
 		// TODO:
