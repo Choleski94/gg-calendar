@@ -1,5 +1,6 @@
 'use strict';
 
+import Confirm from './Confirm';
 import Contact from './Contact';
 import InvitePeople from './InvitePeople';
 import Organization from './Organization';
@@ -10,6 +11,7 @@ import JobContactLocation from './Jobs/ContactLocation';
 import JobServiceLocation from './Jobs/ServiceLocation';
 
 export default {
+	Confirm,
 	Contact,
 	InvitePeople,
 	Organization,
