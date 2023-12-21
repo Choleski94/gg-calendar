@@ -2,15 +2,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { signin } from '@store/actions/auth';
-import { validateEmail } from '@utils/validate';
+import { hasObjectKey } from '@utils';
+import { activate } from '@store/actions/auth';
 import formatMessage from '@utils/formatMessage';
-import { AuthBranding, Input, Layout, Forms } from '@components';
 import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
+import { AuthBranding, Input, Layout, Forms, InlineError } from '@components';
 
-const needActivation = true;
-
-const SignInPage = ({ browser, version, OS, language }) => {
+const ActivatePage = ({ browser, version, OS, language }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -18,49 +16,48 @@ const SignInPage = ({ browser, version, OS, language }) => {
 	const [ errors, setErrors ] = React.useState({});
 	const [ browserInfo, setBrowserInfo ] = React.useState({});
 
+	const inputRefs = Array.from({ length: 6 }, () => React.createRef());
+
 	React.useEffect(() => setBrowserInfo({
 		browser, version, OS, language
 	}), []);
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
-		email: formatMessage('form.validation.email.error.text')
 	};
 
 	const validate = (data = {}, ignoreKeys = []) => {
 		const errs = {};
 
 		// Check for empty input(s).
-		Object.keys(data).map(inputSlug => {
-			if (!ignoreKeys.includes(inputSlug) && !data[inputSlug].length) {
-				errs[inputSlug] = errorMessages.empty;
+		Array.from({ length: 6 }, ((_, idx) => {
+			const numKey = `n${idx}`;
+			
+			// Check for empty email.
+			if (!data[numKey]) {
+				errs[numKey] = errorMessages.empty;
 			}
-		});
-
-		// Check for empty email.
-		if (!data?.email) {
-			errs.email = errorMessages.empty;
-		}
-
-		// Check for empty password.
-		if (!data?.password) {
-			errs.password = errorMessages.empty;
-		}
-
-		// Verify Email.
-		if (data.email && !validateEmail(data.email)) {
-			errs.email = errorMessages.email;
-		}
-
+		}));
+		
 		return errs;
 	};
 
-	const onChange = (e) => setData({
-		...data, [e.target?.name]: (
-			(e.target.type === 'checkbox') ? 
-			e.target.checked : e.target.value
-		)
-	});
+	const onChange = (index, value) => {
+		// Clear existing errors.
+		if (hasObjectKey(errors)) setErrors({});
+
+		if (value.length === 1 && index < inputRefs.length - 1) {
+			const nextInput = inputRefs[index + 1];
+			if (nextInput) {
+				inputRefs[index + 1].current.focus();
+			}
+		}
+
+		setData((prevData) => ({
+			...prevData,
+			[`n${index}`]: value,
+		}));
+	};
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -72,120 +69,102 @@ const SignInPage = ({ browser, version, OS, language }) => {
 
 		if (Object.keys(errs).length) return null;
 
-		dispatch(signin(data)).then((res) => (
+		dispatch(activate(data)).then((res) => (
 			navigate('/dashboard')
 		));
 	};
 
 	return (
-		<>
-			<Layout type="auth">
-				<div className="container-fluid px-3">
-					<div className="row">
-						<div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center min-vh-lg-100 position-relative bg-light px-0">
-							<AuthBranding />
-						</div>
-						<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
-							<div
-								className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
-								style={{ maxWidth: "25rem" }}
-							>
-								{needActivation ? (
-									<Forms.Confirm />
-								) : (
-									<form className="js-validate needs-validation" method="post" onSubmit={onSubmit}>
-										<div className="text-center">
-											<div className="mb-5">
-												<h1 className="display-5">
-													{formatMessage('page.signin.header.text')}
-												</h1>
-												<p>
-													{formatMessage('page.signin.no-account.text')}
-													&nbsp;
-													<Link to="/signup" className="link">
-														{formatMessage('page.signin.form.link.signup.text')}
-													</Link>
-												</p>
-											</div>
-											{/*
-											<div className="d-grid mb-4">
-												<a
-													className="btn btn-white btn-lg"
-													href="authentication-signin-cover.html#"
-												>
-													<span className="d-flex justify-content-center align-items-center">
-														<img
-															className="avatar avatar-xss me-2"
-															src="assets/svg/brands/google-icon.svg"
-															alt="Image Description"
-														/>
-														{formatMessage('page.signin.form.btn.signin-google.text')}
-													</span>
-												</a>
-											</div>
-											<span className="divider-center text-muted mb-4">
-												{formatMessage('page.signin.label.or.text')}
+		<Layout type="auth">
+			<div className="container-fluid px-3">
+				<div className="row">
+					<div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center min-vh-lg-100 position-relative bg-light px-0">
+						<AuthBranding />
+					</div>
+					<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
+						<div
+							className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
+							style={{ maxWidth: "25rem" }}
+						>
+							<form className="js-validate needs-validation" method="post" onSubmit={onSubmit}>
+								<div className="text-center">
+									<div className="mb-5">
+										<h1 className="display-5">
+											{formatMessage('page.activate.header.text')}
+										</h1>
+										<p>
+											{formatMessage('page.activate.has-account.text')}
+											&nbsp;
+											<Link to="/signup" className="link">
+												{formatMessage('page.activate.form.link.signin.text')}
+											</Link>
+										</p>
+									</div>
+								</div>
+								<p className="mb-4">
+									{formatMessage(
+										'page.activate.no-account.text', {
+										email: (
+											<span className="text-bold text-4">
+												demo@tigado.ca
 											</span>
-											*/}
-										</div>
-										<div className="mb-4">
+										)
+									})}
+								</p>
+								<label className="form-label">
+									{formatMessage('page.activate.label.code.text')}
+								</label>
+								<div className="row g-3">
+									{Array.from({ length: 6 }, (_, index) => (
+										<div className="col" key={index}>
 											<Input
-												id="email"
-												type="email"
-												name="email"
-												onChange={onChange}
-												error={errors?.email}
-												value={data?.email}
+												type="text"
+												maxLength={1} 
+												id={`n${index}`}
+												name={`n${index}`}
+												autoComplete="off"
+												ref={inputRefs[index]}
+												value={data[`n${index}`]}
 												className="form-control form-control-lg"
-												label={formatMessage('page.signin.label.email.text')}
-												placeholder={formatMessage('page.signin.form.email.text')}
+												error={errors[`n${index}`] ? ' ' : null}
+												onChange={(e) => onChange(index, e.target.value)}
 											/>
 										</div>
-										<div className="mb-4">
-											<Input
-												id="password"
-												name="password"
-												type="password"
-												onChange={onChange}
-												error={errors?.password}
-												value={data?.password}
-												className="form-control form-control-lg"
-												placeholder={formatMessage('page.signin.form.password.text')}
-												label={(
-													<span className="d-flex justify-content-between align-items-center">
-														<span>
-															{formatMessage('page.signin.label.password.text')}
-														</span>
-														<Link to="/forgot_password" className="form-label-link mb-0">
-															{formatMessage('page.signin.form.link.forgot.text')}
-														</Link>
-													</span>
-												)}
-											/>
-										</div>
-										<Input
-											id="remember"
-											name="remember"
-											type="checkbox"
-											onChange={onChange}
-											value={data?.remember}
-											className="form-check-input"
-											label={formatMessage('page.signin.form.remember.text')}
+									))}
+									{hasObjectKey(errors) && (
+										<InlineError 
+											text={
+												errors?.n0 || errors?.n1 || errors?.n2 ||
+												errors?.n3 || errors?.n4 || errors?.n5
+											}
 										/>
-										<div className="d-grid mt-3">
+									)}
+								</div>
+								<div className="d-grid gap-2">
+									<div className="row align-items-center mt-4">
+										<div className="col-auto">
 											<button type="submit" className="btn btn-primary btn-lg" onClick={onSubmit}>
-												{formatMessage('page.signin.form.btn.signin.text')}
+												{formatMessage('page.activate.form.btn.activate.text')}
 											</button>
 										</div>
-									</form>
-								)}
-							</div>
+										<div className="col">
+											<p className="text-end text-2 text-bold mb-0">
+												{formatMessage('page.activate.no-code.text')}
+												&nbsp;
+												<a href="#">
+													{formatMessage('page.activate.form.link.resend.text')}
+												</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
-			</Layout>
-		</>
+			</div>
+		</Layout>
 	);
 };
 
-export default withGuestRouter(withBrowserDetect(SignInPage));
+export default withGuestRouter(withBrowserDetect(ActivatePage));
