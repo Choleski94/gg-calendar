@@ -5,8 +5,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { signin } from '@store/actions/auth';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-import { AuthBranding, Input, Layout } from '@components';
+import { AuthBranding, Input, Layout, Forms } from '@components';
 import { withGuestRouter, withBrowserDetect } from '@utils/hocs';
+
+const needActivation = true;
 
 const SignInPage = ({ browser, version, OS, language }) => {
 	const navigate = useNavigate();
@@ -76,18 +78,20 @@ const SignInPage = ({ browser, version, OS, language }) => {
 	};
 
 	return (
-		<>
-			<Layout type="auth">
-				<div className="container-fluid px-3">
-					<div className="row">
-						<div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center min-vh-lg-100 position-relative bg-light px-0">
-							<AuthBranding />
-						</div>
-						<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
-							<div
-								className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
-								style={{ maxWidth: "25rem" }}
-							>
+		<Layout type="auth">
+			<div className="container-fluid px-3">
+				<div className="row">
+					<div className="col-lg-6 d-none d-lg-flex justify-content-center align-items-center min-vh-lg-100 position-relative bg-light px-0">
+						<AuthBranding />
+					</div>
+					<div className="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
+						<div
+							className="w-100 content-space-t-4 content-space-t-lg-2 content-space-b-1"
+							style={{ maxWidth: "25rem" }}
+						>
+							{needActivation ? (
+								<Forms.Confirm />
+							) : (
 								<form className="js-validate needs-validation" method="post" onSubmit={onSubmit}>
 									<div className="text-center">
 										<div className="mb-5">
@@ -173,12 +177,12 @@ const SignInPage = ({ browser, version, OS, language }) => {
 										</button>
 									</div>
 								</form>
-							</div>
+							)}
 						</div>
 					</div>
 				</div>
-			</Layout>
-		</>
+			</div>
+		</Layout>
 	);
 };
 
