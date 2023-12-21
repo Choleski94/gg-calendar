@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 
 import { hasObjectKey } from '@utils';
 import { activate } from '@store/actions/auth';
@@ -16,13 +16,23 @@ const ActivatePage = ({ browser, version, OS, language }) => {
 
 	const [ data, setData ] = React.useState({});
 	const [ errors, setErrors ] = React.useState({});
+	const [ loading, setLoading ] = React.useState(false);
 	const [ browserInfo, setBrowserInfo ] = React.useState({});
 
+	const [ searchParams, setSearchParams ] = useSearchParams();
 	const inputRefs = Array.from({ length: 6 }, () => React.createRef());
 
 	React.useEffect(() => setBrowserInfo({
 		browser, version, OS, language
 	}), []);
+
+	React.useEffect(() => {
+		if (searchParams) {
+			// TODO
+			const email = searchParams.get('email');
+			const code = searchParams.get('code');
+		}
+	}, []);
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
