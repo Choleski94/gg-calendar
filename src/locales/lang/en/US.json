@@ -14,6 +14,20 @@
 	"error.AUTH_FAILED.text": "Your email and password combination does not match an existing account",
 	"error.ACCOUNT_NOT_CREATED.text": "Sorry we are not able to process your request Please try again later",
 
+
+	"meta.activate.title.text": "Tigado - Activate",
+	"page.activate.header.text": "Activate your account",
+	"page.activate.has-account.text": "Already have an account?",
+	"page.activate.form.link.signin.text": "Sign in here",
+	"page.activate.label.code.text": "Enter 6 digit code",
+	"page.activate.form.link.resend.text": "Resend it",
+	"page.activate.no-account.text": "Confirm your email address to get started on Tigado. A Code has been sent to {email}",
+	"page.activate.no-code.text": "Didn't get the code?",
+	"page.activate.form.btn.activate.text": "Activate account",
+	"page.activate.form.btn.signin-google.text": "Sign in with Google",
+	"page.activate.form.link.signup.text": "Sign up here",
+
+
 	"meta.signin.title.text": "Tigado - Sign In",
 	"page.signin.header.text": "Sign in",
 	"page.signin.paragraph.text": "Access your account",
