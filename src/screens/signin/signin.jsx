@@ -157,6 +157,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 										)}
 									/>
 								</div>
+								{/*
 								<Input
 									id="remember"
 									name="remember"
@@ -166,6 +167,7 @@ const SignInPage = ({ browser, version, OS, language }) => {
 									className="form-check-input"
 									label={formatMessage('page.signin.form.remember.text')}
 								/>
+								*/}
 								<div className="d-grid mt-3">
 									<button type="submit" className="btn btn-primary btn-lg" onClick={onSubmit}>
 										{formatMessage('page.signin.form.btn.signin.text')}
