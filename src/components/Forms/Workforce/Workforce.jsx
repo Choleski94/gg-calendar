@@ -5,10 +5,10 @@ import formatMessage from '@utils/formatMessage';
 import { getClearOptions, hasObjectKey } from '@utils';
 import { Button, Input, Select, MultiInput, ImageUpload } from '@components';
 
-import useOrganizationOptions from './useOrganizationOptions';
-import { initForm, initPayload } from './Organization.controller';
+import useWorkforceOptions from './useWorkforceOptions';
+import { initForm, initPayload } from './Workforce.controller';
 
-const OrganizationForm = ({
+const WorkforceForm = ({
 	data = {}, 
 	handleSubmit, 
 	setData = () => null, 
@@ -23,7 +23,7 @@ const OrganizationForm = ({
 		phoneOptions,
 		emailOptions,
 		sectorOptions,
-	} = useOrganizationOptions();
+	} = useWorkforceOptions();
 
 	// Initialize form with data.
 	React.useEffect(() => {
@@ -57,6 +57,16 @@ const OrganizationForm = ({
 		// Check for empty name.
 		if (!payload?.name) {
 			errs.name = errorMessages.empty;
+		}
+
+		// Check for empty email.
+		if (!payload?.email) {
+			errs.email = errorMessages.empty;
+		}
+
+		// Check for empty phone.
+		if (!payload?.phone) {
+			errs.phone = errorMessages.empty;
 		}
 
 		return errs;
@@ -265,6 +275,7 @@ const OrganizationForm = ({
 					name="email"
 					label="Email"
 					onChange={onChange}
+					error={errors?.email}
 					value={payload?.email}
 					secondaryLabel="(Optional)"
 					placeholder="business@mail.com"
@@ -278,6 +289,7 @@ const OrganizationForm = ({
 					name="phone"
 					label="Phone"
 					onChange={onChange}
+					error={errors?.phone}
 					value={payload?.phone}
 					secondaryLabel="(Optional)"
 					placeholder="+x(xxx)xxx-xx-xx"
@@ -461,4 +473,4 @@ const OrganizationForm = ({
 	);
 }
 
-export default OrganizationForm;
+export default WorkforceForm;

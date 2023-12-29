@@ -2,7 +2,7 @@
 
 // import formatMessage from '@utils/formatMessage';
 
-const useOrganizationOptions = () => {
+const useWorkforceOptions = () => {
 
 	const typeOptions = [
 		{
@@ -26,15 +26,15 @@ const useOrganizationOptions = () => {
 			value: 'PLC'
 		},
 		{
-			label: 'Organization',
+			label: 'Workforce',
 			value: 'ORG'
 		},
 		{
-			label: 'Non-Profit Organization',
+			label: 'Non-Profit Workforce',
 			value: 'NPO'
 		},
 		{
-			label: 'Non-Governmental Organization',
+			label: 'Non-Governmental Workforce',
 			value: 'NGO'
 		},
 		{
@@ -94,7 +94,7 @@ const useOrganizationOptions = () => {
 			value: 'CO'
 		},
 		{
-			label: 'Club or Social Organization',
+			label: 'Club or Social Workforce',
 			value: 'CLUB'
 		},
 		{
@@ -168,4 +168,4 @@ const useOrganizationOptions = () => {
 	};
 };
 
-export default useOrganizationOptions;
+export default useWorkforceOptions;
