@@ -1,6 +1,3 @@
-// Organization
-export const ORGANIZATION_FETCHED = 'ORGANIZATION_FETCHED';
-
 // App
 export const APP_LOADING = 'APP_LOADING';
 
@@ -10,6 +7,9 @@ export const USER_FETCHED = 'USER_FETCHED';
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
+
+// Organization
+export const ORGANIZATION_FETCHED = 'ORGANIZATION_FETCHED';
 
 // Auth ?
 export const REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';

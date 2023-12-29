@@ -20,14 +20,7 @@ export const organizationState = {
 const organizationReducer = (state = organizationState, action) => {
 	switch (action.type) {
 		case actionTypes.ORGANIZATION_FETCHED:
-			return { ...state, ...action.organization, loaded: true };
-		case actionTypes.LOADING_REQUEST:
-			return {
-				...state,
-				loading: true,
-			};
-		case actionTypes.FAILED_REQUEST:
-			return organizationState;
+			return { ...state, ...action.organization };
 		default:
 			return state;
 	}
