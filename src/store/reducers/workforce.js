@@ -1,6 +1,6 @@
 import * as actionTypes from '../types';
 
-export const organizationState = {
+export const workforceState = {
 	id: null,
 	isInit: false,
 	name: null,
@@ -17,13 +17,13 @@ export const organizationState = {
 	tax_gst_percent: null,
 };
 
-const organizationReducer = (state = organizationState, action) => {
+const workforceReducer = (state = workforceState, action) => {
 	switch (action.type) {
-		case actionTypes.ORGANIZATION_FETCHED:
-			return { ...state, ...action.organization };
+		case actionTypes.WORKFORCE_FETCHED:
+			return { ...state, ...action.workforce };
 		default:
 			return state;
 	}
 };
 
-export default organizationReducer;
+export default workforceReducer;
