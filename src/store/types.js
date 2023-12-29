@@ -8,8 +8,8 @@ export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 
-// Organization
-export const ORGANIZATION_FETCHED = 'ORGANIZATION_FETCHED';
+// Workforce
+export const WORKFORCE_FETCHED = 'WORKFORCE_FETCHED';
 
 // Auth ?
 export const REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';
