@@ -162,7 +162,6 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 												onChange={onChange}
 												value={data?.firstName}
 												error={errors?.firstName}
-												className="form-control form-control-lg"
 												placeholder={formatMessage('page.signup.form.first-name.text')}
 											/>
 										</div>
@@ -176,7 +175,6 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 												onChange={onChange}
 												value={data?.lastName}
 												error={errors?.lastName}
-												className="form-control form-control-lg"
 												placeholder={formatMessage('page.signup.form.last-name.text')}
 											/>
 										</div>
@@ -190,7 +188,6 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 										onChange={onChange}
 										value={data?.email}
 										error={errors?.email}
-										className="form-control form-control-lg"
 										label={formatMessage('page.signup.label.email.text')}
 										placeholder={formatMessage('page.signup.form.email.text')}
 									/>
@@ -204,7 +201,6 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 										value={data?.password}
 										error={errors?.password}
 										label={formatMessage('page.signup.label.password.text')}
-										className="js-toggle-password form-control form-control-lg"
 										placeholder={formatMessage('page.signup.form.password.text')}
 									/>
 								</div>
@@ -216,7 +212,6 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 										onChange={onChange}
 										value={data?.passwordC}
 										error={errors?.passwordC}
-										className="js-toggle-password form-control form-control-lg"
 										label={formatMessage('page.signup.label.password-confirm.text')}
 										placeholder={formatMessage('page.signup.form.repeat-password.text')}
 									/>
