@@ -65,7 +65,6 @@ const MapFilter = ({ data, setData, errors, onSubmit }) => {
 						onChange={onChange}
 						value={data?.firstname}
 						error={errors?.firstname}
-						className="form-control form-control-lg"
 						placeholder="Find a specific address on the map"
 					/>
 				</div>
@@ -136,7 +135,6 @@ const MapFilter = ({ data, setData, errors, onSubmit }) => {
 						onChange={onChange}
 						value={data?.firstname}
 						error={errors?.firstname}
-						className="form-control form-control-lg"
 					/>
 				</div>
 			</div>
