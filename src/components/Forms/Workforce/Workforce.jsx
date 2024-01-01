@@ -199,7 +199,6 @@ const WorkforceForm = ({
 					onChange={onChange}
 					error={errors?.name}
 					value={payload?.name}
-					className="form-control form-control-lg"
 				/>
 			</div>
 			<div className="col-lg-5">
@@ -212,7 +211,6 @@ const WorkforceForm = ({
 					error={errors?.slogan}
 					value={payload?.slogan}
 					secondaryLabel="(Optional)"
-					className="form-control form-control-lg"
 				/>
 			</div>
 			<div className="col-lg-12 mt-4">
@@ -227,7 +225,6 @@ const WorkforceForm = ({
 							value={payload?.orgNum}
 							label="Business Number"
 							secondaryLabel="(Optional)"
-							className="form-control form-control-lg"
 						/>
 					</div>
 					<div className="col-lg-4">
@@ -265,7 +262,6 @@ const WorkforceForm = ({
 					error={errors?.www}
 					value={payload?.www}
 					secondaryLabel="(Optional)"
-					className="form-control form-control-lg"
 				/>
 			</div>
 			<div className="col-lg-4">
@@ -279,7 +275,6 @@ const WorkforceForm = ({
 					value={payload?.email}
 					secondaryLabel="(Optional)"
 					placeholder="business@mail.com"
-					className="form-control form-control-lg"
 				/>
 			</div>
 			<div className="col-lg-4">
@@ -293,7 +288,6 @@ const WorkforceForm = ({
 					value={payload?.phone}
 					secondaryLabel="(Optional)"
 					placeholder="+x(xxx)xxx-xx-xx"
-					className="form-control form-control-lg"
 				/>
 			</div>
 
@@ -311,7 +305,6 @@ const WorkforceForm = ({
 							error={errors?.pstNum}
 							value={payload?.pstNum}
 							secondaryLabel="(Optional)"
-							className="form-control form-control-lg"
 						/>
 					</div>
 					<div className="col-lg-4">
@@ -324,7 +317,6 @@ const WorkforceForm = ({
 							onChange={onChange}
 							error={errors?.pstPercent}
 							value={payload?.pstPercent}
-							className="form-control form-control-lg"
 						/>
 					</div>
 				</div>
@@ -341,7 +333,6 @@ const WorkforceForm = ({
 							error={errors?.gstNum}
 							value={payload?.gstNum}
 							secondaryLabel="(Optional)"
-							className="form-control form-control-lg"
 						/>
 					</div>
 					<div className="col-lg-4">
@@ -354,7 +345,6 @@ const WorkforceForm = ({
 							onChange={onChange}
 							error={errors?.gstPercent}
 							value={payload?.gstPercent}
-							className="form-control form-control-lg"
 						/>
 					</div>
 				</div>
@@ -410,7 +400,6 @@ const WorkforceForm = ({
 							error={errors?.zip}
 							value={payload?.zip}
 							secondaryLabel="(Optional)"
-							className="form-control form-control-lg"
 						/>
 					</div>
 					<div className="col-sm-6">
@@ -423,7 +412,6 @@ const WorkforceForm = ({
 							error={errors?.address}
 							value={payload?.address}
 							secondaryLabel="(Optional)"
-							className="form-control form-control-lg"
 						/>
 					</div>
 					<div className="col-sm-3">
@@ -436,7 +424,6 @@ const WorkforceForm = ({
 							error={errors?.unit}
 							value={payload?.unit}
 							secondaryLabel="(Optional)"
-							className="form-control form-control-lg"
 						/>
 					</div>
 					<div className="col-sm-3">
@@ -450,7 +437,6 @@ const WorkforceForm = ({
 								error={errors?.buzzer}
 								value={payload?.buzzer}
 								secondaryLabel="(Optional)"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
