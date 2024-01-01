@@ -80,27 +80,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 		handleMutation({ payload });
 	}
 
-	/* Labels */
-	const sectorLabel = (
-		<>
-			Sector
-			&nbsp;
-			<span className="form-label-secondary">
-				(Optional)
-			</span>
-		</>
-	);
-
-	const typeLabel = (
-		<>
-			Type
-			&nbsp;
-			<span className="form-label-secondary">
-				(Optional)
-			</span>
-		</>
-	)
-
 	return (
 		<div className="row">
 			<div className="col-lg-12">
@@ -133,7 +112,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 								value={payload?.slogan}
 								onChange={onChange}
 								error={errors?.slogan}
-								className="form-control form-control-lg"
 								// placeholder={formatMessage('page.signin.form.name.text')}
 							/>
 						</div>
@@ -148,7 +126,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 								value={payload?.name}
 								onChange={onChange}
 								error={errors?.name}
-								className="form-control form-control-lg"
 								// placeholder={formatMessage('page.signin.form.name.text')}
 							/>
 						</div>
@@ -161,7 +138,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 								value={payload?.org_number}
 								onChange={onChange}
 								error={errors?.org_number}
-								className="form-control form-control-lg"
 								// placeholder={formatMessage('page.signin.form.name.text')}
 							/>
 						</div>
@@ -169,9 +145,11 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 					<div className="col-lg-3">
 						<div className="col-lg-12 mt-3">
 							<Select
+								label="Type"
 								closeMenuOnSelect
+								options={typeOptions} 
+								secondaryLabel="(Optional)"
 								defaultValue={payload?.type_id}
-								label={typeLabel} options={typeOptions} 
 								onChange={(payload) => onSelectChange(payload, 'type_id')}
 							/>
 						</div>
@@ -186,7 +164,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 										value={payload?.pst_number}
 										onChange={onChange}
 										error={errors?.pst_number}
-										className="form-control form-control-lg"
 										// placeholder={formatMessage('page.signin.form.name.text')}
 									/>
 								</div>
@@ -199,7 +176,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 										value={payload?.pst_percent}
 										onChange={onChange}
 										error={errors?.pst_percent}
-										className="form-control form-control-lg"
 										placeholder="9.975"
 									/>
 								</div>
@@ -209,9 +185,11 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 					<div className="col-lg-3">
 						<div className="col-lg-12 mt-3">
 							<Select
+								label="Sector"
 								closeMenuOnSelect
+								options={sectorOptions} 
+								secondaryLabel="(Optional)"
 								defaultValue={payload?.sector_id}
-								label={sectorLabel} options={sectorOptions} 
 								onChange={(payload) => onSelectChange(payload, 'sector_id')}
 							/>
 						</div>
@@ -226,7 +204,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 										value={payload?.gst_number}
 										onChange={onChange}
 										error={errors?.gst_number}
-										className="form-control form-control-lg"
 										// placeholder={formatMessage('page.signin.form.name.text')}
 									/>
 								</div>
@@ -239,7 +216,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 										value={payload?.gst_percent}
 										onChange={onChange}
 										error={errors?.gst_percent}
-										className="form-control form-control-lg"
 										placeholder="5"
 									/>
 								</div>
@@ -253,19 +229,11 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 							id="www"
 							type="text"
 							name="www"
-							label={(
-								<>
-									Website
-									&nbsp;
-									<span className="form-label-secondary">
-										(Optional)
-									</span>
-								</>
-							)}
+							label="Website"
 							value={payload?.www}
 							onChange={onChange}
 							error={errors?.www}
-							className="form-control form-control-lg"
+							secondaryLabel="(Optional)"
 							// placeholder={formatMessage('page.signin.form.name.text')}
 						/>
 					</div>
