@@ -4,7 +4,7 @@ import React from 'react';
 import { hasObjectKey } from '@utils';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-import { Card, Input, Illustrations } from '@components';
+import { Card, MultiInput, Illustrations } from '@components';
 
 const InvitePeople = ({ data = [], setData = () => null }) => {
 	const [ query, setQuery ] = React.useState('');
@@ -88,18 +88,22 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 		Boolean((payload.options || []).length)
 	), [ payload ]);
 
+	const roleOptions = [
+		{ lbael: 'Guest', value: 'Guest' },
+		{ lbael: 'Admin', value: 'Admin' },
+	];
+
 	return (
 		<>
 			<div className="mb-4">
 				<div className="input-group mb-4 mb-sm-0">
-					<Input
-						id="query"
+					<MultiInput
 						type="text"
 						name="query"
 						value={query}
 						onChange={onChange}
+						options={roleOptions}
 						placeholder="Invite people by email"
-						className="form-control form-control-lg"
 					/>
 					<div className="input-group-append">
 						<a className="btn btn-primary d-sm-inline-block" onClick={onAddItem}>
