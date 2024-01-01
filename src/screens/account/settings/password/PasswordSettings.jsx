@@ -121,7 +121,6 @@ const PasswordSettings = () => {
 								value={data?.oldPassword}
 								error={errors?.oldPassword}
 								placeholder="Enter current password"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -141,7 +140,6 @@ const PasswordSettings = () => {
 								value={data?.password}
 								error={errors?.password}
 								placeholder="Enter new password"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -162,7 +160,6 @@ const PasswordSettings = () => {
 									value={data?.passwordC}
 									error={errors?.passwordC}
 									placeholder="Confirm your new password"
-									className="form-control form-control-lg"
 								/>
 							</div>
 							<h5>
