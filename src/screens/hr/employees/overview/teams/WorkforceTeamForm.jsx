@@ -127,7 +127,6 @@ const WorkforceTeamForm = ({ defaultValues = {}, orgId = '', authorId = '', mode
 								value={payload?.slug}
 								onChange={onChange}
 								error={errors?.slug}
-								className="form-control form-control-lg"
 								// placeholder={formatMessage('page.signin.form.slug.text')}
 							/>
 						</div>
@@ -158,7 +157,6 @@ const WorkforceTeamForm = ({ defaultValues = {}, orgId = '', authorId = '', mode
 							value={payload?.description}
 							error={errors?.description}
 							label={renderDescriptionLabel}
-							className="form-control form-control-lg"
 							// placeholder={formatMessage('page.signin.form.description.text')}
 						/>
 					</div>
