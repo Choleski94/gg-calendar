@@ -122,7 +122,6 @@ const WorkforcePositionForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTE
 								value={payload?.name}
 								onChange={onChange}
 								error={errors?.name}
-								className="form-control form-control-lg"
 								// placeholder={formatMessage('page.signin.form.name.text')}
 							/>
 						</div>
@@ -139,7 +138,6 @@ const WorkforcePositionForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTE
 							value={payload?.description}
 							error={errors?.description}
 							label={renderDescriptionLabel}
-							className="form-control form-control-lg"
 							// placeholder={formatMessage('page.signin.form.description.text')}
 						/>
 					</div>
