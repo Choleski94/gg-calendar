@@ -124,7 +124,6 @@ const RoleForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTED_MODES.CREAT
 								onChange={onChange}
 								error={errors?.name}
 								value={payload?.name}
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -156,7 +155,6 @@ const RoleForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTED_MODES.CREAT
 							value={payload?.description}
 							error={errors?.description}
 							label={renderDescriptionLabel}
-							className="form-control form-control-lg"
 						/>
 					</div>
 				</div>
