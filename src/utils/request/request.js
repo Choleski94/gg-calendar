@@ -14,10 +14,10 @@ const request = {
 		try {
 			const response = await axios.post(entity + '/create', jsonData);
 
-			successHandler(response, {
-				notifyOnSuccess: true,
-				notifyOnFailed: true,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: true,
+			// 	notifyOnFailed: true,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -28,10 +28,10 @@ const request = {
 		try {
 			const response = await axios.get(entity + '/read/' + id);
 
-			successHandler(response, {
-				notifyOnSuccess: false,
-				notifyOnFailed: true,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: false,
+			// 	notifyOnFailed: true,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -45,10 +45,10 @@ const request = {
 		try {
 			const response = await axios.patch(entity + '/update/' + id, jsonData);
 
-			successHandler(response, {
-				notifyOnSuccess: true,
-				notifyOnFailed: true,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: true,
+			// 	notifyOnFailed: true,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -59,10 +59,10 @@ const request = {
 		try {
 			const response = await axios.delete(entity + '/delete/' + id, { data: jsonData });
 
-			successHandler(response, {
-				notifyOnSuccess: true,
-				notifyOnFailed: true,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: true,
+			// 	notifyOnFailed: true,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -71,16 +71,16 @@ const request = {
 	},
 	filter: async ({ entity, options = {} }) => {
 		try {
-			let filter = options.filter ? 'filter=' + options.filter : '';
-			let equal = options.equal ? '&equal=' + options.equal : '';
-			let query = `?${filter}${equal}`;
+			const filter = options.filter ? 'filter=' + options.filter : '';
+			const equal = options.equal ? '&equal=' + options.equal : '';
+			const query = `?${filter}${equal}`;
 
 			const response = await axios.get(entity + '/filter' + query);
 
-			successHandler(response, {
-				notifyOnSuccess: false,
-				notifyOnFailed: false,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: false,
+			// 	notifyOnFailed: false,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -98,10 +98,10 @@ const request = {
 			// headersInstance.cancelToken = source.token;
 			const response = await axios.get(entity + '/search' + query);
 
-			successHandler(response, {
-				notifyOnSuccess: false,
-				notifyOnFailed: false,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: false,
+			// 	notifyOnFailed: false,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -118,10 +118,10 @@ const request = {
 
 			const response = await axios.get(entity + '/list' + query);
 
-			successHandler(response, {
-				notifyOnSuccess: false,
-				notifyOnFailed: false,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: false,
+			// 	notifyOnFailed: false,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -132,10 +132,10 @@ const request = {
 		try {
 			const response = await axios.get(entity + '/listAll');
 
-			successHandler(response, {
-				notifyOnSuccess: false,
-				notifyOnFailed: false,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: false,
+			// 	notifyOnFailed: false,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -172,10 +172,10 @@ const request = {
 		try {
 			const response = await axios.get(entity + '/summary');
 
-			successHandler(response, {
-				notifyOnSuccess: false,
-				notifyOnFailed: false,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: false,
+			// 	notifyOnFailed: false,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -186,10 +186,10 @@ const request = {
 		try {
 			const response = await axios.post(entity + '/mail/', jsonData);
 
-			successHandler(response, {
-				notifyOnSuccess: true,
-				notifyOnFailed: true,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: true,
+			// 	notifyOnFailed: true,
+			// });
 
 			return response.data;
 		} catch (error) {
@@ -200,10 +200,10 @@ const request = {
 		try {
 			const response = await axios.get(`${entity}/convert/${id}`);
 
-			successHandler(response, {
-				notifyOnSuccess: true,
-				notifyOnFailed: true,
-			});
+			// successHandler(response, {
+			// 	notifyOnSuccess: true,
+			// 	notifyOnFailed: true,
+			// });
 
 			return response.data;
 		} catch (error) {
