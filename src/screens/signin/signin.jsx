@@ -130,7 +130,6 @@ const SignInPage = ({ browser, version, OS, language }) => {
 										onChange={onChange}
 										error={errors?.email}
 										value={data?.email}
-										className="form-control form-control-lg"
 										label={formatMessage('page.signin.label.email.text')}
 										placeholder={formatMessage('page.signin.form.email.text')}
 									/>
@@ -143,7 +142,6 @@ const SignInPage = ({ browser, version, OS, language }) => {
 										onChange={onChange}
 										error={errors?.password}
 										value={data?.password}
-										className="form-control form-control-lg"
 										placeholder={formatMessage('page.signin.form.password.text')}
 										label={(
 											<span className="d-flex justify-content-between align-items-center">
