@@ -229,7 +229,6 @@ const Contact = ({
 									placeholder="First name"
 									error={errors?.firstName}
 									value={payload?.firstName}
-									className="form-control form-control-lg"
 								/>
 								<Input
 									type="text"
@@ -239,7 +238,6 @@ const Contact = ({
 									placeholder="Last name"
 									error={errors?.lastName}
 									value={payload?.lastName}
-									className="form-control form-control-lg"
 								/>
 							</div>
 						</div>
@@ -257,7 +255,6 @@ const Contact = ({
 								error={errors?.birthday}
 								secondaryLabel="(Optional)"
 								value={parseBirthday(payload?.birthday)}
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -324,7 +321,6 @@ const Contact = ({
 										label="Avatar Color"
 										error={errors?.color}
 										secondaryLabel="(Optional)"
-										className="form-control form-control-lg"
 									/>
 								</div>
 							</div>
@@ -355,7 +351,6 @@ const Contact = ({
 									value={payload?.phone}
 									secondaryLabel="(Optional)"
 									placeholder="+x(xxx)xxx-xx-xx"
-									className="form-control form-control-lg"
 								/>
 							)}
 						</div>
@@ -381,7 +376,6 @@ const Contact = ({
 									onChange={onChange}
 									value={payload?.email}
 									placeholder="contact@mail.com"
-									className="form-control form-control-lg"
 								/>
 							)}
 						</div>
@@ -438,7 +432,6 @@ const Contact = ({
 								error={errors?.zip}
 								value={payload?.zip}
 								secondaryLabel="(Optional)"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -453,7 +446,6 @@ const Contact = ({
 								error={errors?.address}
 								value={payload?.address}
 								secondaryLabel="(Optional)"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -468,7 +460,6 @@ const Contact = ({
 								error={errors?.unit}
 								value={payload?.unit}
 								secondaryLabel="(Optional)"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -483,7 +474,6 @@ const Contact = ({
 								error={errors?.buzzer}
 								value={payload?.buzzer}
 								secondaryLabel="(Optional)"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
