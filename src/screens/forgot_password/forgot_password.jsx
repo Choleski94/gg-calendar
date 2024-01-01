@@ -118,7 +118,6 @@ const ForgotPasswordPage = ({ browser, version, OS, language }) => {
 											value={data?.email}
 											onChange={onChange}
 											error={errors?.email}
-											className="form-control form-control-lg"
 											placeholder={formatMessage('page.forgot_password.form.email.text')}
 										/>
 									</div>
