@@ -5,8 +5,10 @@ import { ENTITIES } from '@constants';
 import { hasObjectKey } from '@utils';
 import { request } from '@utils/request';
 import { fetchUser } from '@store/actions/user';
+import { selectWorkforce } from '@store/selectors/workforce';
 import { selectUser, isAuthenticated } from '@store/selectors/user';
 import { Modal, Forms, MultiStepForm, Illustrations } from '@components';
+import { fetchWorkforce, workforceFetched } from '@store/actions/workforce';
 
 import { setModalSize, setModalId } from './OnBoarding.controller';
 
@@ -42,7 +44,7 @@ const options = [
 			</span>
 		),
 		Component: ({ ...rest }) => (
-			<Forms.Organization 
+			<Forms.Workforce 
 				withPhoto
 				withoutSubmit
 				{...rest}
@@ -64,30 +66,6 @@ const options = [
 	},
 ];
 
-const formHandlers = {
-	[FORM_SECTIONS.PERSONAL]: (userId, jsonData = {}) => (
-		request.patch({
-			entity: 'user/update/' + userId, jsonData,
-		})
-	),
-	[FORM_SECTIONS.BUSINESS]: (orgId, jsonData = {}) => {
-		if (orgId && orgId.length) {
-			return request.patch({
-				entity: 'organization/update/' + orgId, jsonData,
-			})
-		} else {
-			return request.create({
-				entity: 'organization', jsonData,
-			})
-		}
-	},
-	[FORM_SECTIONS.INVITE]: (userId, payload = {}) => {
-		// TODO:
-		console.log('update invite info', payload);
-		return true;
-	},
-}
-
 const OnBoarding = () => {
 	const [ optionsData, setOptionsData ] = React.useState([]);
 	const [ isCompleted, setIsCompleted ] = React.useState(false);
@@ -100,8 +78,38 @@ const OnBoarding = () => {
 
 	const { id: userId, isOnboarded } = user;
 
+	const formHandlers = {
+		[FORM_SECTIONS.PERSONAL]: (userId, jsonData = {}) => (
+			request.patch({
+				entity: 'user/update/' + userId, jsonData,
+			})
+		),
+		[FORM_SECTIONS.BUSINESS]: (userId, jsonData = {}) => {
+			if (jsonData?.id && jsonData?.id.length) {
+				request.patch({
+					entity: 'workforce/update/' + jsonData?.id, jsonData,
+				}).then(({ result }) => {
+					console.log('RES:::', result);
+				});
+			} else {
+				return request.create({
+					entity: 'workforce', jsonData,
+				}).then(({ result }) => {
+					console.log('RESULT:::', result);
+					dispatch(workforceFetched(result));
+				});
+			}
+		},
+		[FORM_SECTIONS.INVITE]: (userId, payload = {}) => {
+			// TODO:
+			console.log('update invite info', payload);
+			return true;
+		},
+	}
+
 	React.useEffect(() => {
 		dispatch(fetchUser(userId));
+		// dispatch(fetchWorkforce());
 	}, []);
 
 	// Populate option data.
@@ -168,7 +176,7 @@ const OnBoarding = () => {
 					<MultiStepForm 
 						options={options}
 						onSuccess={onSuccess}
-						id="createOrganization"
+						id="createWorkforce"
 						initialData={optionsData}
 						textLastStep="Send invite(s)"
 						onOptionChange={onOptionChange}
