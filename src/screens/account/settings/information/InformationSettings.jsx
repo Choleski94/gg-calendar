@@ -185,7 +185,6 @@ const InformationSettings = () => {
 							error={errors?.password}
 							value={payload?.password}
 							placeholder="Enter current password"
-							className="form-control form-control-lg"
 						/>
 					</div>
 					<div className="mb-1">
