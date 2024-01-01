@@ -156,7 +156,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 								value={payload?.slogan}
 								onChange={onChange}
 								error={errors?.slogan}
-								className="form-control form-control-lg"
 								// placeholder={formatMessage('page.signin.form.name.text')}
 							/>
 						</div>
@@ -171,7 +170,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 								value={payload?.name}
 								onChange={onChange}
 								error={errors?.name}
-								className="form-control form-control-lg"
 								// placeholder={formatMessage('page.signin.form.name.text')}
 							/>
 						</div>
@@ -184,7 +182,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 								value={payload?.org_number}
 								onChange={onChange}
 								error={errors?.org_number}
-								className="form-control form-control-lg"
 								// placeholder={formatMessage('page.signin.form.name.text')}
 							/>
 						</div>
@@ -209,7 +206,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 										value={payload?.pst_number}
 										onChange={onChange}
 										error={errors?.pst_number}
-										className="form-control form-control-lg"
 										// placeholder={formatMessage('page.signin.form.name.text')}
 									/>
 								</div>
@@ -222,7 +218,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 										value={payload?.pst_percent}
 										onChange={onChange}
 										error={errors?.pst_percent}
-										className="form-control form-control-lg"
 										placeholder="9.975"
 									/>
 								</div>
@@ -249,7 +244,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 										value={payload?.gst_number}
 										onChange={onChange}
 										error={errors?.gst_number}
-										className="form-control form-control-lg"
 										// placeholder={formatMessage('page.signin.form.name.text')}
 									/>
 								</div>
@@ -262,7 +256,6 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 										value={payload?.gst_percent}
 										onChange={onChange}
 										error={errors?.gst_percent}
-										className="form-control form-control-lg"
 										placeholder="5"
 									/>
 								</div>
@@ -274,21 +267,13 @@ const CompanyInformationForm = ({ defaultValue, typeOptions = [], sectorOptions 
 					<div className="col-lg-12 mt-3">
 						<Input
 							id="www"
-							type="text"
 							name="www"
-							label={(
-								<>
-									Website
-									&nbsp;
-									<span className="form-label-secondary">
-										(Optional)
-									</span>
-								</>
-							)}
-							value={payload?.www}
+							type="text"
+							label="Website"
 							onChange={onChange}
 							error={errors?.www}
-							className="form-control form-control-lg"
+							value={payload?.www}
+							secondaryLabel="(Optional)"
 							// placeholder={formatMessage('page.signin.form.name.text')}
 						/>
 					</div>
