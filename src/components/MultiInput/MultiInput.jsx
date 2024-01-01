@@ -3,9 +3,15 @@ import React from 'react';
 import InputDropdown from '../InputDropdown';
 
 const MultiInput = ({
-	placeholder = '', addLabel = 'Add', value = [],
-	name = '', label = null, secondaryLabel = null, 
-	options = [], onOptionChange, defaultOption = '', 
+	name = '', 
+	value = [],
+	label = null, 
+	options = [], 
+	addLabel = 'Add', 
+	placeholder = '', 
+	defaultOption = '', 
+	secondaryLabel = null, 
+	onOptionChange = () => null, 
 }) => {
 	const [ inputs, setInputs ] = React.useState(['']); // Initialize with one empty input
 	const [ selectedOption, setSelectedOption ] = React.useState('Home');
