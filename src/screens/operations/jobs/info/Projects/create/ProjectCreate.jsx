@@ -158,7 +158,6 @@ const ProjectCreate = () => {
 									secondaryLabel="()Optional"
 									value={info?.equipmentModel}
 									error={errors?.equipmentModel}
-									className="form-control form-control-lg"
 								/>
 							</div>
 						</div>
@@ -173,7 +172,6 @@ const ProjectCreate = () => {
 									secondaryLabel="()Optional"
 									value={info?.equipmentModel}
 									error={errors?.equipmentModel}
-									className="form-control form-control-lg"
 								/>
 							</div>
 						</div>
