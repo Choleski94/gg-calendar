@@ -134,7 +134,6 @@ const GeneralConfiguration = () => {
 												onChange={onChange}
 												error={errors?.name}
 												value={payload?.name}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
@@ -152,7 +151,6 @@ const GeneralConfiguration = () => {
 												onChange={onChange}
 												error={errors?.slogan}
 												value={payload?.slogan}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
@@ -203,7 +201,6 @@ const GeneralConfiguration = () => {
 												onChange={onChange}
 												error={errors?.www}
 												value={payload?.www}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
@@ -224,7 +221,6 @@ const GeneralConfiguration = () => {
 														error={errors?.pst_number}
 														value={payload?.pst_number}
 														placeholder="PST/QST Number"
-														className="form-control form-control-lg"
 													/>
 												</div>
 												<div className="col-lg-4">
@@ -236,7 +232,6 @@ const GeneralConfiguration = () => {
 														placeholder="PST/QST %"
 														error={errors?.pst_percent}
 														value={payload?.pst_percent}
-														className="form-control form-control-lg"
 													/>
 												</div>
 											</div>
@@ -255,7 +250,6 @@ const GeneralConfiguration = () => {
 														placeholder="GST Number"
 														error={errors?.gst_number}
 														value={payload?.gst_number}
-														className="form-control form-control-lg"
 													/>
 												</div>
 												<div className="col-lg-4">
@@ -267,7 +261,6 @@ const GeneralConfiguration = () => {
 														onChange={onChange}
 														error={errors?.gst_percent}
 														value={payload?.gst_percent}
-														className="form-control form-control-lg"
 													/>
 												</div>
 											</div>
@@ -287,7 +280,6 @@ const GeneralConfiguration = () => {
 												onChange={onChange}
 												error={errors?.org_number}
 												value={payload?.org_number}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
