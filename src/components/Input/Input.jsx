@@ -17,8 +17,8 @@ const Input = React.forwardRef(({
 	error = null,
 	type = 'text',
 	required = '',
-	className = '',
 	secondaryLabel = '',
+	className = 'form-control form-control-lg',
 	...rest
 }, ref) => {
 	const labelClassName = React.useMemo(() => (
