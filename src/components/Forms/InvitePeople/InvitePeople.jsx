@@ -4,7 +4,7 @@ import React from 'react';
 import { hasObjectKey } from '@utils';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-import { Card, MultiInput, Illustrations } from '@components';
+import { Card, InputDropdown, Illustrations } from '@components';
 
 const InvitePeople = ({ data = [], setData = () => null }) => {
 	const [ query, setQuery ] = React.useState('');
@@ -26,7 +26,9 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 		}
 	}, [ payload ]);
 
-	const onChange = (e) => setQuery(e.target.value);
+	const onChange = (e) => {
+		// setQuery(e.target.value);
+	};
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
@@ -89,21 +91,22 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 	), [ payload ]);
 
 	const roleOptions = [
-		{ lbael: 'Guest', value: 'Guest' },
-		{ lbael: 'Admin', value: 'Admin' },
+		{ label: 'Guest', value: '65915f25572278f5166663ea' },
+		{ label: 'Admin', value: '65915f26572278f5166663ed' },
 	];
 
 	return (
 		<>
 			<div className="mb-4">
 				<div className="input-group mb-4 mb-sm-0">
-					<MultiInput
+					<InputDropdown
 						type="text"
 						name="query"
 						value={query}
 						onChange={onChange}
 						options={roleOptions}
 						placeholder="Invite people by email"
+						defaultOption="65915f25572278f5166663ea"
 					/>
 					<div className="input-group-append">
 						<a className="btn btn-primary d-sm-inline-block" onClick={onAddItem}>
