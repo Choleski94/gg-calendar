@@ -164,7 +164,6 @@ const ActivatePage = ({ browser, version, OS, language }) => {
 												autoComplete="off"
 												ref={inputRefs[index]}
 												value={inputRefs[index].current}
-												className="form-control form-control-lg"
 												error={errors[`n${index}`] ? ' ' : null}
 												onChange={(e) => onChange(index, e.target.value)}
 												onKeyDown={(e) => handleKeyDown(index, e.keyCode)}
