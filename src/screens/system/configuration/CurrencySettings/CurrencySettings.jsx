@@ -136,7 +136,6 @@ const CurrencySettings = () => {
 												onChange={onChange}
 												error={errors?.name}
 												value={payload?.name}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
@@ -154,7 +153,6 @@ const CurrencySettings = () => {
 												onChange={onChange}
 												error={errors?.slogan}
 												value={payload?.slogan}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
@@ -188,7 +186,6 @@ const CurrencySettings = () => {
 												onChange={onChange}
 												error={errors?.www}
 												value={payload?.www}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
@@ -206,7 +203,6 @@ const CurrencySettings = () => {
 												onChange={onChange}
 												error={errors?.www}
 												value={payload?.www}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
@@ -224,7 +220,6 @@ const CurrencySettings = () => {
 												onChange={onChange}
 												error={errors?.www}
 												value={payload?.www}
-												className="form-control form-control-lg"
 											/>
 										</td>
 									</tr>
