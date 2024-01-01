@@ -86,7 +86,6 @@ const SchedulingEdit = () => {
 								onChange={onChange}
 								value={data?.startDate}
 								error={errors?.startDate}
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -100,7 +99,6 @@ const SchedulingEdit = () => {
 								onChange={onChange}
 								value={data?.startTime}
 								error={errors?.startTime}
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -115,7 +113,6 @@ const SchedulingEdit = () => {
 								value={data?.endDate}
 								error={errors?.endDate}
 								secondaryLabel="(Optional)"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
@@ -130,7 +127,6 @@ const SchedulingEdit = () => {
 								value={data?.endTime}
 								error={errors?.endTime}
 								secondaryLabel="(Optional)"
-								className="form-control form-control-lg"
 							/>
 						</div>
 					</div>
