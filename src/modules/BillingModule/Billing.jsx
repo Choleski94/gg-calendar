@@ -58,7 +58,6 @@ const Billing = ({ type = 'INVOICE' }) => {
 		setConfigData({ ...configData, items });
 	}
 
-
 	const [ breadcrumbOptions, ctaText ] = React.useMemo(() => {
 		let [ bOptions, cText ] = [ [], '' ];
 
