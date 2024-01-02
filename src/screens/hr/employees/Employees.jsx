@@ -12,7 +12,7 @@ import WorkforceOverview from './overview';
 import WorkforceSettings from './settings';
 import WorkforceStatistics from './statistics';
 
-const EmplyeesScreen = ({ setEmployeeId }) => {
+const EmployeesScreen = ({ setEmployeeId }) => {
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SCREEN_SECTIONS.OVERVIEW);
 
 	return (
@@ -63,4 +63,4 @@ const EmplyeesScreen = ({ setEmployeeId }) => {
 	);
 };
 
-export default withPrivateRouter(EmplyeesScreen);
+export default withPrivateRouter(EmployeesScreen);
