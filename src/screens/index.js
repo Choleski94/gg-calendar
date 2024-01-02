@@ -22,8 +22,8 @@ export { default as DispatchMap } from './operations/dispatch-map';
 // export { default as HrCalls } from './communication/calls';
 export { default as HrLegalParking } from './hr/legal/parking';
 
-// HR Employee & Teams
-export { default as HrEmployees } from './hr/employees';
+// HR Workforce & Teams
+export { default as HrWorkforce } from './hr/workforce';
 
 // Account
 export { default as AccountMember } from './account/member';
