@@ -39,6 +39,7 @@ const parseWorforceRoleOptions = (options = [], actionMenuOptions = []) => optio
 		/>
 	),
 }));
+
 const AccessOverview = ({ setRoleId }) => {
 	const [ options, setOptions ] = React.useState([]);
 	const [ loading, setLoading ] = React.useState(false);
@@ -107,7 +108,8 @@ const AccessOverview = ({ setRoleId }) => {
 			),
 			cb: () => console.log('Delete content...')
 		}
-	]
+	];
+
 	return (
 		<div className="d-grid gap-3 gap-lg-5">
 			<div className="row">

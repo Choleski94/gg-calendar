@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { withPrivateRouter } from '@utils/hocs';
 import BillingModule from '@modules/BillingModule';
 
-import InvoiceControl from './InvoiceControl';
+import InvoiceControl from './control';
 
 const InvoicesScreen = () => {
 	const navigate = useNavigate();

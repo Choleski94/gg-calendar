@@ -10,33 +10,19 @@ const SUPPORTED_MODES = {
 	UPDATE: 'UPDATE',
 }
 
-const DeleteRoleButton = ({ orgId = '', payload = {}, aggregateOption }) => {
-	const { executeMutation, loading } = {};
-
-	const handleMutation = async (mutationVariables) => {
-		try {
-			const res = await executeMutation(mutationVariables);
-			aggregateOption(payload, true);
-		} catch (err) {
-			console.error('ERROR::::', err);
-		}
-	};
-
-	const onDelete = (e) => handleMutation({ orgId, id: payload?.id });
-
-	return (
-		<button type="button" className="btn btn-outline-danger" onClick={onDelete}>
-			<i className="bi bi-trash" /> Delete
-		</button>
-	);
-};
-
-const RoleForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTED_MODES.CREATE, aggregateOption }) => {
+const RoleForm = ({
+	orgId = '', 
+	defaultValues = {}, 
+	mode = SUPPORTED_MODES.CREATE, 
+	aggregateOption
+}) => {
 	const [ currentMode, setcurrentMode ] = React.useState(mode);
 	const [ errors, setErrors ] = React.useState({});
 	const [ payload, setPayload ] = React.useState({
-		orgId, name: '', 
-		description: '',
+		orgId, 
+		name: '', 
+		enabled: false, 
+		description: '', 
 		...defaultValues
 	});
 
@@ -49,41 +35,16 @@ const RoleForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTED_MODES.CREAT
 		return currentMode !== SUPPORTED_MODES.CREATE;
 	}, [ currentMode ]);
 
-	const activeMutationQuery = React.useMemo(() => {
-		if (currentMode === SUPPORTED_MODES.CREATE) {
-			return {};
-		} else {
-			return {};
-		}
-	}, [ currentMode ]);
-
-	const { executeMutation, loading } = {};
-
-	const handleMutation = async (mutationVariables) => {
-		try {
-			const { data, error } = await executeMutation(mutationVariables);
-			if (!error) {
-				let payload = null;
-
-				if (currentMode === SUPPORTED_MODES.CREATE) {
-					payload = data?.insert_organization_positions?.returning;
-				} else {
-					payload = data?.update_organization_positions?.returning;
-				}
-
-				return aggregateOption(...payload);
-			}
-		} catch (err) {
-			console.error('ERROR::::', err);
-		}
-	};
-
 	const validate = (payload) => {
 		const errs = {};
 
 		// Check for empty input(s).
 		if (!payload.name) {
 			errs.name = errorMessages.empty;
+		}
+
+		if (!payload.description) {
+			errs.description = errorMessages.empty;
 		}
 
 		return errs;
@@ -100,15 +61,12 @@ const RoleForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTED_MODES.CREAT
 
 		if (Object.keys(errs).length) return null;
 
-		handleMutation(payload);
+		// handleMutation(payload);
 	}
 
-	const renderDescriptionLabel = (
-		<>
-			Description &nbsp;
-			<span className="form-label-secondary">(Optional)</span>
-		</>
-	);
+	const onDelete = (e) => {
+		console.log('Deleted');
+	}
 
 	return (
 		<div className="row">
@@ -151,10 +109,11 @@ const RoleForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTED_MODES.CREAT
 							id="description"
 							name="description"
 							onChange={onChange}
+							label="Description"
 							description="description"
-							value={payload?.description}
 							error={errors?.description}
-							label={renderDescriptionLabel}
+							secondaryLabel="(Optional)"
+							value={payload?.description}
 						/>
 					</div>
 				</div>
@@ -162,10 +121,9 @@ const RoleForm = ({ defaultValues = {}, orgId = '', mode = SUPPORTED_MODES.CREAT
 					<div className="col-lg-12">
 						<div className="mt-4 d-flex align-items-center">
 							{currentMode !== SUPPORTED_MODES.CREATE && (
-								<DeleteRoleButton 
-									orgId={orgId} payload={payload} 
-									aggregateOption={aggregateOption}
-								/>
+								<button type="button" className="btn btn-outline-danger" onClick={onDelete}>
+									<i className="bi bi-trash" /> Delete
+								</button>
 							)}
 							<div className="ms-auto">
 								<button type="button" className="btn btn-primary" onClick={onSubmit}>
