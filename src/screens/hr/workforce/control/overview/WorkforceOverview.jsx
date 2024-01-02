@@ -34,7 +34,7 @@ const NAV_TAB_OPTIONS = [
 	},
 ];
 
-const EmployeeOverview = () => {
+const WorkforceOverview = () => {
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SCREEN_SECTIONS.MEMBERS);
 
 	return (
@@ -338,4 +338,4 @@ const EmployeeOverview = () => {
 	);
 };
 
-export default EmployeeOverview;
+export default WorkforceOverview;

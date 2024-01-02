@@ -135,30 +135,30 @@ export const hrRoutes = [
 		path: '/hr/system/recommendations',
 		element: () => 'Todo...',
 	},
-	// Employee
+	// Workforce
 	{
-		slug: 'hr-employee-problems',
-		path: '/hr/employee/problems',
+		slug: 'hr-workforce-problems',
+		path: '/hr/workforce/problems',
 		element: () => 'Todo...',
 	},
 	{
-		slug: 'hr-employee-hiring',
-		path: '/hr/employee/hiring',
+		slug: 'hr-workforce-hiring',
+		path: '/hr/workforce/hiring',
 		element: () => 'Todo...',
 	},
 	{
-		slug: 'hr-employee-vacations',
-		path: '/hr/employee/vacations',
+		slug: 'hr-workforce-vacations',
+		path: '/hr/workforce/vacations',
 		element: () => 'Todo...',
 	},
 	{
-		slug: 'hr-employees',
-		path: '/hr/employees/:id?',
-		element: screenElements.HrEmployees,
+		slug: 'hr-workforces',
+		path: '/hr/workforce/:id?',
+		element: screenElements.HrWorkforce,
 	},
 	{
-		slug: 'hr-employee-problems',
-		path: '/hr/employee/problems',
+		slug: 'hr-workforce-problems',
+		path: '/hr/workforce/problems',
 		element: () => 'Todo...',
 	},
 	// Legal
@@ -317,8 +317,8 @@ export const rdRoutes = [
 		element: () => 'Todo...',
 	},
 	{
-		slug: 'research-databases-employees',
-		path: '/research/databases/employees',
+		slug: 'research-databases-workforces',
+		path: '/research/databases/workforces',
 		element: () => 'Todo...',
 	},
 	{

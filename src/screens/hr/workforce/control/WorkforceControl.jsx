@@ -1,18 +1,17 @@
 import React from 'react';
 
-import { withPrivateRouter } from '@utils/hocs';
 import { Layout, NavPill, Breadcrumb, GetSupport } from '@components';
 
 import { 
 	NAV_TAB_OPTIONS,
 	SUPPORTED_SCREEN_SECTIONS, 
 	CUSTOMERS_BREADCRUMB_OPTIONS, 
-} from './Employees.controller';
+} from './WorkforceControl.controller';
 import WorkforceOverview from './overview';
 import WorkforceSettings from './settings';
 import WorkforceStatistics from './statistics';
 
-const EmployeesScreen = ({ setEmployeeId }) => {
+const WorkforceControlScreen = ({ setEmployeeId }) => {
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SCREEN_SECTIONS.OVERVIEW);
 
 	return (
@@ -63,4 +62,4 @@ const EmployeesScreen = ({ setEmployeeId }) => {
 	);
 };
 
-export default withPrivateRouter(EmployeesScreen);
+export default WorkforceControlScreen;
