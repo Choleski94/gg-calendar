@@ -60,7 +60,7 @@ const Scheduling = ({ jobId = '' }) => {
 					time: payload?.time,
 					duration: payload?.duration,
 					techs: (
-						<Link className="d-flex align-items-center" to={`/hr/employee/workforce/${payload?.author?.id}`}>
+						<Link className="d-flex align-items-center" to={`/hr/workforce/${payload?.author?.id}`}>
 							<div>
 								{payload?.author.firstName} {payload?.author.lastName}
 							</div>

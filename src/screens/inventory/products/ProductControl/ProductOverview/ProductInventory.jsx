@@ -17,7 +17,7 @@ const ProductInventory = () => (
 						<td>
 							<a
 								className="d-flex align-items-center"
-								href="/hr/employee/workforce/123"
+								href="/hr/workforce/123"
 							>
 								<div>Office</div>
 							</a>
@@ -30,7 +30,7 @@ const ProductInventory = () => (
 						<td>
 							<a
 								className="d-flex align-items-center"
-								href="/hr/employee/workforce/123"
+								href="/hr/workforce/123"
 							>
 								<div>T Julian</div>
 							</a>
@@ -43,7 +43,7 @@ const ProductInventory = () => (
 						<td>
 							<a
 								className="d-flex align-items-center"
-								href="/hr/employee/workforce/123"
+								href="/hr/workforce/123"
 							>
 								<div>T Duncan</div>
 							</a>
@@ -56,7 +56,7 @@ const ProductInventory = () => (
 						<td>
 							<a
 								className="d-flex align-items-center"
-								href="/hr/employee/workforce/123"
+								href="/hr/workforce/123"
 							>
 								<div>T Loic</div>
 							</a>
@@ -69,7 +69,7 @@ const ProductInventory = () => (
 						<td>
 							<a
 								className="d-flex align-items-center"
-								href="/hr/employee/workforce/123"
+								href="/hr/workforce/123"
 							>
 								<div>T Peter</div>
 							</a>
@@ -82,7 +82,7 @@ const ProductInventory = () => (
 						<td>
 							<a
 								className="d-flex align-items-center"
-								href="/hr/employee/workforce/123"
+								href="/hr/workforce/123"
 							>
 								<div>T Razi</div>
 							</a>
@@ -95,7 +95,7 @@ const ProductInventory = () => (
 						<td>
 							<a
 								className="d-flex align-items-center"
-								href="/hr/employee/workforce/123"
+								href="/hr/workforce/123"
 							>
 								<div>T Mike</div>
 							</a>

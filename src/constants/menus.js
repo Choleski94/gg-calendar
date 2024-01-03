@@ -49,7 +49,7 @@ export const MENU_HR = [
 	},
 	// {
 	// 	slug: 'nav.hr.employee.problem.text',
-	// 	link: '/hr/employee/problems',
+	// 	link: '/hr/problems',
 	// 	icon: 'bi bi-puzzle',
 	// 	badge: {
 	// 		type: 'danger',
@@ -58,7 +58,7 @@ export const MENU_HR = [
 	// },
 	// {
 	// 	slug: 'nav.hr.employee.hiring.text',
-	// 	link: '/hr/employee/hiring',
+	// 	link: '/hr/hiring',
 	// 	icon: 'bi bi-shop',
 	// 	badge: {
 	// 		type: 'danger',
@@ -67,7 +67,7 @@ export const MENU_HR = [
 	// },
 	// {
 	// 	slug: 'nav.hr.employee.vactions.text',
-	// 	link: '/hr/employee/vacations',
+	// 	link: '/hr/vacations',
 	// 	icon: 'bi bi-cloud-sun',
 	// 	badge: {
 	// 		type: 'danger',
@@ -76,7 +76,7 @@ export const MENU_HR = [
 	// },
 	{
 		slug: 'nav.hr.employee.management.text',
-		link: '/hr/employees',
+		link: '/hr/workforce',
 		icon: 'bi bi-people',
 		badge: {
 			type: 'primary',

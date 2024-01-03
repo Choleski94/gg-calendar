@@ -23,15 +23,11 @@ const JOBS_INFO_BREADCRUMB_OPTIONS = [
 		value: 'HR'
 	},
 	{
-		path: '/hr/employee',
-		value: 'Employee'
-	},
-	{
-		path: '/hr/employee/workforce',
+		path: '/hr/workforce',
 		value: 'Workforce'
 	},
 	{
-		path: '/hr/employee/workforce',
+		path: '/hr/workforce/123',
 		value: 'Mark Williams'
 	},
 ];

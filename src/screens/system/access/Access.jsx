@@ -6,7 +6,7 @@ import { withPrivateRouter } from '@utils/hocs';
 import AccessEdit from './edit';
 import AccessControl from './control';
 
-const EmplyeesScreen = ({ setAccessId }) => {
+const AccessScreen = ({ setAccessId }) => {
 	const navigate = useNavigate();
 
 	const { id = '' } = useParams();
@@ -32,4 +32,4 @@ const EmplyeesScreen = ({ setAccessId }) => {
 	);
 };
 
-export default withPrivateRouter(EmplyeesScreen);
+export default withPrivateRouter(AccessScreen);
