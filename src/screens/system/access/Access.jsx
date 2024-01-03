@@ -22,7 +22,7 @@ const AccessScreen = () => {
 	return (
 		roleId && roleId.length ? (
 			<AccessEdit 
-				id={roleId} 
+				roleId={roleId} 
 			/>
 		) : (
 			<AccessControl
