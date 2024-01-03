@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { Layout, NavPill, Breadcrumb, GetSupport } from '@components';
+import { 
+	Layout, 
+	NavPill, 
+	Breadcrumb, 
+	GetSupport
+} from '@components';
 
 import { 
 	NAV_TAB_OPTIONS,
@@ -11,7 +16,7 @@ import WorkforceOverview from './overview';
 import WorkforceSettings from './settings';
 import WorkforceStatistics from './statistics';
 
-const WorkforceControlScreen = ({ setEmployeeId }) => {
+const WorkforceControlScreen = ({ setWorkforceId }) => {
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SCREEN_SECTIONS.OVERVIEW);
 
 	return (
@@ -49,7 +54,7 @@ const WorkforceControlScreen = ({ setEmployeeId }) => {
 			</Layout.StickyHeader>
 			<div className="mt-15">
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.OVERVIEW && (
-					<WorkforceOverview setEmployeeId={setEmployeeId} />
+					<WorkforceOverview setWorkforceId={setWorkforceId} />
 				)}
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.STATISTICS && (
 					<WorkforceStatistics />

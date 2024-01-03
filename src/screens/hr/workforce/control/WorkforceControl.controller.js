@@ -1,10 +1,10 @@
 export const CUSTOMERS_BREADCRUMB_OPTIONS = [
 	{
-		path: '/crm',
-		value: 'CRM'
+		path: '/hr',
+		value: 'hr'
 	},
 	{
-		path: '/crm/workforce',
+		path: '/hr/workforce',
 		value: 'Workforce'
 	},
 ];

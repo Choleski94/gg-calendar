@@ -3,16 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { withPrivateRouter } from '@utils/hocs';
 
-// import EmployeeEdit from './edit';
-import EmployeeControl from './control';
+// import WorkforceEdit from './edit';
+import WorkforceControl from './control';
 
-const EmployeeScreen = ({ setEmployeeId }) => {
+const WorkforceScreen = () => {
 	const navigate = useNavigate();
 
 	const { id = '' } = useParams();
 
-	const setEmplyeesId = (id = '') => (
-		navigate(`/system/access/${id}`)
+	const setWorkforceId = (id = '') => (
+		navigate(`/workforce/${id}`)
 	);
 
 	const roleId = React.useMemo(() => (
@@ -21,15 +21,15 @@ const EmployeeScreen = ({ setEmployeeId }) => {
 
 	return (
 		// roleId && roleId.length ? (
-		// 	<EmployeeEdit 
+		// 	<WorkforceEdit 
 		// 		id={roleId} 
 		// 	/>
 		// ) : (
-			<EmployeeControl
-				setEmplyeesId={setEmplyeesId}
+			<WorkforceControl
+				setWorkforceId={setWorkforceId}
 			/>
 		// )
 	);
 };
 
-export default withPrivateRouter(EmployeeScreen);
+export default withPrivateRouter(WorkforceScreen);

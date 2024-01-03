@@ -152,7 +152,7 @@ export const hrRoutes = [
 		element: () => 'Todo...',
 	},
 	{
-		slug: 'hr-workforces',
+		slug: 'hr-workforce',
 		path: '/hr/workforce/:id?',
 		element: screenElements.HrWorkforce,
 	},
