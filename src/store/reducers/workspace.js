@@ -19,7 +19,7 @@ export const workspaceState = {
 
 const workspaceReducer = (state = workspaceState, action) => {
 	switch (action.type) {
-		case actionTypes.WORKFORCE_FETCHED:
+		case actionTypes.WORKSPACE_FETCHED:
 			return { ...state, ...action.workspace };
 		default:
 			return state;
