@@ -3,7 +3,7 @@ import React from 'react';
 
 import formatMessage from '@utils/formatMessage';
 
-const InviteMember = () => {
+const RoleMember = () => {
 	return (
 		<>
 			<div className="mb-4">
@@ -137,4 +137,4 @@ const InviteMember = () => {
 	);
 };
 
-export default InviteMember;
+export default RoleMember;

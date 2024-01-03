@@ -3,8 +3,8 @@ import React from 'react';
 import { NavPill } from '@components';
 
 import RoleForm from './RoleForm';
-import WorkforceRoleMember from './WorkforceRoleMember';
-import WorkforceRolePermissions from './WorkforceRolePermissions';
+import RoleMember from './RoleMember';
+import RolePermissions from './RolePermissions';
 
 const SUPPORTED_SCREEN_SECTIONS = {
 	UPDATE: 'UPDATE',
@@ -31,7 +31,7 @@ const NAV_TAB_OPTIONS = [
 	},
 ];
 
-const WorkforceRoleDialog = ({ orgId = '', roleId = '', defaultValues, aggregateOption }) => {
+const RoleDialog = ({ orgId = '', roleId = '', defaultValues, aggregateOption }) => {
 	const [ navOptions, setNavOptions ] = React.useState([]);
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SCREEN_SECTIONS.ASSIGN);
 
@@ -61,11 +61,11 @@ const WorkforceRoleDialog = ({ orgId = '', roleId = '', defaultValues, aggregate
 				)}
 
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.ASSIGN && (
-					<WorkforceRoleMember />
+					<RoleMember />
 				)}
 
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.PERMISSIONS && (
-					<WorkforceRolePermissions 
+					<RolePermissions 
 						orgId={orgId} 
 						roleId={roleId} 
 					/>
@@ -75,4 +75,4 @@ const WorkforceRoleDialog = ({ orgId = '', roleId = '', defaultValues, aggregate
 	)
 }
 
-export default WorkforceRoleDialog;
+export default RoleDialog;

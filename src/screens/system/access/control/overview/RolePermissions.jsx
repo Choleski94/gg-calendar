@@ -77,7 +77,7 @@ const PermissionRow = ({ payload = {}, isDisabled = false, defaultValue = {} }) 
 	)
 }
 
-const WorkforceRolePermissions = ({ orgId = '', roleId = '' }) => {
+const RolePermissions = ({ orgId = '', roleId = '' }) => {
 	const [ option, setOption ] = React.useState({ permissions: [], role: {} });
 
 	const { loading, errors, data } = {};
@@ -145,4 +145,4 @@ const WorkforceRolePermissions = ({ orgId = '', roleId = '' }) => {
 	);
 }
 
-export default WorkforceRolePermissions;
+export default RolePermissions;

@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { request } from '@utils/request';
 import mockAccessRole from '@mocks/access';
 import formatMessage from '@utils/formatMessage';
 import { deleteObject, updateOrPushObject } from '@utils';
 import { Card, Counter, Modal, Table, ActionMenu } from '@components';
-import { DEFAULT_TABLE_HEADER, DEFAULT_TABLE_ACTIVE_HEADER, SUPPORTED_STATUSES } from '@constants/access';
+import { ENTITY_ROLE, DEFAULT_TABLE_HEADER, DEFAULT_TABLE_ACTIVE_HEADER, SUPPORTED_STATUSES } from '@constants/access';
 
 import RoleForm from './RoleForm';
-import WorkforceRoleDialog from './WorkforceRoleDialog';
+import RoleDialog from './RoleDialog';
 
 const orgId = '8fa9a6e2-d4f3-49e3-9d1c-42b227f64fd2';
 
@@ -16,14 +17,13 @@ const parseWorforceRoleOptions = (options = [], actionMenuOptions = []) => optio
 		payload?.name,
 		payload?.description,
 	].join(' '),
+	id: payload?._id,
 	name: payload?.name,
-	author: payload?.author,
-	qtyMember: payload?.qtyMember,
+	system: payload?.system,
 	createdAt: payload?.createdAt,
 	description: payload?.description,
-	qtyPermission: payload?.qtyPermission,
-	status: (
-		payload?.isActive ? (
+	enabled: (
+		payload?.enabled ? (
 			<span className="badge bg-soft-success text-success">
 				Active
 			</span>
@@ -47,8 +47,16 @@ const AccessOverview = ({ setRoleId }) => {
 
 	const fetchRoles = () => {
 		setLoading(true);
-		setOptions(mockAccessRole.list);
-		setLoading(false);
+
+		request.list({ entity: ENTITY_ROLE, options }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				setOptions(data.result);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
 	}
 
 	React.useEffect(() => {
@@ -64,7 +72,7 @@ const AccessOverview = ({ setRoleId }) => {
 
 	const onEditRoleClick = (e, currentOption) => {
 		e.preventDefault();
-		return setRoleId('todo');
+		return setRoleId(currentOption.id);
 	};
 
 	const onDeleteRoleClick = (e) => {
