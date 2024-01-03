@@ -1,6 +1,6 @@
 import * as actionTypes from '../types';
 
-export const workforceState = {
+export const workspaceState = {
 	id: null,
 	isInit: false,
 	name: null,
@@ -17,13 +17,13 @@ export const workforceState = {
 	tax_gst_percent: null,
 };
 
-const workforceReducer = (state = workforceState, action) => {
+const workspaceReducer = (state = workspaceState, action) => {
 	switch (action.type) {
 		case actionTypes.WORKFORCE_FETCHED:
-			return { ...state, ...action.workforce };
+			return { ...state, ...action.workspace };
 		default:
 			return state;
 	}
 };
 
-export default workforceReducer;
+export default workspaceReducer;

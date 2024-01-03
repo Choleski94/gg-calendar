@@ -8,8 +8,8 @@ export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 
-// Workforce
-export const WORKFORCE_FETCHED = 'WORKFORCE_FETCHED';
+// Workspace
+export const WORKSPACE_FETCHED = 'WORKSPACE_FETCHED';
 
 // Auth ?
 export const REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';

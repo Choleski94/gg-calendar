@@ -1,5 +1,5 @@
 'use strict';
 
-export { default } from './EmployeesControl';
+export { default } from './WorkforceControl';
 
 

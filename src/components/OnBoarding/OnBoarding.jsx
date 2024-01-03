@@ -5,10 +5,10 @@ import { ENTITIES } from '@constants';
 import { hasObjectKey } from '@utils';
 import { request } from '@utils/request';
 import { fetchUser } from '@store/actions/user';
-import { selectWorkforce } from '@store/selectors/workforce';
+import { selectWorkspace } from '@store/selectors/workspace';
 import { selectUser, isAuthenticated } from '@store/selectors/user';
 import { Modal, Forms, MultiStepForm, Illustrations } from '@components';
-import { fetchWorkforce, workforceFetched } from '@store/actions/workforce';
+import { fetchWorkspace, workspaceFetched } from '@store/actions/workspace';
 
 import { setModalSize, setModalId } from './OnBoarding.controller';
 
@@ -44,7 +44,7 @@ const options = [
 			</span>
 		),
 		Component: ({ ...rest }) => (
-			<Forms.Workforce 
+			<Forms.Workspace 
 				withPhoto
 				withoutSubmit
 				{...rest}
@@ -87,16 +87,16 @@ const OnBoarding = () => {
 		[FORM_SECTIONS.BUSINESS]: (userId, jsonData = {}) => {
 			if (jsonData?.id && jsonData?.id.length) {
 				request.patch({
-					entity: 'workforce/update/' + jsonData?.id, jsonData,
+					entity: 'workspace/update/' + jsonData?.id, jsonData,
 				}).then(({ result }) => {
 					console.log('RES:::', result);
 				});
 			} else {
 				return request.create({
-					entity: 'workforce', jsonData,
+					entity: 'workspace', jsonData,
 				}).then(({ result }) => {
 					console.log('RESULT:::', result);
-					dispatch(workforceFetched(result));
+					dispatch(workspaceFetched(result));
 				});
 			}
 		},
@@ -109,7 +109,7 @@ const OnBoarding = () => {
 
 	React.useEffect(() => {
 		dispatch(fetchUser(userId));
-		// dispatch(fetchWorkforce());
+		// dispatch(fetchWorkspace());
 	}, []);
 
 	// Populate option data.
@@ -176,7 +176,7 @@ const OnBoarding = () => {
 					<MultiStepForm 
 						options={options}
 						onSuccess={onSuccess}
-						id="createWorkforce"
+						id="createWorkspace"
 						initialData={optionsData}
 						textLastStep="Send invite(s)"
 						onOptionChange={onOptionChange}

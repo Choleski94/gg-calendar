@@ -30,7 +30,7 @@ const Tigado = () => {
 					)))}
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
-				<OnBoarding />
+				{/* <OnBoarding /> */}
 			</IntlProvider>
 		</ThemeProvider>
 	);
