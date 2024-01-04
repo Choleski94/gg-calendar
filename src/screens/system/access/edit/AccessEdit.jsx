@@ -187,6 +187,7 @@ const AccessEdit = ({ roleId }) => {
 									<Forms.Role 
 										mode="UPDATE"
 										defaultValues={data}
+										disabled={data?.system}
 										handleSubmit={handleUpdateRole}
 									/>
 								</Card.Body>
