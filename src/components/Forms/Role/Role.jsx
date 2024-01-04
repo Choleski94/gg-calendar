@@ -22,10 +22,12 @@ const RoleForm = ({
 	mode = SUPPORTED_MODES.CREATE, 
 }) => {
 	const [ errors, setErrors ] = React.useState({});
-	const [ payload, setPayload ] = React.useState({
-		...DEFAULT_PAYLOAD, ...defaultValues
-	});
 	const [ currentMode, setcurrentMode ] = React.useState(mode);
+	const [ payload, setPayload ] = React.useState(DEFAULT_PAYLOAD);
+
+	React.useEffect(() => {
+		setPayload(defaultValues);
+	}, [ defaultValues ]);
 
 	const errorMessages = {
 		empty: 'Can\'t be empty.',
@@ -75,15 +77,11 @@ const RoleForm = ({
 		handleSubmit(payload);
 	}
 
-	const onDelete = (e) => {
-		console.log('Deleted');
-	}
-
 	return (
 		<div className="row">
 			<div className="col-lg-12">
 				<div className="row">
-					<div className={currentMode !== SUPPORTED_MODES.CREATE ? 'col-md-10' : 'col-md-12'}>
+					<div className={currentMode !== SUPPORTED_MODES.CREATE ? 'col-md-11' : 'col-md-12'}>
 						<div className="mb-4">
 							<Input
 								id="name"
@@ -97,7 +95,7 @@ const RoleForm = ({
 						</div>
 					</div>
 					{currentMode !== SUPPORTED_MODES.CREATE && (
-						<div className="col-lg-2">
+						<div className="col-lg-1">
 							<div className="mb-4">
 								<label className="form-label" htmlFor="slug">
 									Active
@@ -134,11 +132,6 @@ const RoleForm = ({
 				<div className="row">
 					<div className="col-lg-12">
 						<div className="mt-4 d-flex align-items-center">
-							{currentMode !== SUPPORTED_MODES.CREATE && (
-								<button type="button" className="btn btn-outline-danger" onClick={onDelete}>
-									<i className="bi bi-trash" /> Delete
-								</button>
-							)}
 							<div className="ms-auto">
 								<button type="button" className="btn btn-sm btn-outline-primary" onClick={onSubmit}>
 									{mode === SUPPORTED_MODES.CREATE ? (
