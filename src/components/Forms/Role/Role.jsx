@@ -73,7 +73,7 @@ const RoleForm = ({
 		const errs = validate(payload);
 		setErrors(errs);
 
-		if (Object.keys(errs).length) return null;
+		if (disabled || Object.keys(errs).length) return null;
 
 		handleSubmit(payload);
 	}
