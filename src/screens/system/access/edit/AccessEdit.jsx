@@ -108,6 +108,9 @@ const AccessEdit = ({ roleId }) => {
 
 	const onDeleteRoleClick = (e) => {
 		e.preventDefault();
+
+		if (data.system) return;
+
 		handleDeleteRole(data);
 	};
 
@@ -214,7 +217,7 @@ const AccessEdit = ({ roleId }) => {
 							<Card>
 								<Card.Header>
 									<Card.Title>
-										Deletion
+										Delete role
 									</Card.Title>
 								</Card.Header>
 								<Card.Body>
