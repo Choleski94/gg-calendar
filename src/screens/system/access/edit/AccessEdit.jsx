@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { 
 	Card, 
+	Forms,
 	Table, 
 	Layout, 
 	NavPill, 
@@ -161,6 +162,17 @@ const AccessEdit = ({ roleId }) => {
 					</div>
 					<div className="col-lg-9">
 						<div className="d-grid gap-3 gap-lg-5">
+							<Card>
+								<Card.Header>
+									<Card.Title>
+										Role name & description
+									</Card.Title>
+								</Card.Header>
+								<Card.Body>
+									<Forms.Role />
+								</Card.Body>
+							</Card>
+
 							<Table
 								fullHeight
 								loading={loading}
@@ -171,6 +183,7 @@ const AccessEdit = ({ roleId }) => {
 								headers={DEFAULT_PERMISSION_TABLE_HEADER}
 								data={parseOptions(permissionOptions, onChange)}
 							/>
+
 							<Card>
 								<Card.Header>
 									<Card.Title>
