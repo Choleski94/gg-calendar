@@ -85,14 +85,14 @@ const AccessEdit = ({ roleId }) => {
 	const onChange = (e) => {
 		const rule = e.target.name;
 
-		const permissionCopy = _.cloneDeep(permissionOptions);
+		const permissionCopy = _.cloneDeep(permissionOptions || []);
 		const objectToUpdate = _.find(permissionCopy, ['slug', rule]);
 
 		if (objectToUpdate) {
 			objectToUpdate[rule] = !e.target.value;
 		}
 
-		setPermissionOptions([ ...objectToUpdate ]);
+		setPermissionOptions(objectToUpdate);
 	}
 
 	const onSavePermissionClick = (e) => {
