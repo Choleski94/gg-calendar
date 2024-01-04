@@ -142,7 +142,7 @@ const RoleForm = ({
 								<button type="button" className="btn btn-primary" onClick={onSubmit}>
 									<i className="bi bi-plus" />
 									&nbsp;
-									Save role
+									Create role
 								</button>
 							</div>
 						</div>
