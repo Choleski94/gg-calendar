@@ -18,6 +18,9 @@ const SwitchToggle = ({ name, value = false, disabled = false, onChange, options
 	], [ options ]);
 
 	const onToggleChange = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+
 		const checkedValue = !checked;
 		setChecked(checkedValue);
 
