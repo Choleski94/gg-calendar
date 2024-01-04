@@ -165,11 +165,14 @@ const AccessEdit = ({ roleId }) => {
 							<Card>
 								<Card.Header>
 									<Card.Title>
-										Role name & description
+										Profile
 									</Card.Title>
 								</Card.Header>
 								<Card.Body>
-									<Forms.Role />
+									<Forms.Role 
+										mode="UPDATE"
+										defaultValues={data}
+									/>
 								</Card.Body>
 							</Card>
 
@@ -187,7 +190,7 @@ const AccessEdit = ({ roleId }) => {
 							<Card>
 								<Card.Header>
 									<Card.Title>
-										Delete {data?.name} role
+										Deletion
 									</Card.Title>
 								</Card.Header>
 								<Card.Body>
