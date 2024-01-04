@@ -17,6 +17,7 @@ const Input = React.forwardRef(({
 	error = null,
 	type = 'text',
 	required = '',
+	disabled = false,
 	secondaryLabel = '',
 	className = 'form-control form-control-lg',
 	...rest
@@ -49,6 +50,7 @@ const Input = React.forwardRef(({
 				className={inputClassName}
 				required={required}
 				onChange={onChange}
+				disabled={disabled}
 				checked={value}
 				value={value}
 				name={name}
@@ -56,6 +58,7 @@ const Input = React.forwardRef(({
 				ref={ref}
 				{...rest}
 			/>
+
 			{label && type === 'checkbox' && (
 				<label className="form-label" htmlFor={name}>
 					{label}
