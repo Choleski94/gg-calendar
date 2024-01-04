@@ -1,5 +1,6 @@
 'use strict';
 
+import Role from './Role';
 import Contact from './Contact';
 import Workforce from './Workforce';
 import InvitePeople from './InvitePeople';
@@ -10,6 +11,7 @@ import JobContactLocation from './Jobs/ContactLocation';
 import JobServiceLocation from './Jobs/ServiceLocation';
 
 export default {
+	Role,
 	Contact,
 	Workforce,
 	InvitePeople,
