@@ -12,9 +12,9 @@ import { buildDate, parseTime, hasPrimary } from '@utils';
 import { SUPPORTED_PAYMENT_STATUSES } from '@constants/payments';
 import { Modal, NavPill, Table, Layout, Card, Counter } from '@components';
 
-import OrderCreate from '../../../jobs/info/Orders/OrderCreate';
-import OrderSummary from '../../../jobs/info/Orders/OrderSummary';
-import OrderInventory from '../../../jobs/info/Orders/OrderInventory';
+import OrderCreate from '../../../jobs/edit/Orders/OrderCreate';
+import OrderSummary from '../../../jobs/edit/Orders/OrderSummary';
+import OrderInventory from '../../../jobs/edit/Orders/OrderInventory';
 
 const SUPPORTED_MODAL_VIEWS = {
 	CREATE: 'CREATE',

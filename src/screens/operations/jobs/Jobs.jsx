@@ -3,8 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { withPrivateRouter } from '@utils/hocs';
 
-import JobInfo from './info';
-import JobControl from './JobControl';
+import JobEdit from './edit';
+import JobControl from './control';
 
 const JobsScreen = () => {
 	const navigate = useNavigate();
@@ -21,8 +21,8 @@ const JobsScreen = () => {
 
 	return (
 		jobId && jobId.length ? (
-			<JobInfo 
-				id={jobId} 
+			<JobEdit 
+				jobId={jobId} 
 			/>
 		) : (
 			<JobControl 

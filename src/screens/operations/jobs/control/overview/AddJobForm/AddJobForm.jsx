@@ -4,9 +4,9 @@ import { MultiStepForm } from '@components';
 
 import CustomerSection from './CustomerSection';
 
-import BaseProjects from '../../../info/Projects/BaseProjects';
-import ScheduleSection from '../../../info/Scheduling/SchedulingEdit';
-import BaseCustomerOverview from '../../../../../crm/customers/CustomerControl/overview/BaseCustomerOverview';
+import BaseProjects from '../../../../create/Projects/BaseProjects';
+import ScheduleSection from '../../../../create/Scheduling/SchedulingEdit';
+import BaseCustomerOverview from '../../../../../../crm/customers/CustomerControl/overview/BaseCustomerOverview';
 
 const DEFAULT_ACTIVE_CUSTOMER_TABLE_HEADER = [
 	'name',
