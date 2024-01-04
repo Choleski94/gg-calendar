@@ -2,7 +2,6 @@ import React from 'react';
 
 import formatMessage from '@utils/formatMessage';
 import { SUPPORTED_STATUSES } from '@constants/access';
-import { deleteObject, updateOrPushObject } from '@utils';
 import { Input, TextArea, SwitchToggle } from '@components';
 
 const SUPPORTED_MODES = {
@@ -10,41 +9,53 @@ const SUPPORTED_MODES = {
 	UPDATE: 'UPDATE',
 }
 
+const DEFAULT_PAYLOAD = {
+	name: '', 
+	enabled: false, 
+	permissions: [],
+	description: '', 
+}
+
 const RoleForm = ({
-	orgId = '', 
 	defaultValues = {}, 
+	handleSubmit = () => null,
 	mode = SUPPORTED_MODES.CREATE, 
-	aggregateOption
 }) => {
-	const [ currentMode, setcurrentMode ] = React.useState(mode);
 	const [ errors, setErrors ] = React.useState({});
 	const [ payload, setPayload ] = React.useState({
-		orgId, 
-		name: '', 
-		enabled: false, 
-		description: '', 
-		...defaultValues
+		...DEFAULT_PAYLOAD, ...defaultValues
 	});
+	const [ currentMode, setcurrentMode ] = React.useState(mode);
 
 	const errorMessages = {
 		empty: 'Can\'t be empty.',
 		unique: 'Name already taken',
+		longer: 'Requires a minimum length of 3 characters.',
 	};
 
-	const hasUpdateMode = React.useMemo(() => {
-		return currentMode !== SUPPORTED_MODES.CREATE;
-	}, [ currentMode ]);
+	const hasUpdateMode = React.useMemo(() => (
+		currentMode !== SUPPORTED_MODES.CREATE
+	), [ currentMode ]);
 
 	const validate = (payload) => {
 		const errs = {};
 
-		// Check for empty input(s).
+		// Check for empty name input.
 		if (!payload.name) {
 			errs.name = errorMessages.empty;
 		}
 
+		if (payload.name < 3) {
+			errs.name = errorMessages.longer;
+		}
+
+		// Check for empty description input.
 		if (!payload.description) {
 			errs.description = errorMessages.empty;
+		}
+
+		if (payload.description< 3) {
+			errs.description = errorMessages.longer;
 		}
 
 		return errs;
@@ -61,7 +72,7 @@ const RoleForm = ({
 
 		if (Object.keys(errs).length) return null;
 
-		// handleMutation(payload);
+		handleSubmit(payload);
 	}
 
 	const onDelete = (e) => {
@@ -72,7 +83,7 @@ const RoleForm = ({
 		<div className="row">
 			<div className="col-lg-12">
 				<div className="row">
-					<div className="col-lg-10">
+					<div className={currentMode !== SUPPORTED_MODES.CREATE ? 'col-md-10' : 'col-md-12'}>
 						<div className="mb-4">
 							<Input
 								id="name"
@@ -85,22 +96,24 @@ const RoleForm = ({
 							/>
 						</div>
 					</div>
-					<div className="col-lg-2">
-						<div className="mb-4">
-							<label className="form-label" htmlFor="slug">
-								Active
-							</label>
-							<SwitchToggle 
-								name="status" 
-								onChange={onChange} 
-								options={[
-									SUPPORTED_STATUSES.INACTIVE, 
-									SUPPORTED_STATUSES.ACTIVE
-								]}
-								value={payload?.status === SUPPORTED_STATUSES.ACTIVE}
-							/>
+					{currentMode !== SUPPORTED_MODES.CREATE && (
+						<div className="col-lg-2">
+							<div className="mb-4">
+								<label className="form-label" htmlFor="slug">
+									Active
+								</label>
+								<SwitchToggle 
+									name="status" 
+									onChange={onChange} 
+									options={[
+										SUPPORTED_STATUSES.INACTIVE, 
+										SUPPORTED_STATUSES.ACTIVE
+									]}
+									value={payload?.status === SUPPORTED_STATUSES.ACTIVE}
+								/>
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 				<div className="row">
 					<div className="col-lg-12">

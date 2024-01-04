@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 
 import { 
@@ -26,6 +27,8 @@ import { parseOptions } from './AccessEdit.controller';
 const AccessEdit = ({ roleId }) => {
 	const [ data, setData ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
+	const [ permissionOptions, setPermissionOptions ] = React.useState([]);
+	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SERVICES_SECTIONS.ADMINISTRATION);
 
 	const fetchRolePermissions = (roleId) => {
 		setLoading(true);
@@ -46,27 +49,39 @@ const AccessEdit = ({ roleId }) => {
 		fetchRolePermissions(roleId);
 	}, []);
 
-	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SERVICES_SECTIONS.ADMINISTRATION);
-
-	const permissionOptions = React.useMemo(() => {
-		let permissionRows = [];
-
-		if (hasObjectKey(data)) {
-			const sectionPermissions = SUPPORTED_SERVICES_ROWS[activeSection] || [];
-
-			permissionRows = sectionPermissions.map((rule) => {
-				const [ create = false, view = false, update = false, remove = false ] = data.permissions[rule.slug] || [];
-				return {
-					...rule,
-					create,
-					view,
-					update,
-					remove,
-				}
-			});
+	const onChange = (e, rule) => {
+		const permissionCopy = _.cloneDeep(permissionOptions);
+		const objectToUpdate = _.find(permissionCopy, ['slug', rule]);
+		if (objectToUpdate) {
+			objectToUpdate[e.target.name] = !e.target.value;
 		}
 
-		return permissionRows;
+		setPermissionOptions([ ...objectToUpdate ]);
+	}
+
+	React.useEffect(() => {
+		if (!hasObjectKey(data)) return 
+
+		const sectionPermissions = SUPPORTED_SERVICES_ROWS[activeSection] || [];
+
+		const options = sectionPermissions.map((rule) => {
+			const [
+				create = false, 
+				view = false, 
+				update = false, 
+				remove = false
+			] = data.permissions[rule.slug];
+
+			return {
+				...rule, 
+				create, 
+				view, 
+				update, 
+				remove
+			};
+		});
+
+		setPermissionOptions(options);
 	}, [ data, activeSection ]);
 
 	return (
@@ -114,8 +129,8 @@ const AccessEdit = ({ roleId }) => {
 								title="Permissions"
 								elementsPerPage={100}
 								noDataMessage="No permission found"
-								data={parseOptions(permissionOptions)}
 								headers={DEFAULT_PERMISSION_TABLE_HEADER}
+								data={parseOptions(permissionOptions, onChange)}
 							/>
 						</div>
 					</div>

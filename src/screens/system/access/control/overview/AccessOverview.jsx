@@ -9,8 +9,7 @@ import { ENTITY_ROLE, DEFAULT_TABLE_HEADER, DEFAULT_TABLE_ACTIVE_HEADER, SUPPORT
 
 import RoleForm from './RoleForm';
 import RoleDialog from './RoleDialog';
-
-const orgId = '8fa9a6e2-d4f3-49e3-9d1c-42b227f64fd2';
+import useAccessOptions from './useAccessOptions';
 
 const parseWorforceRoleOptions = (options = [], actionMenuOptions = []) => options.map((payload) => ({
 	query: [
@@ -41,6 +40,7 @@ const parseWorforceRoleOptions = (options = [], actionMenuOptions = []) => optio
 }));
 
 const AccessOverview = ({ setRoleId }) => {
+	const [ data, setData ] = React.useState({});
 	const [ options, setOptions ] = React.useState([]);
 	const [ loading, setLoading ] = React.useState(false);
 	const [ showModal, setShowModal ] = React.useState(false);
@@ -55,6 +55,21 @@ const AccessOverview = ({ setRoleId }) => {
 				setOptions(data.result);
 			}
 		}).catch(() => {
+			setLoading(false);
+		});
+	}
+
+	const handleSubmit = (payload) => {
+		setLoading(true);
+
+		request.create({ entity: ENTITY_ROLE, jsonData: payload }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				setShowModal(false);
+				fetchRoles();
+			}
+		}).catch((error) => {
 			setLoading(false);
 		});
 	}
@@ -87,16 +102,6 @@ const AccessOverview = ({ setRoleId }) => {
 		</button>
 	);
 
-	const aggregateOption = (newOption = {}, shouldDelete = false) => {
-		if (shouldDelete) {
-			setOptions(deleteObject(newOption, options));
-			setShowModal(false);
-		} else {
-			setOptions(updateOrPushObject(newOption, options));
-			setShowModal(false);
-		}
-	}
-
 	const actionMenuOptions = [
 		{
 			key: 'copy',
@@ -118,10 +123,12 @@ const AccessOverview = ({ setRoleId }) => {
 		}
 	];
 
+	const { totalRole, totalActiveRole, totalInactiveRole }= useAccessOptions(options);
+
 	return (
 		<div className="d-grid gap-3 gap-lg-5">
 			<div className="row">
-				<div className="col-sm-3 col-lg-3">
+				<div className="col-sm-4 col-lg-4">
 					<Card>
 						<Card.Body>
 							<Card.Subtitle>
@@ -130,19 +137,21 @@ const AccessOverview = ({ setRoleId }) => {
 							<div className="row align-items-center gx-2">
 								<div className="col">
 									<span className="display-4 text-dark">
-										<Counter number={134} />
+										<Counter number={totalRole} />
 									</span>
 								</div>
+								{/*
 								<div className="col-auto">
 									<span className="badge bg-soft-success text-success p-1">
 										<i className="bi-graph-up" /> 5.0%
 									</span>
 								</div>
+								*/}
 							</div>
 						</Card.Body>
 					</Card>
 				</div>
-				<div className="col-sm-3 col-lg-3">
+				<div className="col-sm-4 col-lg-4">
 					<Card>
 						<Card.Body>
 							<Card.Subtitle>
@@ -151,56 +160,39 @@ const AccessOverview = ({ setRoleId }) => {
 							<div className="row align-items-center gx-2">
 								<div className="col">
 									<span className="display-4 text-dark">
-										<Counter number={100} />
+										<Counter number={totalActiveRole} />
 									</span>
 								</div>
+								{/*
 								<div className="col-auto">
 									<span className="badge bg-soft-success text-success p-1">
 										<i className="bi-graph-up" /> 1.2%
 									</span>
 								</div>
+								*/}
 							</div>
 						</Card.Body>
 					</Card>
 				</div>
-				<div className="col-sm-3 col-lg-3">
+				<div className="col-sm-4 col-lg-4">
 					<Card>
 						<Card.Body>
 							<Card.Subtitle>
-								Innactive permissions
+								Inactive permissions
 							</Card.Subtitle>
 							<div className="row align-items-center gx-2">
 								<div className="col">
 									<span className="display-4 text-dark">
-										<Counter number={16} />
+										<Counter number={totalInactiveRole} />
 									</span>
 								</div>
+								{/*
 								<div className="col-auto">
 									<span className="badge bg-soft-danger text-danger p-1">
 										<i className="bi-graph-down" /> 2.8%
 									</span>
 								</div>
-							</div>
-						</Card.Body>
-					</Card>
-				</div>
-				<div className="col-sm-3 col-lg-3">
-					<Card>
-						<Card.Body>
-							<Card.Subtitle>
-								Innactive permissions
-							</Card.Subtitle>
-							<div className="row align-items-center gx-2">
-								<div className="col">
-									<span className="display-4 text-dark">
-										<Counter number={16} />
-									</span>
-								</div>
-								<div className="col-auto">
-									<span className="badge bg-soft-danger text-danger p-1">
-										<i className="bi-graph-down" /> 2.8%
-									</span>
-								</div>
+								*/}
 							</div>
 						</Card.Body>
 					</Card>
@@ -227,8 +219,9 @@ const AccessOverview = ({ setRoleId }) => {
 					onCloseRequest={toggleModal} 
 				>
 					<RoleForm 
-						orgId={orgId} mode="CREATE" 
-						aggregateOption={aggregateOption} 
+						data={data}
+						mode="CREATE" 
+						handleSubmit={handleSubmit}
 					/>
 				</Modal>
 			) : null}
