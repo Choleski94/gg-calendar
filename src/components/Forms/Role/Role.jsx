@@ -86,10 +86,10 @@ const RoleForm = ({
 						<div className="mb-4">
 							<Input
 								id="name"
-								disabled
 								type="text"
 								name="name"
 								label="Name"
+								disabled={disabled}
 								onChange={onChange}
 								error={errors?.name}
 								value={payload?.name}
@@ -103,13 +103,10 @@ const RoleForm = ({
 									Active
 								</label>
 								<SwitchToggle 
-									name="status" 
+									name="enabled" 
+									disabled={disabled}
 									onChange={onChange} 
-									options={[
-										SUPPORTED_STATUSES.INACTIVE, 
-										SUPPORTED_STATUSES.ACTIVE
-									]}
-									value={payload?.status === SUPPORTED_STATUSES.ACTIVE}
+									value={payload?.enabled}
 								/>
 							</div>
 						</div>
@@ -119,11 +116,11 @@ const RoleForm = ({
 					<div className="col-lg-12">
 						<TextArea
 							rows="4"
-							disabled
 							type="text"
 							id="description"
 							name="description"
 							onChange={onChange}
+							disabled={disabled}
 							label="Description"
 							description="description"
 							error={errors?.description}
