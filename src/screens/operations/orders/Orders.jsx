@@ -3,8 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { withPrivateRouter } from '@utils/hocs';
 
-import OrderInfo from './OrderInfo';
-import OrderControl from './OrderControl';
+import OrderEdit from './edit';
+import OrderControl from './control';
 
 const OrdersScreen = () => {
 	const navigate = useNavigate();
@@ -15,7 +15,7 @@ const OrdersScreen = () => {
 
 	return (
 		orderId && orderId.length ? (
-			<OrderInfo 
+			<OrderEdit 
 				orderId={orderId} 
 				setOrderId={setOrderId} 
 			/>
