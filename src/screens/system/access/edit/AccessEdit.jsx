@@ -26,6 +26,23 @@ import { request } from '@utils/request';
 
 import { parseOptions } from './AccessEdit.controller';
 
+const CardLoader = ({ message }) => (
+	<div className="text-center p-4">
+		<div
+			role="status"
+			className="spinner-border mt-3 mb-5"
+			style={{ width: "3rem", height: "3rem" }}
+		>
+			<span className="visually-hidden">
+				Loading...
+			</span>
+		</div>
+		<p className="mb-0">
+			{message}
+		</p>
+	</div>
+);
+
 const AccessEdit = ({ roleId }) => {
 	const navigate = useNavigate();
 
@@ -194,12 +211,16 @@ const AccessEdit = ({ roleId }) => {
 									</Card.Title>
 								</Card.Header>
 								<Card.Body>
-									<Forms.Role 
-										mode="UPDATE"
-										defaultValues={data}
-										disabled={data?.system}
-										handleSubmit={handleUpdateRole}
-									/>
+									{loading ? (
+										<CardLoader />
+									) : (
+										<Forms.Role 
+											mode="UPDATE"
+											defaultValues={data}
+											disabled={data?.system}
+											handleSubmit={handleUpdateRole}
+										/>
+									)}
 								</Card.Body>
 							</Card>
 
@@ -221,21 +242,27 @@ const AccessEdit = ({ roleId }) => {
 									</Card.Title>
 								</Card.Header>
 								<Card.Body>
-									<Card.Text>
-										Deleting your role removes the permissions for registered 
-										Tigado services linked to that role for the user.
-									</Card.Text>
-									<div className="d-flex justify-content-end m-2">
-										<button 
-											type="submit" 
-											onClick={onDeleteRoleClick}
-											className="btn btn-sm btn-outline-danger" 
-										>
-											<i className="bi-trash" />
-											&nbsp;
-											Delete
-										</button>
-									</div>
+									{loading ? (
+										<CardLoader />
+									) : (
+										<>
+											<Card.Text>
+												Deleting your role removes the permissions for registered 
+												Tigado services linked to that role for the user.
+											</Card.Text>
+											<div className="d-flex justify-content-end m-2">
+												<button 
+													type="submit" 
+													onClick={onDeleteRoleClick}
+													className="btn btn-sm btn-outline-danger" 
+												>
+													<i className="bi-trash" />
+													&nbsp;
+													Delete
+												</button>
+											</div>
+										</>
+									)}
 								</Card.Body>
 							</Card>
 						</div>
