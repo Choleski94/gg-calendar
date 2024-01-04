@@ -70,6 +70,7 @@ const Table = ({
 	height = '',
 	headers = [],
 	loading = false,
+	footerCta = null,
 	component = null,
 	filterTitle = '',
 	defaultIdx = null,
@@ -204,6 +205,11 @@ const Table = ({
 		withExport || withFilter || 
 		title && title.length || 
 		cta
+	), []);
+
+	const showFooter = React.useMemo(() => Boolean(
+		(!hidePagination && items && items.length  > pagination.elementsPerPage) ||
+		footerCta
 	), []);
 
 	const hasActiveItems = React.useMemo(() => (
@@ -480,104 +486,13 @@ const Table = ({
 				</Card.Body>
 			)}
 
-			{!hidePagination && items && items.length > pagination.elementsPerPage ? (
+			{showFooter ? (
 				<Card.Footer>
 					<div className="row justify-content-center justify-content-sm-between align-items-sm-center">
-						<div className="col-sm mb-2 mb-sm-0">
-							<div className="d-flex justify-content-center justify-content-sm-start align-items-center">
-								<span className="me-2">Showing:</span>
-								<div className="tom-select-custom">
-									<select
-										id="datatableEntries"
-										className="js-select form-select form-select-borderless w-auto tomselected ts-hidden-accessible"
-										autoComplete="off"
-										tabIndex={-1}
-									>
-										<option value={10}>10</option>
-										<option value={20}>20</option>
-										<option value={15}>15</option>
-									</select>
-									<div className="ts-wrapper js-select form-select form-select-borderless w-auto single plugin-change_listener plugin-hs_smart_position input-hidden full has-items">
-										<div className="ts-control">
-											<div data-value={15} className="item" data-ts-item="true">
-												15
-											</div>
-										</div>
-										<div className="tom-select-custom">
-											<div
-												className="ts-dropdown single plugin-change_listener plugin-hs_smart_position"
-												style={{ display: "none" }}
-											>
-												<div
-													role="listbox"
-													tabIndex={-1}
-													className="ts-dropdown-content"
-													id="datatableEntries-ts-dropdown"
-												/>
-											</div>
-										</div>
-									</div>
-								</div>
-								<span className="text-secondary me-2">of</span>
-								<span id="datatableWithPaginationInfoTotalQty">24</span>
-							</div>
-						</div>
+						<div className="col-sm mb-2 mb-sm-0" />
 						<div className="col-sm-auto">
 							<div className="d-flex justify-content-center justify-content-sm-end">
-								<nav id="datatablePagination" aria-label="Activity pagination">
-									<div
-										className="dataTables_paginate paging_simple_numbers"
-										id="datatable_paginate"
-									>
-										<ul
-											id="datatable_pagination"
-											className="pagination datatable-custom-pagination"
-										>
-											<li className="paginate_item page-item disabled">
-												<a
-													className="paginate_button previous page-link"
-													aria-controls="datatable"
-													data-dt-idx={0}
-													tabIndex={0}
-													id="datatable_previous"
-												>
-													<span aria-hidden="true">Prev</span>
-												</a>
-											</li>
-											<li className="paginate_item page-item active">
-												<a
-													className="paginate_button page-link"
-													aria-controls="datatable"
-													data-dt-idx={1}
-													tabIndex={0}
-												>
-													1
-												</a>
-											</li>
-											<li className="paginate_item page-item">
-												<a
-													className="paginate_button page-link"
-													aria-controls="datatable"
-													data-dt-idx={2}
-													tabIndex={0}
-												>
-													2
-												</a>
-											</li>
-											<li className="paginate_item page-item">
-												<a
-													className="paginate_button next page-link"
-													aria-controls="datatable"
-													data-dt-idx={3}
-													tabIndex={0}
-													id="datatable_next"
-												>
-													<span aria-hidden="true">Next</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</nav>
+								{footerCta}
 							</div>
 						</div>
 					</div>
@@ -585,158 +500,6 @@ const Table = ({
 			) : null}
 		</Card>
 	);
-
-	// return (
-	// 	<React.Fragment>
-	// 		<TableWrapper>
-	// 			<TableContainer height={height} hasQuickView={component ? toggle : false}>
-	// 				<TableComponent className="data-table">
-	// 					{headers && headers.length ? (
-	// 						<thead>
-	// 							<tr className="data-item data-head">
-	// 								{headers.map(({ key, label }) => (
-	// 									<th
-	// 										key={`header-${key}`}
-	// 										className="data-col"
-	// 										button onClick={(e) => onFilter(e, key)}
-	// 									>
-	// 										{label}
-	// 										{label && label.length && withFilter && (
-	// 											<button>
-	// 												<i className={getClassName(getClassNamesFor(key, sortConfig))} />
-	// 											</button>
-	// 										)}
-	// 									</th>
-	// 								))}
-	// 							</tr>
-	// 						</thead>
-	// 					) : null}
-	// 					{activeItems?.length ? (
-	// 						<tbody>
-	// 							{activeItems.map((item, trIdx) => {
-	// 								const activeId = item.key || genId();
-	// 								return (
-	// 									<tr
-	// 										className="data-item"
-	// 										key={`tr-${activeId}}`}
-	// 										onClick={e => toggleQuickView(e, activeId, item)}
-	// 									>
-	// 										{headerKeys.map((key) => (
-	// 											<td key={`td-${key}-${activeId}`} className="data-col">
-	// 												{item[key]}
-	// 											</td>
-	// 										))}
-	// 									</tr>
-	// 							       );
-	// 							})}
-	// 						</tbody>
-	// 					) : null}
-	// 				</TableComponent>
-	// 			</TableContainer>
-	// 			<TableQuickView hasQuickView={component ? toggle : false}>
-	// 				<TableQuickViewContainer>
-	// 					<TableQuickViewHeader>
-	// 						{quickViewHeader || 'Properties'}
-	// 						<span 
-	// 							onClick={() => setToggle('')}
-	// 							className="table__quick__view_x" 
-	// 						>
-	// 							X Close
-	// 						</span>
-	// 					</TableQuickViewHeader>
-	// 					<TableQuickViewSection>
-	// 						{component}
-	// 					</TableQuickViewSection>
-	// 				</TableQuickViewContainer>
-	// 			</TableQuickView>
-	// 		</TableWrapper>
-	// 		{!hidePagination && items && items.length > pagination.elementsPerPage ? (
-	// 			<Pagination 
-	// 				options={items}
-	// 				setCurrentPage={setActivePage}
-	// 				resetPage={pagination.resetPage}
-	// 				currentPage={pagination.currentPage}
-	// 				elementsPerPage={pagination.elementsPerPage}
-	// 			/>
-	// 		) : (null)}
-	// 	</React.Fragment>
-	// );
-
-	// return (
-	// 	<React.Fragment>
-	// 		<TableWrapper>
-	// 			<TableContainer height={height} hasQuickView={component ? toggle : false}>
-	// 				<TableComponent className="data-table">
-	// 					{headers && headers.length ? (
-	// 						<thead>
-	// 							<tr className="data-item data-head">
-	// 								{headers.map(({ key, label }) => (
-	// 									<th
-	// 										key={`header-${key}`}
-	// 										className="data-col"
-	// 										button onClick={(e) => onFilter(e, key)}
-	// 									>
-	// 										{label}
-	// 										{label && label.length && withFilter && (
-	// 											<button>
-	// 												<i className={getClassName(getClassNamesFor(key, sortConfig))} />
-	// 											</button>
-	// 										)}
-	// 									</th>
-	// 								))}
-	// 							</tr>
-	// 						</thead>
-	// 					) : null}
-	// 					{activeItems?.length ? (
-	// 						<tbody>
-	// 							{activeItems.map((item, trIdx) => {
-	// 								const activeId = item.key || genId();
-	// 								return (
-	// 									<tr
-	// 										className="data-item"
-	// 										key={`tr-${activeId}}`}
-	// 										onClick={e => toggleQuickView(e, activeId, item)}
-	// 									>
-	// 										{headerKeys.map((key) => (
-	// 											<td key={`td-${key}-${activeId}`} className="data-col">
-	// 												{item[key]}
-	// 											</td>
-	// 										))}
-	// 									</tr>
-	// 							       );
-	// 							})}
-	// 						</tbody>
-	// 					) : null}
-	// 				</TableComponent>
-	// 			</TableContainer>
-	// 			<TableQuickView hasQuickView={component ? toggle : false}>
-	// 				<TableQuickViewContainer>
-	// 					<TableQuickViewHeader>
-	// 						{quickViewHeader || 'Properties'}
-	// 						<span 
-	// 							onClick={() => setToggle('')}
-	// 							className="table__quick__view_x" 
-	// 						>
-	// 							X Close
-	// 						</span>
-	// 					</TableQuickViewHeader>
-	// 					<TableQuickViewSection>
-	// 						{component}
-	// 					</TableQuickViewSection>
-	// 				</TableQuickViewContainer>
-	// 			</TableQuickView>
-	// 		</TableWrapper>
-	// 		{!hidePagination && items && items.length > pagination.elementsPerPage ? (
-	// 			<Pagination 
-	// 				options={items}
-	// 				setCurrentPage={setActivePage}
-	// 				resetPage={pagination.resetPage}
-	// 				currentPage={pagination.currentPage}
-	// 				elementsPerPage={pagination.elementsPerPage}
-	// 			/>
-	// 		) : (null)}
-	// 	</React.Fragment>
-	// );
 };
 
 export default Table;
