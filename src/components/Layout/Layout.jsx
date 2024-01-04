@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import constants from '@constants';
 
@@ -48,7 +48,6 @@ const getAcronym = (name = '') => (
 const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, children }) => {
 	const myRef = React.useRef();
 
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const { width } = useWindowSize();
