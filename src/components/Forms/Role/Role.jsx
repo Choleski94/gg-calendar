@@ -124,7 +124,6 @@ const RoleForm = ({
 							label="Description"
 							description="description"
 							error={errors?.description}
-							secondaryLabel="(Optional)"
 							value={payload?.description}
 						/>
 					</div>
