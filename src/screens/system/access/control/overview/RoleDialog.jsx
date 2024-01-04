@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { NavPill } from '@components';
+import { NavPill, Forms } from '@components';
 
-import RoleForm from './RoleForm';
 import RoleMember from './RoleMember';
 import RolePermissions from './RolePermissions';
 
@@ -53,7 +52,7 @@ const RoleDialog = ({ orgId = '', roleId = '', defaultValues, aggregateOption })
 
 			<div className="mt-5">
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.UPDATE && (
-					<RoleForm
+					<Forms.Role
                                                 orgId={orgId} mode="UPDATE"
                                                 defaultValues={defaultValues}
                                                 aggregateOption={aggregateOption}

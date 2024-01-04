@@ -5,10 +5,9 @@ import { request } from '@utils/request';
 import mockAccessRole from '@mocks/access';
 import formatMessage from '@utils/formatMessage';
 import { deleteObject, updateOrPushObject } from '@utils';
-import { Card, Counter, Modal, Table, ActionMenu } from '@components';
+import { Card, Counter, Modal, Table, ActionMenu, Forms } from '@components';
 import { ENTITY_ROLE, DEFAULT_TABLE_HEADER, DEFAULT_TABLE_ACTIVE_HEADER, SUPPORTED_STATUSES } from '@constants/access';
 
-import RoleForm from './RoleForm';
 import RoleDialog from './RoleDialog';
 import useAccessOptions from './useAccessOptions';
 
@@ -256,7 +255,7 @@ const AccessOverview = ({ setRoleId }) => {
 					title="Create new role" 
 					onCloseRequest={toggleModal} 
 				>
-					<RoleForm 
+					<Forms.Role
 						data={data} mode="CREATE" 
 						handleSubmit={handleCreateRole}
 					/>
