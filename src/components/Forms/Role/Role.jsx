@@ -28,7 +28,7 @@ const RoleForm = ({
 
 	React.useEffect(() => {
 		setPayload(defaultValues);
-	}, [ defaultValues ]);
+	}, []);
 
 	const errorMessages = {
 		empty: 'Can\'t be empty.',
