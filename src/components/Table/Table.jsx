@@ -157,8 +157,9 @@ const Table = ({
 	const toggleQuickView = (e, id, item) => {
 		e.preventDefault();
 		e.stopPropagation()
-		setToggle(toggle.includes(id) ? '' : id);
+
 		if (onRowClick) {
+			setToggle(toggle.includes(id) ? '' : id);
 			onRowClick(e, item);
 		}
 	};
