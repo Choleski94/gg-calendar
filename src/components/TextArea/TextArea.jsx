@@ -12,6 +12,7 @@ const TextArea = ({
 	error = null,
 	type = 'text',
 	required = '',
+	disabled = false,
 	secondaryLabel = '',
 	...rest
 }) => (
@@ -33,6 +34,7 @@ const TextArea = ({
 			className="form-control"
 			required={required}
 			onChange={onChange}
+			disabled={disabled}
 			value={value}
 			name={name}
 			type={type}
