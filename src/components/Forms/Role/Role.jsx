@@ -140,10 +140,20 @@ const RoleForm = ({
 								</button>
 							)}
 							<div className="ms-auto">
-								<button type="button" className="btn btn-primary" onClick={onSubmit}>
-									<i className="bi bi-plus" />
-									&nbsp;
-									Create role
+								<button type="button" className="btn btn-sm btn-outline-primary" onClick={onSubmit}>
+									{mode === SUPPORTED_MODES.CREATE ? (
+										<>
+											<i className="bi-plus" />
+											&nbsp;
+											Create role
+										</>
+									) : (
+										<>
+											<i className="bi-save" />
+											&nbsp;
+											Update role
+										</>
+									)} 
 								</button>
 							</div>
 						</div>
