@@ -82,17 +82,24 @@ const AccessEdit = ({ roleId }) => {
 		fetchRolePermissions(roleId);
 	}, []);
 
-	const onChange = (e) => {
-		// const rule = e.target.name;
+	const onChange = (e, rule) => {
+		const permissionCopy = _.cloneDeep(permissionOptions);
 
-		// const permissionCopy = _.cloneDeep(permissionOptions || []);
-		// const objectToUpdate = _.find(permissionCopy, ['slug', rule]);
+		if (permissionCopy || permissionCopy.length) return
 
-		// if (objectToUpdate) {
-		// 	objectToUpdate[rule] = !e.target.value;
-		// }
+		const operation = e.target.name;
 
-		// setPermissionOptions(objectToUpdate);
+		setPermissionOptions([
+			...permissionCopy.map((payload) => {
+				const res = { ...payload };
+
+				if (res.slug === rule) {
+					res[operation] = e.target.value;
+				}
+
+				return res;
+			})
+		]);
 	}
 
 	const onSavePermissionClick = (e) => {
