@@ -208,7 +208,6 @@ const Table = ({
 	), []);
 
 	const showFooter = React.useMemo(() => Boolean(
-		(!hidePagination && items && items.length  > pagination.elementsPerPage) ||
 		footerCta
 	), []);
 
