@@ -17,6 +17,7 @@ const DEFAULT_PAYLOAD = {
 }
 
 const RoleForm = ({
+	disabled = false,
 	defaultValues = {}, 
 	handleSubmit = () => null,
 	mode = SUPPORTED_MODES.CREATE, 
@@ -85,6 +86,7 @@ const RoleForm = ({
 						<div className="mb-4">
 							<Input
 								id="name"
+								disabled
 								type="text"
 								name="name"
 								label="Name"
@@ -117,6 +119,7 @@ const RoleForm = ({
 					<div className="col-lg-12">
 						<TextArea
 							rows="4"
+							disabled
 							type="text"
 							id="description"
 							name="description"
