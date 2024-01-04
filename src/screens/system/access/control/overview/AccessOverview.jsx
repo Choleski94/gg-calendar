@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 
 import { request } from '@utils/request';
@@ -11,33 +12,71 @@ import RoleForm from './RoleForm';
 import RoleDialog from './RoleDialog';
 import useAccessOptions from './useAccessOptions';
 
-const parseWorforceRoleOptions = (options = [], actionMenuOptions = []) => options.map((payload) => ({
-	query: [
-		payload?.name,
-		payload?.description,
-	].join(' '),
-	id: payload?._id,
-	name: payload?.name,
-	system: payload?.system,
-	createdAt: payload?.createdAt,
-	description: payload?.description,
-	enabled: (
-		payload?.enabled ? (
-			<span className="badge bg-soft-success text-success">
-				Active
-			</span>
-		) : (
-			<span className="badge bg-soft-danger text-danger">
-				Inactive
-			</span>
-		)
-	),
-	actions: (
-		<ActionMenu 
-			options={actionMenuOptions}
-		/>
-	),
-}));
+const setActionMenuOptions = ({
+	payload,
+	onCopy = () => null, 
+	onDelete = () => null,
+}) => {
+	const options = [
+		{
+			key: 'copy',
+			value: (
+				<span>
+					<i className="bi bi-files" /> Copy
+				</span>
+			),
+			cb: () => onCopy(payload),
+		},
+	];
+
+	if (!payload?.system) {
+		options.push({
+			key: 'delete',
+			value: (
+				<span className="text-danger">
+					<i className="bi bi-trash3" /> Delete
+				</span>
+			),
+			cb: () => onDelete(payload),
+		});
+	}
+
+	return options;
+}
+
+const parseWorforceRoleOptions = (options, onCopy, onDelete) => (
+	options.map((payload) => ({
+		query: [
+			payload?.name,
+			payload?.description,
+		].join(' '),
+		id: payload?._id,
+		name: payload?.name,
+		system: payload?.system,
+		createdAt: payload?.createdAt,
+		description: payload?.description,
+		enabled: (
+			payload?.enabled ? (
+				<span className="badge bg-soft-success text-success">
+					Active
+				</span>
+			) : (
+				<span className="badge bg-soft-danger text-danger">
+					Inactive
+				</span>
+			)
+		),
+		actions: (
+			<ActionMenu 
+				options={
+					setActionMenuOptions({
+						payload, onCopy, onDelete,
+					})
+				}
+			/>
+		),
+	}))
+);
 
 const AccessOverview = ({ setRoleId }) => {
 	const [ data, setData ] = React.useState({});
@@ -59,7 +98,7 @@ const AccessOverview = ({ setRoleId }) => {
 		});
 	}
 
-	const handleSubmit = (payload) => {
+	const handleCreateRole = (payload) => {
 		setLoading(true);
 
 		request.create({ entity: ENTITY_ROLE, jsonData: payload }).then((data) => {
@@ -67,6 +106,31 @@ const AccessOverview = ({ setRoleId }) => {
 
 			if (data.success === true) {
 				setShowModal(false);
+				fetchRoles();
+			}
+		}).catch((error) => {
+			setLoading(false);
+		});
+	}
+
+	const handleCopyRole = (payload) => {
+		// Set new cloned payload.
+		const newClonedPayload = _.cloneDeep({
+			name: payload?.name + ' Copy',
+			permissions: payload?.permissions,
+			description: payload?.description,
+		});
+
+		handleCreateRole(newClonedPayload);
+	};
+
+	const handleDeleteRole = (payload) => {
+		setLoading(true);
+
+		request.delete({ entity: ENTITY_ROLE, id: payload?._id, jsonData: payload }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
 				fetchRoles();
 			}
 		}).catch((error) => {
@@ -90,38 +154,12 @@ const AccessOverview = ({ setRoleId }) => {
 		return setRoleId(currentOption.id);
 	};
 
-	const onDeleteRoleClick = (e) => {
-		e.preventDefault();
-		setShowModal(true);
-	};
-
 	const renderAddRole = (
 		<button type="button" className="btn btn-sm btn-outline-primary" onClick={onAddRoleClick}>
 			<i className="bi-plus" />
 			Create Role
 		</button>
 	);
-
-	const actionMenuOptions = [
-		{
-			key: 'copy',
-			value: (
-				<span>
-					<i className="bi bi-files" /> Copy
-				</span>
-			),
-			cb: () => console.log('Duplicating content...')
-		},
-		{
-			key: 'delete',
-			value: (
-				<span className="text-danger">
-					<i className="bi bi-trash3" /> Delete
-				</span>
-			),
-			cb: () => console.log('Delete content...')
-		}
-	];
 
 	const { totalRole, totalActiveRole, totalInactiveRole }= useAccessOptions(options);
 
@@ -209,7 +247,7 @@ const AccessOverview = ({ setRoleId }) => {
 				noDataMessage="No roles found"
 				searchPlaceholder="Search roles"
 				defaultActiveKeys={DEFAULT_TABLE_ACTIVE_HEADER}
-				data={parseWorforceRoleOptions(options, actionMenuOptions)}
+				data={parseWorforceRoleOptions(options, handleCopyRole, handleDeleteRole)}
 			/>
 
 			{showModal ? (
@@ -219,9 +257,8 @@ const AccessOverview = ({ setRoleId }) => {
 					onCloseRequest={toggleModal} 
 				>
 					<RoleForm 
-						data={data}
-						mode="CREATE" 
-						handleSubmit={handleSubmit}
+						data={data} mode="CREATE" 
+						handleSubmit={handleCreateRole}
 					/>
 				</Modal>
 			) : null}
