@@ -9,7 +9,13 @@ const SwitchToggle = ({
 	value = false, 
 	disabled = false, 
 }) => {
-	const [ isChecked, setIsChecked ] = React.useState(value);
+	const [ isChecked, setIsChecked ] = React.useState(false);
+
+	React.useEffect(() => {
+		if (value !== isChecked) {
+			setIsChecked(value);
+		}
+	}, [ value ]);
 
 	const [ falseValue, trueValue ] = React.useMemo(() => [
 		options.length >= 1 ? options[0] : false,
