@@ -34,6 +34,22 @@ const AccessEdit = ({ roleId }) => {
 	const [ permissionOptions, setPermissionOptions ] = React.useState([]);
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SERVICES_SECTIONS.ADMINISTRATION);
 
+	const handleUpdateRole = (payload) => {
+		setLoading(true);
+
+		const entity = ENTITY_ROLE + '/update/' + roleId;
+
+		request.patch({ entity, jsonData: payload }).then((response) => {
+			setLoading(false);
+
+			if (response.success === true) {
+				fetchRolePermissions(roleId);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
+	}
+
 	const handleDeleteRole = (payload) => {
 		setLoading(true);
 
@@ -81,7 +97,6 @@ const AccessEdit = ({ roleId }) => {
 
 	const onSavePermissionClick = (e) => {
 		e.preventDefault();
-		setShowModal(true);
 	};
 
 	const onDeleteRoleClick = (e) => {
@@ -172,6 +187,7 @@ const AccessEdit = ({ roleId }) => {
 									<Forms.Role 
 										mode="UPDATE"
 										defaultValues={data}
+										handleSubmit={handleUpdateRole}
 									/>
 								</Card.Body>
 							</Card>
