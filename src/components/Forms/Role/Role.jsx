@@ -118,6 +118,7 @@ const RoleForm = ({
 				<div className="row">
 					<div className="col-lg-12">
 						<TextArea
+							rows="4"
 							type="text"
 							id="description"
 							name="description"
