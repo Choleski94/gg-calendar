@@ -65,19 +65,16 @@ const AccessEdit = ({ roleId }) => {
 		const sectionPermissions = SUPPORTED_SERVICES_ROWS[activeSection] || [];
 
 		const options = sectionPermissions.map((rule) => {
-			const [
-				create = false, 
-				view = false, 
-				update = false, 
-				remove = false
-			] = data.permissions[rule.slug];
+			const [ create, view, update, remove ] = (
+				data.permissions[rule.slug] || [ false, false, false, false]
+			);
 
 			return {
 				...rule, 
-				create, 
-				view, 
-				update, 
-				remove
+				create,
+				view,
+				update,
+				remove,
 			};
 		});
 
