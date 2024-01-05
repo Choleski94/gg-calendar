@@ -19,6 +19,7 @@ export { default as PieChart } from './PieChart';
 export { default as Schedule } from './Schedule';
 export { default as TextArea } from './TextArea';
 export { default as Progress } from './Progress';
+export { default as Dropdown } from './Dropdown';
 // export { default as Accordion } from './Accordion';
 export { default as MultiInput } from './MultiInput';
 export { default as OnBoarding } from './OnBoarding';
