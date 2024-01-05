@@ -151,7 +151,9 @@ const AccessOverview = ({ setRoleId }) => {
 
 	const onEditRoleClick = (e, currentOption) => {
 		e.preventDefault();
-		return setRoleId(currentOption.id);
+		if (!currentOption.system) {
+			return setRoleId(currentOption.id);
+		}
 	};
 
 	const renderAddRole = (
