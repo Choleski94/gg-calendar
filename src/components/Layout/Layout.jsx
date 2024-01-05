@@ -435,7 +435,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 					)}
 
 					{modalSection === SUPPORTED_MODAL_SECTIONS.INVITE_PEOPLE ? (
-						<Modal title="Invite users" size="lg" centered onCloseRequest={onModalClose}>
+						<Modal title="Invite users" size="md" centered onCloseRequest={onModalClose}>
 							<Forms.InviteUser />
 						</Modal>
 					) : null}
