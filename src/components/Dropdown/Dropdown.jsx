@@ -2,20 +2,11 @@ import React from 'react';
 
 import useClickOutside from '@utils/hooks/useClickOutside';
 
-const setDropwdownClassName = (isActive = false) => [
-	'ts-dropdown',
-	(isActive ? 'd-block' : 'd-none')
-].join(' ');
-
-const setDropwdownItemClassName = (activeItem = '', currentItem = '') => [
-	'option',
-	(activeItem === currentItem ? 'active selected' : ''),
-].join(' ');
-
-const getOptionLabelByValue = (options = [], currentValue = '') => {
-	const [ currentOption ] = options.filter(({ value }) => value === currentValue);
-	return currentOption?.label;
-};
+import {
+	getOptionLabelByValue,
+	setDropwdownClassName,
+	setDropwdownItemClassName,
+} from './Dropdown.controller';
 
 const Dropdown = ({
 	options = [],
