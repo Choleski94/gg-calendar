@@ -55,11 +55,11 @@ const options = [
 		id: FORM_SECTIONS.INVITE,
 		title: (
 			<span className="h4">
-				Invite People
+				Invite Users
 			</span>
 		),
 		Component: ({ ...rest }) => (
-			<Forms.InvitePeople
+			<Forms.InviteUser
 				{...rest}
 			/>
 		),
