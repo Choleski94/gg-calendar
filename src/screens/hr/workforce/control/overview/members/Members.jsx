@@ -67,7 +67,7 @@ const Members = ({ setModalSection }) => {
 		setShowModal(false);
 	}
 
-	const onAddMemberClick = (e) => {
+	const onInviteMemberClick = (e) => {
 		e.preventDefault();
 		setShowModal(true);
 	};
@@ -77,14 +77,14 @@ const Members = ({ setModalSection }) => {
 		return setModalSection('VIEW');
 	};
 
-	const renderAddEmployee = (
+	const renderInviteEmployee = (
 		<button 
 			type="button" 
-			onClick={onAddMemberClick}
+			onClick={onInviteMemberClick}
 			className="btn btn-sm btn-outline-primary" 
 		>
 			<i className="bi-plus" />
-			Add new employee
+			Invite
 		</button>
 	);
 
@@ -100,20 +100,18 @@ const Members = ({ setModalSection }) => {
 				fullHeight
 				loading={loading}
 				elementsPerPage={100}
-				cta={renderAddEmployee}
+				cta={renderInviteEmployee}
 				headers={DEFAULT_TABLE_HEADER}
 				onRowClick={onViewMemberClick}
-				searchPlaceholder="Search employees"
+				searchPlaceholder="Search workforce"
 				data={parseOptions(employeeOptions)}
 				defaultActiveKeys={DEFAULT_ACTIVE_HEADER_KEYS}
 			/>
 			{showModal ? (
-				<Modal title="Add new employee" size="lg" centered onCloseRequest={onModalClose}>
-					<Forms.Contact
-						withNote
-						isEmployee
-						data={data}
-						handleSubmit={handleSubmit}
+				<Modal title="Invite new member" size="lg" centered onCloseRequest={onModalClose}>
+					<Forms.InvitePeople 
+						// data={data}
+						// handleSubmit={handleSubmit}
 					/>
 				</Modal>
 			) : null}
