@@ -1,12 +1,17 @@
 import _ from 'lodash';
 import React from 'react';
 
+import { 
+	Card, 
+	Dropdown, 
+	InputDropdown, 
+	Illustrations 
+} from '@components';
 import { hasObjectKey } from '@utils';
 import { request } from '@utils/request';
 import { ENTITY_ROLE } from '@constants/access';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
-import { Card, InputDropdown, Illustrations } from '@components';
 
 const InviteUser = ({ data = [], setData = () => null }) => {
 	const [ query, setQuery ] = React.useState('');
@@ -48,15 +53,6 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 		setOptions(cloneOptions);
 	}
 
-	const onRemoveItem = (e, itemId) => {
-		e.preventDefault();
-		setOptions([
-			...options.filter((item) => (
-				item.id !== itemId
-			))
-		]);
-	}
-
 	const hasOptions = React.useMemo(() => (
 		Boolean((options || []).length)
 	), [ options ]);
@@ -65,6 +61,35 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 		{ label: 'Guest', value: '65915f25572278f5166663ea' },
 		{ label: 'Admin', value: '65915f26572278f5166663ed' },
 	];
+
+	const dropdownOptions = [
+		...roleOptions,
+		{
+			label: (
+				<span className="text-danger">
+					Remove
+				</span>
+			), 
+			value: 'REMOVE'
+		},
+	]
+
+	const handleDropdownChange = ({ id, email, value }) => {
+		const cloneOptions = [ ...options ].filter((item) => (
+			item.id !== id
+		));
+
+		// Check if user want to remove an item.
+		if (value !== 'REMOVE') {
+			cloneOptions.push({
+				email,
+				roleId: value,
+				id: _.uniqueId(), 
+			});
+		}
+
+		setOptions(cloneOptions);
+	}
 
 	return (
 		<>
@@ -84,7 +109,7 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 				<Card.Body fullHeight noHorizontalPassing>
 					{options && options.length ? (
 						<ul className="list-unstyled list-py-2">
-							{options.map(({ id, email }) => (
+							{options.sort((a, b) => a.email.localeCompare(b.email)).map(({ id, email, roleId }) => (
 								<li key={id}>
 									<div className="d-flex">
 										<div className="flex-shrink-0">
@@ -100,11 +125,15 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 													</h5>
 												</div>
 												<div className="col-sm-auto">
-													<button className="btn btn-outline-danger btn-xs" onClick={(e) => onRemoveItem(e, id)}>
-														<i className="bi bi-trash" />
-														&nbsp;
-														Remove
-													</button>
+													<Dropdown 
+														defaultOption={roleId}
+														options={dropdownOptions}
+														handleChange={(value) => 
+															handleDropdownChange({
+																id, email, value
+															})
+														}
+													/>
 												</div>
 											</div>
 										</div>
