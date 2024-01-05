@@ -5,6 +5,7 @@ export const setDropwdownClassName = (isActive = false) => [
 
 export const setDropwdownItemClassName = (activeItem = '', currentItem = '') => [
 	'option',
+	'text-nowrap',
 	(activeItem === currentItem ? 'active selected' : ''),
 ].join(' ');
 
