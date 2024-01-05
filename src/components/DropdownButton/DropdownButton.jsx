@@ -25,11 +25,10 @@ const DropdownButton = ({
 	const [ showDropdown, setShowDropdown ] = React.useState(false);
 
 	React.useEffect(() => {
-		if (!options || !options.length) return
-
-		const [ firstOption ] = options;
-		setActiveOption(defaultOption || firstOption.value);
-	}, []);
+		if (defaultOption && defaultOption.length) {
+			setActiveOption(defaultOption);
+		}
+	}, [ defaultOption ]);
 
         const onClickOutside = () => setShowDropdown(false);
 
