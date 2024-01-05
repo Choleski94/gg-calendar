@@ -38,6 +38,23 @@ Card.Body = ({ children, fullHeight = false, title = '', noHorizontalPassing = f
 	</div>
 );
 
+Card.Loader = ({ children }) => (
+	<div className="text-center p-4">
+		<div
+			role="status"
+			className="spinner-border mt-3 mb-5"
+			style={{ width: "3rem", height: "3rem" }}
+		>
+			<span className="visually-hidden">
+				Loading...
+			</span>
+		</div>
+		<p className="mb-0">
+			{children}
+		</p>
+	</div>
+);
+
 Card.Text = ({ children }) => (
 	<p className="card-text">
 		{children}
