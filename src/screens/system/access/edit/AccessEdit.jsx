@@ -85,7 +85,7 @@ const AccessEdit = ({ roleId }) => {
 	const onChange = (e, rule) => {
 		const permissionCopy = _.cloneDeep(permissionOptions);
 
-		if (permissionCopy || permissionCopy.length) return
+		if (!permissionCopy || !permissionCopy.length) return
 
 		const operation = e.target.name;
 
@@ -104,6 +104,19 @@ const AccessEdit = ({ roleId }) => {
 
 	const onSavePermissionClick = (e) => {
 		e.preventDefault();
+
+		if (data.system) return;
+
+		handleUpdateRole({
+			permissions: permissionOptions.map((payload) => ({
+				[payload.slug]: [
+					payload?.create, 
+					payload?.view, 
+					payload?.update, 
+					payload?.remove
+				],
+			}))
+		});
 	};
 
 	const onDeleteRoleClick = (e) => {
