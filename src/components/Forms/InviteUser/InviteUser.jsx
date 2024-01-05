@@ -145,7 +145,7 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 														withoutButton
 														defaultOption={roleId}
 														options={dropdownOptions}
-														handleChange={(value) => 
+														handleSelect={(value) => 
 															handleDropdownChange({
 																id, email, value
 															})
