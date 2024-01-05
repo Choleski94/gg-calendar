@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { setCardClassName } from './Card.controller';
+import { setCardClassName, setCardFooterClassName } from './Card.controller';
 
 const Card = ({ children = null, centered = false, withoutBorder = false, withoutHover = false, fullHeight = false, ...rest }) => (
 	<div className={setCardClassName({ withoutBorder, withoutHover, centered, fullHeight })} {...rest}>
@@ -67,8 +67,8 @@ Card.Subtitle = ({ children }) => (
 	</h6>
 );
 
-Card.Footer = ({ children }) => (
-	<div className="card-footer">
+Card.Footer = ({ children, withoutPadding, ...rest }) => (
+	<div className={setCardFooterClassName({ withoutPadding })} {...rest}>
 		{children}
 	</div>
 );

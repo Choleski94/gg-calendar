@@ -7,3 +7,8 @@ export const setCardClassName = ({ withoutBorder = false, withoutHover = false, 
 	(withoutHover ? '' : 'card-hover-shadow'),
 	(fullHeight ? 'h-100' : ''),
 ].join(' ');
+
+export const setCardFooterClassName = ({ withoutPadding = false }) => [
+	'card-footer',
+	(withoutPadding ? 'p-0' : ''),
+].join(' ');
