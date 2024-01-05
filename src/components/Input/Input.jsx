@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+
+import { isBoolean } from '@utils';
 
 import InlineError from './../InlineError';
 
@@ -73,12 +74,16 @@ const Input = React.forwardRef(({
 				<CheckboxWrapper>
 					{inputComponent}
 				</CheckboxWrapper>
-				{error && <InlineError text={error} />}
+				{error && (
+					!isBoolean(error) && <InlineError text={error} />
+				)}
 			</>
 		) : (
 			<>
 				{inputComponent}
-				{error && <InlineError text={error} />}
+				{error && (
+					!isBoolean(error) && <InlineError text={error} />
+				)}
 			</>
 		)
 	);
