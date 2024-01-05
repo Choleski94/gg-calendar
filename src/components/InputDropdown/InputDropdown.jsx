@@ -86,6 +86,7 @@ const InputDropdown = ({
 					options={options}
 					btnContent={buttonCTA}
 					onClick={handleOnClick}
+					defaultOption={defaultOption}
 					handleSelect={handleDropdownItemClick}
 				/>
 			</div>
