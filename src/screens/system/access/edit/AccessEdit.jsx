@@ -26,23 +26,6 @@ import { request } from '@utils/request';
 
 import { parseOptions } from './AccessEdit.controller';
 
-const CardLoader = ({ message }) => (
-	<div className="text-center p-4">
-		<div
-			role="status"
-			className="spinner-border mt-3 mb-5"
-			style={{ width: "3rem", height: "3rem" }}
-		>
-			<span className="visually-hidden">
-				Loading...
-			</span>
-		</div>
-		<p className="mb-0">
-			{message}
-		</p>
-	</div>
-);
-
 const AccessEdit = ({ roleId }) => {
 	const navigate = useNavigate();
 
@@ -212,7 +195,9 @@ const AccessEdit = ({ roleId }) => {
 								</Card.Header>
 								<Card.Body>
 									{loading ? (
-										<CardLoader />
+										<Card.Loader>
+											Loading data
+										</Card.Loader>
 									) : (
 										<Forms.Role 
 											mode="UPDATE"
@@ -243,7 +228,9 @@ const AccessEdit = ({ roleId }) => {
 								</Card.Header>
 								<Card.Body>
 									{loading ? (
-										<CardLoader />
+										<Card.Loader>
+											Loading data
+										</Card.Loader>
 									) : (
 										<>
 											<Card.Text>
