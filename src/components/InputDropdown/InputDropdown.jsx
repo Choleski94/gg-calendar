@@ -33,6 +33,7 @@ const InputDropdown = ({
 	required = '',
 	placeholder = '',
 	defaultOption = '',
+	onClick = () => null,
 }) => {
 	const [ data, setData ] = React.useState(value || '');
 	const [ activeOption, setActiveOption ] = React.useState(null);
@@ -100,7 +101,7 @@ const InputDropdown = ({
 						</div>
 					</div>
 				</div>
-				<a className="btn btn-primary d-none d-sm-inline-block" href="javascript:;">
+				<a className="btn btn-primary d-none d-sm-inline-block" onClick={onClick}>
 					<i className="bi bi-plus"/>
 					Invite
 				</a>
