@@ -10,7 +10,7 @@ import { initForm, initPayload, parseBirthday } from './Contact.controller';
 
 const Contact = ({ 
 	data = {}, 
-	isEmployee, 
+	isWorkforce, 
 	withNote = false, 
 	withPhoto = false, 
 	layout = 'VERTICAL', 
@@ -284,7 +284,7 @@ const Contact = ({
 					</div>
 
 					{/* Departement & Position */}
-					{isEmployee ? (
+					{isWorkforce ? (
 						<>
 							<div className="col-lg-4">
 								<div className="mb-4">
