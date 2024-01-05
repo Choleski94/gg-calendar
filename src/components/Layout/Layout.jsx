@@ -4,11 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import constants from '@constants';
 
-import { Modal } from '@components';
+import { Modal, Forms } from '@components';
 import { FALLBACK_LOCALES } from '@locales';
 import { logout } from '@store/actions/auth';
 import { getYear, onlyUnique } from '@utils';
-import InvitePeople from '@modules/InvitePeople';
 import formatMessage from '@utils/formatMessage';
 import { selectUser } from '@store/selectors/user';
 import { setLocale } from '@store/actions/settings';
@@ -436,8 +435,8 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 					)}
 
 					{modalSection === SUPPORTED_MODAL_SECTIONS.INVITE_PEOPLE ? (
-						<Modal title="Invite people" size="lg" centered onCloseRequest={onModalClose}>
-							<InvitePeople />
+						<Modal title="Invite users" size="lg" centered onCloseRequest={onModalClose}>
+							<Forms.InviteUser />
 						</Modal>
 					) : null}
 
