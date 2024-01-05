@@ -2,6 +2,8 @@ import _ from 'lodash';
 import React from 'react';
 
 import { hasObjectKey } from '@utils';
+import { request } from '@utils/request';
+import { ENTITY_ROLE } from '@constants/access';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 import { Card, InputDropdown, Illustrations } from '@components';
@@ -10,7 +12,21 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 	const [ query, setQuery ] = React.useState('');
 	const [ errors, setErrors ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
-	const [ payload, setPayload ] = React.useState({ options: [] });
+	const [ options, setOptions ] = React.useState([]);
+
+	const fetchRoles = () => {
+		setLoading(true);
+
+		request.list({ entity: ENTITY_ROLE }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				console.log('ROLE:::', data.result);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
+	}
 
 	React.useEffect(() => {
 		if (!hasObjectKey(data)) return
@@ -18,77 +34,32 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 		setPayload(data);
 	}, []);
 
-	React.useEffect(() => {
-		if (payload?.options && payload?.options.length) {
-			setData(payload);
-		} else {
-			setData({ options: [] });
-		}
-	}, [ payload ]);
-
-	const onChange = (e) => {
-		// setQuery(e.target.value);
-	};
-
-	const errorMessages = {
-		empty: formatMessage('form.validation.empty.error.text'),
-		email: formatMessage('form.validation.email.error.text'),
-	};
-
-	const validate = (payload = {}) => {
-		const errs = {};
-
-		// Check for empty email.
-		if (!payload?.query) {
-			errs.query = errorMessages.empty;
-		}
-
-		// Verify query is a valid email.
-		if (payload.query && !validateEmail(payload.query)) {
-			errs.query = errorMessages.email;
-		}
-
-		return errs;
-	};
-
-	const onAddItem = (e) => {
-		e.preventDefault();
-
-		// Check if we have error(s).
-		const errs = validate({ query });
-
-		setErrors(errs);
-
-		if (hasObjectKey(errs)) return null;
-
-		const cloneOptions = [ ...payload.options ];
+	const onAddInvite = (payload) => {
+		const cloneOptions = [ ...options ];
 
 		const newOption = ({
-			value: query,
+			email: payload?.query,
+			roleId: payload?.option,
 			id: _.uniqueId(), 
 		});
 
 		cloneOptions.push(newOption);
 
-		setPayload({ options: cloneOptions });
-
-		setQuery(''); // Clear query.
+		setOptions(cloneOptions);
 	}
 
 	const onRemoveItem = (e, itemId) => {
 		e.preventDefault();
-		setPayload({
-			options: [
-				...payload.options.filter((item) => (
-					item.id !== itemId
-				))
-			]
-		});
+		setOptions([
+			...options.filter((item) => (
+				item.id !== itemId
+			))
+		]);
 	}
 
 	const hasOptions = React.useMemo(() => (
-		Boolean((payload.options || []).length)
-	), [ payload ]);
+		Boolean((options || []).length)
+	), [ options ]);
 
 	const roleOptions = [
 		{ label: 'Guest', value: '65915f25572278f5166663ea' },
@@ -97,35 +68,23 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 
 	return (
 		<>
-			<div className="mb-4">
-				<div className="input-group mb-4 mb-sm-0">
-					<InputDropdown
-						type="text"
-						name="query"
-						value={query}
-						onChange={onChange}
-						options={roleOptions}
-						placeholder="Invite people by email"
-						defaultOption="65915f25572278f5166663ea"
-					/>
-					<div className="input-group-append">
-						<a className="btn btn-primary d-sm-inline-block" onClick={onAddItem}>
-							<i className="bi bi-plus" />
-							Invite
-						</a>
-					</div>
-				</div>
-				{errors?.query && (
-					<span className="d-block text-danger text-small">
-						{errors?.query}
-					</span>
-				)}
+			<div className="input-group mb-4 mb-sm-0">
+				<InputDropdown
+					type="text"
+					name="query"
+					// value={query}
+					// onChange={onChange}
+					options={roleOptions}
+					handleSubmit={onAddInvite}
+					placeholder="Invite people by email"
+					defaultOption="65915f25572278f5166663ea"
+				/>
 			</div>
 			<Card withoutBorder withoutHover centered={!hasOptions}>
 				<Card.Body fullHeight noHorizontalPassing>
-					{payload?.options && payload?.options.length ? (
+					{options && options.length ? (
 						<ul className="list-unstyled list-py-2">
-							{payload?.options.map(({ id, value }) => (
+							{options.map(({ id, email }) => (
 								<li key={id}>
 									<div className="d-flex">
 										<div className="flex-shrink-0">
@@ -137,7 +96,7 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 											<div className="row align-items-center">
 												<div className="col-sm">
 													<h5 className="text-body mb-0">
-														{value}
+														{email}
 													</h5>
 												</div>
 												<div className="col-sm-auto">
