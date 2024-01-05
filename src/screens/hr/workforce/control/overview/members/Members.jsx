@@ -108,8 +108,8 @@ const Members = ({ setModalSection }) => {
 				defaultActiveKeys={DEFAULT_ACTIVE_HEADER_KEYS}
 			/>
 			{showModal ? (
-				<Modal title="Invite new member" size="lg" centered onCloseRequest={onModalClose}>
-					<Forms.InvitePeople 
+				<Modal title="Invite users" size="lg" centered onCloseRequest={onModalClose}>
+					<Forms.InviteUser
 						// data={data}
 						// handleSubmit={handleSubmit}
 					/>
