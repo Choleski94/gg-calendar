@@ -18,10 +18,10 @@ const setActionMenuOptions = ({
 }) => {
 	const options = [
 		{
-			key: 'copy',
+			key: 'clone',
 			value: (
 				<span>
-					<i className="bi bi-files" /> Copy
+					<i className="bi bi-files" /> Clone
 				</span>
 			),
 			cb: () => onCopy(payload),
@@ -115,6 +115,7 @@ const AccessOverview = ({ setRoleId }) => {
 	const handleCopyRole = (payload) => {
 		// Set new cloned payload.
 		const newClonedPayload = _.cloneDeep({
+			enabled: false,
 			name: payload?.name + ' Copy',
 			permissions: payload?.permissions,
 			description: payload?.description,
