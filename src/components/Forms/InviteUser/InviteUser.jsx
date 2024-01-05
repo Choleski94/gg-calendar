@@ -14,8 +14,6 @@ import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 
 const InviteUser = ({ data = [], setData = () => null }) => {
-	const [ query, setQuery ] = React.useState('');
-	const [ errors, setErrors ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
 	const [ options, setOptions ] = React.useState([]);
 
@@ -42,15 +40,20 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 	const onAddInvite = (payload) => {
 		const cloneOptions = [ ...options ];
 
-		const newOption = ({
-			email: payload?.query,
-			roleId: payload?.option,
-			id: _.uniqueId(), 
-		});
+		// Check such value does not exists.
+		const [ hasEmail ] = options.filter((opt) => opt.email === payload?.query);
 
-		cloneOptions.push(newOption);
+		if (!hasEmail) {
+			const newOption = ({
+				email: payload?.query,
+				roleId: payload?.option,
+				id: _.uniqueId(), 
+			});
 
-		setOptions(cloneOptions);
+			cloneOptions.push(newOption);
+
+			setOptions(cloneOptions);
+		}
 	}
 
 	const hasOptions = React.useMemo(() => (
@@ -91,20 +94,29 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 		setOptions(cloneOptions);
 	}
 
+	const handleSendInvites = (e) => {
+		e.preventDefault();
+
+		console.log(options);
+	};
+
+	const onLinkSettingsClick = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<>
-			<div className="input-group mb-4 mb-sm-0">
+			<div className="input-group mb-4">
 				<InputDropdown
 					type="text"
 					name="query"
-					// value={query}
-					// onChange={onChange}
 					options={roleOptions}
 					handleSubmit={onAddInvite}
 					placeholder="Invite people by email"
 					defaultOption="65915f25572278f5166663ea"
 				/>
 			</div>
+			<hr className="mt-5" />
 			<Card withoutBorder withoutHover centered={!hasOptions}>
 				<Card.Body fullHeight noHorizontalPassing>
 					{options && options.length ? (
@@ -150,6 +162,28 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 						</>
 					)}
 				</Card.Body>
+				{options && options.length ? (
+					<Card.Footer withoutPadding>
+						<hr className="mt-2" />
+						<div className="row justify-content-center justify-content-sm-between align-items-sm-center">
+							<div className="col-sm mb-2 mb-sm-0">
+								<div className="d-flex justify-content-center justify-content-sm-start align-items-center">
+									<p className="modal-footer-text">
+										The public share <a href="#" onClick={onLinkSettingsClick}>link settings</a>
+									</p>
+								</div>
+							</div>
+							<div className="col-sm-auto">
+								<div className="d-flex justify-content-center justify-content-sm-end">
+									<button type="button" className="btn btn-primary" onClick={handleSendInvites}>
+										<i className="bi-link-45deg me-1" />
+										Send invites
+									</button>
+								</div>
+							</div>
+						</div>
+					</Card.Footer>
+				) : null}
 			</Card>
 		</>
 	);
