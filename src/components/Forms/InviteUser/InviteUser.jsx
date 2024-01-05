@@ -3,9 +3,9 @@ import React from 'react';
 
 import { 
 	Card, 
-	Dropdown, 
 	InputDropdown, 
-	Illustrations 
+	Illustrations,
+	DropdownButton, 
 } from '@components';
 import { hasObjectKey } from '@utils';
 import { request } from '@utils/request';
@@ -14,8 +14,9 @@ import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 
 const InviteUser = ({ data = [], setData = () => null }) => {
-	const [ loading, setLoading ] = React.useState(false);
 	const [ options, setOptions ] = React.useState([]);
+	const [ loading, setLoading ] = React.useState(false);
+	const [ roleOptions, setRoleOptions ] = React.useState([]);
 
 	const fetchRoles = () => {
 		setLoading(true);
@@ -24,12 +25,21 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 			setLoading(false);
 
 			if (data.success === true) {
-				console.log('ROLE:::', data.result);
+				setRoleOptions(
+					data?.result?.map((payload) => ({
+						label: payload?.name,
+						value: payload?._id,
+					}))
+				);
 			}
 		}).catch(() => {
 			setLoading(false);
 		});
 	}
+
+	React.useEffect(() => {
+		fetchRoles();
+	}, []);
 
 	React.useEffect(() => {
 		if (!hasObjectKey(data)) return
@@ -60,12 +70,7 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 		Boolean((options || []).length)
 	), [ options ]);
 
-	const roleOptions = [
-		{ label: 'Guest', value: '65915f25572278f5166663ea' },
-		{ label: 'Admin', value: '65915f26572278f5166663ed' },
-	];
-
-	const dropdownOptions = [
+	const dropdownOptions = React.useMemo(() => ([
 		...roleOptions,
 		{
 			label: (
@@ -75,7 +80,7 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 			), 
 			value: 'REMOVE'
 		},
-	]
+	]), [ roleOptions ]);
 
 	const handleDropdownChange = ({ id, email, value }) => {
 		const cloneOptions = [ ...options ].filter((item) => (
@@ -113,7 +118,6 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 					options={roleOptions}
 					handleSubmit={onAddInvite}
 					placeholder="Invite people by email"
-					defaultOption="65915f25572278f5166663ea"
 				/>
 			</div>
 			<hr className="mt-5" />
@@ -137,7 +141,8 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 													</h5>
 												</div>
 												<div className="col-sm-auto">
-													<Dropdown 
+													<DropdownButton 
+														withoutButton
 														defaultOption={roleId}
 														options={dropdownOptions}
 														handleChange={(value) => 
