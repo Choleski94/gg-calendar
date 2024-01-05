@@ -109,18 +109,32 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 		e.preventDefault();
 	};
 
+
+	const defaultRoleOption = React.useMemo(() => {
+		if (!roleOptions || !roleOptions.length) return ''
+
+		const [ firstRoleOption ] = roleOptions;
+
+		return firstRoleOption?.value || '';
+	}, [ roleOptions ]);
+
 	return (
 		<>
-			<div className="input-group mb-4">
-				<InputDropdown
-					type="text"
-					name="query"
-					options={roleOptions}
-					handleSubmit={onAddInvite}
-					placeholder="Invite people by email"
-				/>
-			</div>
-			<hr className="mt-5" />
+			{roleOptions && roleOptions.length ? (
+				<>
+					<div className="input-group mb-4">
+						<InputDropdown
+							type="text"
+							name="query"
+							options={roleOptions}
+							handleSubmit={onAddInvite}
+							defaultOption={defaultRoleOption}
+							placeholder="Invite people by email"
+						/>
+					</div>
+					<hr className="mt-5" />
+				</>
+			) : null}
 			<Card withoutBorder withoutHover centered={!hasOptions}>
 				<Card.Body fullHeight noHorizontalPassing>
 					{options && options.length ? (
