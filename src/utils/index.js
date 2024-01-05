@@ -16,6 +16,8 @@ import {
 	ONE_DAY_MINUS_ONE_MILLI_SECOND,
 } from '../constants';
 
+export const isBoolean = val => !!val === val;
+
 export const isEven = (n = 0) => n % 2 == 0;
 
 export const humanBoolean = (f) => f ? 'Yes' : 'No';
@@ -604,6 +606,7 @@ export default {
 	sumArray,
 	is2dArray,
 	setImgUrl,
+	isBoolean,
 	buildDate,
 	parseTime,
 	hasPrimary,
