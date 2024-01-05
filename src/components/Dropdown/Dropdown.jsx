@@ -20,7 +20,6 @@ const Dropdown = ({
 		if (!options || !options.length) return
 
 		const [ firstOption ] = options;
-		console.log(defaultOption || firstOption.value);
 		setActiveOption(defaultOption || firstOption.value);
 	}, []);
 
