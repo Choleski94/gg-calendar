@@ -8,7 +8,7 @@ import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 import { Card, InputDropdown, Illustrations } from '@components';
 
-const InvitePeople = ({ data = [], setData = () => null }) => {
+const InviteUser = ({ data = [], setData = () => null }) => {
 	const [ query, setQuery ] = React.useState('');
 	const [ errors, setErrors ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
@@ -126,4 +126,4 @@ const InvitePeople = ({ data = [], setData = () => null }) => {
 	);
 };
 
-export default InvitePeople;
+export default InviteUser;
