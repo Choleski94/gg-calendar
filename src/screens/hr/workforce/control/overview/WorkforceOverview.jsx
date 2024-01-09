@@ -1,7 +1,11 @@
 import React from 'react';
 
+import { request } from '@utils/request';
+import { ENTITY_ROLE } from '@constants/access';
 import formatMessage from '@utils/formatMessage';
+import { ENTITY_INVITE } from '@constants/invites';
 import { NavPill, Card, Counter } from '@components';
+import { ENTITY_WORKFORCE } from '@constants/workforce';
 
 import Invites from './invites';
 import Members from './members';
@@ -23,7 +27,82 @@ const NAV_TAB_OPTIONS = [
 ];
 
 const WorkforceOverview = () => {
+	const [ loading, setLoading ] = React.useState([]);
+	const [ roleObj, setRoleObj ] = React.useState({});
+	const [ memberOptions, setMemberOptions ] = React.useState([]);
+	const [ inviteOptions, setInviteOptions ] = React.useState([]);
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SCREEN_SECTIONS.MEMBERS);
+
+	const fetchWorkforce = async () => {
+		setLoading(true);
+
+		request.list({ entity: ENTITY_WORKFORCE, options }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				setMemberOptions(data.result);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
+	};
+
+	const fetchRoles = () => {
+		setLoading(true);
+
+		request.list({ entity: ENTITY_ROLE }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				setRoleObj(
+					data?.result?.reduce((agg, payload) => Object.assign(agg, {
+						[payload?._id]: payload?.name,
+					}), {})
+				);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
+	}
+
+	const fetchInvites = async () => {
+		setLoading(true);
+
+		request.list({ entity: ENTITY_INVITE }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				setInviteOptions(data.result);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
+	};
+
+	React.useEffect(() => {
+		Promise.all([
+			fetchRoles(),
+			fetchInvites(),
+			fetchWorkforce()
+		]);
+	}, []);
+
+	const metrics = React.useMemo(() => {
+		// Evaluate total members.
+		const totalMember = memberOptions?.length;
+		const totalInvite = inviteOptions?.length;
+		const totalRole = Object.keys(totalInvite || {}).length;
+		const totalActiveMember = (memberOptions.filter(({ enabled }) => enabled) || []).length;
+		const totalInactiveMember = totalMember - totalActiveMember;
+
+		return {
+			totalRole,
+			totalMember,
+			totalInvite,
+			totalActiveMember,
+			totalInactiveMember,
+		}
+	}, [ memberOptions, inviteOptions, roleObj ]);
 
 	return (
 		<div className="d-grid gap-3 gap-lg-5">
@@ -37,7 +116,7 @@ const WorkforceOverview = () => {
 							<div className="row align-items-center gx-2">
 								<div className="col">
 									<span className="display-4 text-dark">
-										<Counter number={18} />
+										<Counter number={metrics?.totalMember} />
 									</span>
 								</div>
 							</div>
@@ -53,7 +132,7 @@ const WorkforceOverview = () => {
 							<div className="row align-items-center gx-2">
 								<div className="col">
 									<span className="display-4 text-dark">
-										<Counter number={11} />
+										<Counter number={metrics?.totalActiveMember} />
 									</span>
 								</div>
 							</div>
@@ -64,12 +143,12 @@ const WorkforceOverview = () => {
 					<Card>
 						<Card.Body>
 							<Card.Subtitle>
-								Innactive members
+								Inactive members
 							</Card.Subtitle>
 							<div className="row align-items-center gx-2">
 								<div className="col">
 									<span className="display-4 text-dark">
-										<Counter number={16} />
+										<Counter number={metrics?.totalInactiveMember} />
 									</span>
 								</div>
 							</div>
@@ -85,7 +164,7 @@ const WorkforceOverview = () => {
 							<div className="row align-items-center gx-2">
 								<div className="col">
 									<span className="display-4 text-dark">
-										<Counter number={2} />
+										<Counter number={metrics.totalInvite} />
 									</span>
 								</div>
 							</div>
@@ -101,11 +180,17 @@ const WorkforceOverview = () => {
 			/>
 
 			{activeSection === SUPPORTED_SCREEN_SECTIONS.MEMBERS && (
-				<Members />
+				<Members 
+					fetchWorkforce={fetchWorkforce}
+				/>
 			)}
 
 			{activeSection === SUPPORTED_SCREEN_SECTIONS.INVITES && (
-				<Invites />
+				<Invites 
+					roleObj={roleObj}
+					fetchInvites={fetchInvites}
+					inviteOptions={inviteOptions}
+				/>
 			)}
 		</div>
 	);

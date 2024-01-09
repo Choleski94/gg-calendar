@@ -14,14 +14,12 @@ const parseSelectOptionValues = () => null;
 
 const pagination = {};
 
-const Invites = () => {
+const Invites = ({ fetchInvites, inviteOptions, roleObj }) => {
 	const navigate = useNavigate();
 
 	const [ data, setData ] = React.useState({});
-	const [ roleObj, setRoleObj ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
 	const [ showModal, setShowModal ] = React.useState(false);
-	const [ inviteOptions, setInviteOptions ] = React.useState([]);
 
 	React.useMemo(() => {
 		setData({ company: 'reparation' });
@@ -31,45 +29,6 @@ const Invites = () => {
 		page: pagination.current || 1, 
 		items: pagination.pageSize || 10
 	};
-
-	const fetchRoles = () => {
-		setLoading(true);
-
-		request.list({ entity: ENTITY_ROLE }).then((data) => {
-			setLoading(false);
-
-			if (data.success === true) {
-				setRoleObj(
-					data?.result?.reduce((agg, payload) => Object.assign(agg, {
-						[payload?._id]: payload?.name,
-					}), {})
-				);
-			}
-		}).catch(() => {
-			setLoading(false);
-		});
-	}
-
-	const fetchInvites = async () => {
-		setLoading(true);
-
-		request.list({ entity: ENTITY_INVITE, options }).then((data) => {
-			setLoading(false);
-
-			if (data.success === true) {
-				setInviteOptions(data.result);
-			}
-		}).catch(() => {
-			setLoading(false);
-		});
-	};
-
-	React.useEffect(() => {
-		Promise.all([
-			fetchRoles(),
-			fetchInvites()
-		]);
-	}, []);
 
 	const handleSubmit = (payload) => {
 		setShowModal(false);
