@@ -47,6 +47,16 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 		setPayload(data);
 	}, []);
 
+	const defaultRoleOption = React.useMemo(() => {
+		if (!roleOptions || !roleOptions.length) {
+			return ''
+		}
+
+		const [ firstRoleOption ] = roleOptions;
+
+		return firstRoleOption?.value || '';
+	}, [ roleOptions ]);
+
 	const onAddInvite = (payload) => {
 		const cloneOptions = [ ...options ];
 
@@ -58,7 +68,7 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 				type: 'INVITE',
 				id: _.uniqueId(), 
 				email: payload?.query,
-				roleId: payload?.option,
+				roleId: payload?.option || defaultRoleOption,
 			});
 
 			cloneOptions.push(newOption);
@@ -115,15 +125,6 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 	const onLinkSettingsClick = (e) => {
 		e.preventDefault();
 	};
-
-
-	const defaultRoleOption = React.useMemo(() => {
-		if (!roleOptions || !roleOptions.length) return ''
-
-		const [ firstRoleOption ] = roleOptions;
-
-		return firstRoleOption?.value || '';
-	}, [ roleOptions ]);
 
 	return (
 		<>
