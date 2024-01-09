@@ -87,6 +87,20 @@ const Invites = () => {
 		});
 	}
 
+	const handleDeleteRole = (inviteId) => {
+		setLoading(true);
+
+		request.delete({ entity: ENTITY_INVITE, id: inviteId }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				fetchInvites();
+			}
+		}).catch((error) => {
+			setLoading(false);
+		});
+	}
+
 	const onModalClose = () => {
 		setShowModal(false);
 	}
@@ -109,7 +123,7 @@ const Invites = () => {
 
 	const onDelete = (e, inviteId) => {
 		e.preventDefault();
-		console.log('DELETE:::', inviteId);
+		handleDeleteRole(inviteId);
 	}
 
 	return (
