@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { request } from '@utils/request';
+import { ENTITY_ROLE } from '@constants/access';
 import formatMessage from '@utils/formatMessage';
 import { Table, Modal, Forms } from '@components';
 import { trimString, formatOptionValueType } from '@utils';
@@ -17,6 +18,7 @@ const Invites = () => {
 	const navigate = useNavigate();
 
 	const [ data, setData ] = React.useState({});
+	const [ roleObj, setRoleObj ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
 	const [ showModal, setShowModal ] = React.useState(false);
 	const [ inviteOptions, setInviteOptions ] = React.useState([]);
@@ -29,6 +31,24 @@ const Invites = () => {
 		page: pagination.current || 1, 
 		items: pagination.pageSize || 10
 	};
+
+	const fetchRoles = () => {
+		setLoading(true);
+
+		request.list({ entity: ENTITY_ROLE }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				setRoleObj(
+					data?.result?.reduce((agg, payload) => Object.assign(agg, {
+						[payload?._id]: payload?.name,
+					}), {})
+				);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
+	}
 
 	const fetchInvites = async () => {
 		setLoading(true);
@@ -45,10 +65,15 @@ const Invites = () => {
 	};
 
 	React.useEffect(() => {
-		fetchInvites();
+		Promise.all([
+			fetchRoles(),
+			fetchInvites()
+		]);
 	}, []);
 
 	const handleSubmit = (payload) => {
+		setShowModal(false);
+
 		setLoading(true);
 
 		request.create({ entity: ENTITY_INVITE, jsonData: payload }).then((data) => {
@@ -60,7 +85,6 @@ const Invites = () => {
 		}).catch(() => {
 			setLoading(false);
 		});
-
 	}
 
 	const onModalClose = () => {
@@ -90,13 +114,7 @@ const Invites = () => {
 
 	return (
 		<div className="d-grid gap-3 gap-lg-5">
-			{/*
-			<EmployeeMetrics 
-				options={inviteOptions}
-			/>
-			*/}
 			<Table
-				withFilter
 				fullHeight
 				loading={loading}
 				elementsPerPage={100}
@@ -104,14 +122,13 @@ const Invites = () => {
 				headers={DEFAULT_TABLE_HEADER}
 				onRowClick={onViewMemberClick}
 				searchPlaceholder="Search invites"
-				data={parseOptions(inviteOptions)}
+				data={parseOptions(inviteOptions, roleObj)}
 				defaultActiveKeys={DEFAULT_ACTIVE_HEADER_KEYS}
 			/>
 			{showModal ? (
 				<Modal title="Invite users" size="md" centered onCloseRequest={onModalClose}>
 					<Forms.InviteUser
-						// data={data}
-						// handleSubmit={handleSubmit}
+						setData={handleSubmit}
 					/>
 				</Modal>
 			) : null}
