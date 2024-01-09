@@ -1,6 +1,6 @@
 'use strict';
 
-export const ENTITY_WORKFORCE = 'workforce';
+export const ENTITY_INVITE = 'invite';
 
 export const DEFAULT_TABLE_HEADER = [
 	{ key: 'name', label: 'Name' },
@@ -20,7 +20,7 @@ export const DEFAULT_ACTIVE_HEADER_KEYS = [
 ];
 
 export default {
-	ENTITY_WORKFORCE,
+	ENTITY_INVITE,
 	DEFAULT_TABLE_HEADER,
 	DEFAULT_ACTIVE_HEADER_KEYS,
 }

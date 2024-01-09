@@ -16,9 +16,8 @@ import WorkforceOverview from './overview';
 import WorkforceSettings from './settings';
 import WorkforceStatistics from './statistics';
 
-const WorkforceControlScreen = ({ setWorkforceId }) => {
+const WorkforceControlScreen = () => {
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SCREEN_SECTIONS.OVERVIEW);
-
 	return (
 		<Layout>
 			<Layout.StickyHeader>
@@ -54,7 +53,7 @@ const WorkforceControlScreen = ({ setWorkforceId }) => {
 			</Layout.StickyHeader>
 			<div className="mt-15">
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.OVERVIEW && (
-					<WorkforceOverview setWorkforceId={setWorkforceId} />
+					<WorkforceOverview />
 				)}
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.STATISTICS && (
 					<WorkforceStatistics />
