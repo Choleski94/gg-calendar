@@ -574,8 +574,8 @@ export const MENU_SYSTEM = [
 		slug: 'nav.hr.system.templates.text',
 		link: '/system/templates',
 		badge: {
-			type: 'danger',
-			value: '-',
+			type: 'primary',
+			value: '✔',
 		},
 	},
 	{
