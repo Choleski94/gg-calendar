@@ -3,14 +3,16 @@
 export const ENTITY_INVITE = 'invites';
 
 export const DEFAULT_TABLE_HEADER = [
+	{ key: 'created', label: 'Date Created' },
 	{ key: 'email', label: 'Email' },
 	{ key: 'role', label: 'Role' },
 	{ key: 'code', label: 'Code' },
-	{ key: 'created', label: 'Date Created' },
+	{ key: 'action', label: '' },
 ];
 
 export const DEFAULT_ACTIVE_HEADER_KEYS = [
-	'email', 'role', 'code', 'created'
+	'email', 'role', 'code', 
+	'created', 'action',
 ];
 
 export default {
