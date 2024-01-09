@@ -59,9 +59,9 @@ const Members = () => {
 				loading={loading}
 				elementsPerPage={100}
 				headers={DEFAULT_TABLE_HEADER}
+				searchPlaceholder="Search member"
 				onRowClick={onWorkforceMemberClick}
 				data={parseOptions(employeeOptions)}
-				searchPlaceholder="Search workforce member"
 				defaultActiveKeys={DEFAULT_ACTIVE_HEADER_KEYS}
 			/>
 		</div>
