@@ -13,7 +13,7 @@ const parseSelectOptionValues = () => null;
 
 const pagination = {};
 
-const Invites = ({ setModalSection }) => {
+const Invites = () => {
 	const navigate = useNavigate();
 
 	const [ data, setData ] = React.useState({});
@@ -103,7 +103,7 @@ const Invites = ({ setModalSection }) => {
 				cta={renderInviteEmployee}
 				headers={DEFAULT_TABLE_HEADER}
 				onRowClick={onViewMemberClick}
-				searchPlaceholder="Search workforce"
+				searchPlaceholder="Search invites"
 				data={parseOptions(inviteOptions)}
 				defaultActiveKeys={DEFAULT_ACTIVE_HEADER_KEYS}
 			/>
