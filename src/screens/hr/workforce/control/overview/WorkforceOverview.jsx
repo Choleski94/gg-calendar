@@ -91,11 +91,11 @@ const WorkforceOverview = () => {
 	return (
 		<div className="d-grid gap-3 gap-lg-5">
 			<div className="row">
-				<div className="col-sm-4 col-lg-4">
+				<div className="col-sm-3 col-lg-3">
 					<Card>
 						<Card.Body>
 							<Card.Subtitle>
-								Total workforce members
+								Total members
 							</Card.Subtitle>
 							<div className="row align-items-center gx-2">
 								<div className="col">
@@ -112,11 +112,11 @@ const WorkforceOverview = () => {
 						</Card.Body>
 					</Card>
 				</div>
-				<div className="col-sm-4 col-lg-4">
+				<div className="col-sm-3 col-lg-3">
 					<Card>
 						<Card.Body>
 							<Card.Subtitle>
-								Active workforce members
+								Active members
 							</Card.Subtitle>
 							<div className="row align-items-center gx-2">
 								<div className="col">
@@ -133,11 +133,32 @@ const WorkforceOverview = () => {
 						</Card.Body>
 					</Card>
 				</div>
-				<div className="col-sm-4 col-lg-4">
+				<div className="col-sm-3 col-lg-3">
 					<Card>
 						<Card.Body>
 							<Card.Subtitle>
-								Innactive workforce members
+								Innactive members
+							</Card.Subtitle>
+							<div className="row align-items-center gx-2">
+								<div className="col">
+									<span className="display-4 text-dark">
+										<Counter number={16} />
+									</span>
+								</div>
+								<div className="col-auto">
+									<span className="badge bg-soft-danger text-danger p-1">
+										<i className="bi-graph-down" /> 2.8%
+									</span>
+								</div>
+							</div>
+						</Card.Body>
+					</Card>
+				</div>
+				<div className="col-sm-3 col-lg-3">
+					<Card>
+						<Card.Body>
+							<Card.Subtitle>
+								Pending Invites
 							</Card.Subtitle>
 							<div className="row align-items-center gx-2">
 								<div className="col">
