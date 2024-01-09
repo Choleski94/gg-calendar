@@ -422,7 +422,7 @@ export const systemRoutes = [
 	{
 		slug: 'system-templates',
 		path: '/system/templates',
-		element: () => 'Todo...',
+		element: screenElements.SystemTemplates,
 	},
 	{
 		slug: 'system-payments',
