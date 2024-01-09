@@ -55,9 +55,10 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 
 		if (!hasEmail) {
 			const newOption = ({
+				type: 'INVITE',
+				id: _.uniqueId(), 
 				email: payload?.query,
 				roleId: payload?.option,
-				id: _.uniqueId(), 
 			});
 
 			cloneOptions.push(newOption);
@@ -90,7 +91,7 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 		// Check if user want to remove an item.
 		if (value !== 'REMOVE') {
 			cloneOptions.push({
-				email,
+				email, 
 				roleId: value,
 				id: _.uniqueId(), 
 			});
@@ -102,7 +103,13 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 	const handleSendInvites = (e) => {
 		e.preventDefault();
 
-		console.log(options);
+		setData(
+			options.map((payload) => ({
+				type: payload?.type,
+				email: payload?.email,
+				roleId: payload?.roleId,
+			}))
+		);
 	};
 
 	const onLinkSettingsClick = (e) => {
