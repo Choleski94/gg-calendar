@@ -96,12 +96,7 @@ const Invites = () => {
 		setShowModal(true);
 	};
 
-	const onViewMemberClick = (e, { id }) => {
-		e.preventDefault();
-		return setModalSection('VIEW');
-	};
-
-	const renderInviteEmployee = (
+	const renderInviteUser = (
 		<button 
 			type="button" 
 			onClick={onInviteMemberClick}
@@ -112,18 +107,22 @@ const Invites = () => {
 		</button>
 	);
 
+	const onDelete = (e, inviteId) => {
+		e.preventDefault();
+		console.log('DELETE:::', inviteId);
+	}
+
 	return (
 		<div className="d-grid gap-3 gap-lg-5">
 			<Table
 				fullHeight
 				loading={loading}
 				elementsPerPage={100}
-				cta={renderInviteEmployee}
+				cta={renderInviteUser}
 				headers={DEFAULT_TABLE_HEADER}
-				onRowClick={onViewMemberClick}
 				searchPlaceholder="Search invites"
-				data={parseOptions(inviteOptions, roleObj)}
 				defaultActiveKeys={DEFAULT_ACTIVE_HEADER_KEYS}
+				data={parseOptions(inviteOptions, roleObj, onDelete)}
 			/>
 			{showModal ? (
 				<Modal title="Invite users" size="md" centered onCloseRequest={onModalClose}>

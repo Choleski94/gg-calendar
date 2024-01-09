@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { AvatarCircle } from '@components';
 import formatMessage from '@utils/formatMessage';
 import { buildDate, parseTime, hasPrimary } from '@utils';
 
-export const parseOptions = (data = [], roleObj) => data.map((payload) => ({
+export const parseOptions = (data = [], roleObj = {}, onDelete = () => null) => data.map((payload) => ({
 	// Supported header data.
 	id: payload?._id,
 	email: (
@@ -33,8 +32,20 @@ export const parseOptions = (data = [], roleObj) => data.map((payload) => ({
 			</small>
 		) : null
 	),
+	action: (
+		<div className="d-flex justify-content-end">
+			<button 
+				type="button" 
+				onClick={(e) => onDelete(e, payload?._id)}
+				className="btn btn-sm btn-outline-danger" 
+			>
+				<i className="bi bi-trash3" /> Delete
+			</button>
+		</div>
+	),
 	// Supported search query field(s).
 	query: [
 		payload?.email,
+		payload?.code,
 	].join(' '),
 }));
