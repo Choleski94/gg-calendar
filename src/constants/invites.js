@@ -1,22 +1,16 @@
 'use strict';
 
-export const ENTITY_INVITE = 'invite';
+export const ENTITY_INVITE = 'invites';
 
 export const DEFAULT_TABLE_HEADER = [
-	{ key: 'name', label: 'Name' },
-	{ key: 'phones', label: 'Phone' },
-	{ key: 'emails', label: 'Email' },
-	{ key: 'address', label: 'Address' },
-	{ key: 'unit', label: 'Unit' },
-	{ key: 'city', label: 'City, State/Prov' },
-	{ key: 'zip', label: 'Zip/Post Code' },
-	{ key: 'created', label: 'Date Joined' },
+	{ key: 'email', label: 'Email' },
+	{ key: 'role', label: 'Role' },
+	{ key: 'code', label: 'Code' },
+	{ key: 'created', label: 'Date Created' },
 ];
 
 export const DEFAULT_ACTIVE_HEADER_KEYS = [
-	'name', 'phones', 'emails',
-	'address', 'unit', 'city', 
-	'zip', 'created'
+	'email', 'role', 'code', 'created'
 ];
 
 export default {
