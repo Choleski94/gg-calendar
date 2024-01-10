@@ -256,72 +256,53 @@ const EditorWithPreview = ({ setTemplateId }) => {
 				</div>
 			</Layout.StickyHeader>
 			<div className="mt-15">
-				<div className="row">
-					<div className="col-md-7 g-0">
-						<div className="d-flex h-100">
-							<div className="flex-grow-1 p-3">
-								<Card fullHeight>
-									<Card.Header>
-										<Card.Title>
-											<h2>
-												HTML source
-											</h2>
-										</Card.Title>
-										<Card.CTA>
-											<button type="button" className="btn btn-sm btn-outline-success">
-												<i className="bi-save"/>
-												&nbsp;
-												Save
-											</button>
-										</Card.CTA>
-									</Card.Header>
-									<Card.Body>
-										<div style={{ width: 'inherit', height: '100%' }}>
-											<MonacoEditor
-												height="100%"
-												language="html"
-												theme="light"
-												value={template}
-												options={{
-													minimap: {
-														enabled: false,
-													},
-												}}
-												onChange={handleEditorChange}
-											/>
-										</div>
-									</Card.Body>
-								</Card>
+				<Card fullHeight>
+					<Card.Header>
+						<Card.Title>
+							<h2>
+								Live Editor
+							</h2>
+						</Card.Title>
+						<Card.CTA>
+							<button type="button" className="btn btn-sm btn-outline-success">
+								<i className="bi-save"/>
+								&nbsp;
+								Save
+							</button>
+						</Card.CTA>
+					</Card.Header>
+					<Card.Body>
+						<div className="row">
+							<div className="col-md-7">
+								<div style={{ width: '100%', height: '100%' }}>
+									<MonacoEditor
+										height="100%"
+										language="html"
+										theme="light"
+										value={template}
+										options={{
+											minimap: {
+												enabled: false,
+											},
+										}}
+										onChange={handleEditorChange}
+									/>
+								</div>
+							</div>
+							<div className="col-md-5">
+								<iframe
+									title="Preview"
+									srcDoc={previewHTML}
+									style={{
+										width: '100%', 
+										height: '100%', 
+										minHeight: '750px',
+									}}
+								/>
 							</div>
 						</div>
-					</div>
-					<div className="col-md-5 g-0">
-						<div className="d-flex h-100">
-							<div className="flex-grow-1 p-3">
-								<Card fullHeight>
-									<Card.Header>
-										<Card.Title>
-											<h2>
-												Live Preview
-											</h2>
-										</Card.Title>
-									</Card.Header>
-									<Card.Body>
-										<iframe
-											title="Preview"
-											srcDoc={previewHTML}
-											style={{
-												width: '100%', 
-												height: '100%', 
-												minHeight: '750px',
-											}}
-										/>
-									</Card.Body>
-								</Card>
-							</div>
-						</div>
-					</div>
-				</div>
+					</Card.Body>
+				</Card>
 			</div>
 		</Layout>
 	);
