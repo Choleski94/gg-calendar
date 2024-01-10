@@ -7,6 +7,7 @@ export { default as Modal } from './Modal';
 export { default as Table } from './Table';
 export { default as Badge } from './Badge';
 export { default as Icons } from './Icons';
+export { default as Editor } from './Editor';
 export { default as Loader } from './Loader';
 export { default as Button } from './Button';
 export { default as Select } from './Select';
