@@ -1,10 +1,8 @@
 import React from 'react';
 import Handlebars from 'handlebars';
-import MonacoEditor from 'react-monaco-editor';
 
 import compileTemplate from '@utils/compileTemplate';
-
-import { Card, Layout, NavPill, Breadcrumb, GetSupport } from '@components';
+import { Card, Editor, Layout, NavPill, Breadcrumb, GetSupport } from '@components';
 
 const BREADCRUMB_OPTIONS = [
 	{
@@ -244,6 +242,7 @@ const EditorWithPreview = ({ setTemplateId }) => {
 
 	// Handle editor content change
 	const handleEditorChange = (value, event) => {
+		console.log('VALUE:::', value);
 		setContent(value);
 	};
 
@@ -294,7 +293,7 @@ const EditorWithPreview = ({ setTemplateId }) => {
 						<div className="row">
 							<div className="col-md-7">
 								<div style={{ width: '100%', height: '100%' }}>
-									<MonacoEditor
+									<Editor
 										theme="light"
 										height="100%"
 										language="html"
