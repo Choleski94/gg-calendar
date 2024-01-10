@@ -421,7 +421,7 @@ export const systemRoutes = [
 	},
 	{
 		slug: 'system-templates',
-		path: '/system/templates',
+		path: '/system/templates/:id?',
 		element: screenElements.SystemTemplates,
 	},
 	{
