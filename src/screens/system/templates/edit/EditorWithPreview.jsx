@@ -69,12 +69,10 @@ const initialLayout =
 			<![endif]--> 
 		</div>
 	</body>
-</html>
-`;
+</html>`;
 
 const contentPartial = 
-`
-<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:600px;" width="600">
+`<table align="center" border="0" cellpadding="0" cellspacing="0" style="width:600px;" width="600">
 	<tr>
 		<td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
 			<![endif]--> 
@@ -211,8 +209,7 @@ const contentPartial =
 			<!--[if mso | IE]> 
 		</td>
 	</tr>
-</table>
-`;
+</table>`;
 
 const EditorWithPreview = ({ setTemplateId }) => {
 	// State to manage the template content and variables
