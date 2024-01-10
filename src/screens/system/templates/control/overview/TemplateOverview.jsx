@@ -7,7 +7,7 @@ import formatMessage from '@utils/formatMessage';
 import { convertToEpoch, buildDate, parseTime } from '@utils';
 import { ENTITY_INVOICE, DEFAULT_TABLE_HEADER } from '@constants/invoices';
 
-import InvoiceMetrics from './InvoiceMetrics';
+import TemplateMetrics from './TemplateMetrics';
 
 const pagination = {};
 
@@ -60,24 +60,24 @@ const parseOptions = (data = []) => data.map((payload) => ({
 	].join(' '),
 }));
 
-const InvoicesOverview = () => {
+const TemplatesOverview = () => {
 	const navigate = useNavigate();
 
 	const [ loading, setLoading ] = React.useState(false);
-	const [ invoiceOptions, setInvoiceOptions ] = React.useState([]);
+	const [ templateOptions, setTemplateOptions ] = React.useState([]);
 
 	const options = {
 		page: pagination.current || 1, 
 		items: pagination.pageSize || 10
 	};
 
-	const fetchIncomeInvoices = async () => {
+	const fetchIncomeTemplates = async () => {
 		setLoading(true);
 
 		request.list({ entity: ENTITY_INVOICE, options }).then((data) => {
 			setLoading(false);
 			if (data.success === true) {
-				setInvoiceOptions(data.result);
+				setTemplateOptions(data.result);
 			}
 		}).catch(() => {
 			setLoading(false);
@@ -85,48 +85,48 @@ const InvoicesOverview = () => {
 	};
 
 	React.useEffect(() => {
-		fetchIncomeInvoices();
+		fetchIncomeTemplates();
 	}, []);
 
-	const onViewInvoiceClick = (e, { id }) => {
+	const onViewTemplateClick = (e, { id }) => {
 		e.preventDefault();
-		return navigate(`/accounting/invoices/${id}`);
+		return navigate(`/system/templates/${id}`);
 	};
 
-	const onCreateInvoiceClick = (e) => {
+	const onCreateTemplateClick = (e) => {
 		e.preventDefault();
-		return navigate('/accounting/invoices/create');
+		return navigate('/system/templates/create');
 	};
 
-	const renderCreateInvoice = (
+	const renderCreateTemplate = (
 		<button 
 			type="button" 
-			onClick={onCreateInvoiceClick}
+			onClick={onCreateTemplateClick}
 			className="btn btn-sm btn-outline-primary" 
 		>
 			<i className="bi-plus" />
-			Create new invoice
+			Create new template
 		</button>
 	);
 
 	return (
 		<div className="d-grid gap-3 gap-lg-5">
-			<InvoiceMetrics 
-				options={invoiceOptions}
+			<TemplateMetrics 
+				options={templateOptions}
 			/>
 			<Table
 				withFilter
 				fullHeight
 				loading={loading}
 				elementsPerPage={100}
-				cta={renderCreateInvoice}
+				cta={renderCreateTemplate}
 				headers={DEFAULT_TABLE_HEADER}
-				onRowClick={onViewInvoiceClick}
-				searchPlaceholder="Search invoice"
-				data={parseOptions(invoiceOptions)}
+				onRowClick={onViewTemplateClick}
+				searchPlaceholder="Search template"
+				data={parseOptions(templateOptions)}
 			/>
 		</div>
 	);
 };
 
-export default InvoicesOverview;
+export default TemplatesOverview;

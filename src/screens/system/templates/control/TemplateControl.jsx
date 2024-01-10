@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Layout, NavPill, Breadcrumb, GetSupport } from '@components';
 
-import InvoiceOverview from './overview';
-import InvoiceSettings from './settings';
-import InvoiceStatistics from './statistics';
+import TemplateOverview from './overview';
+import TemplateSettings from './settings';
+import TemplateStatistics from './statistics';
 
 const BREADCRUMB_OPTIONS = [
 	{
@@ -13,7 +13,7 @@ const BREADCRUMB_OPTIONS = [
 	},
 	{
 		path: '/accounting/invoices',
-		value: 'Invoices'
+		value: 'Templates'
 	},
 ];
 
@@ -38,7 +38,7 @@ const NAV_TAB_OPTIONS = [
 	},
 ];
 
-const InvoiceControl = ({ setInvoiceId }) => {
+const TemplateControl = ({ setTemplateId }) => {
 	const [ activeSection, setActiveSection ] = React.useState(SUPPORTED_SCREEN_SECTIONS.OVERVIEW);
 	return (
 		<Layout>
@@ -51,13 +51,13 @@ const InvoiceControl = ({ setInvoiceId }) => {
 									<Breadcrumb options={BREADCRUMB_OPTIONS} />
 									<h1 className="page-header-title">
 										{activeSection === SUPPORTED_SCREEN_SECTIONS.OVERVIEW && (
-											'Manage Invoices'
+											'Manage Templates'
 										)}
 										{activeSection === SUPPORTED_SCREEN_SECTIONS.STATISTICS && (
-											'Invoice statistics'
+											'Template statistics'
 										)}
 										{activeSection === SUPPORTED_SCREEN_SECTIONS.SETTINGS && (
-											'Invoice Permissions'
+											'Template Permissions'
 										)}
 									</h1>
 								</div>
@@ -75,19 +75,19 @@ const InvoiceControl = ({ setInvoiceId }) => {
 			</Layout.StickyHeader>
 			<div className="mt-15">
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.OVERVIEW && (
-					<InvoiceOverview 
-						setInvoiceId={setInvoiceId} 
+					<TemplateOverview 
+						setTemplateId={setTemplateId} 
 					/>
 				)}
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.STATISTICS && (
-					<InvoiceStatistics />
+					<TemplateStatistics />
 				)}
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.SETTINGS && (
-					<InvoiceSettings />
+					<TemplateSettings />
 				)}
 			</div>
 		</Layout>
 	);
 };
 
-export default InvoiceControl;
+export default TemplateControl;

@@ -4,33 +4,33 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { withPrivateRouter } from '@utils/hocs';
 import BillingModule from '@modules/BillingModule';
 
-import InvoiceControl from './control';
+import TemplateControl from './control';
 
-const InvoicesScreen = () => {
+const TemplatesScreen = () => {
 	const navigate = useNavigate();
 
 	const { id = '' } = useParams();
 
-	const setInvoiceId = (id = '') => (
-		navigate(`/accounting/invoices/${id}`)
+	const setTemplateId = (id = '') => (
+		navigate(`/system/templates/${id}`)
 	);
 
-	const invoiceId = React.useMemo(() => (
+	const templateId = React.useMemo(() => (
 		(id || '').toLowerCase()
 	), [ id ]);
 
 	return (
-		invoiceId && invoiceId.length ? (
+		templateId && templateId.length ? (
 			<BillingModule
 				type="INVOICE"
-				id={invoiceId} 
+				id={templateId} 
 			/>
 		) : (
-			<InvoiceControl
-				setInvoiceId={setInvoiceId}
+			<TemplateControl
+				setTemplateId={setTemplateId}
 			/>
 		)
 	);
 };
 
-export default withPrivateRouter(InvoicesScreen);
+export default withPrivateRouter(TemplatesScreen);

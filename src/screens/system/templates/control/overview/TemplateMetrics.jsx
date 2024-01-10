@@ -3,14 +3,14 @@ import React from 'react';
 import { Card, Counter } from '@components';
 import formatMessage from '@utils/formatMessage';
 
-const InvoicesMetrics = ({ options = [] }) => {
+const TemplatesMetrics = ({ options = [] }) => {
 
 	const [ total, paid, unpaid, draft ] = React.useMemo(() => {
 
 		let [ totalAmount, paidAmount, unpaidAmount, draftAmount ] = [ 0, 0, 0, 0 ];
 
 		options.forEach(({ status, paymentStatus }) => {
-			// Update total amount of invoices.
+			// Update total amount of templates.
 			totalAmount += 1;
 
 			if (status === 'draft') {
@@ -35,7 +35,7 @@ const InvoicesMetrics = ({ options = [] }) => {
 				<Card>
 					<Card.Body>
 						<Card.Subtitle>
-							Total invoices
+							Total templates
 						</Card.Subtitle>
 						<div className="row align-items-center gx-2">
 							<div className="col">
@@ -58,7 +58,7 @@ const InvoicesMetrics = ({ options = [] }) => {
 				<Card>
 					<Card.Body>
 						<Card.Subtitle>
-							Paid invoices
+							Email templates
 						</Card.Subtitle>
 						<div className="row align-items-center gx-2">
 							<div className="col">
@@ -81,7 +81,7 @@ const InvoicesMetrics = ({ options = [] }) => {
 				<Card>
 					<Card.Body>
 						<Card.Subtitle>
-							Unpaid invoices
+							SMS templates
 						</Card.Subtitle>
 						<div className="row align-items-center gx-2">
 							<div className="col">
@@ -104,7 +104,7 @@ const InvoicesMetrics = ({ options = [] }) => {
 				<Card>
 					<Card.Body>
 						<Card.Subtitle>
-							Draft invoices
+							Draft templates
 						</Card.Subtitle>
 						<div className="row align-items-center gx-2">
 							<div className="col">
@@ -127,4 +127,4 @@ const InvoicesMetrics = ({ options = [] }) => {
 	);
 };
 
-export default InvoicesMetrics;
+export default TemplatesMetrics;

@@ -1,3 +1,3 @@
 'use strict';
 
-export { default } from './Invoices';
+export { default } from './Templates';
