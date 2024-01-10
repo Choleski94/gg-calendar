@@ -2,8 +2,8 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { withPrivateRouter } from '@utils/hocs';
-import BillingModule from '@modules/BillingModule';
 
+import EditorWithPreview from './edit';
 import TemplateControl from './control';
 
 const TemplatesScreen = () => {
@@ -21,7 +21,7 @@ const TemplatesScreen = () => {
 
 	return (
 		templateId && templateId.length ? (
-			<BillingModule
+			<EditorWithPreview
 				type="INVOICE"
 				id={templateId} 
 			/>

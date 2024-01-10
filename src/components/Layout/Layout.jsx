@@ -44,7 +44,7 @@ const getAcronym = (name = '') => (
 	(name || '').toUpperCase().split(' ').map((w) => w.slice(0, 1)).join('')
 );
 
-const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, children }) => {
+const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, withoutPadding = false, children }) => {
 	const myRef = React.useRef();
 
 	const dispatch = useDispatch();
@@ -419,7 +419,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, child
 						</main>
 					) : (
 						<main id="content" role="main" className="main footer-offset">
-							<div className="content container-fluid">
+							<div className={`content container-fluid ${withoutPadding ? 'p-0' : ''}`}>
 								{children}
 							</div>
 						</main>
