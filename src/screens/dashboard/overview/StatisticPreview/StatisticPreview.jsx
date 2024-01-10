@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React from 'react';
 
 import { ENTITIES } from '@constants';
-import { Card, Progress } from '@components';
+import { Progress } from '@components';
 import formatMessage from '@utils/formatMessage';
 
 const DEFAULT_PREVIEW = {
