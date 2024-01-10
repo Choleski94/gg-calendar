@@ -38,7 +38,7 @@ const NAV_TAB_OPTIONS = [
 	},
 ];
 
-// Define the initial Handlebars template
+// Define the initial Handlebars layout
 const initialLayout = 
 `<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 	<head>
