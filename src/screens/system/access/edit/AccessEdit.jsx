@@ -212,10 +212,12 @@ const AccessEdit = ({ roleId }) => {
 											Loading data
 										</Card.Loader>
 									) : (
-										<Forms.Role 
+										<Forms.CreateUpdate
 											mode="UPDATE"
 											defaultValues={data}
 											disabled={data?.system}
+											createText="Create role"
+											updateText="Update role"
 											handleSubmit={handleUpdateRole}
 										/>
 									)}

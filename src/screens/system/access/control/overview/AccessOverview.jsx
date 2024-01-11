@@ -258,7 +258,9 @@ const AccessOverview = ({ setRoleId }) => {
 					title="Create new role" 
 					onCloseRequest={toggleModal} 
 				>
-					<Forms.Role
+					<Forms.CreateUpdate
+						createText="Create role"
+						updateText="Update role"
 						data={data} mode="CREATE" 
 						handleSubmit={handleCreateRole}
 					/>

@@ -52,7 +52,9 @@ const RoleDialog = ({ orgId = '', roleId = '', defaultValues, aggregateOption })
 
 			<div className="mt-5">
 				{activeSection === SUPPORTED_SCREEN_SECTIONS.UPDATE && (
-					<Forms.Role
+					<Forms.CreateUpdate
+						createText="Create role"
+						updateText="Update role"
                                                 orgId={orgId} mode="UPDATE"
                                                 defaultValues={defaultValues}
                                                 aggregateOption={aggregateOption}

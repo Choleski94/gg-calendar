@@ -16,7 +16,7 @@ const DEFAULT_PAYLOAD = {
 	description: '', 
 }
 
-const RoleForm = ({
+const CreateUpdateForm = ({
 	disabled = false,
 	defaultValues = {}, 
 	updateText = 'Update',
@@ -153,5 +153,5 @@ const RoleForm = ({
 	);
 };
 
-export default RoleForm;
+export default CreateUpdateForm;
 
