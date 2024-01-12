@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { withPrivateRouter } from '@utils/hocs';
 
-import EditorWithPreview from './edit';
+import TemplateEdit from './edit';
 import TemplateControl from './control';
 
 const TemplatesScreen = () => {
@@ -21,9 +21,8 @@ const TemplatesScreen = () => {
 
 	return (
 		templateId && templateId.length ? (
-			<EditorWithPreview
-				type="INVOICE"
-				id={templateId} 
+			<TemplateEdit
+				remplateId={templateId} 
 			/>
 		) : (
 			<TemplateControl
