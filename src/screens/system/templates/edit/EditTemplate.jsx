@@ -286,6 +286,14 @@ const EditTemplate = () => {
 		setContent(value);
 	};
 
+	const onDeleteTemplateClick = (e) => {
+		e.preventDefault();
+
+		if (data.system) return;
+
+		handleDeleteTemplate(data);
+	};
+
 	return (
 		<Layout>
 			<Layout.StickyHeader>
@@ -319,9 +327,7 @@ const EditTemplate = () => {
 						<Card fullHeight>
 							<Card.Header>
 								<Card.Title>
-									<h2>
-										Profile
-									</h2>
+									Profile
 								</Card.Title>
 							</Card.Header>
 							<Card.Body>
@@ -341,13 +347,12 @@ const EditTemplate = () => {
 							</Card.Body>
 						</Card>
 					</div>
-					<div className="col-md-12">
+
+					<div className="col-md-12 mb-5">
 						<Card fullHeight>
 							<Card.Header>
 								<Card.Title>
-									<h2>
-										Live Editor
-									</h2>
+									Live Editor
 								</Card.Title>
 								<Card.CTA>
 									<button type="button" className="btn btn-sm btn-outline-success">
@@ -387,6 +392,40 @@ const EditTemplate = () => {
 										/>
 									</div>
 								</div>
+							</Card.Body>
+						</Card>
+					</div>
+
+					<div className="col-md-12">
+						<Card>
+							<Card.Header>
+								<Card.Title>
+									Delete template
+								</Card.Title>
+							</Card.Header>
+							<Card.Body>
+								{loading ? (
+									<Card.Loader>
+										Loading data
+									</Card.Loader>
+								) : (
+									<>
+										<Card.Text>
+											Permanently deleting your template will irreversibly erase the associated email/SMS message, ensuring that it cannot be recovered.
+										</Card.Text>
+										<div className="d-flex justify-content-end m-2">
+											<button
+												type="submit"
+												onClick={onDeleteTemplateClick}
+												className="btn btn-sm btn-outline-danger"
+											>
+												<i className="bi-trash" />
+												&nbsp;
+												Delete
+											</button>
+										</div>
+									</>
+								)}
 							</Card.Body>
 						</Card>
 					</div>
