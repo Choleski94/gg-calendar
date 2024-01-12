@@ -22,7 +22,7 @@ const TemplatesScreen = () => {
 	return (
 		templateId && templateId.length ? (
 			<TemplateEdit
-				remplateId={templateId} 
+				templateId={templateId} 
 			/>
 		) : (
 			<TemplateControl
