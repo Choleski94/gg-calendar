@@ -3,7 +3,7 @@
 import Contact from './Contact';
 import Workforce from './Workforce';
 import InviteUser from './InviteUser';
-import CreateUpdate from './CreateUpdate';
+import NameDescription from './NameDescription';
 
 import JobProjects from './Jobs/Projects';
 import JobInformation from './Jobs/Information';
@@ -14,7 +14,7 @@ export default {
 	Contact,
 	Workforce,
 	InviteUser,
-	CreateUpdate,
+	NameDescription,
 	// TODO
 	JobProjects,
 	JobInformation,

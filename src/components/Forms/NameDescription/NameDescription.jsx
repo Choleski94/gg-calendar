@@ -1,35 +1,29 @@
 import React from 'react';
 
 import formatMessage from '@utils/formatMessage';
-import { SUPPORTED_STATUSES } from '@constants/access';
 import { Input, TextArea, SwitchToggle } from '@components';
 
-const SUPPORTED_MODES = {
-	CREATE: 'CREATE',
-	UPDATE: 'UPDATE',
-}
-
-const DEFAULT_PAYLOAD = {
-	name: '', 
-	enabled: false, 
-	permissions: [],
-	description: '', 
-}
-
-const CreateUpdateForm = ({
+const NameDescription = ({
 	disabled = false,
+	withActive = false,
 	defaultValues = {}, 
-	updateText = 'Update',
-	createText = 'Create',
+	btcContent = 'Save',
 	handleSubmit = () => null,
-	mode = SUPPORTED_MODES.CREATE, 
 }) => {
 	const [ errors, setErrors ] = React.useState({});
-	const [ payload, setPayload ] = React.useState(DEFAULT_PAYLOAD);
+	const [ payload, setPayload ] = React.useState({
+		name: '', 
+		enabled: false, 
+		permissions: [],
+		description: '', 
+	});
 
 	React.useEffect(() => {
 		setPayload(defaultValues);
 	}, []);
+
+	// <i className="bi-plus" />
+	// &nbsp;
 
 	const errorMessages = {
 		empty: 'Can\'t be empty.',
@@ -79,7 +73,7 @@ const CreateUpdateForm = ({
 		<div className="row">
 			<div className="col-lg-12">
 				<div className="row">
-					<div className={mode !== SUPPORTED_MODES.CREATE ? 'col-md-11' : 'col-md-12'}>
+					<div className={withActive ? 'col-md-11' : 'col-md-12'}>
 						<div className="mb-4">
 							<Input
 								id="name"
@@ -93,7 +87,7 @@ const CreateUpdateForm = ({
 							/>
 						</div>
 					</div>
-					{mode !== SUPPORTED_MODES.CREATE && (
+					{withActive && (
 						<div className="col-lg-1">
 							<div className="mb-4">
 								<label className="form-label" htmlFor="slug">
@@ -130,19 +124,7 @@ const CreateUpdateForm = ({
 						<div className="mt-4 d-flex align-items-center">
 							<div className="ms-auto">
 								<button type="button" className="btn btn-sm btn-outline-primary" onClick={onSubmit}>
-									{mode === SUPPORTED_MODES.CREATE ? (
-										<>
-											<i className="bi-plus" />
-											&nbsp;
-											{createText}
-										</>
-									) : (
-										<>
-											<i className="bi-save" />
-											&nbsp;
-											{updateText}
-										</>
-									)} 
+									{ctaContent}
 								</button>
 							</div>
 						</div>
@@ -153,5 +135,5 @@ const CreateUpdateForm = ({
 	);
 };
 
-export default CreateUpdateForm;
+export default NameDescription;
 
