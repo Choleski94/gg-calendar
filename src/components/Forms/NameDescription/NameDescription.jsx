@@ -7,7 +7,7 @@ const NameDescription = ({
 	disabled = false,
 	withActive = false,
 	defaultValues = {}, 
-	btcContent = 'Save',
+	ctaContent = 'Save',
 	handleSubmit = () => null,
 }) => {
 	const [ errors, setErrors ] = React.useState({});
