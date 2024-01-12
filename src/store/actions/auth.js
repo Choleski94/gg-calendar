@@ -60,5 +60,11 @@ export const logout = () => (dispatch) => (
 		}
 
 		dispatch(userLoggedOut());
+	}).catch(() => {
+		if (typeof window !== 'undefined') {
+			window.localStorage.removeItem('tigadoJWT');
+		}
+
+		dispatch(userLoggedOut());
 	})
 );
