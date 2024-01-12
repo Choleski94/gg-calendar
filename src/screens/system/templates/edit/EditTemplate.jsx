@@ -8,10 +8,11 @@ import {
 	// SUPPORTED_SERVICES_ROWS,
 	// BREADCRUMB_ACCESS_OPTIONS,
 } from '@constants/templates';
-
 import { request } from '@utils/request';
 import compileTemplate from '@utils/compileTemplate';
-import { Card, Editor, Forms, Layout, NavPill, Breadcrumb, GetSupport } from '@components';
+import { Card, Editor, Layout, NavPill, Breadcrumb, GetSupport } from '@components';
+
+import EditTemplateForm from './EditTemplateForm';
 
 const BREADCRUMB_OPTIONS = [
 	{
@@ -281,7 +282,7 @@ const EditTemplate = () => {
 
 	// Handle editor content change
 	const handleEditorChange = (value, event) => {
-		console.log('VALUE:::', value);
+		// console.log('VALUE:::', value);
 		setContent(value);
 	};
 
@@ -329,7 +330,7 @@ const EditTemplate = () => {
 										Loading data
 									</Card.Loader>
 								) : (
-									<Forms.NameDescription
+									<EditTemplateForm
 										withActive
 										defaultValues={data}
 										disabled={data?.system}
