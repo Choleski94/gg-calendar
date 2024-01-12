@@ -1,3 +1,3 @@
 'use strict';
 
-export { default } from './EditorWithPreview';
+export { default } from './EditTemplate';

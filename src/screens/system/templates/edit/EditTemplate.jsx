@@ -1,8 +1,17 @@
+import _ from 'lodash';
 import React from 'react';
 import Handlebars from 'handlebars';
+import { useNavigate } from 'react-router-dom';
 
+import {
+	ENTITY_TEMPLATE,
+	// SUPPORTED_SERVICES_ROWS,
+	// BREADCRUMB_ACCESS_OPTIONS,
+} from '@constants/templates';
+
+import { request } from '@utils/request';
 import compileTemplate from '@utils/compileTemplate';
-import { Card, Editor, Layout, NavPill, Breadcrumb, GetSupport } from '@components';
+import { Card, Editor, Forms, Layout, NavPill, Breadcrumb, GetSupport } from '@components';
 
 const BREADCRUMB_OPTIONS = [
 	{
@@ -211,15 +220,48 @@ const contentPartial =
 	</tr>
 </table>`;
 
-const EditorWithPreview = ({ setTemplateId }) => {
-	// State to manage the template content and variables
+const EditTemplate = () => {
+	const navigate = useNavigate();
+
+	const [ data, setData ] = React.useState({});
 	const [ content, setContent ] = React.useState('');
+	const [ loading, setLoading ] = React.useState(false);
 	const [ previewHTML, setPreviewHTML ] = React.useState('');
 	const [ variables, setVariables ] = React.useState({
 		client: 'Julian Guzman',
 		company: 'Flash Repair',
 		content: 'This is a demo with variable support.',
 	});
+
+	const handleUpdateTemplate = (payload) => {
+		setLoading(true);
+
+		// const entity = ENTITY_TEMPLATE + '/update/' + roleId;
+
+		// request.patch({ entity, jsonData: payload }).then((response) => {
+		// 	setLoading(false);
+
+		// 	if (response.success === true) {
+		// 		fetchTemplatePermissions(roleId);
+		// 	}
+		// }).catch(() => {
+		// 	setLoading(false);
+		// });
+	}
+
+	const handleDeleteTemplate = (payload) => {
+		setLoading(true);
+
+		// request.delete({ entity: ENTITY_TEMPLATE, id: payload?._id, jsonData: payload }).then((data) => {
+		// 	setLoading(false);
+
+		// 	if (data.success === true) {
+		// 		navigate('/system/templates');
+		// 	}
+		// }).catch((error) => {
+		// 	setLoading(false);
+		// });
+	}
 
 	React.useEffect(() => {
 		setContent(contentPartial);
@@ -271,56 +313,86 @@ const EditorWithPreview = ({ setTemplateId }) => {
 				</div>
 			</Layout.StickyHeader>
 			<div className="mt-15">
-				<Card fullHeight>
-					<Card.Header>
-						<Card.Title>
-							<h2>
-								Live Editor
-							</h2>
-						</Card.Title>
-						<Card.CTA>
-							<button type="button" className="btn btn-sm btn-outline-success">
-								<i className="bi-save"/>
-								&nbsp;
-								Save
-							</button>
-						</Card.CTA>
-					</Card.Header>
-					<Card.Body>
-						<div className="row">
-							<div className="col-md-7">
-								<div style={{ width: '100%', height: '100%' }}>
-									<Editor
-										theme="light"
-										height="100%"
-										language="html"
-										value={content}
-										options={{
-											minimap: {
-												enabled: false,
-											},
-										}}
-										onChange={handleEditorChange}
+				<div className="row">
+					<div className="col-md-12 mb-5">
+						<Card fullHeight>
+							<Card.Header>
+								<Card.Title>
+									<h2>
+										Profile
+									</h2>
+								</Card.Title>
+							</Card.Header>
+							<Card.Body>
+								{loading ? (
+									<Card.Loader>
+										Loading data
+									</Card.Loader>
+								) : (
+									<Forms.NameDescription
+										withActive
+										defaultValues={data}
+										disabled={data?.system}
+										ctaContent="Update template"
+										handleSubmit={handleUpdateTemplate}
 									/>
+								)}
+							</Card.Body>
+						</Card>
+					</div>
+					<div className="col-md-12">
+						<Card fullHeight>
+							<Card.Header>
+								<Card.Title>
+									<h2>
+										Live Editor
+									</h2>
+								</Card.Title>
+								<Card.CTA>
+									<button type="button" className="btn btn-sm btn-outline-success">
+										<i className="bi-save"/>
+										&nbsp;
+										Save
+									</button>
+								</Card.CTA>
+							</Card.Header>
+							<Card.Body>
+								<div className="row">
+									<div className="col-md-7">
+										<div style={{ width: '100%', height: '100%' }}>
+											<Editor
+												theme="light"
+												height="100%"
+												language="html"
+												value={content}
+												options={{
+													minimap: {
+														enabled: false,
+													},
+												}}
+												onChange={handleEditorChange}
+											/>
+										</div>
+									</div>
+									<div className="col-md-5">
+										<iframe
+											title="Preview"
+											srcDoc={previewHTML}
+											style={{
+												width: '100%', 
+												height: '100%', 
+												minHeight: '750px',
+											}}
+										/>
+									</div>
 								</div>
-							</div>
-							<div className="col-md-5">
-								<iframe
-									title="Preview"
-									srcDoc={previewHTML}
-									style={{
-										width: '100%', 
-										height: '100%', 
-										minHeight: '750px',
-									}}
-								/>
-							</div>
-						</div>
-					</Card.Body>
-				</Card>
+							</Card.Body>
+						</Card>
+					</div>
+				</div>
 			</div>
 		</Layout>
 	);
 };
 
-export default EditorWithPreview;
+export default EditTemplate;

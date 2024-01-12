@@ -1,69 +1,93 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Table } from '@components';
 import { request } from '@utils/request';
 import formatMessage from '@utils/formatMessage';
+import { LANGUAGE_CODES } from '@constants/locales';
+import { Table, Modal, Forms, ActionMenu } from '@components';
 import { convertToEpoch, buildDate, parseTime } from '@utils';
-import { ENTITY_INVOICE, DEFAULT_TABLE_HEADER } from '@constants/invoices';
+import { ENTITY_TEMPLATE, DEFAULT_TABLE_HEADER } from '@constants/templates';
 
 import TemplateMetrics from './TemplateMetrics';
 
 const pagination = {};
 
-const parseOptions = (data = []) => data.map((payload) => ({
-	// Supported header data.
-	id: payload?._id,
-	balance: (
-		<span>
-			${(payload?.balance || 0).toFixed(2)} CAD
-		</span>
-	),
-	total: (
-		<span>
-			${(payload?.total || 0).toFixed(2)} CAD
-		</span>
-	),
-	status: payload?.status,
-	number: payload?.number,
-	date: payload?.date ? (
-		<small>
-			{buildDate(convertToEpoch(payload?.date))}
-			<br />
-			<small className="text-muted">
-				{parseTime(convertToEpoch(payload?.date))}
-			</small>
-		</small>
-	) : null,
-	expiredDate: payload?.expiredDate ? (
-		<small>
-			{buildDate(convertToEpoch(payload?.expiredDate))}
-			<br />
-			<small className="text-muted">
-				{parseTime(convertToEpoch(payload?.expiredDate))}
-			</small>
-		</small>
-	) : null,
-	client: (
-		<span className="d-flex align-items-center">
-			<span className="d-block text-inherit mb-0">
-				{payload?.client?.firstName} {payload?.client?.lastName}
-			</span>
-		</span>
-	),
-	payment_status: payload?.paymentStatus,
-	// Supported search query field(s).
-	query: [
-		payload?.status,
-		payload?.paymentStatus,
-		payload?.client?.company,
-	].join(' '),
-}));
+const setActionMenuOptions = ({
+	payload,
+	onCopy = () => null, 
+	onDelete = () => null,
+}) => {
+	const options = [
+		{
+			key: 'clone',
+			value: (
+				<span>
+					<i className="bi bi-files" /> Clone
+				</span>
+			),
+			cb: () => onCopy(payload),
+		},
+	];
+
+	if (!payload?.system) {
+		options.push({
+			key: 'delete',
+			value: (
+				<span className="text-danger">
+					<i className="bi bi-trash3" /> Delete
+				</span>
+			),
+			cb: () => onDelete(payload),
+		});
+	}
+
+	return options;
+}
+
+const parseOptions = (options, onCopy, onDelete) => (
+	options.map((payload) => ({
+		query: [
+			payload?.name,
+			payload?.description,
+		].join(' '),
+		id: payload?._id,
+		name: payload?.name,
+		languages: (payload?.languages || []).map((lang = '') => {
+			const langCode = lang.toUpperCase();
+			return LANGUAGE_CODES[langCode];
+		}).join(', '),
+		system: payload?.system,
+		createdAt: payload?.createdAt,
+		description: payload?.description,
+		enabled: (
+			payload?.enabled ? (
+				<span className="badge bg-soft-success text-success">
+					Active
+				</span>
+			) : (
+				<span className="badge bg-soft-danger text-danger">
+					Inactive
+				</span>
+			)
+		),
+		actions: (
+			<ActionMenu 
+				options={
+					setActionMenuOptions({
+						payload, onCopy, onDelete,
+					})
+				}
+			/>
+		),
+	}))
+);
 
 const TemplatesOverview = () => {
 	const navigate = useNavigate();
 
+	const [ data, setData ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
+	const [ showModal, setShowModal ] = React.useState(false);
 	const [ templateOptions, setTemplateOptions ] = React.useState([]);
 
 	const options = {
@@ -71,10 +95,10 @@ const TemplatesOverview = () => {
 		items: pagination.pageSize || 10
 	};
 
-	const fetchIncomeTemplates = async () => {
+	const fetchTemplates = async () => {
 		setLoading(true);
 
-		request.list({ entity: ENTITY_INVOICE, options }).then((data) => {
+		request.list({ entity: ENTITY_TEMPLATE, options }).then((data) => {
 			setLoading(false);
 			if (data.success === true) {
 				setTemplateOptions(data.result);
@@ -84,24 +108,67 @@ const TemplatesOverview = () => {
 		});
 	};
 
+	const handleCreateTemplate = (payload) => {
+		setLoading(true);
+
+		request.create({ entity: ENTITY_TEMPLATE, jsonData: payload }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				setShowModal(false);
+				fetchTemplates();
+			}
+		}).catch((error) => {
+			setLoading(false);
+		});
+	}
+
+	const handleCopyTemplate = (payload) => {
+		// Set new cloned payload.
+		const newClonedPayload = _.cloneDeep({
+			enabled: false,
+			name: payload?.name + ' Copy',
+			permissions: payload?.permissions,
+			description: payload?.description,
+		});
+
+		handleCreateTemplate(newClonedPayload);
+	};
+
+	const handleDeleteTemplate = (payload) => {
+		setLoading(true);
+
+		request.delete({ entity: ENTITY_TEMPLATE, id: payload?._id, jsonData: payload }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				fetchTemplates();
+			}
+		}).catch((error) => {
+			setLoading(false);
+		});
+	}
+
 	React.useEffect(() => {
-		fetchIncomeTemplates();
+		fetchTemplates();
 	}, []);
+
+	const toggleModal = () => setShowModal(false);
 
 	const onViewTemplateClick = (e, { id }) => {
 		e.preventDefault();
 		return navigate(`/system/templates/${id}`);
 	};
 
-	const onCreateTemplateClick = (e) => {
+	const onAddTemplateClick = (e) => {
 		e.preventDefault();
-		return navigate('/system/templates/create');
+		setShowModal(true);
 	};
 
-	const renderCreateTemplate = (
+	const renderAddTemplate = (
 		<button 
 			type="button" 
-			onClick={onCreateTemplateClick}
+			onClick={onAddTemplateClick}
 			className="btn btn-sm btn-outline-primary" 
 		>
 			<i className="bi-plus" />
@@ -119,12 +186,31 @@ const TemplatesOverview = () => {
 				fullHeight
 				loading={loading}
 				elementsPerPage={100}
-				cta={renderCreateTemplate}
+				cta={renderAddTemplate}
 				headers={DEFAULT_TABLE_HEADER}
 				onRowClick={onViewTemplateClick}
 				searchPlaceholder="Search template"
-				data={parseOptions(templateOptions)}
+				data={
+					parseOptions(
+						templateOptions, 
+						handleCopyTemplate, 
+						handleDeleteTemplate
+					)
+				}
 			/>
+			{showModal ? (
+				<Modal 
+					size="md" centered 
+					title="Create new template" 
+					onCloseRequest={toggleModal} 
+				>
+					<Forms.NameDescription
+						data={data} 
+						ctaContent="Create template"
+						handleSubmit={handleCreateTemplate}
+					/>
+				</Modal>
+			) : null}
 		</div>
 	);
 };
