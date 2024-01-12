@@ -91,6 +91,8 @@ const AccessOverview = ({ setRoleId }) => {
 
 			if (data.success === true) {
 				setOptions(data.result);
+			} else {
+				setOptions([]);
 			}
 		}).catch(() => {
 			setLoading(false);
