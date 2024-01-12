@@ -2,10 +2,20 @@
 
 export const ENTITY_TEMPLATE = 'templates';
 
+// TODO: Deprecate & replace with localization.
+export const DEFAULT_CATEGORIES = {
+	TRANSACTIONAL: 'Transactional',
+	MARKETING: 'Marketing',
+	BILLING: 'Billing',
+	REVIEW: 'Review',
+};
+
 export const DEFAULT_TABLE_HEADER = [
 	{ key: 'name', label: 'Name' },
 	{ key: 'description', label: 'Description' },
 	{ key: 'languages', label: 'Language(s)' },
+	{ key: 'category', label: 'Category' },
+	{ key: 'type', label: 'Type' },
 	{ key: 'enabled', label: 'Status' },
 	{ key: 'actions', label: 'Actions' },
 ];
@@ -36,6 +46,7 @@ export const BREADCRUMB_ACCESS_OPTIONS = [
 export default {
 	ENTITY_TEMPLATE,
 	SUPPORTED_STATUSES,
+	DEFAULT_CATEGORIES,
 	DEFAULT_TABLE_HEADER,
 	BREADCRUMB_ACCESS_OPTIONS,
 	DEFAULT_TABLE_ACTIVE_HEADER,

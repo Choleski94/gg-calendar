@@ -6,7 +6,11 @@ import formatMessage from '@utils/formatMessage';
 import { LANGUAGE_CODES } from '@constants/locales';
 import { Table, Modal, Forms, ActionMenu } from '@components';
 import { convertToEpoch, buildDate, parseTime } from '@utils';
-import { ENTITY_TEMPLATE, DEFAULT_TABLE_HEADER } from '@constants/templates';
+import {
+	ENTITY_TEMPLATE, 
+	DEFAULT_CATEGORIES,
+	DEFAULT_TABLE_HEADER, 
+} from '@constants/templates';
 
 import TemplateMetrics from './TemplateMetrics';
 
@@ -57,6 +61,20 @@ const parseOptions = (options, onCopy, onDelete) => (
 			return LANGUAGE_CODES[langCode];
 		}).join(', '),
 		system: payload?.system,
+		category: DEFAULT_CATEGORIES[payload?.category || ''],
+		type: payload?.type ? (
+			payload?.type === 'EMAIL' ? (
+				<span>
+					<i className="bi-envelope m-1 mb-0" />
+					Email
+				</span>
+			) : (
+				<span>
+					<i className="bi-phone m-1 mb-0" />
+					Phone
+				</span>
+			)
+		) : 'N/A',
 		description: payload?.description,
 		enabled: (
 			payload?.enabled ? (
