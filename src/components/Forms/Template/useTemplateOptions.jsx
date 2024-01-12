@@ -5,9 +5,9 @@
 const useTemplateOptions = () => {
 
 	const languageOptions = [
-		{ label: 'English', value: 'en-US' }, 
-		{ label: 'Français', value: 'fr-FR' },
-		{ label: 'Español', value: 'es-ES' },
+		{ label: 'English', value: 'en' }, 
+		{ label: 'Français', value: 'fr' },
+		{ label: 'Español', value: 'es' },
 	];
 
 	const typeOptions = [
