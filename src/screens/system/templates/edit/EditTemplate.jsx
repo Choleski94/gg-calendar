@@ -10,9 +10,7 @@ import {
 } from '@constants/templates';
 import { request } from '@utils/request';
 import compileTemplate from '@utils/compileTemplate';
-import { Card, Editor, Layout, NavPill, Breadcrumb, GetSupport } from '@components';
-
-import EditTemplateForm from './EditTemplateForm';
+import { Card, Editor, Forms, Layout, NavPill, Breadcrumb, GetSupport } from '@components';
 
 const BREADCRUMB_OPTIONS = [
 	{
@@ -221,7 +219,7 @@ const contentPartial =
 	</tr>
 </table>`;
 
-const EditTemplate = () => {
+const EditTemplate = ({ templateId }) => {
 	const navigate = useNavigate();
 
 	const [ data, setData ] = React.useState({});
@@ -237,13 +235,13 @@ const EditTemplate = () => {
 	const handleUpdateTemplate = (payload) => {
 		setLoading(true);
 
-		// const entity = ENTITY_TEMPLATE + '/update/' + roleId;
+		// const entity = ENTITY_TEMPLATE + '/update/' + templateId;
 
 		// request.patch({ entity, jsonData: payload }).then((response) => {
 		// 	setLoading(false);
 
 		// 	if (response.success === true) {
-		// 		fetchTemplatePermissions(roleId);
+		// 		fetchTemplatePermissions(templateId);
 		// 	}
 		// }).catch(() => {
 		// 	setLoading(false);
@@ -253,18 +251,33 @@ const EditTemplate = () => {
 	const handleDeleteTemplate = (payload) => {
 		setLoading(true);
 
-		// request.delete({ entity: ENTITY_TEMPLATE, id: payload?._id, jsonData: payload }).then((data) => {
-		// 	setLoading(false);
+		request.delete({ entity: ENTITY_TEMPLATE, id: payload?._id, jsonData: payload }).then((data) => {
+			setLoading(false);
 
-		// 	if (data.success === true) {
-		// 		navigate('/system/templates');
-		// 	}
-		// }).catch((error) => {
-		// 	setLoading(false);
-		// });
+			if (data.success === true) {
+				navigate('/system/templates');
+			}
+		}).catch((error) => {
+			setLoading(false);
+		});
+	}
+
+	const fetchTemplate = (templateId) => {
+		setLoading(true);
+
+		request.read({ entity: ENTITY_TEMPLATE, id: templateId }).then((data) => {
+			setLoading(false);
+
+			if (data.success === true) {
+				setData(data.result);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
 	}
 
 	React.useEffect(() => {
+		fetchTemplate(templateId);
 		setContent(contentPartial);
 	}, []);
 
@@ -336,11 +349,10 @@ const EditTemplate = () => {
 										Loading data
 									</Card.Loader>
 								) : (
-									<EditTemplateForm
+									<Forms.Template
 										withActive
 										defaultValues={data}
 										disabled={data?.system}
-										ctaContent="Update template"
 										handleSubmit={handleUpdateTemplate}
 									/>
 								)}
