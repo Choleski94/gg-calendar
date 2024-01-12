@@ -101,6 +101,8 @@ const TemplatesOverview = () => {
 			setLoading(false);
 			if (data.success === true) {
 				setTemplateOptions(data.result);
+			} else {
+				setTemplateOptions([]);
 			}
 		}).catch(() => {
 			setLoading(false);
