@@ -21,7 +21,6 @@ import {
 	DEFAULT_PERMISSION_TABLE_HEADER, 
 } from '@constants/access';
 import { hasObjectKey } from '@utils';
-import mockPermission from '@mocks/jobs';
 import { request } from '@utils/request';
 
 import { parseOptions } from './AccessEdit.controller';
