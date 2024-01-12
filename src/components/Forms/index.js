@@ -1,6 +1,7 @@
 'use strict';
 
 import Contact from './Contact';
+import Template from './Template';
 import Workforce from './Workforce';
 import InviteUser from './InviteUser';
 import NameDescription from './NameDescription';
@@ -12,6 +13,7 @@ import JobServiceLocation from './Jobs/ServiceLocation';
 
 export default {
 	Contact,
+	Template,
 	Workforce,
 	InviteUser,
 	NameDescription,
