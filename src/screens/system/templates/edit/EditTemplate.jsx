@@ -235,17 +235,17 @@ const EditTemplate = ({ templateId }) => {
 	const handleUpdateTemplate = (payload) => {
 		setLoading(true);
 
-		// const entity = ENTITY_TEMPLATE + '/update/' + templateId;
+		const entity = ENTITY_TEMPLATE + '/update/' + templateId;
 
-		// request.patch({ entity, jsonData: payload }).then((response) => {
-		// 	setLoading(false);
+		request.patch({ entity, jsonData: payload }).then((response) => {
+			setLoading(false);
 
-		// 	if (response.success === true) {
-		// 		fetchTemplatePermissions(templateId);
-		// 	}
-		// }).catch(() => {
-		// 	setLoading(false);
-		// });
+			if (response.success === true) {
+				fetchTemplatePermissions(templateId);
+			}
+		}).catch(() => {
+			setLoading(false);
+		});
 	}
 
 	const handleDeleteTemplate = (payload) => {
