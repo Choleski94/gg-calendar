@@ -57,7 +57,6 @@ const parseOptions = (options, onCopy, onDelete) => (
 			return LANGUAGE_CODES[langCode];
 		}).join(', '),
 		system: payload?.system,
-		createdAt: payload?.createdAt,
 		description: payload?.description,
 		enabled: (
 			payload?.enabled ? (

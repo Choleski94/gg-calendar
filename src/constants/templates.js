@@ -7,7 +7,6 @@ export const DEFAULT_TABLE_HEADER = [
 	{ key: 'description', label: 'Description' },
 	{ key: 'languages', label: 'Language(s)' },
 	{ key: 'enabled', label: 'Status' },
-	{ key: 'createdAt', label: 'Date created' },
 	{ key: 'actions', label: 'Actions' },
 ];
 
