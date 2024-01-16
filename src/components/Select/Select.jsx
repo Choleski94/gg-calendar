@@ -31,7 +31,7 @@ const Select = ({
 		}
 
 		return res;
-	}, [ value ]);
+	}, [ value, options ]);
 
 	const handleChange = (payload) => {
 		let res = null;
