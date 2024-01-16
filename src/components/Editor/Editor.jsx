@@ -4,27 +4,47 @@ import * as monaco from 'monaco-editor';
 import { DEFAULT_THEME } from './Editor.constants';
 
 const Editor = ({
+	id = '',
 	value = '',
 	options = {},
 	language = 'html',
 	width = 'inherit',
 	height = 'inherit',
-	onChange = () => null
+	onChange = () => null,
 }) => {
 	const editorRef = React.useRef(null);
 	const timeoutRef = React.useRef(null);
 	const containerRef = React.useRef(null);
 
 	const [ refresh, setRefresh ] = React.useState(false);
+	const [ currentId, setCurrentId ] = React.useState('');
+
+	const idUpdated = React.useMemo(() => {
+		let res = false;
+
+		if (id !== currentId) {
+			res = true;
+			setCurrentId(id);
+		}
+
+		return res;
+	}, [ id ]);
 
 	React.useEffect(() => {
 		if (editorRef.current) {
-			console.log('Editor ready', value);
-			if (!refresh) setRefresh(true);
-		} else {
-			console.log('Editor not ready', value);
+			if (!refresh) {
+				setRefresh(!refresh);
+			}
 		}
-	}, [ value ]);
+
+		if (idUpdated) {
+			if (editorRef.current) {
+				editorRef.current.setValue('');
+			}
+
+			setRefresh(!refresh);
+		}
+	}, [ id ]);
 
 	React.useEffect(() => {
 		// Define Monaco Editor theme
@@ -65,7 +85,7 @@ const Editor = ({
 			}
 			clearTimeout(timeoutRef.current);
 		};
-	}, [ refresh ]);
+	}, [ id, refresh ]);
 
 	return (
 		<div ref={containerRef} style={{ width, height }} />
