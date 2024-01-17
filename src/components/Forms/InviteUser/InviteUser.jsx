@@ -13,10 +13,12 @@ import { ENTITY_ROLE } from '@constants/access';
 import { validateEmail } from '@utils/validate';
 import formatMessage from '@utils/formatMessage';
 
-const InviteUser = ({ data = [], setData = () => null }) => {
+const InviteUser = ({ data = [], setData = () => null, hideFooter = false }) => {
+
 	const [ options, setOptions ] = React.useState([]);
 	const [ loading, setLoading ] = React.useState(false);
 	const [ roleOptions, setRoleOptions ] = React.useState([]);
+	const [ isFormChanged, setIsFormChanged ] = React.useState(false);
 
 	const fetchRoles = () => {
 		setLoading(true);
@@ -37,14 +39,21 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 		});
 	}
 
+	// Initialize form with data.
+	React.useEffect(() => {
+		if (isFormChanged) return
+
+		setOptions(data);
+	}, [ data ]);
+
+	React.useEffect(() => {
+		if (isFormChanged) {
+			setData(options);
+		}
+	}, [ options ]);
+
 	React.useEffect(() => {
 		fetchRoles();
-	}, []);
-
-	React.useEffect(() => {
-		if (!hasObjectKey(data)) return
-
-		setPayload(data);
 	}, []);
 
 	const defaultRoleOption = React.useMemo(() => {
@@ -58,6 +67,8 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 	}, [ roleOptions ]);
 
 	const onAddInvite = (payload) => {
+		if (!isFormChanged) setIsFormChanged(true);
+
 		const cloneOptions = [ ...options ];
 
 		// Check such value does not exists.
@@ -94,6 +105,8 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 	]), [ roleOptions ]);
 
 	const handleDropdownChange = ({ id, email, value }) => {
+		if (!isFormChanged) setIsFormChanged(true);
+
 		const cloneOptions = [ ...options ].filter((item) => (
 			item.id !== id
 		));
@@ -189,7 +202,7 @@ const InviteUser = ({ data = [], setData = () => null }) => {
 						</>
 					)}
 				</Card.Body>
-				{options && options.length ? (
+				{!hideFooter && options && options.length ? (
 					<Card.Footer withoutPadding>
 						<hr className="mt-2" />
 						<div className="row justify-content-center justify-content-sm-between align-items-sm-center">
