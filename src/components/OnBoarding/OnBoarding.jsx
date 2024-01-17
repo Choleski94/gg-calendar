@@ -144,17 +144,21 @@ const OnBoarding = () => {
 
 	const toggleShowOnBoarding = () => {
 		if (isCompleted) {
-			console.log('---------->>>');
+			// console.log('---------->>>');
 		}
 	};
 
 	const onSuccess = () => {
-		setIsCompleted(true);
+		const jsonData = { isOnboarded: true };
+
+		request.patch({
+			entity: 'user/update/' + userId, jsonData,
+		}).then(() => {
+			setIsCompleted(true);
+		});
 	}
 
-	const onStartOnBoarding = () => {
-		setStartOnboarding(true);
-	}
+	const onStartOnBoarding = () => setStartOnboarding(true);
 
 	const onOptionChange = (stepIndex, payload) => {
 		updateOptionData(stepIndex, payload);
@@ -165,7 +169,7 @@ const OnBoarding = () => {
 		return currentFormApiFn(userId, payload);
 	}
 
-	if (isOnboarded || !isUserAuth) return null;
+	if (isOnboarded || !isUserAuth || isCompleted) return null;
 
 	return (
 		<Modal 
