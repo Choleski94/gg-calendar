@@ -22,6 +22,7 @@ const FORM_SECTION_KEYS = Object.keys(FORM_SECTIONS);
 
 const options = [
 	{
+		validate: true,
 		id: FORM_SECTIONS.PERSONAL,
 		title: (
 			<span className="h4">
@@ -37,6 +38,7 @@ const options = [
 		),
 	},
 	{
+		validate: true,
 		id: FORM_SECTIONS.BUSINESS,
 		title: (
 			<span className="h4">
@@ -52,6 +54,7 @@ const options = [
 		),
 	},
 	{
+		validate: false,
 		id: FORM_SECTIONS.INVITE,
 		title: (
 			<span className="h4">
@@ -91,20 +94,19 @@ const OnBoarding = () => {
 				request.patch({
 					entity: 'workspace/update/' + jsonData?.id, jsonData,
 				}).then(({ result }) => {
-					console.log('RES:::', result);
+					// console.log('RES:::', result);
 				});
 			} else {
 				return request.create({
 					entity: 'workspace', jsonData,
 				}).then(({ result }) => {
-					console.log('RESULT:::', result);
 					dispatch(workspaceFetched(result));
 				});
 			}
 		},
 		[FORM_SECTIONS.INVITE]: (userId, payload = {}) => {
 			// TODO:
-			console.log('update invite info', payload);
+			// console.log('update invite info', payload);
 			return true;
 		},
 	}
@@ -122,8 +124,6 @@ const OnBoarding = () => {
 	const updateOptionData = (stepIdx, payload) => {
 		// Clone option data state.
 		const cloneOptionData = [ ...optionsData ];
-
-		console.log('AWA:::', cloneOptionData);
 
 		cloneOptionData[stepIdx] = payload;
 
