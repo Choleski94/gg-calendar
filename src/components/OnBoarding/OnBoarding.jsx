@@ -44,7 +44,7 @@ const options = [
 			</span>
 		),
 		Component: ({ ...rest }) => (
-			<Forms.Workspace 
+			<Forms.Workforce
 				withPhoto
 				withoutSubmit
 				{...rest}
@@ -58,8 +58,10 @@ const options = [
 				Invite Users
 			</span>
 		),
-		Component: ({ ...rest }) => (
+		Component: ({ data, setData, ...rest }) => (
 			<Forms.InviteUser
+				hideFooter data={data?.invites || []}
+				setData={(payload) => setData({ invites: payload }) }
 				{...rest}
 			/>
 		),
@@ -120,6 +122,9 @@ const OnBoarding = () => {
 	const updateOptionData = (stepIdx, payload) => {
 		// Clone option data state.
 		const cloneOptionData = [ ...optionsData ];
+
+		console.log('AWA:::', cloneOptionData);
+
 		cloneOptionData[stepIdx] = payload;
 
 		// Check if we want to share location.
