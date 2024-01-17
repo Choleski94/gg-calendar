@@ -43,7 +43,9 @@ const MultiStepForm = ({
 
 	React.useEffect(() => {
 		setData(new Array(totalOption).fill({}));
-		setValidStep(new Array(totalOption).fill(false));
+		setValidStep(
+			options.map(({ validate }) => !Boolean(validate))
+		);
 	}, [ totalOption ]);
 
 	const onProgressClick = (e, currentIdx) => {
@@ -74,8 +76,8 @@ const MultiStepForm = ({
 		if (activeStep === totalOption) return onSuccess();
 	};
 
-	const onSetData = (payload, formIdx) => {
-		const hasValidPayload = hasObjectKey(payload || {});
+	const onSetData = (payload, formIdx, validate) => {
+		const hasValidPayload = !validate || hasObjectKey(payload || {});
 
 		if (hasValidPayload) {
 			const cloneData = [ ...data ];
@@ -94,7 +96,7 @@ const MultiStepForm = ({
 			setData(cloneData);
 
 			const cloneValidStep = [ ...validStep ];
-			cloneValidStep[formIdx] = false;
+			cloneValidStep[formIdx] = validate;
 
 			setValidStep(cloneValidStep);
 		}
@@ -119,11 +121,11 @@ const MultiStepForm = ({
 				))}
 			</ul>
 			<div>
-				{options.map(({ id, Component }, currentIdx) => (
+				{options.map(({ id, validate, Component }, currentIdx) => (
 					(activeStep == currentIdx) ? (
 						<Component
 							key={id} 
-							setData={(payload) => onSetData(payload, activeStep)}
+							setData={(payload) => onSetData(payload, activeStep, validate)}
 							data={setComponentData(defaultData[currentIdx], data[currentIdx])}
 						/>
 					) : null
