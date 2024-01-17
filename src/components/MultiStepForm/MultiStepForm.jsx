@@ -44,7 +44,7 @@ const MultiStepForm = ({
 	React.useEffect(() => {
 		setData(new Array(totalOption).fill({}));
 		setValidStep(
-			options.map(({ validate }) => !Boolean(validate || true))
+			options.map(({ validate }) => !Boolean(validate))
 		);
 	}, [ totalOption ]);
 
