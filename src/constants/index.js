@@ -13,6 +13,7 @@ export const ENTITIES = {
 	CLIENT: 'client',
 	INVITE: 'invites',
 	INVOICE: 'invoice',
+	WORKFORCE: 'workforce',
 	PAYMENT_INVOICE: 'payment/invoice',
 };
 
