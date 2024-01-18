@@ -47,7 +47,7 @@ const InviteUser = ({ data = [], setData = () => null, hideFooter = false }) => 
 	}, [ data ]);
 
 	React.useEffect(() => {
-		if (isFormChanged) {
+		if (isFormChanged || options && options.length) {
 			setData(options);
 		}
 	}, [ options ]);
