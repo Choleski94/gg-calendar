@@ -11,6 +11,7 @@ export const ENTITIES = {
 	QUOTE: 'quote',
 	OFFER: 'offer',
 	CLIENT: 'client',
+	INVITE: 'invites',
 	INVOICE: 'invoice',
 	PAYMENT_INVOICE: 'payment/invoice',
 };
