@@ -48,7 +48,7 @@ const InviteUser = ({ data = [], setData = () => null, hideFooter = false }) => 
 
 	React.useEffect(() => {
 		if (isFormChanged || options && options.length) {
-			setData(options);
+			setData([ ...options]);
 		}
 	}, [ options ]);
 
@@ -126,13 +126,13 @@ const InviteUser = ({ data = [], setData = () => null, hideFooter = false }) => 
 	const handleSendInvites = (e) => {
 		e.preventDefault();
 
-		setData(
-			options.map((payload) => ({
+		setData([
+			...options.map((payload) => ({
 				type: payload?.type,
 				email: payload?.email,
 				roleId: payload?.roleId,
 			}))
-		);
+		]);
 	};
 
 	const onLinkSettingsClick = (e) => {
