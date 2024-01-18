@@ -64,7 +64,7 @@ const options = [
 		Component: ({ data, setData, ...rest }) => (
 			<Forms.InviteUser
 				hideFooter data={data?.invites || []}
-				setData={(payload) => setData({ invites: payload }) }
+				setData={(payload) => setData({ invites: payload })}
 				{...rest}
 			/>
 		),
@@ -94,20 +94,24 @@ const OnBoarding = () => {
 				request.patch({
 					entity: 'workspace/update/' + jsonData?.id, jsonData,
 				}).then(({ result }) => {
-					// console.log('RES:::', result);
+					// console.log('Workforce created');
 				});
 			} else {
 				return request.create({
-					entity: 'workspace', jsonData,
+					entity: ENTITIES.WORKFORCE,
+					jsonData,
 				}).then(({ result }) => {
 					dispatch(workspaceFetched(result));
 				});
 			}
 		},
 		[FORM_SECTIONS.INVITE]: (userId, payload = {}) => {
-			// TODO:
-			// console.log('update invite info', payload);
-			return true;
+			request.create({
+				entity: ENTITIES.INVITE,
+				jsonData: payload?.invites
+			}).then(({ result }) => {
+				// console.log('Invites sent');
+			});
 		},
 	}
 
@@ -148,7 +152,7 @@ const OnBoarding = () => {
 		}
 	};
 
-	const setOnBoardingComplete = () => {
+	const onSuccess = () => {
 		const jsonData = { isOnboarded: true };
 
 		request.patch({
@@ -156,21 +160,6 @@ const OnBoarding = () => {
 		}).then(() => {
 			setIsCompleted(true);
 		});
-	}
-
-	const onSuccess = () => {
-		const [ userData, workforceData, { invites } ] = optionsData;
-
-		if (invites && invites.length) {
-			request.create({ entity: ENTITIES.INVITE, jsonData: invites }).then((data) => {
-				if (data.success === true) {
-					setIsCompleted(true);
-					setOnBoardingComplete();
-				}
-			});
-		} else {
-			setOnBoardingComplete();
-		}
 	}
 
 	const onStartOnBoarding = () => setStartOnboarding(true);
