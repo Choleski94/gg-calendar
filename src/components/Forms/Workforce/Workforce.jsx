@@ -33,13 +33,13 @@ const WorkforceForm = ({
 	}, [ data ]);
 
 	React.useEffect(() => {
-		if (isFormChanged) {
+		if (isFormChanged || hasObjectKey(payload)) {
 			// Check if we have error(s).
 			const errs = validate(payload);
 
 			setErrors(errs);
 
-			if (!Object.keys(errs).length) {
+			if (!hasObjectKey(errs)) {
 				setData(initForm(payload));
 			} else {
 				setData({});
@@ -273,7 +273,6 @@ const WorkforceForm = ({
 					onChange={onChange}
 					error={errors?.email}
 					value={payload?.email}
-					secondaryLabel="(Optional)"
 					placeholder="business@mail.com"
 				/>
 			</div>
@@ -286,7 +285,6 @@ const WorkforceForm = ({
 					onChange={onChange}
 					error={errors?.phone}
 					value={payload?.phone}
-					secondaryLabel="(Optional)"
 					placeholder="+x(xxx)xxx-xx-xx"
 				/>
 			</div>
