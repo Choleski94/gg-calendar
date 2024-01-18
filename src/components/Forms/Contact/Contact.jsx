@@ -41,7 +41,7 @@ const Contact = ({
 	}, [ data ]);
 
 	React.useEffect(() => {
-		if (isFormChanged) {
+		if (isFormChanged || hasObjectKey(payload)) {
 			// Check if we have error(s).
 			const errs = validate(payload);
 
