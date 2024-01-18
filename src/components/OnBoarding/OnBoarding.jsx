@@ -148,7 +148,7 @@ const OnBoarding = () => {
 		}
 	};
 
-	const onSuccess = () => {
+	const setOnBoardingComplete = () => {
 		const jsonData = { isOnboarded: true };
 
 		request.patch({
@@ -156,6 +156,21 @@ const OnBoarding = () => {
 		}).then(() => {
 			setIsCompleted(true);
 		});
+	}
+
+	const onSuccess = () => {
+		const [ userData, workforceData, { invites } ] = optionsData;
+
+		if (invites && invites.length) {
+			request.create({ entity: ENTITIES.INVITE, jsonData: invites }).then((data) => {
+				if (data.success === true) {
+					setIsCompleted(true);
+					setOnBoardingComplete();
+				}
+			});
+		} else {
+			setOnBoardingComplete();
+		}
 	}
 
 	const onStartOnBoarding = () => setStartOnboarding(true);
