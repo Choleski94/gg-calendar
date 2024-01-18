@@ -110,7 +110,7 @@ export const contentPartial =
 																<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
 																	<tbody>
 																		<tr>
-																			<td style="width:64px;"> <img height="auto" src="https://i.imgur.com/KO1vcE9.png" style="border:0;display:block;outline:none;text-decoration:none;width:100%;" width="64"> </td>
+																			<td style="width:64px;"> <img height="auto" src="https://www.secure.tigado.ca/assets/img/logo-icon.svg" style="border:0;display:block;outline:none;text-decoration:none;width:100%;" width="64"> </td>
 																		</tr>
 																	</tbody>
 																</table>
