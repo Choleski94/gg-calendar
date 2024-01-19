@@ -72,6 +72,7 @@ const options = [
 ];
 
 const OnBoarding = () => {
+	const [ optionsDa ] = React.useState(false);
 	const [ optionsData, setOptionsData ] = React.useState([]);
 	const [ isCompleted, setIsCompleted ] = React.useState(false);
 	const [ startOnboarding, setStartOnboarding ] = React.useState(false);
@@ -173,7 +174,7 @@ const OnBoarding = () => {
 		return currentFormApiFn(userId, payload);
 	}
 
-	if (isOnboarded || !isUserAuth || isCompleted) return null;
+	if (isOnboarded && !isUserAuth || isCompleted && !isUserAuth) return null;
 
 	return (
 		<Modal 
