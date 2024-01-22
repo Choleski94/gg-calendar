@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 
 import { signup } from '@store/actions/auth';
 import { validateEmail } from '@utils/validate';
@@ -17,15 +17,24 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 	const [ errors, setErrors ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
 	const [ browserInfo, setBrowserInfo ] = React.useState({});
+	const [ searchParams, setSearchParams ] = useSearchParams();
 	const [ data, setData ] = React.useState({
-		email: '', 
+		email: '', inviteCode: '',
 		firstName: '', lastName: '',
 		password: '', passwordC: '',
 	});
 
-	React.useEffect(() => setBrowserInfo({
-		browser, version, OS, language
-	}), []);
+	React.useEffect(() => {
+		const inviteCode = searchParams.get('code') || '';
+
+		if (inviteCode && inviteCode.length) {
+			setData({ ...data, inviteCode });
+		}
+
+		setBrowserInfo({
+			browser, version, OS, language
+		});
+	}, []);
 
 	const errorMessages = {
 		empty: formatMessage('form.validation.empty.error.text'),
@@ -74,15 +83,13 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 	};
 
 	const onChange = (e) => setData({
-		...data,
-		[e.target.name]: (
-			(e.target.type === 'checkbox') ? 
-			e.target.checked : e.target.value
-		)
+		...data, [e.target.name]: e.target.value
 	});
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+
+		console.log(data);
 
 		// Check if we have error(s).
 		const errs = validate(data, ['OS', 'browser', 'language']);
@@ -95,6 +102,8 @@ const SignUpPage = ({ browser, version, OS, language, ...rest }) => {
 			navigate('/dashboard')
 		));
 	};
+
+	console.log('MA DATA:::', searchParams.get('code'));
 
 	return (
 		<Layout type="auth">
