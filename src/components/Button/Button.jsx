@@ -1,8 +1,10 @@
 import React from 'react';
 
-const Button = ({ onClick, children, ...rest }) => (
+import { Loading } from './Button.styled';
+
+const Button = ({ onClick, children, loading = false, ...rest }) => (
 	<button type="button" className="btn btn-primary" onClick={onClick} {...rest}>
-		{children}
+		{loading ? <Loading /> : children}
 	</button>
 );
 
