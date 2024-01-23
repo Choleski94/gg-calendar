@@ -84,32 +84,40 @@ const OnBoarding = () => {
 
 	const { id: userId, isOnboarded } = user;
 
+	const { id: workspaceId } = useSelector(selectWorkspace);
+
 	const formHandlers = {
-		[FORM_SECTIONS.PERSONAL]: (userId, jsonData = {}) => (
+		[FORM_SECTIONS.PERSONAL]: (jsonData = {}) => (
 			request.patch({
 				entity: 'user/update/' + userId, jsonData,
 			})
 		),
-		[FORM_SECTIONS.BUSINESS]: (userId, jsonData = {}) => {
-			if (jsonData?.id && jsonData?.id.length) {
-				request.patch({
-					entity: 'workspace/update/' + jsonData?.id, jsonData,
+		[FORM_SECTIONS.BUSINESS]: (jsonData = {}) => {
+			if (workspaceId && workspaceId.length) {
+				console.log('We have id');
+
+				return request.patch({
+					entity: 'workspace/update/' + workspaceId, jsonData,
 				}).then(({ result }) => {
 					// console.log('Workforce created');
 				});
 			} else {
+				console.log('We don\'t have id');
 				return request.create({
-					entity: ENTITIES.WORKFORCE,
+					entity: ENTITIES.WORKSPACE,
 					jsonData,
 				}).then(({ result }) => {
 					dispatch(workspaceFetched(result));
 				});
 			}
 		},
-		[FORM_SECTIONS.INVITE]: (userId, payload = {}) => {
+		[FORM_SECTIONS.INVITE]: (payload = {}) => {
 			request.create({
 				entity: ENTITIES.INVITE,
-				jsonData: payload?.invites
+				jsonData: payload?.invites.map((data) => ({
+					...data, 
+					workspaceId
+				}))
 			}).then(({ result }) => {
 				// console.log('Invites sent');
 			});
@@ -171,10 +179,10 @@ const OnBoarding = () => {
 		const currentFormSection = FORM_SECTION_KEYS[stepIndex];
 		const currentFormApiFn = formHandlers[currentFormSection];
 
-		return currentFormApiFn(userId, payload);
+		return currentFormApiFn(payload);
 	}
 
-	if (isOnboarded && !isUserAuth || isCompleted && !isUserAuth) return null;
+	if (isOnboarded || isCompleted && !isUserAuth) return null;
 
 	return (
 		<Modal 
