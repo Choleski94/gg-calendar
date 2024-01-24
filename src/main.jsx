@@ -11,13 +11,13 @@ import { userLoggedIn } from '@store/actions/auth';
 import rootReducer, { preloadedState } from '@store/rootReducer';
 import setAuthorizationHeader from '@utils/setAuthorizationHeader';
 
-const root = document.getElementById('root');
-
 const store = configureStore({
 	preloadedState,
 	reducer: rootReducer,
 	devTools: import.meta.env.PROD === false, // Enable Redux DevTools in development mode
 });
+
+const root = document.getElementById('root');
 
 if (localStorage.tigadoJWT) {
 	const payload = jwtDecode(localStorage?.tigadoJWT);
