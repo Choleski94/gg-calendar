@@ -1,10 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ENTITIES } from '@constants';
 import { hasObjectKey } from '@utils';
 import { request } from '@utils/request';
-import { fetchUser } from '@store/actions/user';
 import { selectWorkspace } from '@store/selectors/workspace';
 import { selectUser, isAuthenticated } from '@store/selectors/user';
 import { Modal, Forms, MultiStepForm, Illustrations } from '@components';
@@ -77,8 +76,6 @@ const OnBoarding = () => {
 	const [ isCompleted, setIsCompleted ] = React.useState(false);
 	const [ startOnboarding, setStartOnboarding ] = React.useState(false);
 
-	const dispatch = useDispatch();
-
 	const user = useSelector(selectUser);
 	const isUserAuth = useSelector(isAuthenticated);
 
@@ -123,11 +120,6 @@ const OnBoarding = () => {
 			});
 		},
 	}
-
-	React.useEffect(() => {
-		dispatch(fetchUser(userId));
-		// dispatch(fetchWorkspace());
-	}, []);
 
 	// Populate option data.
 	React.useEffect(() => {
