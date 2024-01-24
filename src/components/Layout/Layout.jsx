@@ -53,7 +53,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, witho
 	const { pathname } = useLocation();
 
 	const { lang } = useSelector(selectLocaleSettings);
-	const { firstName, lastName, organizations } = useSelector(selectUser);
+	const { firstName, lastName, workspaces } = useSelector(selectUser);
 
 	const [ showMenu, setShowMenu ]  = React.useState(false);
 	const [ menuToggle, setMenuToggle ] = React.useState('');
@@ -156,16 +156,16 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, witho
 		}
 	};
 
-	const [ activeOrganization, additionalOrganizations ] = React.useMemo(() => {
+	const [ activeWorkspace, additionalWorkspaces ] = React.useMemo(() => {
 		// TODO: Filter active organization.
-		const [ activeOrg ] = (organizations || []).slice(0, 1);
+		const [ activeOrg ] = (workspaces || []).slice(0, 1);
 		// TODO: Get remaining organziations.
-		const [ additionalOrg ] = (organizations || []).slice(1, -1);
+		const [ additionalOrg ] = (workspaces || []).slice(1, -1);
 		return [ activeOrg, additionalOrg ];
-	}, [ organizations ]);
+	}, [ workspaces ]);
 
 	const hasActiveOrganization = React.useMemo(() => Boolean(
-		Object.keys(activeOrganization || {}).length
+		Object.keys(activeWorkspace || {}).length
 	), []);
 
 	return (
@@ -188,7 +188,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, witho
 								</button>
 							</div>
 
-							<Search placeholder={`Search in ${activeOrganization?.id?.name || 'Tigado'}`} />
+							<Search placeholder={`Search in ${activeWorkspace?.id?.name || 'Tigado'}`} />
 
 							<div className="navbar-nav-wrap-content-end">
 								<ul className="navbar-nav">
@@ -281,7 +281,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, witho
 														<div className="flex-shrink-0">
 															<div className="avatar avatar-sm avatar-warning avatar-circle">
 																<span className="avatar-initials">
-																	{getAcronym(activeOrganization?.id?.name)}
+																	{getAcronym(activeWorkspace?.name)}
 																</span>
 															</div>
 														</div>
@@ -290,7 +290,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, witho
 																{firstName} {lastName}
 															</h6>
 															<span className="card-text h6">
-																{activeOrganization?.id?.name}
+																{activeWorkspace?.name}
 															</span>
 														</div>
 													</div>
@@ -310,25 +310,25 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, witho
 												style={UserDropdownStyle} aria-labelledby="accountNavbarDropdown"
 												className={getUserDropdownClassName(menuToggle === SUPPORTED_MENU_TOGGLE.PROFILE)}
 											>
-												{additionalOrganizations && additionalOrganizations?.length ? (
+												{additionalWorkspaces && additionalWorkspaces?.length ? (
 													<>
-														{additionalOrganizations.map((org) => (
+														{additionalWorkspaces.map((org) => (
 															<>
 																<a key={org?.id} className="dropdown-item" href="#">
 																	<div className="d-flex align-items-center">
 																		<div className="flex-shrink-0">
 																			<div className="avatar avatar-sm avatar-warning avatar-circle">
 																				<span className="avatar-initials">
-																					{getAcronym(org?.id?.name)}
+																					{getAcronym(org?.name)}
 																				</span>
 																			</div>
 																		</div>
 																		<div className="flex-grow-1 p-2 pt-0 pb-0">
 																			<h6 className="mb-0">
-																				{org?.id?.name}
+																				{org?.name}
 																			</h6>
 																			<span className="card-text">
-																				{org?.role}
+																				{org?.role?.name}
 																			</span>
 																		</div>
 																	</div>
