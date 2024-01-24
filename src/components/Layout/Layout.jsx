@@ -164,10 +164,6 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, witho
 		return [ activeOrg, additionalOrg ];
 	}, [ workspaces ]);
 
-	const hasActiveOrganization = React.useMemo(() => Boolean(
-		Object.keys(activeWorkspace || {}).length
-	), []);
-
 	return (
 		<>
 			{(type !== 'auth') ? (
@@ -276,7 +272,7 @@ const Layout = ({ type = '', withoutFooter = false, withOffCanvas = false, witho
 												onClick={(e) => onMenuToggleClick(e, SUPPORTED_MENU_TOGGLE.PROFILE)}
 												className={getUserWrapperDropdownClassName(menuToggle === SUPPORTED_MENU_TOGGLE.PROFILE)}
 											>
-												{hasActiveOrganization ? (
+												{activeWorkspace?.id && activeWorkspace?.id?.length ? (
 													<div className="d-flex align-items-center">
 														<div className="flex-shrink-0">
 															<div className="avatar avatar-sm avatar-warning avatar-circle">
