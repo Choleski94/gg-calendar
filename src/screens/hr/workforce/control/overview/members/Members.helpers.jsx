@@ -17,48 +17,64 @@ export const parseOptions = (data = []) => data.map((payload) => ({
 			<div className="ms-3">
 				<span className="d-block h5 text-inherit mb-0">
 					{payload?.firstName} {payload?.lastName}
-					{!payload?.enabled && (
+					{payload?.verified && (
+						<>
+							&nbsp;
+							<i className="bi-patch-exclamation-fill text-success" />
+						</>
+					)}
+					{payload?.removed && (
+						<>
+							&nbsp;
+							<i className="bi-patch-exclamation-fill text-warning" />
+						</>
+					)}
+					{payload?.verified && (
 						<>
 							&nbsp;
 							<i className="bi-patch-exclamation-fill text-danger" />
 						</>
 					)}
 				</span>
-				{payload?.department && (
+				{/* payload?.department && (
 					<span className="d-block fs-5 text-body text-capitalize">
 						{payload?.department}
 					</span>
-				)}
+				) */}
 			</div>
 		</span>
 	),
-	phones: (
-		(payload?.phones || []).map(({ value, ext, type }) => (
+	phone: (
+		(payload?.phone && payload?.phone.length) ? (
 			<div>
-				{value}
-				{(ext && ext.length) ? (
+				{payload?.phone}
+				{/* (ext && ext.length) ? (
 					`, ext. ${ext}`
-				) : null}
+				) : null */}
+				{/*
 				&nbsp;
 				<small className="font-italic">
 					{type === 'MOBILE' && '(Mobile)'}
 					{type === 'HOME' && '(Home)'}
 					{type === 'WORK' && '(Work)'}
 				</small>
+				*/}
 			</div>
-		))
+		) : 'N/A'
 	),
-	emails: (
-		(payload?.emails || []).map(({ value, type }) => (
+	email: (
+		(payload?.email && payload?.email.length) ? (
 			<div>
-				{(value || '').toLowerCase()}
+				{payload?.email}
+				{/*
 				&nbsp;
 				<small className="font-italic">
 					{type === 'PERSONAL' && '(Personal)'}
 					{type === 'WORK' && '(Work)'}
 				</small>
+				*/}
 			</div>
-		))
+		) : 'N/A'
 	),
 	address: (
 		<small>
@@ -80,13 +96,13 @@ export const parseOptions = (data = []) => data.map((payload) => ({
 			{payload?.zip}
 		</small>
 	),
-	created: (
-		payload?.created ? (
+	createdAt: (
+		payload?.createdAt ? (
 			<small>
-				{buildDate(new Date(payload['created']))}
+				{buildDate(new Date(payload?.createdAt))}
 				<br />
 				<small className="text-muted">
-					{parseTime(new Date(payload['created']))}
+					{parseTime(new Date(payload?.createdAt))}
 				</small>
 			</small>
 		) : null
@@ -96,15 +112,11 @@ export const parseOptions = (data = []) => data.map((payload) => ({
 		payload?.zip,
 		payload?.unit,
 		payload?.city,
+		payload?.email,
+		payload?.phone,
 		payload?.state,
 		payload?.address,
 		payload?.lastName,
 		payload?.firstName,
-		payload?.emails.map(({ value, type }) => (
-			(value || '').toLowerCase()
-		)).join(' '),
-		payload?.phones.map(({ value, ext, type }) => (
-			value
-		)).join(' '),
-	].join(' '),
+	].map((val) => (val || '').toLowerCase()).join(' '),
 }));

@@ -1,10 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { 
+	ENTITY_USER, 
+	DEFAULT_TABLE_HEADER, 
+	DEFAULT_ACTIVE_HEADER_KEYS 
+} from '@constants/user';
 import { request } from '@utils/request';
 import { Table, Forms } from '@components';
 import formatMessage from '@utils/formatMessage';
-import { ENTITY_WORKFORCE, DEFAULT_TABLE_HEADER, DEFAULT_ACTIVE_HEADER_KEYS } from '@constants/workforce';
 
 import { parseOptions } from './Members.helpers';
 
@@ -31,7 +35,7 @@ const Members = () => {
 	const fetchWorkforce = async () => {
 		setLoading(true);
 
-		request.list({ entity: ENTITY_WORKFORCE, options }).then((data) => {
+		request.list({ entity: ENTITY_USER, options }).then((data) => {
 			setLoading(false);
 
 			if (data.success === true) {
