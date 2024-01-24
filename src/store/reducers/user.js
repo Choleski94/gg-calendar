@@ -9,6 +9,7 @@ export const userState = {
 	lastName: null,
 	firstName: null,
 	isOnboarded: true,
+	workspaces: [],
 };
 
 const userReducer = (state = userState, action) => {
