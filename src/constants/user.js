@@ -1,11 +1,11 @@
 'use strict';
 
-export const ENTITY_WORKFORCE = 'workforce';
+export const ENTITY_USER = 'user';
 
 export const DEFAULT_TABLE_HEADER = [
 	{ key: 'name', label: 'Name' },
-	{ key: 'phones', label: 'Phone' },
-	{ key: 'emails', label: 'Email' },
+	{ key: 'phone', label: 'Phone' },
+	{ key: 'email', label: 'Email' },
 	{ key: 'address', label: 'Address' },
 	{ key: 'unit', label: 'Unit' },
 	{ key: 'city', label: 'City, State/Prov' },
@@ -14,13 +14,11 @@ export const DEFAULT_TABLE_HEADER = [
 ];
 
 export const DEFAULT_ACTIVE_HEADER_KEYS = [
-	'name', 'phones', 'emails',
-	'address', 'unit', 'city', 
-	'zip', 'created'
+	'name', 'phone', 'email', 'created'
 ];
 
 export default {
-	ENTITY_WORKFORCE,
+	ENTITY_USER,
 	DEFAULT_TABLE_HEADER,
 	DEFAULT_ACTIVE_HEADER_KEYS,
 }
