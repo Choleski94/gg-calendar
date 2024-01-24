@@ -10,11 +10,11 @@ export const DEFAULT_TABLE_HEADER = [
 	{ key: 'unit', label: 'Unit' },
 	{ key: 'city', label: 'City, State/Prov' },
 	{ key: 'zip', label: 'Zip/Post Code' },
-	{ key: 'created', label: 'Date Joined' },
+	{ key: 'createdAt', label: 'Date Joined' },
 ];
 
 export const DEFAULT_ACTIVE_HEADER_KEYS = [
-	'name', 'phone', 'email', 'created'
+	'name', 'phone', 'email', 'createdAt'
 ];
 
 export default {
