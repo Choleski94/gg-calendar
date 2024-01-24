@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { request } from '@utils/request';
+import { ENTITY_USER } from '@constants/user';
 import { ENTITY_ROLE } from '@constants/access';
 import formatMessage from '@utils/formatMessage';
 import { ENTITY_INVITE } from '@constants/invites';
 import { NavPill, Card, Counter } from '@components';
-import { ENTITY_WORKFORCE } from '@constants/workforce';
 
 import Invites from './invites';
 import Members from './members';
@@ -36,7 +36,7 @@ const WorkforceOverview = () => {
 	const fetchWorkforce = async () => {
 		setLoading(true);
 
-		request.list({ entity: ENTITY_WORKFORCE, options }).then((data) => {
+		request.list({ entity: ENTITY_USER, options }).then((data) => {
 			setLoading(false);
 
 			if (data.success === true) {
