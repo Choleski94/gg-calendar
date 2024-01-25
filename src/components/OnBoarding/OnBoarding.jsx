@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ENTITIES } from '@constants';
 import { hasObjectKey } from '@utils';
@@ -76,6 +76,8 @@ const OnBoarding = () => {
 	const [ isCompleted, setIsCompleted ] = React.useState(false);
 	const [ startOnboarding, setStartOnboarding ] = React.useState(false);
 
+	const dispatch = useDispatch();
+
 	const user = useSelector(selectUser);
 	const isUserAuth = useSelector(isAuthenticated);
 
@@ -91,7 +93,7 @@ const OnBoarding = () => {
 		),
 		[FORM_SECTIONS.BUSINESS]: (jsonData = {}) => {
 			if (workspaceId && workspaceId.length) {
-				console.log('We have id');
+				// console.log('We have id');
 
 				return request.patch({
 					entity: 'workspace/update/' + workspaceId, jsonData,
@@ -99,11 +101,12 @@ const OnBoarding = () => {
 					// console.log('Workforce created');
 				});
 			} else {
-				console.log('We don\'t have id');
+				// console.log('We don\'t have id');
 				return request.create({
 					entity: ENTITIES.WORKSPACE,
 					jsonData,
 				}).then(({ result }) => {
+					// console.log('New workspace:::', result);
 					dispatch(workspaceFetched(result));
 				});
 			}
