@@ -18,9 +18,9 @@ export const workspaceState = {
 	createdAt: null,
 	orgSector: null,
 	gstPercent: null,
-	isVerified: false
 	qstPercent: null,
-	suspended:false
+	suspended: false,
+	isVerified: false,
 };
 
 const workspaceReducer = (state = workspaceState, action) => {
