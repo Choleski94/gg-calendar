@@ -2,19 +2,25 @@ import * as actionTypes from '../types';
 
 export const workspaceState = {
 	id: null,
-	isInit: false,
-	name: null,
-	orgNum: null,
-	slogan: null,
 	www: null,
+	name: null,
 	unit: null,
-	buzzer: null,
 	email: null,
 	phone: null,
-	tax_qst_num: null,
-	tax_qst_percent: null,
-	tax_gst_num: null,
-	tax_gst_percent: null,
+	buzzer: null,
+	gstNum: null,
+	orgNum: null,
+	qstNum: null,
+	slogan: null,
+	orgType: null,
+	enabled: false,
+	removed: false,
+	createdAt: null,
+	orgSector: null,
+	gstPercent: null,
+	isVerified: false
+	qstPercent: null,
+	suspended:false
 };
 
 const workspaceReducer = (state = workspaceState, action) => {
