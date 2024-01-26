@@ -6,11 +6,11 @@ import { Modal, Card, Forms } from '@components';
 import SearchCustomerModule from '@modules/SearchCustomerModule';
 
 const infoDummy = {
-	birthday: '01/11/2023',
 	firstName: 'Sara',
-	lastName: 'Williams',
-	address: '280 Suzanne Throughway',
 	city: 'Breannabury',
+	lastName: 'Williams',
+	birthday: '01/11/2023',
+	address: '280 Suzanne Throughway',
 	state: 'QC',
 	gender: 'FEMALE',
 	languages: ['EN'],
