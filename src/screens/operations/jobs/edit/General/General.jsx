@@ -23,6 +23,8 @@ const General = ({ id  = '' }) => {
 	const [ data, setData ] = React.useState({});
 	const [ loading, setLoading ] = React.useState(false);
 	const [ showModal, setShowModal ] = React.useState(false);
+	const [ serviceData, setServiceData ] = React.useState({});
+	const [ showService, setShowService ] = React.useState(false);
 
 	const fetchGeneralInfo = (id = '') => {
 		if (id !== 'create') {
@@ -64,34 +66,83 @@ const General = ({ id  = '' }) => {
 
 	const onSearchClick = () => setShowModal(true);
 
+	const onAddServiceClick = () => setShowService(true);
+
+	const onRemoveServiceClick = () => {
+		setShowService(false);
+	}
+
 	return (
-		<Card>
-			<Card.Header>
-				<Card.Title>
-					General Information
-				</Card.Title>
-				<Card.CTA>
-					<a className="text-muted" onClick={onSearchClick}>
-						<i className="bi bi-search" />
-					</a>
-				</Card.CTA>
-			</Card.Header>
-			<Card.Body>
-				<Forms.Contact 
-					withNote
-					data={data}
-					handleSubmit={handleSubmit}
-					layout="HORIZONTAL"
-				/>
-			</Card.Body>
-			{showModal ? (
-				<Modal title="Search customer" size="lg" centered onCloseRequest={onModalClose}>
-					<SearchCustomerModule
-						setCustomerData={setCustomerData}
-					/>
-				</Modal>
+		<>
+			<div className={showService ? 'col-6' : 'col-12'}>
+				<Card>
+					<Card.Header>
+						<Card.Title>
+							Billing Information
+						</Card.Title>
+						<Card.CTA>
+							{!showService ? (
+								<a className="text-muted" onClick={onAddServiceClick}>
+									<i className="bi bi-plus" />
+									&nbsp;
+									Add service
+								</a>
+							) : null}
+						</Card.CTA>
+					</Card.Header>
+					<Card.Body>
+						<Forms.Contact 
+							withNote
+							data={data}
+							handleSubmit={handleSubmit}
+							// layout="HORIZONTAL"
+						/>
+					</Card.Body>
+					{showModal ? (
+						<Modal title="Search customer" size="lg" centered onCloseRequest={onModalClose}>
+							<SearchCustomerModule
+								setCustomerData={setCustomerData}
+							/>
+						</Modal>
+					) : null}
+				</Card>
+			</div>
+			{showService ? (
+				<div className="col-6">
+					<Card>
+						<Card.Header>
+							<Card.Title>
+								Service Information
+							</Card.Title>
+							<Card.CTA>
+								{showService ? (
+									<a className="text-muted" onClick={onRemoveServiceClick}>
+										<i className="bi bi-x" />
+										&nbsp;
+										Remove service
+									</a>
+								) : null}
+							</Card.CTA>
+						</Card.Header>
+						<Card.Body>
+							<Forms.Contact 
+								withNote
+								data={serviceData}
+								handleSubmit={handleSubmit}
+								// layout="HORIZONTAL"
+							/>
+						</Card.Body>
+						{showModal ? (
+							<Modal title="Search customer" size="lg" centered onCloseRequest={onModalClose}>
+								<SearchCustomerModule
+									setCustomerData={setCustomerData}
+								/>
+							</Modal>
+						) : null}
+					</Card>
+				</div>
 			) : null}
-		</Card>
+		</>
 	);
 };
 

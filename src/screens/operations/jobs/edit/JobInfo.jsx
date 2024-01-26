@@ -163,11 +163,9 @@ const JobInfo = ({ id = '' }) => {
 				{!createMode ? (
 					<JobInfoMetrics id={id} />
 				) : null}
-				<div className="col-12">
-					<General 
-						id={id}
-					/>
-				</div>
+				<General 
+					id={id}
+				/>
 				<div className="col-6 mt-4">
 					<Scheduling id={id} />
 				</div>
