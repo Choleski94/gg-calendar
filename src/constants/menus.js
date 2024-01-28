@@ -1,6 +1,6 @@
 'use strict';
 
-export const MENU_ACCOUNT = [
+export const ACCOUNT = [
 	{
 		slug: 'nav.account.access-logs.text',
 		link: '/account/access-logs',
@@ -11,7 +11,7 @@ export const MENU_ACCOUNT = [
 	},
 ];
 
-export const MENU_CATEGORY = [
+export const CATEGORY = [
 	{
 		id: '',
 		path: '/',
@@ -312,7 +312,9 @@ export const MENU_CATEGORY = [
 	},
 ];
 
-export const MENU = {
-	ACCOUNT: MENU_ACCOUNT,
-	CATEGORY: MENU_CATEGORY,
+export const MENUS = {
+	ACCOUNT,
+	CATEGORY,
 };
+
+export default MENUS;
