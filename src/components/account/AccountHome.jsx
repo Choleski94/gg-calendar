@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-import Box from '@static/images/Box._CB485927553_.png';
-import Prime from '@static/images/rc_prime._CB485926807_.png';
-import Payment from '@static/images/Payments._CB485926359_.png';
-import Lock from '@static/images/sign-in-lock._CB485931504_.png';
-import Support from '@static/images/contact_us._CB623781998_.png';
-import Amz_Payment from '@static/images/nozama_pay._CB485946857_.png';
-import Location from '@static/images/address-map-pin._CB485934183_.png';
+import Box from '../../static/images/Box._CB485927553_.png';
+import Prime from '../../static/images/rc_prime._CB485926807_.png';
+import Payment from '../../static/images/Payments._CB485926359_.png';
+import Lock from '../../static/images/sign-in-lock._CB485931504_.png';
+import Support from '../../static/images/contact_us._CB623781998_.png';
+import Amz_Payment from '../../static/images/nozama_pay._CB485946857_.png';
+import Location from '../../static/images/address-map-pin._CB485934183_.png';
 
 export const AccountHome = () => (
 	<div className="row">
