@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import logo from '@static/images/nozama-logo.png';
+import logo from '../../static/images/nozama-logo.png';
 
 export const AddressCards = (props) => (
 	<div className="col-sm-4 noz-address-cards mb-3 d-flex align-items-stretch">

@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import productimage1 from '@static/images/41KUCZkvICL._SY90_.jpg'
-
+import productimage1 from '../../static/images/41KUCZkvICL._SY90_.jpg';
 
 export const OrdersCard = () => (
 	<div className="noz-order-card border mt-3">

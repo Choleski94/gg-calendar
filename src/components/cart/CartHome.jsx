@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import noz_fullfill from '@static/images/fba-badge_18px._CB485936079_.png';
+import noz_fullfill from '../../static/images/fba-badge_18px._CB485936079_.png';
 
 export const CartProductsCards = ({ img }) => (
 	<div className="noz-cart-products mt-4 border-bottom mb-3 pb-3">

@@ -9,6 +9,11 @@ export const guestRoutes = [
 		element: screenElements.Home,
 	},
 	{
+		slug: 'cart',
+		path: '/cart',
+		element: screenElements.Cart,
+	},
+	{
 		slug: 'sign-in',
 		path: '/signin',
 		element: screenElements.SignIn,
@@ -17,6 +22,26 @@ export const guestRoutes = [
 		slug: 'sign-up',
 		path: '/signup',
 		element: screenElements.SignUp,
+	},
+	{
+		slug: 'account',
+		path: '/account',
+		element: screenElements.Account,
+	},
+	{
+		slug: 'account-order',
+		path: '/account/orders',
+		element: screenElements.AccountOrders,
+	},
+	{
+		slug: 'account-address',
+		path: '/account/address',
+		element: screenElements.AccountAddress,
+	},
+	{
+		slug: 'account-address-add',
+		path: '/account/address/add',
+		element: screenElements.AccountAddressAdd,
 	},
 	// {
 	// 	slug: 'activate',
