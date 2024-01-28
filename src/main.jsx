@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 
-import App from '@app';
-import { Loader } from '@components';
+import Nozama from '@app';
+//import { Loader } from '@components';
 import { userLoggedIn } from '@store/actions/auth';
 import rootReducer, { preloadedState } from '@store/rootReducer';
 import setAuthorizationHeader from '@utils/setAuthorizationHeader';
@@ -19,29 +19,29 @@ const store = configureStore({
 
 const root = document.getElementById('root');
 
-if (localStorage.tigadoJWT) {
-	const payload = jwtDecode(localStorage?.tigadoJWT);
-
-	const user = {
-		token: localStorage?.tigadoJWT,
-		id: payload?.id,
-		phone: payload?.phone,
-		email: payload?.email,
-		lastName: payload?.lastName,
-		firstName: payload?.firstName,
-		isOnboarded: payload?.isOnboarded,
-	};
-
-	setAuthorizationHeader(localStorage.tigadoJWT);
-	store.dispatch(userLoggedIn(user));
-}
+// if (localStorage.nozamaJWT) {
+// 	const payload = jwtDecode(localStorage?.nozamaJWT);
+// 
+// 	const user = {
+// 		token: localStorage?.nozamaJWT,
+// 		id: payload?.id,
+// 		phone: payload?.phone,
+// 		email: payload?.email,
+// 		lastName: payload?.lastName,
+// 		firstName: payload?.firstName,
+// 		isOnboarded: payload?.isOnboarded,
+// 	};
+// 
+// 	setAuthorizationHeader(localStorage.nozamaJWT);
+// 	store.dispatch(userLoggedIn(user));
+// }
 
 if (root) {
 	ReactDOM.createRoot(root).render(
 		<BrowserRouter>
 			<Provider store={store}>
-				<Suspense fallback={<Loader />}>
-					<App />
+				<Suspense fallback={() => <h1>Loader</h1>}>
+					<Nozama />
 				</Suspense>
 			</Provider>
 		</BrowserRouter>

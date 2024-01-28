@@ -5,29 +5,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import routes from '@constants/routes';
-import themes from '@components/themes';
-import { OnBoarding } from '@components';
-import { fetchUser } from '@store/actions/user';
-import { selectUser } from '@store/selectors/user';
+// import themes from '@components/themes';
+// import { fetchUser } from '@store/actions/user';
+// import { selectUser } from '@store/selectors/user';
 import { getLocale, constructLocale } from '@locales';
 import { selectLocaleSettings } from '@store/selectors/settings';
 
-const theme = 'light';
+// const theme = 'light';
 
-const Tigado = () => {
-	const dispatch = useDispatch();
+const Nozama = () => {
+	// const dispatch = useDispatch();
 
-	const { id: userId } = useSelector(selectUser);
+	// const { id: userId } = useSelector(selectUser);
 	const localeISO = constructLocale(useSelector(selectLocaleSettings));
 
 	const localeMessage = getLocale(localeISO);
 
-	React.useEffect(() => {
-		dispatch(fetchUser(userId));
-	}, []);
+	// React.useEffect(() => {
+	// 	dispatch(fetchUser(userId));
+	// }, []);
 
 	return (
-		<ThemeProvider theme={themes[theme]}>
+		// <ThemeProvider theme={themes[theme]}>
 			<IntlProvider key={localeISO} locale={localeISO} messages={localeMessage}>
 				<Routes>
 					{(routes.map(({ slug, element: Component, path }) => (
@@ -38,10 +37,9 @@ const Tigado = () => {
 					)))}
 					<Route path="*" element={<Navigate to="/" />} />
 				</Routes>
-				<OnBoarding />
 			</IntlProvider>
-		</ThemeProvider>
+		// </ThemeProvider>
 	);
 }
 
-export default Tigado;
+export default Nozama;

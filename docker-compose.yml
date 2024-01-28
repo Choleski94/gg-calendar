@@ -1,22 +1,22 @@
 version: '3'
 
 networks:
-  tigado-net:
+  nozama-net:
     external: true
 
 services:
-  tigado-frontend:
+  nozama-frontend:
     user: node
     restart: always
-    hostname: tigado-frontend
-    container_name: tigado-frontend
+    hostname: nozama-frontend
+    container_name: nozama-frontend
     build:
       context: .
     volumes:
       - ./:/home/node:cached
     # extra_hosts:
     networks:
-      - tigado-net
+      - nozama-net
     ports:
       - 3000:3000
     expose:

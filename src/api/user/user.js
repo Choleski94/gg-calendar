@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-import { ENTITIES } from '@constants';
-
 const user = {
 	fetchUser: (userId) => (
-		axios.get(ENTITIES.USER + '/read/' + userId).then((res) => res.data.result)
+		axios.get('/read/' + userId).then((res) => res.data.result)
 	),
 }
 
