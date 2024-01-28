@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { MENU } from '@constants';
+import { MENUS } from '@constants/menus';
 
 const categoryMenu = [
 	{
@@ -54,7 +54,7 @@ const CategorySection = () => {
 
 	React.useEffect(() => {
 		setOptions(
-			MENU.CATEGORY
+			MENUS.CATEGORY
 			// isPrime ? categoryPrimeMenu : categoryMenu
 		);
 	}, []);

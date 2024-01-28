@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import logo from '@static/images/nozama-white-logo.png';
+import logo from '../../static/images/nozama-white-logo.png';
 
 const Logo = () => (
 	<div className="nozama-logo">
