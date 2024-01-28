@@ -6,10 +6,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 
 import Nozama from '@app';
-//import { Loader } from '@components';
+// import { Loader } from '@components';
 import { userLoggedIn } from '@store/actions/auth';
 import rootReducer, { preloadedState } from '@store/rootReducer';
 import setAuthorizationHeader from '@utils/setAuthorizationHeader';
+
+import './static/css/bootstrap.css';
+import './static/css/style.css';
 
 const store = configureStore({
 	preloadedState,

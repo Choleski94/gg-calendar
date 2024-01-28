@@ -7,27 +7,27 @@
 
 @font-face {
 	font-family: emberLight;
-	Src: url('../../amazon_typefaces/Ember/AmazonEmber_Lt.ttf');
+	Src: url('../fonts/amazon_typefaces/Ember/AmazonEmber_Lt.ttf');
 }
 
 @font-face {
 	font-family: emberMedium;
-	src: url('../../amazon_typefaces/Ember/Amazon-Ember-Medium.ttf');
+	src: url('../fonts/amazon_typefaces/Ember/Amazon-Ember-Medium.ttf');
 }
 
 @font-face {
 	font-family: emberBold;
-	src: url('../../amazon_typefaces/Ember/AmazonEmber_Bd.ttf');
+	src: url('../fonts/amazon_typefaces/Ember/AmazonEmber_Bd.ttf');
 }
 
 @font-face {
 	font-family: emberExtraBold;
-	src: url('../../amazon_typefaces/Ember/AmazonEmber_He.ttf');
+	src: url('../fonts/amazon_typefaces/Ember/AmazonEmber_He.ttf');
 }
 
 @font-face {
 	font-family: emberNormal;
-	src: url('../../amazon_typefaces/Ember/AmazonEmber_Rg.ttf');
+	src: url('../fonts/amazon_typefaces/Ember/AmazonEmber_Rg.ttf');
 }
 
 .bold-text{
