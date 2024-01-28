@@ -6,7 +6,7 @@ export const guestRoutes = [
 	{
 		slug: 'home',
 		path: '/',
-		element: screenElements.SignIn,
+		element: screenElements.Home,
 	},
 	{
 		slug: 'sign-in',
