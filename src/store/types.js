@@ -1,6 +1,8 @@
 // App
 export const APP_LOADING = 'APP_LOADING';
 
+export const APP_PRIME_TOGGLED = 'APP_PRIME_TOGGLED';
+
 // User
 export const USER_FETCHED = 'USER_FETCHED';
 
@@ -8,16 +10,10 @@ export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 
-// Workspace
-export const WORKSPACE_FETCHED = 'WORKSPACE_FETCHED';
-
 // Auth ?
 export const REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';
 
 export const FAILED_REQUEST = 'AUTH_FAILED_REQUEST';
-
-// Settings
-export const LOCALE_SET = 'LOCALE_SET';
 
 // TODO: REMOVE
 export const RESET_STATE = 'SETTINGS_RESET_STATE';

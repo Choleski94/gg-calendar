@@ -8,6 +8,10 @@ export const appLoading = app => ({
 	app
 });
 
+export const togglePrime = () => ({
+	type: actionTypes.APP_PRIME_TOGGLED,
+});
+
 export const loadingApp = (loading = false) => (dispatch) => (
 	dispatch(appLoading({ loading }))
 );
