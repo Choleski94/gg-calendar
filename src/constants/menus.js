@@ -11,7 +11,60 @@ export const ACCOUNT = [
 	},
 ];
 
-export const CATEGORY = [
+export const CATEGORY_DEFAULT = [
+	{
+		id: '',
+		path: '/',
+		text: 'Nozama miniTV',
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Best Sellers',
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Mobiles',
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Customer Services',
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Today\'s Deals'
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Electronics',
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Prime',
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Fashion',
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Nozama Pay',
+	},
+	{
+		id: '',
+		path: '/',
+		text: 'Home & Kitchen',
+	},
+];
+
+export const CATEGORY_PRIME = [
 	{
 		id: '',
 		path: '/',
@@ -314,7 +367,10 @@ export const CATEGORY = [
 
 export const MENUS = {
 	ACCOUNT,
-	CATEGORY,
+	CATEGORY: {
+		PRIME: CATEGORY_PRIME,
+		DEFAULT: CATEGORY_DEFAULT,
+	},
 };
 
 export default MENUS;

@@ -1,63 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { MENUS } from '@constants/menus';
-
-const categoryMenu = [
-	{
-		path: '/',
-		text: 'Nozama miniTV',
-	},
-	{
-		path: '/',
-		text: 'Best Sellers',
-	},
-	{
-		path: '/',
-		text: 'Mobiles',
-	},
-	{
-		path: '/',
-		text: 'Customer Services',
-	},
-	{
-		path: '/',
-		text: 'Today\'s Deals'
-	},
-	{
-		path: '/',
-		text: 'Electronics',
-	},
-	{
-		path: '/',
-		text: 'Prime',
-	},
-	{
-		path: '/',
-		text: 'Fashion',
-	},
-	{
-		path: '/',
-		text: 'Nozama Pay',
-	},
-	{
-		path: '/',
-		text: 'Home & Kitchen',
-	},
-];
-
-const isPrime = true;
+import { selectPrime } from '@store/selectors/app';
 
 const CategorySection = () => {
 
 	const [ options, setOptions ] = React.useState([]);
 
+	const isPrime = useSelector(selectPrime);
+
 	React.useEffect(() => {
 		setOptions(
-			MENUS.CATEGORY
-			// isPrime ? categoryPrimeMenu : categoryMenu
+			isPrime ? MENUS.CATEGORY.PRIME : MENUS.CATEGORY.DEFAULT 
 		);
-	}, []);
+	}, [ isPrime ]);
 
 	if (!options || !options.length) {
 		return null;
