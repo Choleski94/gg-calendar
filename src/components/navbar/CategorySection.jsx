@@ -38,12 +38,10 @@ const CategorySection = () => {
 				</Link>
 			</span>
 			{options && options.length ? (
-				options.map(({ path, text }) => (
-					<span>
-						<Link to={path} className="px-1">
-							{text}
-						</Link>
-					</span>
+				options.map(({ id, text }) => (
+					<Link key={id} to={`/browse?category=${id}`} className="px-1">
+						{text}
+					</Link>
 				))
 			) : null}
 		</div>

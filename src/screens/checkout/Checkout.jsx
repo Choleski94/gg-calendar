@@ -1,15 +1,20 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+
 import './checkout.css';
 
 import logo from '../../static/images/nozama-logo.png';
-import { ItemsSection } from '../../components/checkout/Items';
-import { PaymentCard } from '../../components/checkout/Payment';
-import { AddressSection } from '../../components/checkout/Address';
-import { OrdersSummary } from '../../components/checkout/OrderSummary';
+
+import { ItemsSection } from '@components/checkout/Items';
+import { PaymentCard } from '@components/checkout/Payment';
+import { AddressSection } from '@components/checkout/Address';
+import { OrdersSummary } from '@components/checkout/OrderSummary';
 
 const Checkout = () => {
-	
-	document.body.style.background = '#ffff';
+
+	React.useEffect(() => {
+		document.body.style.background = '#ffff';
+	}, []);
 
 	return (
 		<>

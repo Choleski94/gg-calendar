@@ -24,6 +24,11 @@ export const guestRoutes = [
 		element: screenElements.SignUp,
 	},
 	{
+		slug: 'browse',
+		path: '/browse',
+		element: screenElements.Browse,
+	},
+	{
 		slug: 'account',
 		path: '/account',
 		element: screenElements.Account,
