@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 
-import Nozama from '@app';
+import App from '@app';
 // import { Loader } from '@components';
 import { userLoggedIn } from '@store/actions/auth';
 import rootReducer, { preloadedState } from '@store/rootReducer';
@@ -44,7 +44,7 @@ if (root) {
 		<BrowserRouter>
 			<Provider store={store}>
 				<Suspense fallback={() => <h1>Loader</h1>}>
-					<Nozama />
+					<App />
 				</Suspense>
 			</Provider>
 		</BrowserRouter>
