@@ -11,8 +11,44 @@ import { userLoggedIn } from '@store/actions/auth';
 import rootReducer, { preloadedState } from '@store/rootReducer';
 import setAuthorizationHeader from '@utils/setAuthorizationHeader';
 
-import './static/css/bootstrap.css';
-import './static/css/style.css';
+/*!*************************************!*\
+// (CSS) 
+/*!*************************************!*/
+
+// <html>
+import "./static/css/root.css";
+// </html>
+
+// <header>
+import "./static/css/header.css";
+// </header>
+
+// <main>
+import "./static/css/containers.css";
+import "./static/css/yearview.css";
+import "./static/css/monthview.css";
+import "./static/css/weekview.css";
+import "./static/css/dayview.css";
+import "./static/css/listview.css";
+import "./static/css/sidebar.css";
+import "./static/css/sbdatepicker.css";
+// </main>
+
+// <aside>
+import "./static/css/aside/datepicker.css";
+import "./static/css/aside/toast.css";
+import "./static/css/aside/goto.css";
+import "./static/css/aside/toggleForm.css";
+import "./static/css/aside/sidebarSubMenu.css";
+import "./static/css/aside/changeViewModule.css";
+import "./static/css/aside/editCategoryForm.css";
+import "./static/css/aside/form.css";
+import "./static/css/aside/timepicker.css";
+import "./static/css/aside/deleteCategoryPopup.css";
+import "./static/css/aside/entryOptions.css";
+import "./static/css/aside/info.css";
+import "./static/css/aside/shortcuts.css";
+// </aside>
 
 const store = configureStore({
 	preloadedState,
