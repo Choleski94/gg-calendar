@@ -7,6 +7,7 @@ import { getLocale, constructLocale } from "@locales";
 
 import View from './components/View';
 import Focus from './components/Focus';
+import Footer from './components/Footer';
 import Search from './components/Search';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
