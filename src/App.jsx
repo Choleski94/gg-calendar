@@ -1,9 +1,10 @@
-import React from "react";
-import { IntlProvider } from "react-intl";
-import { ThemeProvider } from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { IntlProvider } from 'react-intl';
+import { ThemeProvider } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getLocale, constructLocale } from "@locales";
+import { withShortcutsListener } from '@utils/hocs';
+import { getLocale, constructLocale } from '@locales';
 
 import View from './components/View';
 import Focus from './components/Focus';
@@ -344,4 +345,4 @@ const App = () => {
 	);
 };
 
-export default App;
+export default withShortcutsListener(App);

@@ -1,7 +1,7 @@
 // App
 export const APP_LOADING = 'APP_LOADING';
 
-export const APP_PRIME_TOGGLED = 'APP_PRIME_TOGGLED';
+export const APP_VIEW_TOGGLED = 'APP_VIEW_TOGGLED';
 
 // User
 export const USER_FETCHED = 'USER_FETCHED';

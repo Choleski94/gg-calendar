@@ -8,8 +8,9 @@ export const appLoading = app => ({
 	app
 });
 
-export const togglePrime = () => ({
-	type: actionTypes.APP_PRIME_TOGGLED,
+export const toggleView = (view) => ({
+	type: actionTypes.APP_VIEW_TOGGLED,
+	view
 });
 
 export const loadingApp = (loading = false) => (dispatch) => (
