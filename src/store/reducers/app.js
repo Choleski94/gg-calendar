@@ -10,6 +10,7 @@ const appReducer = (state = appState, action) => {
 		case actionTypes.APP_LOADING:
 			return { ...state, ...action.app };
 		case actionTypes.APP_VIEW_TOGGLED:
+			if (state.view === action.view) return;
 			return { ...state, view: action.view };
 		default:
 			return state;
