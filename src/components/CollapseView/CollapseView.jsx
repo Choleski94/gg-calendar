@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { toggleCollapsed } from '@store/actions/app';
 import { selectView, selectCollapsed } from '@store/selectors/app';
-import { CALENDAR_VIEWS, CALENDAR_VIEW_OPTIONS } from '@constants/calendar';
 
 import { WHITELIST_CALENDARE_VIEWS } from './CollapseView.controller';
 
