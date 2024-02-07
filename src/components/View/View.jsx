@@ -1,27 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-const SUPPORTED_VIEWS = {
-	YEAR: 'YEAR',
-	MONTH: 'MONTH',
-	WEEK: 'WEEK',
-	DAY: 'DAY',
-	LIST: 'LIST',
-}
+import { selectView } from '@store/selectors/app';
+import { CALENDAR_VIEWS } from '@constants/calendar';
 
 const View = () => {
-	const [ viewMode, setActiveViewMode ] = React.useState(SUPPORTED_VIEWS.WEEK);
+	const calendarView = useSelector(selectView);
 
 	return (
 		<div className="container__calendars cc-tran">
 			{/* yearview */}
-			{viewMode === SUPPORTED_VIEWS.YEAR && (
-				<div className="yearview hide-view">
+			{calendarView === CALENDAR_VIEWS.YEAR && (
+				<div className="yearview">
 					<div className="calendar__yearview" />
 				</div>
 			)}
 			{/* monthview */}
-			{viewMode === SUPPORTED_VIEWS.MONTH && (
-				<div className="monthview hide-view">
+			{calendarView === CALENDAR_VIEWS.MONTH && (
+				<div className="monthview">
 					<div className="monthview__top">
 						<div className="monthview__top-weekname">SUN</div>
 						<div className="monthview__top-weekname">MON</div>
@@ -35,8 +31,8 @@ const View = () => {
 				</div>
 			)}
 			{/* weekview */}
-			{viewMode === SUPPORTED_VIEWS.WEEK && (
-				<div className="weekview hide-view">
+			{calendarView === CALENDAR_VIEWS.WEEK && (
+				<div className="weekview">
 					<div className="weekview__top">
 						<div />
 						<div className="weekview--header">
@@ -153,8 +149,8 @@ const View = () => {
 				</div>
 			)}
 			{/* dayview */}
-			{viewMode === SUPPORTED_VIEWS.DAY && (
-				<div className="dayview hide-view">
+			{calendarView === CALENDAR_VIEWS.DAY && (
+				<div className="dayview">
 					<div className="calendar__dayview">
 						{/* row 1 */}
 						<div className="dayview--header">
@@ -185,8 +181,8 @@ const View = () => {
 				</div>
 			)}
 			{/* listview */}
-			{viewMode === SUPPORTED_VIEWS.LIST && (
-				<div className="listview hide-view">
+			{calendarView === CALENDAR_VIEWS.LIST && (
+				<div className="listview">
 					<div className="listview__body"></div>
 				</div>
 			)}
