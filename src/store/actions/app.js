@@ -13,10 +13,16 @@ export const toggleView = (view) => ({
 	view
 });
 
-export const toggleCollapsed = (collapsed) => ({
-	type: actionTypes.APP_COLLAPSED_TOGGLED,
-	collapsed
-});
+export const toggleCollapsed = {
+	header: (header) => ({
+		type: actionTypes.APP_COLLAPSED_HEADER_TOGGLED,
+		header
+	}),
+	sidebar: (sidebar) => ({
+		type: actionTypes.APP_COLLAPSED_SIDEBAR_TOGGLED,
+		sidebar
+	}),
+}
 
 export const loadingApp = (loading = false) => (dispatch) => (
 	dispatch(appLoading({ loading }))

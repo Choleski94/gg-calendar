@@ -10,10 +10,10 @@ const CollapseView = () => {
 	const dispatch = useDispatch();
 
 	const calendarView = useSelector(selectView);
-	const isCollapsed = useSelector(selectCollapsed);
+	const { header: isCollapsed } = useSelector(selectCollapsed);
 
 	const toggleIsVisible = () => {
-		dispatch(toggleCollapsed());
+		dispatch(toggleCollapsed.header());
 	}
 
 	const showCollapseView = React.useMemo(() => {
