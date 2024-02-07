@@ -15,7 +15,10 @@ const SelectView = () => {
 	const [ showDropdown, setShowDropdown ] = React.useState(false);
 
 	const viewText = React.useMemo(() => {
-		setShowDropdown(false); 	// Close if changed with shortcuts.
+		// Close if changed with shortcuts.
+		if (showDropdown) {
+			setShowDropdown(false);
+		}
 
 		const [ currentViewObj ] = CALENDAR_VIEW_OPTIONS.filter(({ slug }) => (
 			slug === calendarView
