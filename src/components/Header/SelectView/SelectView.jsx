@@ -1,34 +1,30 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { toggleView } from '@store/actions/app';
 import { selectView } from '@store/selectors/app';
-import { CALENDAR_VIEWS, CALENDAR_VIEW_OPTIONS } from '@constants/calendar';
+import { CALENDAR_VIEW_OPTIONS } from '@constants/calendar';
 
 import { setClassName } from './SelectView.controller';
 
 const SelectView = () => {
-	const [ showDropdown, setShowDropdown ] = React.useState(false);
-	const [ activeView, setActiveView ] = React.useState(CALENDAR_VIEWS.WEEK);
+	const dispatch = useDispatch();
 
 	const calendarView = useSelector(selectView);
 
-	React.useEffect(() => {
-		setActiveView(calendarView);
-	}, [ calendarView ]);
+	const [ showDropdown, setShowDropdown ] = React.useState(false);
 
 	const viewText = React.useMemo(() => {
 		const [ currentViewObj ] = CALENDAR_VIEW_OPTIONS.filter(({ slug }) => (
-			slug === activeView
+			slug === calendarView
 		));
 
 		return currentViewObj?.text || '';
-	}, [ activeView ]);
+	}, [ calendarView ]);
 
 	const onViewOptionClick = (e, viewSlug) => {
-		if (activeView !== viewSlug) {
-			setActiveView(viewSlug);
-			// setActiveView(viewSlug);
-			useDispatch(toggleCollapsed(viewSlug));
+		if (calendarView !== viewSlug) {
+			dispatch(toggleView(viewSlug));
 			setShowDropdown(false); 	// Close after selection
 		}
 	}
@@ -58,7 +54,7 @@ const SelectView = () => {
 						<div className="change-view--option">
 							{CALENDAR_VIEW_OPTIONS.map(({ id, slug, text }) => (
 								<div 
-									className={setClassName(slug === activeView)} 
+									className={setClassName(slug === calendarView)} 
 									onClick={(e) => onViewOptionClick(e, slug)}
 									data-view-option={slug} 
 									data-view-key={id}
