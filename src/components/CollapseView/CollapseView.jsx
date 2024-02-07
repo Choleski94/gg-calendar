@@ -10,7 +10,7 @@ const CollapseView = () => {
 	const dispatch = useDispatch();
 
 	const calendarView = useSelector(selectView);
-	const { header: isCollapsed } = useSelector(selectCollapsed);
+	const { header: isHeaderCollapsed } = useSelector(selectCollapsed);
 
 	const toggleIsVisible = () => {
 		dispatch(toggleCollapsed.header());
@@ -32,7 +32,7 @@ const CollapseView = () => {
 
 	return (
 		<aside className="collapse-view">
-			{isCollapsed ? (
+			{isHeaderCollapsed ? (
 				<div onClick={toggleIsVisible}>
 					<svg
 						width="18px"
