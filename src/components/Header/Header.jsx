@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SelectView from './SelectView';
+
 const Header = () => {
 	return (
 		<header className="header">
@@ -147,17 +149,8 @@ const Header = () => {
 								<circle cx={12} cy={12} r="3.5" />
 							</svg>
 						</button>
-						<div className="select-wrapper">
-							<button
-								name="select__modal"
-								id="s-modals"
-								className="select__modal"
-								aria-label="button"
-								role="button"
-							>
-								Month
-							</button>
-						</div>
+
+						<SelectView />
 					</div>
 					{/* end col-3 */}
 				</div>

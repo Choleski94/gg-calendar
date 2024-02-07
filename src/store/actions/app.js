@@ -13,6 +13,11 @@ export const toggleView = (view) => ({
 	view
 });
 
+export const toggleCollapsed = (collapsed) => ({
+	type: actionTypes.APP_COLLAPSED_TOGGLED,
+	collapsed
+});
+
 export const loadingApp = (loading = false) => (dispatch) => (
 	dispatch(appLoading({ loading }))
 );

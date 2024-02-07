@@ -3,6 +3,8 @@ export const APP_LOADING = 'APP_LOADING';
 
 export const APP_VIEW_TOGGLED = 'APP_VIEW_TOGGLED';
 
+export const APP_COLLAPSED_TOGGLED = 'APP_COLLAPSED_TOGGLED';
+
 // User
 export const USER_FETCHED = 'USER_FETCHED';
 

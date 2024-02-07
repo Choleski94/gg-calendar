@@ -16,7 +16,36 @@ export const CALENDAR_VIEWS = {
 	ESCAPE: 'ESCAPE',
 }
 
+export const CALENDAR_VIEW_OPTIONS = [
+	{
+		id: CALENDAR_SHORTCUTS.D,
+		slug: CALENDAR_VIEWS.DAY,
+		text: 'Day',
+	},
+	{
+		id: CALENDAR_SHORTCUTS.W,
+		slug: CALENDAR_VIEWS.WEEK,
+		text: 'Week',
+	},
+	{
+		id: CALENDAR_SHORTCUTS.M,
+		slug: CALENDAR_VIEWS.MONTH,
+		text: 'Month',
+	},
+	{
+		id: CALENDAR_SHORTCUTS.Y,
+		slug: CALENDAR_VIEWS.YEAR,
+		text: 'Year',
+	},
+	{
+		id: CALENDAR_SHORTCUTS.L,
+		slug: CALENDAR_VIEWS.LIST,
+		text: 'List',
+	}
+]
+
 export default {
 	CALENDAR_VIEWS,
 	CALENDAR_SHORTCUTS,
+	CALENDAR_VIEW_OPTIONS,
 }

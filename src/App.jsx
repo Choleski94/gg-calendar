@@ -7,7 +7,6 @@ import { withShortcutsListener } from '@utils/hocs';
 import { getLocale, constructLocale } from '@locales';
 
 import View from './components/View';
-import Focus from './components/Focus';
 import Footer from './components/Footer';
 import Search from './components/Search';
 import Header from './components/Header';
@@ -17,7 +16,7 @@ import Category from './components/Category';
 import CreateCTA from './components/CreateCTA';
 import Shortcuts from './components/Shortcuts';
 import Datepicker from './components/Datepicker';
-import SelectView from './components/SelectView';
+import CollapseView from './components/CollapseView';
 import Notifications from './components/Notifications';
 
 const App = () => {
@@ -218,7 +217,6 @@ const App = () => {
 			</aside>
 
 			{/* options for header select element (pick view) */}
-			<SelectView />
 
 			{/* floating toggle form button visible when sidebar is closed */}
 			<CreateCTA />
@@ -227,7 +225,7 @@ const App = () => {
 			<Category />
 
 			{/* "eye" icon that appears in day/week view */}
-			<Focus />
+			<CollapseView />
 
 			{/* search for date popup */}
 			<Search />
