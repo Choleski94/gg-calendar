@@ -9,6 +9,7 @@ import { getLocale, constructLocale } from '@locales';
 import { THEME_KEYS, THEME_CLASSNAMES } from '@constants/themes';
 
 import View from './components/View';
+import Modal from './components/Modals';
 import Footer from './components/Footer';
 import Search from './components/Search';
 import Header from './components/Header';
@@ -43,6 +44,7 @@ const App = () => {
 
 			{/* overlays / used for popup content */}
 			{/* see readme @overlays */}
+			{/*
 			<aside style={{ display: "none" }} className="change-view--overlay toggle-options" />
 			<aside className="resize-overlay hide-resize-overlay" style={{ backgroundColor: "transparent" }} />
 			<aside className="sidebar-sub-menu__overlay hide-sidebar-sub-menu" />
@@ -54,7 +56,9 @@ const App = () => {
 			<aside className="go-to-date-overlay hide-gotodate" />
 			<aside className="category__form-overlay hide-ctg-form" />
 			<aside className="shortcuts-modal-overlay hide-shortcuts" />
+			*/}
 			{/* end overlays */}
+			<Modal />
 
 			{/* datepicker for header & form */}
 			<Datepicker />

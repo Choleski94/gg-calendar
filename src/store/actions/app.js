@@ -9,8 +9,13 @@ export const appLoading = app => ({
 });
 
 export const toggleView = (view) => ({
-	type: actionTypes.APP_VIEW_TOGGLED,
+	type: actionTypes.APP_VIEW_UPDATED,
 	view
+});
+
+export const toggleModal = (modal) => ({
+	type: actionTypes.APP_MODAL_UPDATED,
+	modal
 });
 
 export const toggleCollapsed = {

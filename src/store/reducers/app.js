@@ -4,6 +4,7 @@ export const appState = {
 	view: 'WEEK',
 	theme: 'LIGHT',
 	loading: false,
+	modal: 'CLOSED',
 	collapsed: {
 		header: false,
 		sidebar: false,
@@ -16,9 +17,11 @@ const appReducer = (state = appState, action) => {
 			return { ...state, ...action.app };
 		case actionTypes.APP_THEME_UPDATED:
 			return { ...state, theme: action.theme };
-		case actionTypes.APP_VIEW_TOGGLED:
+		case actionTypes.APP_VIEW_UPDATED:
 			if (state.view === action.view) return;
 			return { ...state, view: action.view };
+		case actionTypes.APP_MODAL_UPDATED:
+			return { ...state, modal: action.modal };
 		case actionTypes.APP_COLLAPSED_HEADER_TOGGLED:
 			return {
 				...state, 
