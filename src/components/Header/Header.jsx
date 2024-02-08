@@ -1,16 +1,30 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { toggleCollapsed } from '@store/actions/app';
+import { selectView, selectCollapsed } from '@store/selectors/app';
 
 import SelectView from './SelectView';
+import { setDatetimeWrapper } from './Header.controller';
 
 const Header = () => {
+	const dispatch = useDispatch();
+
+	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
+
+	const toggleSidebar = () => {
+		dispatch(toggleCollapsed.sidebar());
+	}
+
 	return (
 		<header className="header">
 			<div className="h__container">
 				<div className="h-col-1">
 					<button
-						className="menu"
 						data-tooltip="Main menu"
+						onClick={toggleSidebar}
 						aria-label="button"
+						className="menu"
 						role="button"
 					>
 						<svg
@@ -106,7 +120,7 @@ const Header = () => {
 								</svg>
 							</button>
 						</div>
-						<div className="datetime-wrapper">
+						<div className={setDatetimeWrapper(isSidebarCollapsed)}>
 							<button
 								className="datetime-content"
 								aria-label="button"

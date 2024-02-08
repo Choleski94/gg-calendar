@@ -1,8 +1,15 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { selectCollapsed } from '@store/selectors/app';
+
+import { setSidebarClassName } from './Sidebar.controller';
 
 const Sidebar = () => {
+	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
+
 	return (
-		<aside className="sidebar sidebar-transition hide-sidebar">
+		<aside className={setSidebarClassName(isSidebarCollapsed)}>
 			{/* sidebar header */}
 			<div className="sidebar-content--header">
 				<button
