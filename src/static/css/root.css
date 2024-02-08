@@ -132,7 +132,7 @@ html {
 	font-size: 14px;
 }
 
-.body, #root {
+.body {
 	font-family: var(--primaryFont);
 	font-weight: 400;
 	background: var(--black1);

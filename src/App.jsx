@@ -1,10 +1,12 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
+import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 
+import { selectTheme } from '@store/selectors/app';
 import { withShortcutsListener } from '@utils/hocs';
 import { getLocale, constructLocale } from '@locales';
+import { THEME_KEYS, THEME_CLASSNAMES } from '@constants/themes';
 
 import View from './components/View';
 import Footer from './components/Footer';
@@ -20,8 +22,17 @@ import CollapseView from './components/CollapseView';
 import Notifications from './components/Notifications';
 
 const App = () => {
+
+	const theme = useSelector(selectTheme);
+
+	const themeClassName = React.useMemo(() => (
+		THEME_CLASSNAMES[theme || THEME_KEYS.DARK]
+	), [ theme ]);
+
+	console.log('DATA:::', theme, themeClassName);
+
 	return (
-		<>
+		<div className={themeClassName} style={{ cursor: 'default' }}>
 			<Header />
 			<main className="main">
 				{/* hide-sidebar */}
@@ -339,7 +350,7 @@ const App = () => {
 
 			{/* popup that appears after event edit/creation */}
 			<Notifications />
-		</>
+		</div>
 	);
 };
 
