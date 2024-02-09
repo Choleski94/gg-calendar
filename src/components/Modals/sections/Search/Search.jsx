@@ -31,7 +31,7 @@ const Search = ({
 					</div>
 				</div>
 				<div className="go-to__footer">
-					<div className="cancel-go-to">
+					<div className="cancel-go-to" onClick={onClose}>
 						Cancel
 					</div>
 					<div className="submit-go-to">
