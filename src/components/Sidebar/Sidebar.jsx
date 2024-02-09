@@ -1,21 +1,30 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { toggleModal } from '@store/actions/app';
+import { MODAL_SECTIONS } from '@constants/modals';
 import { selectCollapsed } from '@store/selectors/app';
 
 import { setSidebarClassName } from './Sidebar.controller';
 
 const Sidebar = () => {
+	const dispatch = useDispatch();
+
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
+
+	const onCreateClick = () => {
+		dispatch(toggleModal(MODAL_SECTIONS.CREATE_EVENT));
+	}
 
 	return (
 		<aside className={setSidebarClassName(isSidebarCollapsed)}>
 			{/* sidebar header */}
 			<div className="sidebar-content--header">
 				<button
-					className="sb-toggle-form-btn"
-					aria-label="button"
 					role="button"
+					aria-label="button"
+					onClick={onCreateClick}
+					className="sb-toggle-form-btn"
 				>
 					<span className="stfb">
 						<svg width={36} height={36} viewBox="0 0 36 36">
@@ -26,7 +35,9 @@ const Sidebar = () => {
 							<path fill="none" d="M0 0h36v36H0z" />
 						</svg>
 					</span>
-					<span className="sb-toggle-form-btn__content">Create</span>
+					<span className="sb-toggle-form-btn__content">
+						Create
+					</span>
 				</button>
 				{/* <div class="sb-icon-toggles"></div> */}
 				<button className="sb-data-btn" aria-label="button" role="button">
