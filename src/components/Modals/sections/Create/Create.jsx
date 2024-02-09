@@ -12,7 +12,11 @@ const Create = ({
 				<aside className="form-modal-overlay hide-form-overlay" />
 				<div className="entries__form--header">
 					<div className="form-header--dragarea" />
-					<div className="form--header__icon-close" data-tooltip="close form">
+					<div 
+						onClick={onClose}
+						data-tooltip="close form"
+						className="form--header__icon-close" 
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							height={20}

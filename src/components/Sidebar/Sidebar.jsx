@@ -12,6 +12,10 @@ const Sidebar = () => {
 
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
 
+	const onSettingClick = () => {
+		dispatch(toggleModal(MODAL_SECTIONS.SETTING));
+	}
+
 	const onCreateClick = () => {
 		dispatch(toggleModal(MODAL_SECTIONS.CREATE_EVENT));
 	}
@@ -40,7 +44,12 @@ const Sidebar = () => {
 					</span>
 				</button>
 				{/* <div class="sb-icon-toggles"></div> */}
-				<button className="sb-data-btn" aria-label="button" role="button">
+				<button 
+					role="button"
+					aria-label="button" 
+					className="sb-data-btn" 
+					onClick={onSettingClick}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						height={24}
