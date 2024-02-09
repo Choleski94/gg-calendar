@@ -50,6 +50,7 @@ const Settings = ({
 					</div>
 					<div className="sub-menu--icons">
 						<div
+							onClick={onAnimationToggle}
 							className="toggle-animations-icon__sm"
 							data-tooltip={setAnimationDataTooltip(hasAnimation)}
 						>
