@@ -18,6 +18,16 @@ export const toggleTheme = (theme) => ({
 	theme
 });
 
+export const toggleShortcut = (shortcut) => ({
+	type: actionTypes.APP_SHORTCUT_TOGGLED,
+	shortcut
+});
+
+export const toggleAnimation = (animation) => ({
+	type: actionTypes.APP_ANIMATION_TOGGLED,
+	animation
+});
+
 export const toggleModal = (modal) => ({
 	type: actionTypes.APP_MODAL_UPDATED,
 	modal

@@ -2,8 +2,18 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { THEME_KEYS } from '@constants/themes';
-import { toggleTheme } from '@store/actions/app';
-import { selectTheme } from '@store/selectors/app';
+import { toggleTheme, toggleShortcut } from '@store/actions/app';
+import { selectTheme, selectShortcut } from '@store/selectors/app';
+
+export const setShortcutFill = (isActive = false) => (
+	isActive ? 'var(--primary1)' : 'var(--red1)'
+);
+
+export const setShortcutDataTooltip = (isActive = false) => ([
+	'Keyboard',
+	'shortcuts',
+	(isActive ? 'enabled' : 'disabled'),
+].join(' '));
 
 const Settings = ({
 	onClose = () => null,
@@ -11,6 +21,11 @@ const Settings = ({
 	const dispatch = useDispatch();
 
 	const activeTheme = useSelector(selectTheme);
+	const hasShortcut = useSelector(selectShortcut);
+
+	const onKeyboardToggle = () => {
+		dispatch(toggleShortcut());
+	}
 
 	const handleThemeClick = (currentTheme) => {
 		dispatch(toggleTheme(currentTheme));
@@ -43,11 +58,11 @@ const Settings = ({
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								enableBackground="new 0 0 24 24"
-								height="24px"
-								viewBox="0 0 24 24"
-								width="24px"
-								fill="var(--red1)"
 								className="tai-off hide-tai"
+								viewBox="0 0 24 24"
+								fill="var(--red1)"
+								height="24px"
+								width="24px"
 							>
 								<g>
 									<rect fill="none" height={24} width={24} />
@@ -56,14 +71,15 @@ const Settings = ({
 							</svg>
 						</div>
 						<div
+							onClick={onKeyboardToggle}
 							className="keyboard-disabled-sm"
-							data-tooltip="Keyboard shortcuts enabled"
+							data-tooltip={setShortcutDataTooltip(hasShortcut)}
 						>
 							<svg
+								fill={setShortcutFill(hasShortcut)}
 								xmlns="http://www.w3.org/2000/svg"
 								height={24}
 								width={24}
-								fill="var(--primary1)"
 							>
 								<path d="M4 19q-.825 0-1.412-.587Q2 17.825 2 17V7q0-.825.588-1.412Q3.175 5 4 5h16q.825 0 1.413.588Q22 6.175 22 7v10q0 .825-.587 1.413Q20.825 19 20 19Zm0-2h16V7H4v10Zm4-1h8v-2H8Zm-3-3h2v-2H5Zm3 0h2v-2H8Zm3 0h2v-2h-2Zm3 0h2v-2h-2Zm3 0h2v-2h-2ZM5 10h2V8H5Zm3 0h2V8H8Zm3 0h2V8h-2Zm3 0h2V8h-2Zm3 0h2V8h-2ZM4 17V7v10Z" />
 							</svg>
@@ -176,7 +192,9 @@ const Settings = ({
 							</div>
 						</div>
 						<div className="sub-menu--item smias">
-							<div className="sub-menu--item__title">Keyboard Shortcuts</div>
+							<div className="sub-menu--item__title">
+								Keyboard Shortcuts
+							</div>
 							<div className="sub-menu--item__description">
 								<span>30 individual keys in use for 23 different actions.</span>
 								<br />
@@ -195,13 +213,16 @@ const Settings = ({
 									</svg>
 								</div>
 								<div className="smia-set-shortcut-status">
-									<span className="smia-set-status-title">toggle on/off</span>
-									<div className="smia-disable-shortcuts__btn">
+									<span className="smia-set-status-title">
+										toggle on/off
+									</span>
+									<div className="smia-disable-shortcuts__btn" onClick={() => console.log('ok..')}>
 										<label>
 											<input
 												type="checkbox"
+												checked={hasShortcut}
+												onChange={onKeyboardToggle}
 												className="smia-toggle-shortcuts-checkbox"
-												defaultChecked="checked"
 											/>{" "}
 											<span className="smia-slider" />
 										</label>
