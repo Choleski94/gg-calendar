@@ -16,6 +16,7 @@ const appReducer = (state = appState, action) => {
 		case actionTypes.APP_LOADING:
 			return { ...state, ...action.app };
 		case actionTypes.APP_THEME_UPDATED:
+			if (state.theme === action.theme) return;
 			return { ...state, theme: action.theme };
 		case actionTypes.APP_VIEW_UPDATED:
 			if (state.view === action.view) return;

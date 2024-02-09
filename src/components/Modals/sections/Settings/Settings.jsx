@@ -1,8 +1,21 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { THEME_KEYS } from '@constants/themes';
+import { toggleTheme } from '@store/actions/app';
+import { selectTheme } from '@store/selectors/app';
 
 const Settings = ({
 	onClose = () => null,
 }) => {
+	const dispatch = useDispatch();
+
+	const activeTheme = useSelector(selectTheme);
+
+	const handleThemeClick = (currentTheme) => {
+		dispatch(toggleTheme(currentTheme));
+	}
+
 	return (
 		<>
 			<aside className="sidebar-sub-menu">
@@ -114,37 +127,42 @@ const Settings = ({
 							</div>
 						</div>
 						<div className="sub-menu--item smi-theme-actions">
-							<div className="sub-menu--item__title">Configure Application Theme</div>
+							<div className="sub-menu--item__title">
+								Configure Application Theme
+							</div>
 							<div className="sub-menu--item__description">
 								light, dark, and high contrast themes.
 							</div>
 							<div className="sub-menu--item__actions theme-actions">
-								<div className="theme-option theme-option-dark">
+								<div className="theme-option theme-option-dark" onClick={() => handleThemeClick(THEME_KEYS.DARK)}>
 									<input
 										className="theme-radio__input"
+										defaultValue="dark"
 										name="themeoption"
 										type="radio"
-										defaultValue="dark"
-										defaultChecked="checked"
-									/>{" "}
+										// defaultChecked="checked"
+									/>
+									{" "}
 									<span>Dark</span>
 								</div>
-								<div className="theme-option theme-option-light">
+								<div className="theme-option theme-option-light" onClick={() => handleThemeClick(THEME_KEYS.LIGHT)}>
 									<input
 										className="theme-radio__input"
+										defaultValue="light"
 										name="themeoption"
 										type="radio"
-										defaultValue="light"
-									/>{" "}
+									/>
+									{" "}
 									<span>Light</span>
 								</div>
-								<div className="theme-option theme-option-contrast">
+								<div className="theme-option theme-option-contrast" onClick={() => handleThemeClick(THEME_KEYS.CONTRAST)}>
 									<input
 										className="theme-radio__input"
+										defaultValue="contrast"
 										name="themeoption"
 										type="radio"
-										defaultValue="contrast"
-									/>{" "}
+									/>
+									{" "}
 									<span>High Contrast</span>
 								</div>
 							</div>

@@ -13,6 +13,11 @@ export const toggleView = (view) => ({
 	view
 });
 
+export const toggleTheme = (theme) => ({
+	type: actionTypes.APP_THEME_UPDATED,
+	theme
+});
+
 export const toggleModal = (modal) => ({
 	type: actionTypes.APP_MODAL_UPDATED,
 	modal
