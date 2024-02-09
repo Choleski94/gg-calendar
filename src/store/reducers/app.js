@@ -28,7 +28,7 @@ const appReducer = (state = appState, action) => {
 		case actionTypes.APP_SHORTCUT_TOGGLED:
 			return { ...state, shortcut: !state.shortcut };
 		case actionTypes.APP_ANIMATION_TOGGLED:
-			return { ...state, animation: action.animation };
+			return { ...state, animation: !state.animation };
 		case actionTypes.APP_COLLAPSED_HEADER_TOGGLED:
 			return {
 				...state, 

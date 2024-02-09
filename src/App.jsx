@@ -3,10 +3,10 @@ import { IntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 
-import { selectTheme } from '@store/selectors/app';
 import { withShortcutsListener } from '@utils/hocs';
 import { getLocale, constructLocale } from '@locales';
 import { THEME_KEYS, THEME_CLASSNAMES } from '@constants/themes';
+import { selectTheme, selectAnimation } from '@store/selectors/app';
 
 import View from './components/View';
 import Modal from './components/Modals';
@@ -25,10 +25,12 @@ import Notifications from './components/Notifications';
 const App = () => {
 
 	const theme = useSelector(selectTheme);
+	const animation = useSelector(selectAnimation);
 
-	const themeClassName = React.useMemo(() => (
-		THEME_CLASSNAMES[theme || THEME_KEYS.DARK]
-	), [ theme ]);
+	const themeClassName = React.useMemo(() => ([
+		THEME_CLASSNAMES[theme || THEME_KEYS.DARK],
+		(animation ? '' : 'disable-transitions'),
+	].join(' ')), [ theme, animation ]);
 
 	return (
 		<div className={themeClassName} style={{ cursor: 'default' }}>
