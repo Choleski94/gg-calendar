@@ -17,7 +17,6 @@ const Modal = () => {
 	const modalRef = React.useRef(null);
 
 	const onClose = () => {
-		console.log('Closing....');
 		dispatch(toggleModal(MODAL_SECTIONS.CLOSED));
 	}
 

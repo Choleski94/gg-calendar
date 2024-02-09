@@ -30,8 +30,6 @@ const App = () => {
 		THEME_CLASSNAMES[theme || THEME_KEYS.DARK]
 	), [ theme ]);
 
-	console.log('DATA:::', theme, themeClassName);
-
 	return (
 		<div className={themeClassName} style={{ cursor: 'default' }}>
 			<Header />

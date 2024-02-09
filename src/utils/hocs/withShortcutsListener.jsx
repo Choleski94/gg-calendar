@@ -28,7 +28,6 @@ const withShortcutsListener = (Component) => {
 					dispatch(toggleView(CALENDAR_VIEWS.LIST));
 					break;
 				case CALENDAR_SHORTCUTS.ESCAPE:
-					console.log('Press escape');
 					break;
 			}
 		};

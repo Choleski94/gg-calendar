@@ -154,8 +154,9 @@ export const validatePhoneNumber = /^(?:[+\d()\-\s]+)$/;
 export const bindValue = (obj, parentElement) => {
 	parentElement.querySelectorAll('[data-property]').forEach((element) => {
 		const type = element.dataset.type;
+
 		let value = valueByString(obj, element.dataset.property);
-		console.log({ type });
+
 		switch (type) {
 			case 'date':
 				value = formatDate(value);
