@@ -136,34 +136,42 @@ const Settings = ({
 							<div className="sub-menu--item__actions theme-actions">
 								<div className="theme-option theme-option-dark" onClick={() => handleThemeClick(THEME_KEYS.DARK)}>
 									<input
+										checked={activeTheme === THEME_KEYS.DARK}
+										defaultValue={THEME_KEYS.DARK}
 										className="theme-radio__input"
-										defaultValue="dark"
 										name="themeoption"
 										type="radio"
-										// defaultChecked="checked"
 									/>
-									{" "}
-									<span>Dark</span>
+									&nbsp;
+									<span>
+										Dark
+									</span>
 								</div>
 								<div className="theme-option theme-option-light" onClick={() => handleThemeClick(THEME_KEYS.LIGHT)}>
 									<input
+										checked={activeTheme === THEME_KEYS.LIGHT}
+										defaultValue={THEME_KEYS.LIGHT}
 										className="theme-radio__input"
-										defaultValue="light"
 										name="themeoption"
 										type="radio"
 									/>
-									{" "}
-									<span>Light</span>
+									&nbsp;
+									<span>
+										Light
+									</span>
 								</div>
 								<div className="theme-option theme-option-contrast" onClick={() => handleThemeClick(THEME_KEYS.CONTRAST)}>
 									<input
+										checked={activeTheme === THEME_KEYS.CONTRAST}
+										defaultValue={THEME_KEYS.CONTRAST}
 										className="theme-radio__input"
-										defaultValue="contrast"
 										name="themeoption"
 										type="radio"
 									/>
-									{" "}
-									<span>High Contrast</span>
+									&nbsp;
+									<span>
+										High Contrast
+									</span>
 								</div>
 							</div>
 						</div>
