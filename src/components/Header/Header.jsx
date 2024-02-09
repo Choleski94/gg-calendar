@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { toggleCollapsed } from '@store/actions/app';
+import { MODAL_SECTIONS } from '@constants/modals';
+import { toggleModal, toggleCollapsed } from '@store/actions/app';
 import { selectView, selectCollapsed } from '@store/selectors/app';
 
 import SelectView from './SelectView';
@@ -14,6 +15,18 @@ const Header = () => {
 
 	const toggleSidebar = () => {
 		dispatch(toggleCollapsed.sidebar());
+	}
+
+	const onSearchClick = () => {
+		dispatch(toggleModal(MODAL_SECTIONS.SEARCH));
+	}
+
+	const onSettingClick = () => {
+		dispatch(toggleModal(MODAL_SECTIONS.SETTING));
+	}
+
+	const onCreateClick = () => {
+		dispatch(toggleModal(MODAL_SECTIONS.CREATE_EVENT));
 	}
 
 	return (
@@ -132,10 +145,11 @@ const Header = () => {
 					</div>
 					<div className="h-col-3">
 						<button
+							role="button"
+							aria-label="button"
 							className="h-search"
 							data-tooltip="search"
-							aria-label="button"
-							role="button"
+							onClick={onSearchClick}
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -147,10 +161,11 @@ const Header = () => {
 							</svg>
 						</button>
 						<button
+							role="button"
+							aria-label="button"
 							className="settings"
 							data-tooltip="settings"
-							aria-label="button"
-							role="button"
+							onClick={onSettingClick}
 						>
 							<svg
 								width={24}

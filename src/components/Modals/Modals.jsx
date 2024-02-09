@@ -5,6 +5,8 @@ import { toggleModal } from '@store/actions/app';
 import { selectModal } from '@store/selectors/app';
 import { MODAL_SECTIONS } from '@constants/modals';
 
+import Create from './sections/Create';
+import Search from './sections/Search';
 import Settings from './sections/Settings';
 
 const Modal = () => {
@@ -57,13 +59,30 @@ const Modal = () => {
 		return null;
 	}
 
-	if (modalSection === MODAL_SECTIONS.SETTINGS) {
+	if (modalSection === MODAL_SECTIONS.SEARCH) {
+		return (
+			<Search 
+				onClose={onClose}
+			/>
+		);
+	}
+
+	if (modalSection === MODAL_SECTIONS.SETTING) {
 		return (
 			<Settings 
 				onClose={onClose}
 			/>
 		);
 	}
+
+	if (modalSection === MODAL_SECTIONS.CREATE_EVENT) {
+		return (
+			<Create
+				onClose={onClose}
+			/>
+		);
+	}
+
 	// return (
 	// 	<>
 	// 		<div key={`modal-${id}`} tabIndex={-1} role="dialog" className="modal fade show d-block">
