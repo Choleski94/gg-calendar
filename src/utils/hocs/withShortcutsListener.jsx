@@ -1,6 +1,7 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { selectModal } from '@store/selectors/app';
 import { MODAL_SECTIONS } from '@constants/modals';
 import { CALENDAR_VIEWS, CALENDAR_SHORTCUTS } from '@constants/calendar';
 import { setView, setModal, toggleView, toggleTheme, toggleCollapsed } from '@store/actions/app';
@@ -9,7 +10,15 @@ const withShortcutsListener = (Component) => {
 	const WithShortcutsListener = ({ ...rest }) => {
 		const dispatch = useDispatch();
 
+		const modalSection = useSelector(selectModal);
+
 		const handleKeyPress = (event) => {
+			// Verify modals are closed.
+			if (modalSection !== MODAL_SECTIONS.CLOSED) {
+				return null;
+			}
+
+			// Get keyboard key pressed.
 			const actionKey = (event.key || '').toUpperCase();
 
 			switch (actionKey) {

@@ -48,6 +48,9 @@ export const toggleCollapsed = {
 	sidebar: () => ({
 		type: actionTypes.APP_COLLAPSED_SIDEBAR_TOGGLED,
 	}),
+	category: () => ({
+		type: actionTypes.APP_COLLAPSED_CATEGORY_TOGGLED,
+	}),
 }
 
 export const loadingApp = (loading = false) => (dispatch) => (

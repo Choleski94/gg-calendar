@@ -15,3 +15,5 @@ export const selectShortcut = createSelector([ appSelect ], (app) => app.shortcu
 export const selectAnimation = createSelector([ appSelect ], (app) => app.animation); 
 
 export const selectCollapsed = createSelector([ appSelect ], (app) => app.collapsed); 
+
+export const selectCategories = createSelector([ appSelect ], (app) => app.categories); 

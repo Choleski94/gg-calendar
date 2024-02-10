@@ -5,6 +5,7 @@ import { setModal } from '@store/actions/app';
 import { MODAL_SECTIONS } from '@constants/modals';
 import { selectCollapsed } from '@store/selectors/app';
 
+import Category from './Category';
 import { setSidebarClassName } from './Sidebar.controller';
 
 const Sidebar = () => {
@@ -204,42 +205,10 @@ const Sidebar = () => {
 						</aside>
 					</div>
 				</div>
+
 				{/* category modal */}
-				<div className="sb__categories">
-					<div
-						className="sb__categories--header"
-						style={{ backgroundColor: "var(--black1)" }}
-					>
-						<div className="sbch-col__one">
-							<div className="sbch-title">My Calendars</div>
-							<div className="sbch-caret sbch-caret--open">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									height={24}
-									width={24}
-									fill="var(--white2)"
-								>
-									<path d="m12 15.375-6-6 1.4-1.4 4.6 4.6 4.6-4.6 1.4 1.4Z" />
-								</svg>
-							</div>
-						</div>
-						<div className="sbch-plus">
-							<svg
-								xmlns="http://www.w3.sorg/2000/svg"
-								height={24}
-								width={24}
-								fill="var(--white2)"
-								style={{ pointerEvents: "none" }}
-							>
-								<path d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6Z" />
-							</svg>
-						</div>
-					</div>
-					<div className="sb__categories--body">
-						{/* renders via ./sidebarCategories.js */}
-						<div className="sb__categories--body-form" />
-					</div>
-				</div>
+				<Category />
+
 				{/* sidebar footer (github/personal links) */}
 				<div className="sb__info">
 					<div className="sb__info-links">

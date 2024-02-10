@@ -85,7 +85,15 @@ const Modal = () => {
 
 	if (modalSection === MODAL_SECTIONS.CREATE_EVENT) {
 		return (
-			<Create
+			<Create.Event
+				onClose={onClose}
+			/>
+		);
+	}
+
+	if (modalSection === MODAL_SECTIONS.CREATE_CATEGORY) {
+		return (
+			<Create.Category
 				onClose={onClose}
 			/>
 		);

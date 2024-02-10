@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Create = ({
+const CreateEvent = ({
 	onClose = () => null,
 }) => {
 	return (
@@ -192,4 +192,4 @@ const Create = ({
 	);
 }
 
-export default Create;
+export default CreateEvent;
