@@ -3,12 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { selectCollapsed, selectCategories } from '@store/selectors/app';
 
-export const setCategoryOptionBtnStyle = (color = '') => ({
-	backgroundColor: color,
-	border: `2px solid ${color}`,
-})
+import { setCategoryOptionBtnStyle } from './Category.controller';
 
-const CategoryOption = ({ id = '', text = '', color = '' }) => {
+const CategoryOption = ({ name = '', color = '' }) => {
 	const dispatch = useDispatch();
 
 	const categories = useSelector(selectCategories);
@@ -37,7 +34,7 @@ const CategoryOption = ({ id = '', text = '', color = '' }) => {
 					</button>
 				</div>
 				<span className="sbch-form--item__label">
-					{text}
+					{name}
 				</span>
 			</div>
 			<div className="sbch-form--item__col--actions">

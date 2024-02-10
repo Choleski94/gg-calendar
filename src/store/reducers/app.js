@@ -13,7 +13,11 @@ export const appState = {
 	modal: 'CLOSED',
 	animation: true,
 	categories: [
-		{ id: 'a', color: 'rgb(44, 82, 186)', text: 'default' },
+		{
+			name: 'default',
+			id: 'category_default', 
+			color: 'rgb(44, 82, 186)', 
+		},
 	],
 	collapsed: {
 		header: false,
@@ -62,6 +66,8 @@ const appReducer = (state = appState, action) => {
 			};
 		case actionTypes.APP_SHORTCUT_TOGGLED:
 			return { ...state, shortcut: !state.shortcut };
+		case actionTypes.APP_CATEGORY_UPDATED:
+			return { ...state, categories: action.categories };
 		case actionTypes.APP_ANIMATION_TOGGLED:
 			return { ...state, animation: !state.animation };
 		case actionTypes.APP_COLLAPSED_HEADER_TOGGLED:

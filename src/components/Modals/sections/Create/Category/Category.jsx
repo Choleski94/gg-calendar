@@ -1,6 +1,11 @@
+import _ from 'lodash';
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { MODAL_SECTIONS } from '@constants/modals';
 import { CATEGORY_COLORS } from '@constants/calendar';
+import { selectCategories } from '@store/selectors/app';
+import { setModal, setCategories } from '@store/actions/app';
 
 export const setActiveColorStyle = (color = '') => ({
 	background: color,
@@ -9,8 +14,25 @@ export const setActiveColorStyle = (color = '') => ({
 const CreateCategory = ({
 	onClose = () => null,
 }) => {
-	const [ error, setError ] = React.useState('');
+	const dispatch = useDispatch();
+
+	const categories = useSelector(selectCategories);
+
+	const [ hasError, setHasError ] = React.useState(false);
 	const [ data, setData ] = React.useState({ name: '', color: '#2C52BA' });
+
+	const onSubmit = (payload = []) => {
+		const clonedCategories = [ ...categories ];
+
+		clonedCategories.push({
+			...payload,
+			id: _.uniqueId('category_'), 
+		});
+
+		dispatch(setCategories(clonedCategories));
+
+		dispatch(setModal(MODAL_SECTIONS.CLOSED));
+	}
 
 	const validate = (payload = {}) => {
 		const errs = {};
@@ -23,28 +45,38 @@ const CreateCategory = ({
 	}
 
 	const handleChange = (e) => setData({
-		[e.target.name]: e.target.value
+		...data, [e.target.name]: e.target.value
 	});
 
 	const handleColor = (color) => setData({
 		...data, color,
 	});
 
+	const handleClearError = () => {
+		setHasError(false);
+	};
+
 	const handleSubmit = () => {
 		const errs = validate(data);
 
-		const hasError = Object.keys(errs || {}).length;
+		setHasError(
+			Boolean(
+				Object.keys(errs || {}).length
+			)
+		);
 
-		if (hasError) return null;
-
-		console.log('New category:::', data);
+		onSubmit(data);
 	}
 
 	return (
 		<>
 			<aside className="category__form" style={{ left: "211px", top: "314px" }}>
 				<div className="category__form--body">
-					<div className="ctg-input--err hide-ctg-err" />
+					{hasError ? (
+						<div className="ctg-input--err" onClick={handleClearError}>
+							Category name is required
+						</div>
+					) : null}
 					<input
 						placeholder="Create new category"
 						className="category__form-input"

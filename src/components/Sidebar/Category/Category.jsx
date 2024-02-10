@@ -6,11 +6,7 @@ import { setModal, toggleCollapsed } from '@store/actions/app';
 import { selectCollapsed, selectCategories } from '@store/selectors/app';
 
 import CategoryOption from './CategoryOption';
-
-export const setCategoryCaret = (isActive = false) => ([
-	'sbch-caret',
-	(isActive ? '' : 'sbch-caret--open'),
-].join(' ').trim())
+import { setCategoryCaret } from './Category.controller';
 
 const Category = () => {
 	const dispatch = useDispatch();
@@ -62,12 +58,10 @@ const Category = () => {
 			<div className="sb__categories--body">
 				<div className="sb__categories--body-form">
 					{!isCategoryCollapsed ? (
-						categories.map(({ id, text, color }) => (
+						categories.map(({ id, ...rest }) => (
 							<CategoryOption 
-								id={id}
 								key={id}
-								text={text}
-								color={color}
+								{...rest}
 							/>
 						))
 					) : null}

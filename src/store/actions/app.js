@@ -53,6 +53,11 @@ export const toggleCollapsed = {
 	}),
 }
 
+export const setCategories = (categories) => ({
+	type: actionTypes.APP_CATEGORY_UPDATED,
+	categories
+});
+
 export const loadingApp = (loading = false) => (dispatch) => (
 	dispatch(appLoading({ loading }))
 );
