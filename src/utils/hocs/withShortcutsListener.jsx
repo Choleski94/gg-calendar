@@ -50,6 +50,11 @@ const withShortcutsListener = (Component) => {
 				case 'A':
 					dispatch(setModal(MODAL_SECTIONS.SETTINGS));
 					break;
+				// Shortcuts shortcut.
+				case '?':
+				case '/':
+					dispatch(setModal(MODAL_SECTIONS.SHORTCUTS));
+					break;
 				case CALENDAR_SHORTCUTS.ESCAPE:
 					break;
 			}
