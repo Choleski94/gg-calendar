@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { THEME_KEYS } from '@constants/themes';
+import { THEMES } from '@constants/themes';
 import { MODAL_SECTIONS } from '@constants/modals';
 import { selectTheme, selectShortcut, selectAnimation } from '@store/selectors/app';
-import { toggleTheme, toggleModal, toggleShortcut, toggleAnimation } from '@store/actions/app';
+import { setTheme, setModal, toggleShortcut, toggleAnimation } from '@store/actions/app';
 
 import { 
 	setShortcutFill, 
@@ -22,7 +22,7 @@ const Settings = ({
 	const hasAnimation = useSelector(selectAnimation);
 
 	const onShortcutsClick = () => {
-		dispatch(toggleModal(MODAL_SECTIONS.SHORTCUTS));
+		dispatch(setModal(MODAL_SECTIONS.SHORTCUTS));
 	}
 
 	const onKeyboardToggle = () => {
@@ -34,7 +34,7 @@ const Settings = ({
 	}
 
 	const handleThemeClick = (currentTheme) => {
-		dispatch(toggleTheme(currentTheme));
+		dispatch(setTheme(currentTheme));
 	}
 
 	return (
@@ -160,10 +160,10 @@ const Settings = ({
 								light, dark, and high contrast themes.
 							</div>
 							<div className="sub-menu--item__actions theme-actions">
-								<div className="theme-option theme-option-dark" onClick={() => handleThemeClick(THEME_KEYS.DARK)}>
+								<div className="theme-option theme-option-dark" onClick={() => handleThemeClick(THEMES.DARK)}>
 									<input
-										checked={activeTheme === THEME_KEYS.DARK}
-										defaultValue={THEME_KEYS.DARK}
+										checked={activeTheme === THEMES.DARK}
+										defaultValue={THEMES.DARK}
 										className="theme-radio__input"
 										name="themeoption"
 										type="radio"
@@ -173,10 +173,10 @@ const Settings = ({
 										Dark
 									</span>
 								</div>
-								<div className="theme-option theme-option-light" onClick={() => handleThemeClick(THEME_KEYS.LIGHT)}>
+								<div className="theme-option theme-option-light" onClick={() => handleThemeClick(THEMES.LIGHT)}>
 									<input
-										checked={activeTheme === THEME_KEYS.LIGHT}
-										defaultValue={THEME_KEYS.LIGHT}
+										checked={activeTheme === THEMES.LIGHT}
+										defaultValue={THEMES.LIGHT}
 										className="theme-radio__input"
 										name="themeoption"
 										type="radio"
@@ -186,10 +186,10 @@ const Settings = ({
 										Light
 									</span>
 								</div>
-								<div className="theme-option theme-option-contrast" onClick={() => handleThemeClick(THEME_KEYS.CONTRAST)}>
+								<div className="theme-option theme-option-contrast" onClick={() => handleThemeClick(THEMES.CONTRAST)}>
 									<input
-										checked={activeTheme === THEME_KEYS.CONTRAST}
-										defaultValue={THEME_KEYS.CONTRAST}
+										checked={activeTheme === THEMES.CONTRAST}
+										defaultValue={THEMES.CONTRAST}
 										className="theme-radio__input"
 										name="themeoption"
 										type="radio"

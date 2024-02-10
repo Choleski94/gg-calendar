@@ -1,8 +1,10 @@
-export const THEME_KEYS = {
+export const THEMES = {
 	DARK: 'DARK',
 	LIGHT: 'LIGHT',
 	CONTRAST: 'CONTRAST',
 }
+
+export const THEME_KEYS = Object.keys(THEMES || {});
 
 export const THEME_CLASSNAMES = {
 	DARK: 'body',
@@ -11,6 +13,7 @@ export const THEME_CLASSNAMES = {
 }
 
 export default {
+	THEMES,
 	THEME_KEYS,
 	THEME_CLASSNAMES,
 }

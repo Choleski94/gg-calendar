@@ -8,14 +8,22 @@ export const appLoading = app => ({
 	app
 });
 
-export const toggleView = (view) => ({
+export const setView = (view) => ({
 	type: actionTypes.APP_VIEW_UPDATED,
 	view
 });
 
-export const toggleTheme = (theme) => ({
+export const toggleView = () => ({
+	type: actionTypes.APP_VIEW_TOGGLED,
+});
+
+export const setTheme = (theme) => ({
 	type: actionTypes.APP_THEME_UPDATED,
 	theme
+});
+
+export const toggleTheme = () => ({
+	type: actionTypes.APP_THEME_TOGGLED,
 });
 
 export const toggleShortcut = (shortcut) => ({
@@ -28,19 +36,17 @@ export const toggleAnimation = (animation) => ({
 	animation
 });
 
-export const toggleModal = (modal) => ({
+export const setModal = (modal) => ({
 	type: actionTypes.APP_MODAL_UPDATED,
 	modal
 });
 
 export const toggleCollapsed = {
-	header: (header) => ({
+	header: () => ({
 		type: actionTypes.APP_COLLAPSED_HEADER_TOGGLED,
-		header
 	}),
-	sidebar: (sidebar) => ({
+	sidebar: () => ({
 		type: actionTypes.APP_COLLAPSED_SIDEBAR_TOGGLED,
-		sidebar
 	}),
 }
 

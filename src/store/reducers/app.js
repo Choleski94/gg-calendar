@@ -1,5 +1,10 @@
 import * as actionTypes from '../types';
 
+import { toggleStringArray } from '@utils';
+import { THEME_KEYS } from '@constants/themes';
+import { MODAL_SECTIONS } from '@constants/modals';
+import { BASE_CALENDAR_KEYS } from '@constants/calendar';
+
 export const appState = {
 	view: 'WEEK',
 	theme: 'LIGHT',
@@ -20,11 +25,25 @@ const appReducer = (state = appState, action) => {
 		case actionTypes.APP_THEME_UPDATED:
 			if (state.theme === action.theme) return;
 			return { ...state, theme: action.theme };
+		case actionTypes.APP_THEME_TOGGLED:
+			return {
+				...state, 
+				theme: toggleStringArray(state.theme, THEME_KEYS)
+			};
 		case actionTypes.APP_VIEW_UPDATED:
 			if (state.view === action.view) return;
 			return { ...state, view: action.view };
+		case actionTypes.APP_VIEW_TOGGLED:
+			return {
+				...state, 
+				view: toggleStringArray(state.view, BASE_CALENDAR_KEYS)
+			};
 		case actionTypes.APP_MODAL_UPDATED:
-			return { ...state, modal: action.modal };
+			if (state.modal === action.modal) {
+				return { ...state, modal: MODAL_SECTIONS.CLOSED };
+			} else {
+				return { ...state, modal: action.modal };
+			}
 		case actionTypes.APP_SHORTCUT_TOGGLED:
 			return { ...state, shortcut: !state.shortcut };
 		case actionTypes.APP_ANIMATION_TOGGLED:

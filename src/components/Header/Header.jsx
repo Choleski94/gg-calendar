@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { MODAL_SECTIONS } from '@constants/modals';
-import { toggleModal, toggleCollapsed } from '@store/actions/app';
+import { setModal, toggleCollapsed } from '@store/actions/app';
 import { selectView, selectCollapsed } from '@store/selectors/app';
 
 import SelectView from './SelectView';
@@ -18,15 +18,15 @@ const Header = () => {
 	}
 
 	const onSearchClick = () => {
-		dispatch(toggleModal(MODAL_SECTIONS.SEARCH));
+		dispatch(setModal(MODAL_SECTIONS.SEARCH));
 	}
 
 	const onSettingClick = () => {
-		dispatch(toggleModal(MODAL_SECTIONS.SETTINGS));
+		dispatch(setModal(MODAL_SECTIONS.SETTINGS));
 	}
 
 	const onCreateClick = () => {
-		dispatch(toggleModal(MODAL_SECTIONS.CREATE_EVENT));
+		dispatch(setModal(MODAL_SECTIONS.CREATE_EVENT));
 	}
 
 	return (

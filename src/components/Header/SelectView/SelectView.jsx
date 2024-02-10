@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { toggleView } from '@store/actions/app';
+import { setView } from '@store/actions/app';
 import { selectView } from '@store/selectors/app';
 import { CALENDAR_VIEW_OPTIONS } from '@constants/calendar';
 
@@ -29,7 +29,7 @@ const SelectView = () => {
 
 	const onViewOptionClick = (e, viewSlug) => {
 		if (calendarView !== viewSlug) {
-			dispatch(toggleView(viewSlug));
+			dispatch(setView(viewSlug));
 			setShowDropdown(false); 	// Close after selection
 		}
 	}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { toggleView } from '@store/actions/app';
+import { MODAL_SECTIONS } from '@constants/modals';
 import { CALENDAR_VIEWS, CALENDAR_SHORTCUTS } from '@constants/calendar';
+import { setView, setModal, toggleView, toggleTheme, toggleCollapsed } from '@store/actions/app';
 
 const withShortcutsListener = (Component) => {
 	const WithShortcutsListener = ({ ...rest }) => {
@@ -12,20 +13,42 @@ const withShortcutsListener = (Component) => {
 			const actionKey = (event.key || '').toUpperCase();
 
 			switch (actionKey) {
+				// Theme shortcuts.
+				case '0':
+					dispatch(toggleTheme());
+					break;
+				//  Views shortcuts.
+				case '1':
 				case CALENDAR_SHORTCUTS.D:
-					dispatch(toggleView(CALENDAR_VIEWS.DAY));
+					dispatch(setView(CALENDAR_VIEWS.DAY));
 					break;
+				case '2':
 				case CALENDAR_SHORTCUTS.W:
-					dispatch(toggleView(CALENDAR_VIEWS.WEEK));
+					dispatch(setView(CALENDAR_VIEWS.WEEK));
 					break;
+				case '3':
 				case CALENDAR_SHORTCUTS.M:
-					dispatch(toggleView(CALENDAR_VIEWS.MONTH));
+					dispatch(setView(CALENDAR_VIEWS.MONTH));
 					break;
+				case '4':
 				case CALENDAR_SHORTCUTS.Y:
-					dispatch(toggleView(CALENDAR_VIEWS.YEAR));
+					dispatch(setView(CALENDAR_VIEWS.YEAR));
 					break;
+				case '5':
 				case CALENDAR_SHORTCUTS.L:
-					dispatch(toggleView(CALENDAR_VIEWS.LIST));
+					dispatch(setView(CALENDAR_VIEWS.LIST));
+					break;
+				// View shortcut.
+				case 'V':
+					dispatch(toggleView());
+					break;
+				// Sidebar shortcut.
+				case 'S':
+					dispatch(toggleCollapsed.sidebar());
+					break;
+				// Settings shortcut.
+				case 'A':
+					dispatch(setModal(MODAL_SECTIONS.SETTINGS));
 					break;
 				case CALENDAR_SHORTCUTS.ESCAPE:
 					break;

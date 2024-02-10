@@ -3,7 +3,11 @@ export const APP_LOADING = 'APP_LOADING';
 
 export const APP_VIEW_UPDATED = 'APP_VIEW_UPDATED';
 
+export const APP_VIEW_TOGGLED = 'APP_VIEW_TOGGLED';
+
 export const APP_THEME_UPDATED = 'APP_THEME_UPDATED';
+
+export const APP_THEME_TOGGLED = 'APP_THEME_TOGGLED';
 
 export const APP_MODAL_UPDATED = 'APP_MODAL_UPDATED';
 

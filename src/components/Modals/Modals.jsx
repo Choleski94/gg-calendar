@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { toggleModal } from '@store/actions/app';
+import { setModal } from '@store/actions/app';
 import { selectModal } from '@store/selectors/app';
 import { MODAL_SECTIONS } from '@constants/modals';
 
@@ -18,7 +18,7 @@ const Modal = () => {
 	const modalRef = React.useRef(null);
 
 	const onClose = () => {
-		dispatch(toggleModal(MODAL_SECTIONS.CLOSED));
+		dispatch(setModal(MODAL_SECTIONS.CLOSED));
 	}
 
 	React.useEffect(() => {

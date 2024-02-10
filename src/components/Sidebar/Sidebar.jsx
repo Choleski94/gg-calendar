@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { toggleModal } from '@store/actions/app';
+import { setModal } from '@store/actions/app';
 import { MODAL_SECTIONS } from '@constants/modals';
 import { selectCollapsed } from '@store/selectors/app';
 
@@ -13,11 +13,11 @@ const Sidebar = () => {
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
 
 	const onSettingClick = () => {
-		dispatch(toggleModal(MODAL_SECTIONS.SETTINGS));
+		dispatch(setModal(MODAL_SECTIONS.SETTINGS));
 	}
 
 	const onCreateClick = () => {
-		dispatch(toggleModal(MODAL_SECTIONS.CREATE_EVENT));
+		dispatch(setModal(MODAL_SECTIONS.CREATE_EVENT));
 	}
 
 	return (

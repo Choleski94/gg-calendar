@@ -7,14 +7,17 @@ export const CALENDAR_SHORTCUTS = {
 	ESCAPE: 'ESCAPE',
 }
 
-export const CALENDAR_VIEWS = {
+export const BASE_CALENDAR_VIEWS = {
 	DAY: 'DAY',
 	WEEK: 'WEEK',
 	MONTH: 'MONTH',
 	YEAR: 'YEAR',
 	LIST: 'LIST',
-	ESCAPE: 'ESCAPE',
 }
+
+export const BASE_CALENDAR_KEYS = Object.keys(BASE_CALENDAR_VIEWS || {});
+
+export const CALENDAR_VIEWS = { ...BASE_CALENDAR_VIEWS, ESCAPE: 'ESCAPE' }
 
 export const CALENDAR_VIEW_OPTIONS = [
 	{
@@ -47,5 +50,7 @@ export const CALENDAR_VIEW_OPTIONS = [
 export default {
 	CALENDAR_VIEWS,
 	CALENDAR_SHORTCUTS,
+	BASE_CALENDAR_KEYS,
+	BASE_CALENDAR_VIEWS,
 	CALENDAR_VIEW_OPTIONS,
 }
