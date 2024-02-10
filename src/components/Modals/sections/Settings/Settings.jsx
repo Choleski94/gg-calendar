@@ -2,23 +2,15 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { THEME_KEYS } from '@constants/themes';
-import { toggleTheme, toggleShortcut, toggleAnimation } from '@store/actions/app';
+import { MODAL_SECTIONS } from '@constants/modals';
 import { selectTheme, selectShortcut, selectAnimation } from '@store/selectors/app';
+import { toggleTheme, toggleModal, toggleShortcut, toggleAnimation } from '@store/actions/app';
 
-export const setShortcutFill = (isActive = false) => (
-	isActive ? 'var(--primary1)' : 'var(--red1)'
-);
-
-export const setAnimationDataTooltip = (isActive = false) => ([
-	'Animations',
-	(isActive ? 'Enabled' : 'Disabled'),
-].join(' '));
-
-export const setShortcutDataTooltip = (isActive = false) => ([
-	'Keyboard',
-	'shortcuts',
-	(isActive ? 'enabled' : 'disabled'),
-].join(' '));
+import { 
+	setShortcutFill, 
+	setShortcutDataTooltip, 
+	setAnimationDataTooltip,
+} from './Settings.controller';
 
 const Settings = ({
 	onClose = () => null,
@@ -28,6 +20,10 @@ const Settings = ({
 	const activeTheme = useSelector(selectTheme);
 	const hasShortcut = useSelector(selectShortcut);
 	const hasAnimation = useSelector(selectAnimation);
+
+	const onShortcutsClick = () => {
+		dispatch(toggleModal(MODAL_SECTIONS.SHORTCUTS));
+	}
 
 	const onKeyboardToggle = () => {
 		dispatch(toggleShortcut());
@@ -215,13 +211,15 @@ const Settings = ({
 								<span>("Escape" key actions will always be enabled.)</span>
 							</div>
 							<div className="smia-shortcuts">
-								<div className="toggle-kb-shortcuts-btn__smia">
-									<span>Open Shortcuts Menu </span>
+								<div className="toggle-kb-shortcuts-btn__smia" onClick={onShortcutsClick}>
+									<span>
+										Open Shortcuts Menu
+									</span>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
+										fill="var(--white2)"
 										height={24}
 										width={24}
-										fill="var(--white2)"
 									>
 										<path d="M4 19q-.825 0-1.412-.587Q2 17.825 2 17V7q0-.825.588-1.412Q3.175 5 4 5h16q.825 0 1.413.588Q22 6.175 22 7v10q0 .825-.587 1.413Q20.825 19 20 19Zm0-2h16V7H4v10Zm4-1h8v-2H8Zm-3-3h2v-2H5Zm3 0h2v-2H8Zm3 0h2v-2h-2Zm3 0h2v-2h-2Zm3 0h2v-2h-2ZM5 10h2V8H5Zm3 0h2V8H8Zm3 0h2V8h-2Zm3 0h2V8h-2Zm3 0h2V8h-2ZM4 17V7v10Z" />
 									</svg>
