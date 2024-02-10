@@ -8,6 +8,7 @@ import { MODAL_SECTIONS } from '@constants/modals';
 import Create from './sections/Create';
 import Search from './sections/Search';
 import Settings from './sections/Settings';
+import Shortcuts from './sections/Shortcuts';
 
 const Modal = () => {
 	const dispatch = useDispatch();
@@ -66,9 +67,17 @@ const Modal = () => {
 		);
 	}
 
-	if (modalSection === MODAL_SECTIONS.SETTING) {
+	if (modalSection === MODAL_SECTIONS.SETTINGS) {
 		return (
-			<Settings 
+			<Settings
+				onClose={onClose}
+			/>
+		);
+	}
+
+	if (modalSection === MODAL_SECTIONS.SHORTCUTS) {
+		return (
+			<Shortcuts
 				onClose={onClose}
 			/>
 		);
