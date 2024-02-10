@@ -12,7 +12,7 @@ const withShortcutsListener = (Component) => {
 
 		const modalSection = useSelector(selectModal);
 
-		const handleKeyPress = (event) => {
+		const handleKeyPress = React.useCallback((event) => {
 			// Verify modals are closed.
 			if (modalSection !== MODAL_SECTIONS.CLOSED) {
 				return null;
@@ -67,7 +67,7 @@ const withShortcutsListener = (Component) => {
 				case CALENDAR_SHORTCUTS.ESCAPE:
 					break;
 			}
-		};
+		}, [ modalSection ]);
 
 		React.useEffect(() => {
 			document.addEventListener('keydown', handleKeyPress);
@@ -75,7 +75,7 @@ const withShortcutsListener = (Component) => {
 			return () => {
 				document.removeEventListener('keydown', handleKeyPress);
 			};
-		}, []);
+		}, [ handleKeyPress ]);
 
 		return (
 			<Component {...rest} />

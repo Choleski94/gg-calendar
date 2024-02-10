@@ -9,15 +9,36 @@ export const setActiveColorStyle = (color = '') => ({
 const CreateCategory = ({
 	onClose = () => null,
 }) => {
-	const [ name, setName ] = React.useState('');
 	const [ error, setError ] = React.useState('');
-	const [ activeColor, setActiveColor ] = React.useState('#2C52BA');
+	const [ data, setData ] = React.useState({ name: '', color: '#2C52BA' });
 
-	const handleChange = (e) => {
-		setName(e.target.value)
+	const validate = (payload = {}) => {
+		const errs = {};
+
+		if (!payload?.name || !payload?.name.length) {
+			errs.name = 'Category name is required';
+		}
+
+		return errs;
 	}
 
-	// Category name is required
+	const handleChange = (e) => setData({
+		[e.target.name]: e.target.value
+	});
+
+	const handleColor = (color) => setData({
+		...data, color,
+	});
+
+	const handleSubmit = () => {
+		const errs = validate(data);
+
+		const hasError = Object.keys(errs || {}).length;
+
+		if (hasError) return null;
+
+		console.log('New category:::', data);
+	}
 
 	return (
 		<>
@@ -28,17 +49,18 @@ const CreateCategory = ({
 						placeholder="Create new category"
 						className="category__form-input"
 						onChange={handleChange}
+						value={data?.name}
 						maxLength={20}
 						minLength={1}
-						value={name}
 						type="text"
+						name="name"
 						required
 					/>
 					<div className="color__picker">
 						<div className="color-picker__header">
 							<div
 								className="color-picker__title"
-								style={setActiveColorStyle(activeColor)}
+								style={setActiveColorStyle(data?.color)}
 							>
 								color
 							</div>
@@ -50,9 +72,9 @@ const CreateCategory = ({
 									data-color-hex={hexColor}
 									className="color-picker--option"
 									style={{ backgroundColor: hexColor }}
-									onClick={() => setActiveColor(hexColor)}
+									onClick={() => handleColor(hexColor)}
 								>
-									{(hexColor === activeColor) ? (
+									{(hexColor === data?.color) ? (
 										<svg
 											width="18px"
 											height="18px"
@@ -76,11 +98,13 @@ const CreateCategory = ({
 						role="button"
 					>
 						Cancel
-					</button>{" "}
+					</button>
+					{" "}
 					<button
 						className="btn-root category__form--submit"
-						role="button"
+						onClick={handleSubmit}
 						aria-label="button"
+						role="button"
 					>
 						Save
 					</button>

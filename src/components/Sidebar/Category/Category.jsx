@@ -49,8 +49,8 @@ const Category = () => {
 				</div>
 				<div className="sbch-plus" onClick={toggleCreateCategory}>
 					<svg
-						style={{ pointerEvents: "none" }}
 						xmlns="http://www.w3.sorg/2000/svg"
+						style={{ pointerEvents: "none" }}
 						fill="var(--white2)"
 						height={24}
 						width={24}

@@ -12,6 +12,7 @@ const CategoryOption = ({ id = '', text = '', color = '' }) => {
 	const dispatch = useDispatch();
 
 	const categories = useSelector(selectCategories);
+
 	const { category: isCategoryCollapsed } = useSelector(selectCollapsed);
 
 	return (
