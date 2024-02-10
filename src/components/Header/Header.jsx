@@ -22,7 +22,7 @@ const Header = () => {
 	}
 
 	const onSettingClick = () => {
-		dispatch(toggleModal(MODAL_SECTIONS.SETTING));
+		dispatch(toggleModal(MODAL_SECTIONS.SETTINGS));
 	}
 
 	const onCreateClick = () => {
