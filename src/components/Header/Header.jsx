@@ -37,7 +37,7 @@ const Header = ({
 	const todayString = React.useMemo(() => {
 		const tmpDate = new Date();
 		return ([
-			CALENDAR_LABELS.WEEK[tmpDate.getDay()],
+			CALENDAR_LABELS.WEEK.LONG[tmpDate.getDay()],
 			', ',
 			CALENDAR_LABELS.MONTH.LONG[tmpDate.getMonth()],
 			' ',
