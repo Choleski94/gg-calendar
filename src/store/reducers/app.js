@@ -16,9 +16,75 @@ export const appState = {
 		{
 			checked: true,
 			name: 'default',
-			id: 'category_0', 
-			color: 'rgb(44, 82, 186)', 
+			id: 'category_0',
+			color: 'rgb(44, 82, 186)'
 		},
+		{
+			name: 'F - Ali.',
+			color: '#DF2A79',
+			checked: true,
+			id: 'category_1'
+		},
+		{
+			name: 'F - Loic.',
+			color: '#2C52BA',
+			checked: true,
+			id: 'category_2'
+		},
+		{
+			name: 'I - Aaron.',
+			color: '#73113C',
+			checked: true,
+			id: 'category_3'
+		},
+		{
+			name: 'O - Julian.',
+			color: '#C20000',
+			checked: true,
+			id: 'category_4'
+		},
+		{
+			name: 'O - Peter.',
+			color: '#2C52BA',
+			checked: true,
+			id: 'category_5'
+		},
+		{
+			name: 'T1 - Marek',
+			color: '#E84334',
+			checked: true,
+			id: 'category_6'
+		},
+		{
+			name: 'T1 - Mike.',
+			color: '#2C52BA',
+			checked: true,
+			id: 'category_7'
+		},
+		{
+			name: 'T1 - Billy.',
+			color: '#167671',
+			checked: true,
+			id: 'category_8'
+		},
+		{
+			name: 'T2 - Matthew.',
+			color: '#604793',
+			checked: true,
+			id: 'category_9'
+		},
+		{
+			name: 'T3 - Duncan.',
+			color: '#2C52BA',
+			checked: true,
+			id: 'category_10'
+		},
+		{
+			name: 'T3 - Eric.',
+			color: '#516C7B',
+			checked: true,
+			id: 'category_11'
+		}
 	],
 	collapsed: {
 		header: false,

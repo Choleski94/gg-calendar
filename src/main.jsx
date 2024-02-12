@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 
 import App from '@app';
@@ -77,12 +76,10 @@ const root = document.getElementById('root');
 
 if (root) {
 	ReactDOM.createRoot(root).render(
-		<BrowserRouter>
-			<Provider store={store}>
-				<Suspense fallback={() => <h1>Loader</h1>}>
-					<App />
-				</Suspense>
-			</Provider>
-		</BrowserRouter>
+		<Provider store={store}>
+			<Suspense fallback={() => <h1>Loader</h1>}>
+				<App />
+			</Suspense>
+		</Provider>
 	);
 }
