@@ -15,6 +15,10 @@ export const BASE_CALENDAR_VIEWS = {
 	LIST: 'LIST',
 }
 
+export const WEEK_START = 1; 	// 0
+
+export const WEEK_END = 8; 	// 7
+
 export const BASE_CALENDAR_KEYS = Object.keys(BASE_CALENDAR_VIEWS || {});
 
 export const CALENDAR_VIEWS = { ...BASE_CALENDAR_VIEWS, ESCAPE: 'ESCAPE' }
@@ -112,15 +116,21 @@ export const CALENDAR_MONTH_LABELS = {
 	SHORT: CALENDAR_MONTH_LONG_ABELS.map((month) => month.substring(0, 3)),
 };
 
-export const CALENDAR_WEEK_LABELS = [
-	'Sunday',
+// ⚠️  NOTE: Adjust `CALENDAR_WEEK_LABELS` respect to `WEEK_START` value.
+const CALENDAR_WEEK_LONG_LABELS = [
 	'Monday',
 	'Tuesday',
 	'Wednesday',
 	'Thursday',
 	'Friday',
-	'Saturday'
+	'Saturday',
+	'Sunday',
 ];
+
+export const CALENDAR_WEEK_LABELS = {
+	LONG: CALENDAR_WEEK_LONG_LABELS,
+	SHORT: CALENDAR_WEEK_LONG_LABELS.map((week) => week.substring(0, 3)),
+};
 
 export const CALENDAR_LABELS = {
 	MONTH: CALENDAR_MONTH_LABELS,
@@ -128,6 +138,8 @@ export const CALENDAR_LABELS = {
 }
 
 export default {
+	WEEK_END,
+	WEEK_START,
 	CALENDAR_VIEWS,
 	CATEGORY_COLORS,
 	CALENDAR_LABELS,

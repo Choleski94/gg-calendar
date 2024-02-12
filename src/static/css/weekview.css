@@ -40,6 +40,7 @@
 
 .weekview--header-day__title {
 	text-align: center;
+	text-transform: uppercase;
 	font-weight: 400;
 	user-select: none;
 	pointer-events: none;
