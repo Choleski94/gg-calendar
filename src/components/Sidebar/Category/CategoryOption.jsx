@@ -1,7 +1,4 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { selectCollapsed, selectCategories } from '@store/selectors/app';
 
 import {
 	setCategoryOptionFill, 
@@ -9,16 +6,26 @@ import {
 	setCategoryOptionBtnStyle, 
 } from './Category.controller';
 
-const CategoryOption = ({ id = '', name = '', color = '', checked = false, onClick = () => null }) => {
-	const dispatch = useDispatch();
+const CategoryOption = ({
+	id = '', 
+	name = '', 
+	color = '', 
+	checked = false, 
+	showDelete = false,
+	onClick = () => null, 
+	onDeleteClick = () => null,
+}) => {
+	const handleClick = (e) => {
+		// onClick(id);
+	}
 
-	const categories = useSelector(selectCategories);
-
-	const { category: isCategoryCollapsed } = useSelector(selectCollapsed);
+	const handleDeleteClick = (e) => {
+		// onDeleteClick(id);
+	}
 
 	return (
 		<div className="sbch-form--item">
-			<div className="sbch-form--item__col" onClick={() => onClick(id)}>
+			<div className="sbch-form--item__col" onClick={handleClick}>
 				<div className="sbch-form--item__checkbox--wrapper">
 					<button
 						data-sbch-category={name}
@@ -42,6 +49,18 @@ const CategoryOption = ({ id = '', name = '', color = '', checked = false, onCli
 				</span>
 			</div>
 			<div className="sbch-form--item__col--actions">
+				{showDelete ? (
+					<button
+						data-sbch-color={color}
+						data-sbch-category={name}
+						onClick={handleDeleteClick}
+						className="sbch-col--actions__delete-icon"
+					>
+						<svg height={20} width={20} fill="var(--white2)">
+							<path d="M6.062 15 5 13.938 8.938 10 5 6.062 6.062 5 10 8.938 13.938 5 15 6.062 11.062 10 15 13.938 13.938 15 10 11.062Z" />
+						</svg>
+					</button>
+				) : null}
 				<button
 					data-sbch-color={color}
 					data-sbch-category={name}

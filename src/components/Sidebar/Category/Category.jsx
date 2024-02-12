@@ -72,8 +72,10 @@ const Category = () => {
 			<div className="sb__categories--body">
 				<div className="sb__categories--body-form">
 					{!isCategoryCollapsed ? (
-						categories.map(({ id, ...rest }) => (
+						categories.map(({ id, ...rest }, categoryIdx) => (
 							<CategoryOption 
+								onDeleteClick={onCategoryClick}
+								showDelete={categoryIdx != 0}
 								onClick={onCategoryClick}
 								key={id} id={id}
 								{...rest }
