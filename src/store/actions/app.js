@@ -70,23 +70,23 @@ export const loadingApp = (loading = false) => (dispatch) => (
 // 
 export const setDay = (day) => ({
 	type: actionTypes.APP_SELECTED_DAY_UPDATED,
-	day,
+	day: String(day),
 });
 
 export const setMonth = (month) => ({
 	type: actionTypes.APP_SELECTED_MONTH_UPDATED,
-	month,
+	month: String(month),
 });
 
 export const setYear = (year) => ({
 	type: actionTypes.APP_SELECTED_YEAR_UPDATED,
-	year,
+	year: String(year),
 });
 
-export const setDate = (year, month, day) => {
-	setYear(year);
-	setMonth(month);
-	setDay(day);
+export const setDate = (year, month, day) => (dispatch) => {
+	dispatch(setYear(year));
+	dispatch(setMonth(month));
+	dispatch(setDay(day));
 }
 
 // export const setDateSelected = (date) => ({

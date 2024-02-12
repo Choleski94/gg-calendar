@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { MODAL_SECTIONS } from '@constants/modals';
-import { setModal, toggleCollapsed } from '@store/actions/app';
 import { selectView, selectCollapsed } from '@store/selectors/app';
+import { setDate, setModal, toggleCollapsed } from '@store/actions/app';
 import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
 
 import SelectView from './SelectView';
@@ -20,6 +20,18 @@ const Header = ({
 
 	const toggleSidebar = () => {
 		dispatch(toggleCollapsed.sidebar());
+	}
+
+	const onTodayClick = () => {
+		// TOOD: take into coi
+		if (calendarView !== BASE_CALENDAR_VIEWS.LIST) {
+			const todayDate = new Date();
+			dispatch(setDate(
+				todayDate.getFullYear(),
+				todayDate.getMonth(),
+				todayDate.getDate(),
+			))
+		}
 	}
 
 	const onSearchClick = () => {
@@ -153,6 +165,7 @@ const Header = ({
 						className="btn-root btn-today"
 						style={{ cursor: "pointer" }}
 						data-tooltip={todayString}
+						onClick={onTodayClick}
 						aria-label="button"
 						role="button"
 					>

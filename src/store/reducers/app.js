@@ -15,7 +15,7 @@ export const appState = {
 	selected: {
 		year: "2024",
 		month: "1",
-		day: "12",
+		day: "2",
 	},
 	categories: [
 		{
@@ -176,6 +176,36 @@ const appReducer = (state = appState, action) => {
 				collapsed: {
 					...state.collapsed, 
 					category: !state.collapsed.category,
+				}
+			};
+		// Calendar
+		case actionTypes.APP_SELECTED_DAY_UPDATED:
+			// if (state.modal !== MODAL_SECTIONS.CLOSED) return state
+
+			return {
+				...state, 
+				selected: {
+					...state.selected, 
+					day: action.day,
+				}
+			};
+		case actionTypes.APP_SELECTED_MONTH_UPDATED:
+			// if (state.modal !== MODAL_SECTIONS.CLOSED) return state
+
+			return {
+				...state, 
+				selected: {
+					...state.selected, 
+					month: action.month,
+				}
+			};
+		case actionTypes.APP_SELECTED_YEAR_UPDATED:
+			// if (state.modal !== MODAL_SECTIONS.CLOSED) return state
+			return {
+				...state, 
+				selected: {
+					...state.selected, 
+					year: action.year,
 				}
 			};
 		default:
