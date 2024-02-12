@@ -54,8 +54,13 @@ export const toggleCollapsed = {
 }
 
 export const setCategories = (categories) => ({
-	type: actionTypes.APP_CATEGORY_UPDATED,
+	type: actionTypes.APP_CATEGORY_INSERTED,
 	categories
+});
+
+export const updateCategories = (index, value) => ({
+	type: actionTypes.APP_CATEGORY_UPDATED,
+	index, value
 });
 
 export const loadingApp = (loading = false) => (dispatch) => (

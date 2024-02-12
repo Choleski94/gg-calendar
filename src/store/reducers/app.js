@@ -14,8 +14,9 @@ export const appState = {
 	animation: true,
 	categories: [
 		{
+			checked: true,
 			name: 'default',
-			id: 'category_default', 
+			id: 'category_0', 
 			color: 'rgb(44, 82, 186)', 
 		},
 	],
@@ -66,8 +67,14 @@ const appReducer = (state = appState, action) => {
 			};
 		case actionTypes.APP_SHORTCUT_TOGGLED:
 			return { ...state, shortcut: !state.shortcut };
-		case actionTypes.APP_CATEGORY_UPDATED:
+		case actionTypes.APP_CATEGORY_INSERTED:
 			return { ...state, categories: action.categories };
+		case actionTypes.APP_CATEGORY_UPDATED:
+			const categories = [ ...state.categories ];
+
+			categories[action.index] = action.value;
+
+			return { ...state, categories };
 		case actionTypes.APP_ANIMATION_TOGGLED:
 			return { ...state, animation: !state.animation };
 		case actionTypes.APP_COLLAPSED_HEADER_TOGGLED:

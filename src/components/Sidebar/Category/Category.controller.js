@@ -3,7 +3,18 @@ export const setCategoryCaret = (isActive = false) => ([
 	(isActive ? '' : 'sbch-caret--open'),
 ].join(' ').trim());
 
-export const setCategoryOptionBtnStyle = (color = '') => ({
-	backgroundColor: color,
-	border: `2px solid ${color}`,
-});
+export const setCategoryOptionFill = (isChecked = false) => (
+	isChecked ? 'var(--taskcolor0)' : 'none'
+);
+
+export const setCategoryOptionChecked = (isChecked) => String(isChecked);
+
+export const setCategoryOptionBtnStyle = (color = '', isChecked = false) => (
+	isChecked ? ({
+		backgroundColor: color,
+		border: `2px solid ${color}`,
+	}) : ({
+		backgroundColor: 'var(--black1)',
+		border: `2px solid ${color}`,
+	})
+);

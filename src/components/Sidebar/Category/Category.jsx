@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { MODAL_SECTIONS } from '@constants/modals';
-import { setModal, toggleCollapsed } from '@store/actions/app';
 import { selectCollapsed, selectCategories } from '@store/selectors/app';
+import { setModal, toggleCollapsed, setCategories, updateCategories } from '@store/actions/app';
 
 import CategoryOption from './CategoryOption';
 import { setCategoryCaret } from './Category.controller';
@@ -20,6 +20,20 @@ const Category = () => {
 
 	const toggleCreateCategory = () => {
 		dispatch(setModal(MODAL_SECTIONS.CREATE_CATEGORY));
+	}
+
+	const onCategoryClick = (categoryId) => {
+		const clonedCategories = [ ...categories ];
+
+		const activeIndex = clonedCategories.findIndex(({ id }) => (
+			id === categoryId
+		));
+
+		const activeCategory = { ...clonedCategories[activeIndex] };
+
+		activeCategory.checked = !activeCategory.checked;
+
+		dispatch(updateCategories(activeIndex, activeCategory));
 	}
 
 	return (
@@ -60,8 +74,9 @@ const Category = () => {
 					{!isCategoryCollapsed ? (
 						categories.map(({ id, ...rest }) => (
 							<CategoryOption 
-								key={id}
-								{...rest}
+								onClick={onCategoryClick}
+								key={id} id={id}
+								{...rest }
 							/>
 						))
 					) : null}

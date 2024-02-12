@@ -3,9 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { selectCollapsed, selectCategories } from '@store/selectors/app';
 
-import { setCategoryOptionBtnStyle } from './Category.controller';
+import {
+	setCategoryOptionFill, 
+	setCategoryOptionChecked,
+	setCategoryOptionBtnStyle, 
+} from './Category.controller';
 
-const CategoryOption = ({ name = '', color = '' }) => {
+const CategoryOption = ({ id = '', name = '', color = '', checked = false, onClick = () => null }) => {
 	const dispatch = useDispatch();
 
 	const categories = useSelector(selectCategories);
@@ -14,19 +18,19 @@ const CategoryOption = ({ name = '', color = '' }) => {
 
 	return (
 		<div className="sbch-form--item">
-			<div className="sbch-form--item__col">
+			<div className="sbch-form--item__col" onClick={() => onClick(id)}>
 				<div className="sbch-form--item__checkbox--wrapper">
 					<button
-						data-sbch-checked="true"
-						data-sbch-category="default"
+						data-sbch-category={name}
 						className="sbch-form--item__checkbox"
-						style={setCategoryOptionBtnStyle(color)}
+						style={setCategoryOptionBtnStyle(color, checked)}
+						data-sbch-checked={setCategoryOptionChecked(checked)}
 					>
 						<svg
 							width="18px"
 							height="18px"
 							viewBox="0 0 24 24"
-							fill="var(--taskcolor0)"
+							fill={setCategoryOptionFill(checked)}
 						>
 							<path d="M0 0h24v24H0z" fill="none" />
 							<path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
@@ -39,8 +43,8 @@ const CategoryOption = ({ name = '', color = '' }) => {
 			</div>
 			<div className="sbch-form--item__col--actions">
 				<button
-					data-sbch-color="#2C52BA"
-					data-sbch-category="default"
+					data-sbch-color={color}
+					data-sbch-category={name}
 					className="sbch-col--actions__edit-icon sbch-col--actions__edit-icon--immutable"
 				>
 					<svg height={20} width={20} fill="var(--white3)">

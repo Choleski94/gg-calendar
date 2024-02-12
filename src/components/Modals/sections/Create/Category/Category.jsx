@@ -19,7 +19,7 @@ const CreateCategory = ({
 	const categories = useSelector(selectCategories);
 
 	const [ hasError, setHasError ] = React.useState(false);
-	const [ data, setData ] = React.useState({ name: '', color: '#2C52BA' });
+	const [ data, setData ] = React.useState({ name: '', color: '#2C52BA', checked: true });
 
 	const onSubmit = (payload = []) => {
 		const clonedCategories = [ ...categories ];
