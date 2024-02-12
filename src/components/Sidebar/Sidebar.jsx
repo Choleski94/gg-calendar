@@ -114,12 +114,12 @@ const Sidebar = () => {
 						<div className="sbdatepicker__body">
 							{/* create a 7x7 table */}
 							<div className="sbdatepicker__body--header">
-								<div className="sbdatepicker__body--header-cell">S</div>
 								<div className="sbdatepicker__body--header-cell">M</div>
 								<div className="sbdatepicker__body--header-cell">T</div>
 								<div className="sbdatepicker__body--header-cell">W</div>
 								<div className="sbdatepicker__body--header-cell">T</div>
 								<div className="sbdatepicker__body--header-cell">F</div>
+								<div className="sbdatepicker__body--header-cell">S</div>
 								<div className="sbdatepicker__body--header-cell">S</div>
 							</div>
 							<div className="sbdatepicker__body--dates" />
@@ -209,10 +209,9 @@ const Sidebar = () => {
 				{/* category modal */}
 				<Category />
 
-				{/* sidebar footer (github/personal links) */}
+				{/* sidebar footer (github/personal links) 
 				<div className="sb__info">
 					<div className="sb__info-links">
-						{/* data-tooltip="github.com/chaseottofy"  */}
 						<a
 							href="https://github.com/chaseottofy"
 							rel="noreferrer"
@@ -234,16 +233,16 @@ const Sidebar = () => {
 							</svg>
 						</a>
 						<button
+							role="button"
 							className="sb-link sbl-email"
 							data-tooltip="ottofy@zohomail.com"
-							role="button"
 							aria-label="email me at ottofy@zohomail.com"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
+								fill="var(--white2)"
 								height={24}
 								width={24}
-								fill="var(--white2)"
 							>
 								<path d="M4 20q-.825 0-1.412-.587Q2 18.825 2 18V6q0-.825.588-1.412Q3.175 4 4 4h16q.825 0 1.413.588Q22 5.175 22 6v12q0 .825-.587 1.413Q20.825 20 20 20Zm8-7L4 8v10h16V8Zm0-2 8-5H4ZM4 8V6v12Z" />
 							</svg>
@@ -278,6 +277,7 @@ const Sidebar = () => {
 						</div>
 					</div>
 				</div>
+				*/}
 			</div>
 		</aside>	
 	);
