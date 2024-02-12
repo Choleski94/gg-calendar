@@ -92,9 +92,40 @@ export const CATEGORY_COLORS = [
 	'#516C7B',
 ];
 
+export const CALENDAR_MONTH_LABELS = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December'
+];
+
+export const CALENDAR_WEEK_LABELS = [
+	'Sunday',
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday'
+];
+
+export const CALENDAR_LABELS = {
+	MONTH: CALENDAR_MONTH_LABELS,
+	WEEK: CALENDAR_WEEK_LABELS,
+}
+
 export default {
 	CALENDAR_VIEWS,
 	CATEGORY_COLORS,
+	CALENDAR_LABELS,
 	CALENDAR_SHORTCUTS,
 	BASE_CALENDAR_KEYS,
 	BASE_CALENDAR_VIEWS,

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { MODAL_SECTIONS } from '@constants/modals';
+import { CALENDAR_LABELS } from '@constants/calendar';
 import { setModal, toggleCollapsed } from '@store/actions/app';
 import { selectView, selectCollapsed } from '@store/selectors/app';
 
@@ -29,6 +30,16 @@ const Header = () => {
 		dispatch(setModal(MODAL_SECTIONS.CREATE_EVENT));
 	}
 
+	const todayString = React.useMemo(() => {
+		const tmpDate = new Date();
+		return ([
+			CALENDAR_LABELS.WEEK[tmpDate.getDay()],
+			',',
+			CALENDAR_LABELS.MONTH[tmpDate.getMonth()],
+			tmpDate.getDate()
+		]);
+	}, []);
+
 	return (
 		<header className="header">
 			<div className="h__container">
@@ -55,10 +66,10 @@ const Header = () => {
 					</button>
 					<div className="logo" data-current-day-of-month={4}>
 						<svg
-							height={36}
-							viewBox="0 0 36 36"
-							width={36}
 							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 36 36"
+							height={36}
+							width={36}
 						>
 							<g fill="none" fillRule="evenodd">
 								<path d="m0 0h36v36h-36z" />
@@ -95,10 +106,13 @@ const Header = () => {
 							</g>
 						</svg>
 					</div>
-					<h3 className="header-title">Calendar</h3>
+					<h3 className="header-title">
+						Calendar
+					</h3>
 					<button
 						className="btn-root btn-today"
 						style={{ cursor: "pointer" }}
+						data-tooltip={todayString}
 						aria-label="button"
 						role="button"
 					>
@@ -111,10 +125,10 @@ const Header = () => {
 							<button className="prev" aria-label="button" role="button">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									height="24px"
-									viewBox="0 0 24 24"
-									width="24px"
 									fill="var(--white2)"
+									viewBox="0 0 24 24"
+									height="24px"
+									width="24px"
 								>
 									<path d="M0 0h24v24H0z" fill="none" />
 									<path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
