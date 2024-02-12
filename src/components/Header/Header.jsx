@@ -2,15 +2,17 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { MODAL_SECTIONS } from '@constants/modals';
-import { CALENDAR_LABELS } from '@constants/calendar';
 import { setModal, toggleCollapsed } from '@store/actions/app';
 import { selectView, selectCollapsed } from '@store/selectors/app';
+import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
 
 import SelectView from './SelectView';
-import { setDatetimeWrapper } from './Header.controller';
+import { setDatetimeWrapper, setPrevNextStyle } from './Header.controller';
 
 const Header = () => {
 	const dispatch = useDispatch();
+
+	const calendarView = useSelector(selectView);
 
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
 
@@ -39,6 +41,41 @@ const Header = () => {
 			tmpDate.getDate()
 		]);
 	}, []);
+
+	const [ prevString, nextString ] = React.useMemo(() => {
+		let scheduleText = null;
+
+		switch (calendarView) {
+			case BASE_CALENDAR_VIEWS.DAY:
+				scheduleText = 'day';
+				break;
+			case BASE_CALENDAR_VIEWS.WEEK:
+				scheduleText = 'week';
+				break;
+			case BASE_CALENDAR_VIEWS.MONTH:
+				scheduleText = 'month';
+				break;
+			case BASE_CALENDAR_VIEWS.YEAR:
+				scheduleText = 'year';
+				break;
+			case BASE_CALENDAR_VIEWS.LIST:
+			default:
+				scheduleText = null;
+				break;
+		}
+
+		return (
+			scheduleText && scheduleText.length ? (
+				[ `prev ${scheduleText}`, `next ${scheduleText}`]
+			) : (
+				[ null, null]
+			)
+		);
+	}, [ calendarView ]);
+
+	const showPrevNext = React.useMemo(() => (
+		prevString && nextString
+	), [ prevString, nextString ]);
 
 	return (
 		<header className="header">
@@ -121,8 +158,13 @@ const Header = () => {
 				</div>
 				<div className="group-right">
 					<div className="h-col-2">
-						<div className="prev-next">
-							<button className="prev" aria-label="button" role="button">
+						<div className="prev-next" style={setPrevNextStyle(showPrevNext)}>
+							<button 
+								role="button"
+								className="prev" 
+								aria-label="button" 
+								data-tooltip={prevString}
+							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									fill="var(--white2)"
@@ -134,7 +176,12 @@ const Header = () => {
 									<path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
 								</svg>
 							</button>
-							<button className="next" aria-label="button" role="button">
+							<button 
+								role="button" 
+								className="next" 
+								aria-label="button" 
+								data-tooltip={nextString}
+							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									height="24px"
