@@ -9,7 +9,9 @@ import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
 import SelectView from './SelectView';
 import { setDatetimeWrapper, setPrevNextStyle } from './Header.controller';
 
-const Header = () => {
+const Header = ({
+	title = '',
+}) => {
 	const dispatch = useDispatch();
 
 	const calendarView = useSelector(selectView);
@@ -36,10 +38,11 @@ const Header = () => {
 		const tmpDate = new Date();
 		return ([
 			CALENDAR_LABELS.WEEK[tmpDate.getDay()],
-			',',
-			CALENDAR_LABELS.MONTH[tmpDate.getMonth()],
+			', ',
+			CALENDAR_LABELS.MONTH.LONG[tmpDate.getMonth()],
+			' ',
 			tmpDate.getDate()
-		]);
+		].join(''));
 	}, []);
 
 	const [ prevString, nextString ] = React.useMemo(() => {
@@ -200,7 +203,9 @@ const Header = () => {
 								aria-label="button"
 								role="button"
 							>
-								<div className="datetime-content--title">January 2023</div>
+								<div className="datetime-content--title">
+									{title}
+								</div>
 							</button>
 						</div>
 					</div>

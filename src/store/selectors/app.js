@@ -17,3 +17,12 @@ export const selectAnimation = createSelector([ appSelect ], (app) => app.animat
 export const selectCollapsed = createSelector([ appSelect ], (app) => app.collapsed); 
 
 export const selectCategories = createSelector([ appSelect ], (app) => app.categories); 
+
+// Calendar
+export const selectDate = createSelector([ appSelect ], (app) => app.selected); 
+
+export const selectDay = createSelector([ appSelect ], (app) => app.selected.day); 
+
+export const selectMonth = createSelector([ appSelect ], (app) => app.selected.month); 
+
+export const selectYear = createSelector([ appSelect ], (app) => app.selected.year); 

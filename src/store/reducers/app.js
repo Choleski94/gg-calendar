@@ -12,6 +12,11 @@ export const appState = {
 	shortcut: true,
 	modal: 'CLOSED',
 	animation: true,
+	selected: {
+		year: "2024",
+		month: "1",
+		day: "12",
+	},
 	categories: [
 		{
 			checked: true,

@@ -92,7 +92,7 @@ export const CATEGORY_COLORS = [
 	'#516C7B',
 ];
 
-export const CALENDAR_MONTH_LABELS = [
+export const CALENDAR_MONTH_LONG_ABELS = [
 	'January',
 	'February',
 	'March',
@@ -106,6 +106,11 @@ export const CALENDAR_MONTH_LABELS = [
 	'November',
 	'December'
 ];
+
+export const CALENDAR_MONTH_LABELS = {
+	LONG: CALENDAR_MONTH_LONG_ABELS,
+	SHORT: CALENDAR_MONTH_LONG_ABELS.map((month) => month.substring(0, 3)),
+};
 
 export const CALENDAR_WEEK_LABELS = [
 	'Sunday',

@@ -4,10 +4,14 @@ import WeekTop from './WeekTop';
 import WeekSidebar from './WeekSidebar';
 import WeekCalendar from './WeekCalendar';
 
-const WeekScheduling = () => {
+const WeekScheduling = ({
+	setHeaderTitle = () => null,
+}) => {
 	return (
 		<div className="weekview">
-			<WeekTop />
+			<WeekTop 
+				setHeaderTitle={setHeaderTitle} 
+			/>
 			<div className="weekview__grid">
 				<WeekSidebar />
 				<WeekCalendar />

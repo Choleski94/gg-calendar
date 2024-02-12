@@ -7,7 +7,9 @@ import { selectView, selectCollapsed } from '@store/selectors/app';
 import { setViewClassName } from './View.controller';
 import { Day, Week, Year, List, Month } from './scheduling';
 
-const View = () => {
+const View = ({
+	setHeaderTitle = () => null,
+}) => {
 	const calendarView = useSelector(selectView);
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
 
@@ -15,23 +17,33 @@ const View = () => {
 		<div className={setViewClassName(isSidebarCollapsed)}>
 			{/* yearview */}
 			{calendarView === CALENDAR_VIEWS.YEAR && (
-				<Year />
+				<Year 
+					setHeaderTitle={setHeaderTitle}
+				/>
 			)}
 			{/* monthview */}
 			{calendarView === CALENDAR_VIEWS.MONTH && (
-				<Month />
+				<Month 
+					setHeaderTitle={setHeaderTitle}
+				/>
 			)}
 			{/* weekview */}
 			{calendarView === CALENDAR_VIEWS.WEEK && (
-				<Week />
+				<Week 
+					setHeaderTitle={setHeaderTitle}
+				/>
 			)}
 			{/* dayview */}
 			{calendarView === CALENDAR_VIEWS.DAY && (
-				<Day />
+				<Day 
+					setHeaderTitle={setHeaderTitle}
+				/>
 			)}
 			{/* listview */}
 			{calendarView === CALENDAR_VIEWS.LIST && (
-				<List />
+				<List 
+					setHeaderTitle={setHeaderTitle}
+				/>
 			)}
 			{/* stats view */}
 		</div>

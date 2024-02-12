@@ -66,3 +66,31 @@ export const updateCategories = (index, value) => ({
 export const loadingApp = (loading = false) => (dispatch) => (
 	dispatch(appLoading({ loading }))
 );
+
+// 
+export const setDay = (day) => ({
+	type: actionTypes.APP_SELECTED_DAY_UPDATED,
+	day,
+});
+
+export const setMonth = (month) => ({
+	type: actionTypes.APP_SELECTED_MONTH_UPDATED,
+	month,
+});
+
+export const setYear = (year) => ({
+	type: actionTypes.APP_SELECTED_YEAR_UPDATED,
+	year,
+});
+
+export const setDate = (year, month, day) => {
+	setYear(year);
+	setMonth(month);
+	setDay(day);
+}
+
+// export const setDateSelected = (date) => ({
+// 	this.dateSelected = date;
+// 	Context.setLocalDateSelected(date);
+// })
+

@@ -25,6 +25,8 @@ const App = () => {
 	const theme = useSelector(selectTheme);
 	const animation = useSelector(selectAnimation);
 
+	const [ headerTitle, setHeaderTitle ] = React.useState('');
+
 	const themeClassName = React.useMemo(() => ([
 		THEME_CLASSNAMES[theme || THEMES.DARK],
 		(animation ? '' : 'disable-transitions'),
@@ -32,12 +34,16 @@ const App = () => {
 
 	return (
 		<div className={themeClassName} style={{ cursor: 'default' }}>
-			<Header />
+			<Header 
+				title={headerTitle} 
+			/>
 			<main className="main">
 				{/* hide-sidebar */}
 				<Sidebar />
 				{/* calendar views */}
-				<View />
+				<View 
+					setHeaderTitle={setHeaderTitle}
+				/>
 			</main>
 
 			{/* overlays / used for popup content */}
