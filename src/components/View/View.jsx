@@ -8,10 +8,25 @@ import { setViewClassName } from './View.controller';
 import { Day, Week, Year, List, Month } from './scheduling';
 
 const View = ({
+	prevFnRef = null,
+	nextFnRef = null,
 	setHeaderTitle = () => null,
 }) => {
 	const calendarView = useSelector(selectView);
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
+
+	const handleCallback = () => {
+		console.log('Callback triggered.... PHASE I);
+		// Your logic or function call in ChildComponent2
+	};
+
+	React.useEffect(() => {
+		prevFnRef.current = { handleCallback };
+	}, [ prevFnRef ]);
+
+	React.useEffect(() => {
+		nextFnRef.current = { handleCallback };
+	}, [ nextFnRef ]);
 
 	return (
 		<div className={setViewClassName(isSidebarCollapsed)}>

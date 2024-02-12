@@ -22,9 +22,13 @@ import CollapseView from './components/CollapseView';
 import Notifications from './components/Notifications';
 
 const App = () => {
+	const prevFnRef = React.useRef();
+	const nextFnRef = React.useRef();
+
 	const theme = useSelector(selectTheme);
 	const animation = useSelector(selectAnimation);
 
+	const [ today, setToday ] = React.useState(new Date());
 	const [ headerTitle, setHeaderTitle ] = React.useState('');
 
 	const themeClassName = React.useMemo(() => ([
@@ -32,16 +36,32 @@ const App = () => {
 		(animation ? '' : 'disable-transitions'),
 	].join(' ').trim()), [ theme, animation ]);
 
+	const handlePrevClick = () => {
+		if (prevFnRef.current) {
+			prevFnRef.current.handleCallback();
+		}
+	};
+
+	const handleNextClick = () => {
+		if (nextFnRef.current) {
+			nextFnRef.current.handleCallback();
+		}
+	};
+
 	return (
 		<div className={themeClassName} style={{ cursor: 'default' }}>
 			<Header 
 				title={headerTitle} 
+				prevFn={handlePrevClick}
+				nextFn={handleNextClick}
 			/>
 			<main className="main">
 				{/* hide-sidebar */}
 				<Sidebar />
 				{/* calendar views */}
 				<View 
+					prevFnRef={prevFnRef}
+					nextFnRef={nextFnRef}
 					setHeaderTitle={setHeaderTitle}
 				/>
 			</main>

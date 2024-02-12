@@ -11,6 +11,8 @@ import { setDatetimeWrapper, setPrevNextStyle } from './Header.controller';
 
 const Header = ({
 	title = '',
+	prevFn = () => null,
+	nextFn = () => null,
 }) => {
 	const dispatch = useDispatch();
 
@@ -23,7 +25,6 @@ const Header = ({
 	}
 
 	const onTodayClick = () => {
-		// TOOD: take into coi
 		if (calendarView !== BASE_CALENDAR_VIEWS.LIST) {
 			const todayDate = new Date();
 			dispatch(setDate(
@@ -32,6 +33,16 @@ const Header = ({
 				todayDate.getDate(),
 			))
 		}
+	}
+
+	const onPrevClick = () => {
+		console.log('Prev click...');
+		prevFn();
+	}
+
+	const onNextClick = () => {
+		console.log('Next click...');
+		nextFn();
 	}
 
 	const onSearchClick = () => {
@@ -179,6 +190,7 @@ const Header = ({
 								role="button"
 								className="prev" 
 								aria-label="button" 
+								onClick={onPrevClick}
 								data-tooltip={prevString}
 							>
 								<svg
@@ -196,6 +208,7 @@ const Header = ({
 								role="button" 
 								className="next" 
 								aria-label="button" 
+								onClick={onNextClick}
 								data-tooltip={nextString}
 							>
 								<svg
