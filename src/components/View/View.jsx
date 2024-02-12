@@ -16,7 +16,7 @@ const View = ({
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
 
 	const handleCallback = () => {
-		console.log('Callback triggered.... PHASE I);
+		console.log('Callback triggered.... PHASE I');
 		// Your logic or function call in ChildComponent2
 	};
 
