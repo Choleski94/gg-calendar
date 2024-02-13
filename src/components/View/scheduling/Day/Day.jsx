@@ -5,6 +5,8 @@ import { setDate } from '@store/actions/app';
 import { selectDate, selectView } from '@store/selectors/app';
 import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
 
+import DaySidebar from './DaySidebar';
+
 const DayScheduling = ({
 	prevFnRef = null,
 	nextFnRef = null,
@@ -77,9 +79,7 @@ const DayScheduling = ({
 				{/* row 3 */}
 				<div className="dayview__grid">
 					<div className="dayview__grid--wrapper">
-						<div className="dayview--side-grid__wrapper">
-							<div className="dayview--side-grid" />
-						</div>
+						<DaySidebar />
 						<div className="dayview--main-grid" data-dv-top="false" />
 					</div>
 					<div className="dayview--footer" />
