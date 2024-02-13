@@ -2,8 +2,13 @@ import React from 'react';
 
 import { WEEK_START, WEEK_END } from '@constants/calendar';
 
+import WeekCol from './WeekCol';
+
 const WeekGrid = () => {
 
+	const renderDataForGrid = () => {
+
+	};
 	// weekEntries = React.useMemo(() => {
 	// 	const activeEntries = this.getActiveEntries();
 	// 	const [ start, end ] = [ week[WEEK_START], week[WEEK_END] ];
@@ -38,41 +43,12 @@ const WeekGrid = () => {
 
 	return (
 		<div className="weekview--calendar">
-			<div
-				className="week--col"
-				data-column-index={0}
-				data-wv-top="false"
-			/>
-			<div
-				className="week--col"
-				data-column-index={1}
-				data-wv-top="false"
-			/>
-			<div
-				className="week--col"
-				data-column-index={2}
-				data-wv-top="false"
-			/>
-			<div
-				className="week--col"
-				data-column-index={3}
-				data-wv-top="false"
-			/>
-			<div
-				className="week--col"
-				data-column-index={4}
-				data-wv-top="false"
-			/>
-			<div
-				className="week--col"
-				data-column-index={5}
-				data-wv-top="false"
-			/>
-			<div
-				className="week--col"
-				data-column-index={6}
-				data-wv-top="false"
-			/>
+			{new Array(5).fill(null).map((_, colIdx) => (
+				<WeekCol 
+					index={colIdx}
+					key={`week-col-${colIdx}`}
+				/>
+			))}
 		</div>
 	);
 }

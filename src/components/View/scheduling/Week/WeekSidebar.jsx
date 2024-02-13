@@ -1,80 +1,41 @@
 import React from 'react';
 
+import { TOTAL_DAY_HOURS } from '@constants/calendar';
+
 const WeekSidebar = () => {
+	// Dynamically set sidebar time interval.
+	const sidebarValueElts = React.useMemo(() => (
+		new Array(TOTAL_DAY_HOURS).fill(null).map((_, i) => {
+			let hour;
+			let md;
+
+			if (i === 0) {
+				hour = "";
+				md = "";
+			} else {
+				hour = i;
+				md = "AM";
+			}
+
+			if (hour > 12) {
+				hour -= 12;
+			}
+
+			if (i >= 12) {
+				md = "PM";
+			}
+
+			return `${hour} ${md}`;
+		})
+	), []);
+
 	return (
 		<div className="weekview--sidebar">
-			<span className="sidegrid-cell">
-				&nbsp;
-			</span>
-			<span className="sidegrid-cell">
-				1 AM
-			</span>
-			<span className="sidegrid-cell">
-				2 AM
-			</span>
-			<span className="sidegrid-cell">
-				3 AM
-			</span>
-			<span className="sidegrid-cell">
-				4 AM
-			</span>
-			<span className="sidegrid-cell">
-				5 AM
-			</span>
-			<span className="sidegrid-cell">
-				6 AM
-			</span>
-			<span className="sidegrid-cell">
-				7 AM
-			</span>
-			<span className="sidegrid-cell">
-				8 AM
-			</span>
-			<span className="sidegrid-cell">
-				9 AM
-			</span>
-			<span className="sidegrid-cell">
-				10 AM
-			</span>
-			<span className="sidegrid-cell">
-				11 AM
-			</span>
-			<span className="sidegrid-cell">
-				12 PM
-			</span>
-			<span className="sidegrid-cell">
-				1 PM
-			</span>
-			<span className="sidegrid-cell">
-				2 PM
-			</span>
-			<span className="sidegrid-cell">
-				3 PM
-			</span>
-			<span className="sidegrid-cell">
-				4 PM
-			</span>
-			<span className="sidegrid-cell">
-				5 PM
-			</span>
-			<span className="sidegrid-cell">
-				6 PM
-			</span>
-			<span className="sidegrid-cell">
-				7 PM
-			</span>
-			<span className="sidegrid-cell">
-				8 PM
-			</span>
-			<span className="sidegrid-cell">
-				9 PM
-			</span>
-			<span className="sidegrid-cell">
-				10 PM
-			</span>
-			<span className="sidegrid-cell">
-				11 PM
-			</span>
+			{sidebarValueElts.map((cellValue) => (
+				<span key={cellValue} className="sidegrid-cell">
+					{cellValue}
+				</span>
+			))}
 		</div>
 	);
 }
