@@ -118,16 +118,17 @@ export const CALENDAR_MONTH_LABELS = {
 	SHORT: CALENDAR_MONTH_LONG_ABELS.map((month) => month.substring(0, 3)),
 };
 
-// ⚠️  NOTE: Adjust `CALENDAR_WEEK_LABELS` respect to `WEEK_START` value.
+// ⚠️  NOTE: Automatically adjust respect  to `WEEK_START` value.
 const CALENDAR_WEEK_LONG_LABELS = [
+	(WEEK_START === 0 ? 'Sunday' : null), 
 	'Monday',
 	'Tuesday',
 	'Wednesday',
 	'Thursday',
 	'Friday',
 	'Saturday',
-	'Sunday',
-];
+	(WEEK_START === 1 ? 'Sunday' : null),
+].filter((wd) => wd);
 
 export const CALENDAR_WEEK_LABELS = {
 	LONG: CALENDAR_WEEK_LONG_LABELS,
