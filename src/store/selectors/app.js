@@ -19,7 +19,11 @@ export const selectCollapsed = createSelector([ appSelect ], (app) => app.collap
 export const selectCategories = createSelector([ appSelect ], (app) => app.categories); 
 
 // Calendar
-export const selectDate = createSelector([ appSelect ], (app) => app.selected); 
+export const selectDate = createSelector([ appSelect ], (app) => ({
+	year: 	Number(app.selected.year),
+	month: 	Number(app.selected.month),
+	day: 	Number(app.selected.day),
+})); 
 
 export const selectDay = createSelector([ appSelect ], (app) => app.selected.day); 
 

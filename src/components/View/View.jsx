@@ -13,50 +13,48 @@ const View = ({
 	setHeaderTitle = () => null,
 }) => {
 	const calendarView = useSelector(selectView);
+
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
-
-	const handleCallback = () => {
-		console.log('Callback triggered.... PHASE I');
-		// Your logic or function call in ChildComponent2
-	};
-
-	React.useEffect(() => {
-		prevFnRef.current = { handleCallback };
-	}, [ prevFnRef ]);
-
-	React.useEffect(() => {
-		nextFnRef.current = { handleCallback };
-	}, [ nextFnRef ]);
 
 	return (
 		<div className={setViewClassName(isSidebarCollapsed)}>
 			{/* yearview */}
 			{calendarView === CALENDAR_VIEWS.YEAR && (
 				<Year 
+					prevFnRef={prevFnRef}
+					nextFnRef={nextFnRef}
 					setHeaderTitle={setHeaderTitle}
 				/>
 			)}
 			{/* monthview */}
 			{calendarView === CALENDAR_VIEWS.MONTH && (
 				<Month 
+					prevFnRef={prevFnRef}
+					nextFnRef={nextFnRef}
 					setHeaderTitle={setHeaderTitle}
 				/>
 			)}
 			{/* weekview */}
 			{calendarView === CALENDAR_VIEWS.WEEK && (
 				<Week 
+					prevFnRef={prevFnRef}
+					nextFnRef={nextFnRef}
 					setHeaderTitle={setHeaderTitle}
 				/>
 			)}
 			{/* dayview */}
 			{calendarView === CALENDAR_VIEWS.DAY && (
 				<Day 
+					prevFnRef={prevFnRef}
+					nextFnRef={nextFnRef}
 					setHeaderTitle={setHeaderTitle}
 				/>
 			)}
 			{/* listview */}
 			{calendarView === CALENDAR_VIEWS.LIST && (
 				<List 
+					prevFnRef={prevFnRef}
+					nextFnRef={nextFnRef}
 					setHeaderTitle={setHeaderTitle}
 				/>
 			)}

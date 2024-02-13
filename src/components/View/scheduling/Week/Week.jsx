@@ -1,17 +1,55 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectDate } from '@store/selectors/app';
-import { CALENDAR_LABELS, WEEK_START, WEEK_END, } from '@constants/calendar';
+import { setDate } from '@store/actions/app';
+import { selectDate, selectView } from '@store/selectors/app'; 
+import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS, WEEK_START, WEEK_END, } from '@constants/calendar';
 
 import WeekGrid from './WeekGrid';
 import WeekHeader from './WeekHeader';
 import WeekSidebar from './WeekSidebar';
 
 const WeekScheduling = ({
+	prevFnRef = null,
+	nextFnRef = null,
 	setHeaderTitle = () => null,
 }) => {
-	const { day, month, year } = useSelector(selectDate);
+	const dispatch = useDispatch();
+
+	const calendarView = useSelector(selectView);
+	const { day, month, year } = useSelector(selectDate); 
+
+	const setPrevWeek = (d, m, y) => {
+		const prevWeek = new Date(
+			y, m, d - 7
+		);
+
+		dispatch(setDate(
+			prevWeek.getFullYear(), 
+			prevWeek.getMonth(), 
+			prevWeek.getDate(),
+		));
+	};
+
+	const setNextWeek = (d, m, y) => {
+		const nextWeek = new Date(
+			y, m, d + 7
+		);
+
+		dispatch(setDate(
+			nextWeek.getFullYear(), 
+			nextWeek.getMonth(), 
+			nextWeek.getDate(),
+		));
+	};
+
+	React.useEffect(() => {
+		prevFnRef.current = { setPrevWeek };
+	}, [ prevFnRef ]);
+
+	React.useEffect(() => {
+		nextFnRef.current = { setNextWeek };
+	}, [ nextFnRef ]);
 
 	// Set week array.
 	const weekArray = React.useMemo(() => {
@@ -34,6 +72,8 @@ const WeekScheduling = ({
 
 	// Set header view title.
 	React.useEffect(() => {
+		if (calendarView !== BASE_CALENDAR_VIEWS.WEEK) return null;
+
 		const [ [ m1, m2 ], [ d1, d2 ] ] = [
 			[ weekArray[0].getMonth(), weekArray[6].getMonth() ],
 			[ weekArray[0].getDate(), weekArray[6].getDate() ]

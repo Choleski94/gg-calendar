@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { MODAL_SECTIONS } from '@constants/modals';
-import { selectView, selectCollapsed } from '@store/selectors/app';
 import { setDate, setModal, toggleCollapsed } from '@store/actions/app';
 import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
+import { selectView, selectCollapsed, selectDate } from '@store/selectors/app';
 
 import SelectView from './SelectView';
 import { setDatetimeWrapper, setPrevNextStyle } from './Header.controller';
@@ -15,6 +15,7 @@ const Header = ({
 	nextFn = () => null,
 }) => {
 	const dispatch = useDispatch();
+	const { day, month, year } = useSelector(selectDate); 
 
 	const calendarView = useSelector(selectView);
 
@@ -36,13 +37,11 @@ const Header = ({
 	}
 
 	const onPrevClick = () => {
-		console.log('Prev click...');
-		prevFn();
+		prevFn(day, month, year);
 	}
 
 	const onNextClick = () => {
-		console.log('Next click...');
-		nextFn();
+		nextFn(day, month, year);
 	}
 
 	const onSearchClick = () => {

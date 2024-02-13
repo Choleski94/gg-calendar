@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { withShortcutsListener } from '@utils/hocs';
 import { getLocale, constructLocale } from '@locales';
 import { THEMES, THEME_CLASSNAMES } from '@constants/themes';
-import { selectTheme, selectAnimation } from '@store/selectors/app';
+import { selectTheme, selectAnimation, selectDate } from '@store/selectors/app';
 
 import View from './components/View';
 import Modal from './components/Modals';
@@ -24,9 +24,10 @@ import Notifications from './components/Notifications';
 const App = () => {
 	const prevFnRef = React.useRef();
 	const nextFnRef = React.useRef();
-
+	
 	const theme = useSelector(selectTheme);
 	const animation = useSelector(selectAnimation);
+	const { day, month, year } = useSelector(selectDate); 
 
 	const [ today, setToday ] = React.useState(new Date());
 	const [ headerTitle, setHeaderTitle ] = React.useState('');
@@ -38,13 +39,25 @@ const App = () => {
 
 	const handlePrevClick = () => {
 		if (prevFnRef.current) {
-			prevFnRef.current.handleCallback();
+			if (prevFnRef?.current?.setPrevDay) {
+				prevFnRef.current.setPrevDay(day, month, year);
+			}
+
+			if (prevFnRef?.current?.setPrevWeek) {
+				prevFnRef.current?.setPrevWeek(day, month, year);
+			}
 		}
 	};
 
 	const handleNextClick = () => {
 		if (nextFnRef.current) {
-			nextFnRef.current.handleCallback();
+			if (nextFnRef?.current?.setNextDay) {
+				nextFnRef.current.setNextDay(day, month, year);
+			}
+
+			if (nextFnRef?.current?.setNextWeek) {
+				nextFnRef.current.setNextWeek(day, month, year);
+			}
 		}
 	};
 
