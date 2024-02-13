@@ -1,8 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { isToday } from '@utils/dates';
 import { selectDate } from '@store/selectors/app';
 import { CALENDAR_LABELS } from '@constants/calendar';
+
+import {
+	setDayTitleStyle, 
+	setDayTitleClassName,
+} from './DayHeader.controller';
 
 const DayHeader = ({}) => {
 	const {
@@ -10,6 +16,10 @@ const DayHeader = ({}) => {
 		month: selectedMonth, 
 		year: selectedYear
 	} = useSelector(selectDate);
+
+	const hasToday = React.useMemo(() => isToday(
+		new Date(selectedYear, selectedMonth, selectedDay)
+	), [ selectedYear, selectedMonth, selectedDay ]);
 
 	// Evaluate gmt offset.
 	const gmtOffset = React.useMemo(() => {
@@ -24,11 +34,11 @@ const DayHeader = ({}) => {
 		<>
 			<div className="dayview--header">
 				<div className="dayview--header-day">
-					<div className="dayview--header-day__title">
+					<div className="dayview--header-day__title" style={setDayTitleStyle(hasToday)}>
 						SUN
 						{CALENDAR_LABELS.WEEK.SHORT[0]}
 					</div>
-					<div className="dayview--header-day__number">
+					<div className={setDayTitleClassName(hasToday)}>
 						{selectedDay}
 					</div>
 				</div>
