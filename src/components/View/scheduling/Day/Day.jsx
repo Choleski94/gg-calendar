@@ -5,7 +5,6 @@ import { setDate } from '@store/actions/app';
 import { selectDate, selectView } from '@store/selectors/app';
 import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
 
-import DayOnTop from './DayOnTop';
 import DayHeader from './DayHeader';
 import DaySidebar from './DaySidebar';
 
@@ -63,10 +62,7 @@ const DayScheduling = ({
 	return (
 		<div className="dayview">
 			<div className="calendar__dayview">
-				{/* row 1 */}
 				<DayHeader />
-				{/* row 2 */}
-				<DayOnTop />
 				{/* row 3 */}
 				<div className="dayview__grid">
 					<div className="dayview__grid--wrapper">
