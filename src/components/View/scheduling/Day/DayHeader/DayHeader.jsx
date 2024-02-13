@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { isToday } from '@utils/dates';
 import { selectDate } from '@store/selectors/app';
-import { CALENDAR_LABELS } from '@constants/calendar';
+import { CALENDAR_LABELS, WEEK_START } from '@constants/calendar';
 
 import {
 	setDayTitleStyle, 
@@ -17,10 +17,6 @@ const DayHeader = ({}) => {
 		year: selectedYear
 	} = useSelector(selectDate);
 
-	const hasToday = React.useMemo(() => isToday(
-		new Date(selectedYear, selectedMonth, selectedDay)
-	), [ selectedYear, selectedMonth, selectedDay ]);
-
 	// Evaluate gmt offset.
 	const gmtOffset = React.useMemo(() => {
 		let gmtDelta = new Date().getTimezoneOffset() / 60;
@@ -30,13 +26,22 @@ const DayHeader = ({}) => {
 		return gmtDelta;
 	}, []);
 
+	// Evaluate if present date is today.
+	const hasToday = React.useMemo(() => isToday(
+		new Date(selectedYear, selectedMonth, selectedDay)
+	), [ selectedYear, selectedMonth, selectedDay ]);
+
+	// Get week day.
+	const weekDay = React.useMemo(() => (
+		(new Date(selectedYear, selectedMonth, selectedDay)).getDay() - WEEK_START
+	), [ selectedYear, selectedMonth, selectedDay ]);
+
 	return (
 		<>
 			<div className="dayview--header">
 				<div className="dayview--header-day">
 					<div className="dayview--header-day__title" style={setDayTitleStyle(hasToday)}>
-						SUN
-						{CALENDAR_LABELS.WEEK.SHORT[0]}
+						{CALENDAR_LABELS.WEEK.SHORT[weekDay]}
 					</div>
 					<div className={setDayTitleClassName(hasToday)}>
 						{selectedDay}
