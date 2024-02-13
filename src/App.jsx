@@ -38,26 +38,26 @@ const App = () => {
 	].join(' ').trim()), [ theme, animation ]);
 
 	const handlePrevClick = () => {
-		if (prevFnRef.current) {
-			if (prevFnRef?.current?.setPrevDay) {
-				prevFnRef.current.setPrevDay(day, month, year);
-			}
+		if (!prevFnRef.current) return;
 
-			if (prevFnRef?.current?.setPrevWeek) {
-				prevFnRef.current?.setPrevWeek(day, month, year);
-			}
+		if (prevFnRef?.current?.setPrevDay) {
+			prevFnRef?.current?.setPrevDay(day, month, year);
+		}
+
+		if (prevFnRef?.current?.setPrevWeek) {
+			prevFnRef?.current?.setPrevWeek(day, month, year);
 		}
 	};
 
 	const handleNextClick = () => {
-		if (nextFnRef.current) {
-			if (nextFnRef?.current?.setNextDay) {
-				nextFnRef.current.setNextDay(day, month, year);
-			}
+		if (!nextFnRef.current) return;
 
-			if (nextFnRef?.current?.setNextWeek) {
-				nextFnRef.current.setNextWeek(day, month, year);
-			}
+		if (nextFnRef?.current?.setNextDay) {
+			nextFnRef.current.setNextDay(day, month, year);
+		}
+
+		if (nextFnRef?.current?.setNextWeek) {
+			nextFnRef.current.setNextWeek(day, month, year);
 		}
 	};
 
