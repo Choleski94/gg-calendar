@@ -5,6 +5,8 @@ import { setDate } from '@store/actions/app';
 import { selectDate, selectView } from '@store/selectors/app';
 import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
 
+import DayOnTop from './DayOnTop';
+import DayHeader from './DayHeader';
 import DaySidebar from './DaySidebar';
 
 const DayScheduling = ({
@@ -62,20 +64,9 @@ const DayScheduling = ({
 		<div className="dayview">
 			<div className="calendar__dayview">
 				{/* row 1 */}
-				<div className="dayview--header">
-					<div className="dayview--header-day">
-						<div className="dayview--header-day__title">SUN</div>
-						<div className="dayview--header-day__number">1</div>
-					</div>
-					<div className="dv-info-day-wrapper">
-						<div className="dayview--header-day__info" />
-					</div>
-				</div>
+				<DayHeader />
 				{/* row 2 */}
-				<div className="dv-ontop-row2">
-					<div className="dv-gmt">gmt-one</div>
-					<div className="dayview--ontop-container" data-dv-top="true" />
-				</div>
+				<DayOnTop />
 				{/* row 3 */}
 				<div className="dayview__grid">
 					<div className="dayview__grid--wrapper">
