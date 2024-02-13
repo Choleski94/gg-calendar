@@ -2,14 +2,26 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectDate } from '@store/selectors/app';
-import { CALENDAR_LABELS, WEEK_START, WEEK_END, } from '@constants/calendar';
+import { CALENDAR_LABELS } from '@constants/calendar';
 
 import { setWeekViewHeaderClassName } from './WeekHeader.controller';
 
 const WeekHeader = ({
 	weekArray = [],
 }) => {
-	const { day: selectedDay, month: selectedMonth, year: selectedYear } = useSelector(selectDate); 
+	const {
+		day: selectedDay, 
+		month: selectedMonth, 
+		year: selectedYear,
+	} = useSelector(selectDate); 
+
+	const gmtOffset = React.useMemo(() => {
+		let gmtDelta = new Date().getTimezoneOffset() / 60;
+		if (gmtDelta < 0) {
+			gmtDelta = `+${Math.abs(gmtDelta)}`;
+		}
+		return gmtDelta;
+	}, []);
 
 	const daysOfWeek = React.useMemo(() => {
 		let [ dayNumbers, ymd, hasToday, hasSelected ] = [ [], [] ];
@@ -73,7 +85,9 @@ const WeekHeader = ({
 					</div>
 				))}
 			</div>
-			<div className="wv-gmt">UTC 5</div>
+			<div className="wv-gmt">
+				UTC {gmtOffset}
+			</div>
 			<div className="weekview--allday-module">
 				{daysOfWeek.map(({ date, num }) => (
 					<div
