@@ -89,7 +89,6 @@ const useDayGrid = () => {
 		}
 	}
 
-	/* */
 	const getActiveCategories = () => {
 		const active = Object.keys(ctg).filter((key) => ctg[key].active);
 		return (active.length > 0) ? active : [];
