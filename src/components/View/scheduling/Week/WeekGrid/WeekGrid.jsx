@@ -1,53 +1,29 @@
 import React from 'react';
 
-import { WEEK_START, WEEK_END } from '@constants/calendar';
+import { TOTAL_DAY_WEEK } from '@constants/calendar';
 
 import WeekCol from './WeekCol';
+import useWeekGrid from './useWeekGrid';
+import { Week } from './WeekGrid.controller'; 
 
-const WeekGrid = () => {
+const WeekGrid = ({ weekArray = [] }) => {
+	const { getWeekEntries } = useWeekGrid();
 
-	const renderDataForGrid = () => {
+	const entries = React.useMemo(() => (
+		getWeekEntries(weekArray)
+	), [ weekArray ]);
 
-	};
-	// weekEntries = React.useMemo(() => {
-	// 	const activeEntries = this.getActiveEntries();
-	// 	const [ start, end ] = [ week[WEEK_START], week[WEEK_END] ];
-
-	// 	const boxes = {
-	// 		allDay: [], 	// entries that start on one day and end on another
-	// 		day: [], 	// entries that start and end on same day
-	// 	};
-
-	// 	if (activeEntries.length === 0) return boxes;
-
-	// 	const entries = activeEntries.filter((entry) => {
-	// 		const entryDate = new Date(entry.start);
-	// 		return entryDate >= start && entryDate <= end;
-	// 	});
-
-	// 	entries.forEach((entry) => {
-	// 		entry.coordinates = this.generateCoordinates(
-	// 			new Date(entry.start),
-	// 			new Date(entry.end)
-	// 		);
-
-	// 		if (entry.coordinates.allDay) {
-	// 			boxes.allDay.push(entry);
-	// 		} else {
-	// 			boxes.day.push(entry);
-	// 		}
-	// 	});
-
-	// 	return boxes;
-	// }, [ week ]);
+	const [ topBoxes, allBoxes ] = React.useMemo(() => {
+		const boxes = new Week(entries.day, entries.allDay);
+		return [ boxes.getBoxesTopLengths(), boxes.getBoxes() ];
+	}, [ entries ]);
 
 	return (
 		<div className="weekview--calendar">
-			{new Array(5).fill(null).map((_, colIdx) => (
-				<WeekCol 
-					index={colIdx}
-					key={`week-col-${colIdx}`}
-				/>
+			{new Array(TOTAL_DAY_WEEK).fill(null).map((_, colIdx) => (
+				<WeekCol key={`week--col-${colIdx}`} index={colIdx}>
+					Testing
+				</WeekCol>
 			))}
 		</div>
 	);

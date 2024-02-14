@@ -102,7 +102,7 @@ const WeekScheduling = ({
 			/>
 			<div className="weekview__grid">
 				<WeekSidebar />
-				<WeekGrid />
+				<WeekGrid weekArray={weekArray} />
 				<div />
 				<div className="weekview--footer" />
 			</div>

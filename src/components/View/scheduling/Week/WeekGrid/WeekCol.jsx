@@ -1,17 +1,15 @@
 import React from 'react';
 
-import { WEEK_START, WEEK_END } from '@constants/calendar';
-
-const WeekCol = ({
-	index = 0,
-}) => {
+const WeekGrid = ({ index = 0, children }) => {
 	return (
 		<div
-			data-wv-top="false"
 			className="week--col"
+			data-wv-top="false"
 			data-column-index={index}
-		/>
+		>
+			{children}
+		</div>
 	);
 }
 
-export default WeekCol;
+export default WeekGrid;
