@@ -1,5 +1,3 @@
-import generateId from '@utils/uinqueId';
-
 /**
  * @class Week
  * 
@@ -105,33 +103,33 @@ class Day {
 		return overlaps.sort((a, b) => +a.coordinates.y - +b.coordinates.y)
 	}
 
-	updateStore(store, id) {
-		const boxEntry = this.getBox(id);
-		const coords = boxEntry.coordinates;
-		let boxstart = +coords.y * 15;
-		let boxend = +coords.e * 15;
+	// updateStore(store, id) {
+	// 	const boxEntry = this.getBox(id);
+	// 	const coords = boxEntry.coordinates;
+	// 	let boxstart = +coords.y * 15;
+	// 	let boxend = +coords.e * 15;
 
-		const startDate = new Date(boxEntry.start);
-		const starthours = Math.floor(boxstart / 60);
-		const startminutes = boxstart % 60;
-		startDate.setHours(starthours);
-		startDate.setMinutes(startminutes);
+	// 	const startDate = new Date(boxEntry.start);
+	// 	const starthours = Math.floor(boxstart / 60);
+	// 	const startminutes = boxstart % 60;
+	// 	startDate.setHours(starthours);
+	// 	startDate.setMinutes(startminutes);
 
-		const endDate = new Date(boxEntry.start);
-		let endhours = Math.floor(boxend / 60);
-		let endminutes = boxend % 60;
-		if (endhours === 24) {
-			endhours = 23;
-			endminutes = 59;
-		}
-		endDate.setHours(endhours);
-		endDate.setMinutes(endminutes);
+	// 	const endDate = new Date(boxEntry.start);
+	// 	let endhours = Math.floor(boxend / 60);
+	// 	let endminutes = boxend % 60;
+	// 	if (endhours === 24) {
+	// 		endhours = 23;
+	// 		endminutes = 59;
+	// 	}
+	// 	endDate.setHours(endhours);
+	// 	endDate.setMinutes(endminutes);
 
-		store.updateEntry(id, {
-			start: startDate,
-			end: endDate,
-		});
-	}
+	// 	store.updateEntry(id, {
+	// 		start: startDate,
+	// 		end: endDate,
+	// 	});
+	// }
 }
 
 export {
