@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setDate } from '@store/actions/app';
 import { selectDate } from '@store/selectors/app';
-import { CALENDAR_LABELS } from '@constants/calendar';
+import { setDate, setView } from '@store/actions/app';
+import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
 
 import { setWeekViewHeaderClassName } from './WeekHeader.controller';
 
@@ -71,6 +71,7 @@ const WeekHeader = ({
 
 	const onWeekDayClick = (date) => {
 		dispatch(setDate(...date.split('-')));
+		dispatch(setView(BASE_CALENDAR_VIEWS.DAY));
 	}
 
 	return (
