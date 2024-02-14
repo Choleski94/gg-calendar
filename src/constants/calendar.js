@@ -1,3 +1,5 @@
+export const TOTAL_DAY_WEEK = 7;
+
 export const TOTAL_DAY_HOURS = 24;
 
 export const CALENDAR_SHORTCUTS = {
@@ -143,6 +145,7 @@ export const CALENDAR_LABELS = {
 export default {
 	WEEK_END,
 	WEEK_START,
+	TOTAL_DAY_WEEK,
 	CALENDAR_VIEWS,
 	CATEGORY_COLORS,
 	CALENDAR_LABELS,
