@@ -2,9 +2,19 @@ import React from 'react';
 
 import { TOTAL_DAY_WEEK } from '@constants/calendar';
 
-import WeekCol from './WeekCol';
+import WeekCell from './WeekCell';
 import useWeekGrid from './useWeekGrid';
 import { Week } from './WeekGrid.controller'; 
+
+const filterCoordinate = (data = [], colIdx) => {
+	const colData = data.filter(({ coordinates }) => (
+		coordinates?.x === colIdx
+	));
+
+	return (
+		colData && colData.length ? colData : []
+	);
+}
 
 const WeekGrid = ({ weekArray = [] }) => {
 	const { getWeekEntries } = useWeekGrid();
@@ -21,9 +31,11 @@ const WeekGrid = ({ weekArray = [] }) => {
 	return (
 		<div className="weekview--calendar">
 			{new Array(TOTAL_DAY_WEEK).fill(null).map((_, colIdx) => (
-				<WeekCol key={`week--col-${colIdx}`} index={colIdx}>
-					Testing
-				</WeekCol>
+				<WeekCell
+					colIdx={colIdx} 
+					key={`week--col-${colIdx}`} 
+					data={filterCoordinate(allBoxes, colIdx)}
+				/>
 			))}
 		</div>
 	);
