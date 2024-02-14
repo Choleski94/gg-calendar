@@ -6,9 +6,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import App from '@app';
 // import { Loader } from '@components';
-import { userLoggedIn } from '@store/actions/auth';
 import rootReducer, { preloadedState } from '@store/rootReducer';
-import setAuthorizationHeader from '@utils/setAuthorizationHeader';
 
 /*!*************************************!*\
 // (CSS) 
@@ -56,23 +54,6 @@ const store = configureStore({
 });
 
 const root = document.getElementById('root');
-
-// if (localStorage.nozamaJWT) {
-// 	const payload = jwtDecode(localStorage?.nozamaJWT);
-// 
-// 	const user = {
-// 		token: localStorage?.nozamaJWT,
-// 		id: payload?.id,
-// 		phone: payload?.phone,
-// 		email: payload?.email,
-// 		lastName: payload?.lastName,
-// 		firstName: payload?.firstName,
-// 		isOnboarded: payload?.isOnboarded,
-// 	};
-// 
-// 	setAuthorizationHeader(localStorage.nozamaJWT);
-// 	store.dispatch(userLoggedIn(user));
-// }
 
 if (root) {
 	ReactDOM.createRoot(root).render(
