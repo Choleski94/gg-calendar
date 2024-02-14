@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { setDate } from '@store/actions/app';
 import { selectDate } from '@store/selectors/app';
 import { CALENDAR_LABELS } from '@constants/calendar';
 
@@ -9,6 +10,8 @@ import { setWeekViewHeaderClassName } from './WeekHeader.controller';
 const WeekHeader = ({
 	weekArray = [],
 }) => {
+	const dispatch = useDispatch();
+
 	const {
 		day: selectedDay, 
 		month: selectedMonth, 
@@ -66,6 +69,10 @@ const WeekHeader = ({
 		});
 	}, [ weekArray ]);
 
+	const onWeekDayClick = (date) => {
+		dispatch(setDate(...date.split('-')));
+	}
+
 	return (
 		<div className="weekview__top">
 			<div />
@@ -77,8 +84,9 @@ const WeekHeader = ({
 						</span>
 						{' '}
 						<button
-							className={setWeekViewHeaderClassName(isSelected, isToday)}
 							data-weekview-date={date}
+							onClick={() => onWeekDayClick(date)}
+							className={setWeekViewHeaderClassName(isSelected, isToday)}
 						>
 							{num}
 						</button>
