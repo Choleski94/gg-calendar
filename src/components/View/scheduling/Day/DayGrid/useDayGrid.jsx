@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { WEEK_START } from '@constants/calendar';
 import { testDate, compareDates } from '@utils/dates';
 
 const ctg = {
@@ -64,7 +65,7 @@ const useDayGrid = () => {
 	// generates coordinates based on start and end times for a given entry
 	// if an entry spans beyond a day, it will render at the top of the grid in
 	// a static (immobile) position.
-	const generateCoordinates = (start, end) => {
+	const generateCoordinates = (start, end, startWeekIndex = WEEK_START) => {
 		[ start, end ] = [ testDate(start), testDate(end) ];
 
 		const startMin = start.getHours() * 4 + Math.floor(start.getMinutes() / 15);
@@ -72,16 +73,19 @@ const useDayGrid = () => {
 		const height = endMin - startMin;
 		const total = startMin + height;
 
+		const startIdx = (start.getDay() - startWeekIndex + 7) % 7;
+		const endIdx = (end.getDay() - startWeekIndex + 7) % 7;
+
 		if (!compareDates(start, end)) {
 			return {
 				allDay: true,
-				x: start.getDay(),
-				x2: end.getDay(),
+				x: startIdx,
+				x2: endIdx,
 			};
 		} else {
 			return {
 				allDay: false,
-				x: start.getDay(),
+				x: startIdx,
 				y: startMin,
 				h: height,
 				e: total,
