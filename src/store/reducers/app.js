@@ -12,6 +12,11 @@ export const appState = {
 	shortcut: true,
 	modal: 'CLOSED',
 	animation: true,
+	collapsed: {
+		header: false,
+		sidebar: false,
+		category: false,
+	},
 	selected: {
 		year: "2024",
 		month: "1",
@@ -91,11 +96,6 @@ export const appState = {
 			id: 'category_11'
 		}
 	],
-	collapsed: {
-		header: false,
-		sidebar: false,
-		category: false,
-	},
 };
 
 const appReducer = (state = appState, action) => {

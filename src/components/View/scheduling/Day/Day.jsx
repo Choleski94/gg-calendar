@@ -5,6 +5,7 @@ import { setDate } from '@store/actions/app';
 import { selectDate, selectView } from '@store/selectors/app';
 import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
 
+import DayGrid from './DayGrid';
 import DayHeader from './DayHeader';
 import DaySidebar from './DaySidebar';
 
@@ -15,12 +16,17 @@ const DayScheduling = ({
 }) => {
 	const dispatch = useDispatch();
 
-	const calendarView = useSelector(selectView);
-	const { day, month, year } = useSelector(selectDate);
+	const {
+		day: selectedDay, 
+		month: selectedMonth, 
+		year: selectedYear,
+	} = useSelector(selectDate);
 
-	const setPrevDay = (day, month, year) => {
+	const calendarView = useSelector(selectView);
+
+	const setPrevDay = (d, m, y) => {
 		const prevDay = new Date(
-			year, month, day - 1
+			y, m, d - 1
 		);
 
 		dispatch(setDate(
@@ -30,9 +36,9 @@ const DayScheduling = ({
 		));
 	};
 
-	const setNextDay = (day, month, year) => {
+	const setNextDay = (d, m, y) => {
 		const nextDay = new Date(
-			year, month, day + 1
+			y, m, d + 1
 		);
 
 		dispatch(setDate(
@@ -55,19 +61,18 @@ const DayScheduling = ({
 		if (calendarView !== BASE_CALENDAR_VIEWS.DAY) return null;
 
 		setHeaderTitle(
-			`${CALENDAR_LABELS.MONTH.LONG[month]} ${day}, ${year}`
+			`${CALENDAR_LABELS.MONTH.LONG[selectedMonth]} ${selectedDay}, ${selectedYear}`
 		);
-	}, [ day, month, year ]);
+	}, [ selectedDay, selectedMonth, selectedYear ]);
 
 	return (
 		<div className="dayview">
 			<div className="calendar__dayview">
 				<DayHeader />
-				{/* row 3 */}
 				<div className="dayview__grid">
 					<div className="dayview__grid--wrapper">
 						<DaySidebar />
-						<div className="dayview--main-grid" data-dv-top="false" />
+						<DayGrid />
 					</div>
 					<div className="dayview--footer" />
 				</div>
