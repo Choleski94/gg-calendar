@@ -63,7 +63,7 @@ const DayScheduling = ({
 		setHeaderTitle(
 			`${CALENDAR_LABELS.MONTH.LONG[selectedMonth]} ${selectedDay}, ${selectedYear}`
 		);
-	}, [ selectedDay, selectedMonth, selectedYear ]);
+	}, [ selectedYear, selectedMonth, selectedDay ]);
 
 	return (
 		<div className="dayview">

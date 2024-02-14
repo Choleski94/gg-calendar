@@ -16,8 +16,13 @@ const WeekScheduling = ({
 }) => {
 	const dispatch = useDispatch();
 
+	const {
+		day: selectedDay, 
+		month: selectedMonth, 
+		year: selectedYear,
+	} = useSelector(selectDate); 
+
 	const calendarView = useSelector(selectView);
-	const { day, month, year } = useSelector(selectDate); 
 
 	const setPrevWeek = (d, m, y) => {
 		const prevWeek = new Date(
@@ -53,7 +58,7 @@ const WeekScheduling = ({
 
 	// Set week array.
 	const weekArray = React.useMemo(() => {
-		const week = new Date(year, month, day);
+		const week = new Date(selectedYear, selectedMonth, selectedDay);
 
 		week.setDate(week.getDate() - week.getDay());
 
@@ -68,7 +73,7 @@ const WeekScheduling = ({
                 }
 
 		return weekArray;
-	}, [ day, month, year ]);
+	}, [ selectedYear, selectedMonth, selectedDay ]);
 
 	// Set header view title.
 	React.useEffect(() => {
