@@ -11,26 +11,23 @@ import { Day } from './DayGrid.controller';
 
 const GridLayout = WidthProvider(RGL);
 
-const DEFAULT_RESIZE_HANDLES = ['sw', 'nw', 'se', 'ne' ];
+const initialLayout = [
+	{ i: '1', id: '1', x: 0, y: 0, w: 1, h: 1 },
+	{ i: '2', id: '2', x: 1, y: 0, w: 1, h: 1 },
+	{ i: '3', id: '3', x: 2, y: 0, w: 1, h: 1 },
+];
 
-const withResizeHandles = (payload) => (
-	payload.map((xItem) => ({
-		...xItem, 
-		resizeHandles: DEFAULT_RESIZE_HANDLES
-	}))
-);
+const DEFAULT_RESIZE_HANDLES = ['s'];
 
-const items = [
-	{ i: 'a_button', x: 0, y: 0, w: 1, h: 2 },
-	{ i: 'b_button', x: 1, y: 0, w: 3, h: 12 },
-	{ i: 'c_button', x: 4, y: 0, w: 3, h: 1 },
-	{ i: 'd_button', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
-]
+const parseBox = (payload = {}) => ({
+	...payload,
+	i: payload.id, x: 0, y: 0, w: 1, h: 2,
+	resizeHandles: DEFAULT_RESIZE_HANDLES,
+});
 
 const DayGrid = () => {
 	const { getDayEntries } = useDayGrid();
-
-	const [ layout, setLayout ] = React.useState([]);
+	const [ layout, setLayout ] = React.useState(initialLayout);
 
 	const {
 		day: selectedDay,
@@ -49,60 +46,14 @@ const DayGrid = () => {
 		return [ boxes.getBoxesTop(), boxes.getBoxes() ];
 	}, [ entries ]);
 
-	//
-	const onDrop = (layout, layoutItem) => {
-		console.log(`Dropped`, layout, layoutItem);
-		// // console.log(`Dropped element props:\n${JSON.stringify(layoutItem, ['x', 'y', 'w', 'h'], 2)}`);
-		// const newLayoutItem = Object.assign(layoutItem, {
-		// 	i: tmpLayoutItemId,
-		// 	resizeHandles: DEFAULT_RESIZE_HANDLES,
-		// });
+	const dayCellRefs = React.useMemo(() => allBoxes.map(() => (
+		React.createRef())
+	), [ allBoxes ]);
 
-		// setLayout([
-		// 	...new Map([
-		// 		...layout,
-		// 		newLayoutItem,
-		// 	].map((item) => [item.i, item])).values()
-		// ]);
-		// dispatch(actions.editorSet(newLayoutItem));
-		// setTmpLayoutItemId(null);
+	// TODO: 
+	const onLayoutChange = (newLayout) => {
+		setLayout(newLayout);
 	};
-
-	const onLayoutChange = (layout, layouts) => {
-		// Track client layout change.
-		// Grid changes (e.g. i, x, y)
-		// Properties changes (e.g. i, h, w)
-		console.log('LAYOUT:::', layout, layouts);
-	};
-
-	const onDragStart = (layout, layoutItem, _event) => {
-		console.log('On drag start:::', layout, layoutItem, _event);
-
-		// if (!UNSUPPORTED_LAYOUT_IDS.includes(layoutItem.i)) {
-		// 	dispatch(actions.editorSet(layoutItem));
-		// 	return null;
-		// }
-		// setTmpLayoutItemId([uuidv4(), state.app.activeTool].join('_'));
-	};
-
-
-	const generateLayout = () => {
-		console.log('Generate layout....');
-
-		const availableHandles = ["s", "w", "e", "n", "sw", "nw", "se", "ne"];
-
-		return _.map(new Array(items), (item, i) => {
-			const y = Math.ceil(Math.random() * 4) + 1;
-			return {
-				x: (i * 2) % cols,
-				y: Math.floor(i / 6) * y,
-				w: 2,
-				h: y,
-				i: i.toString(),
-				resizeHandles: availableHandles
-			};
-		});
-	}
 
 	const onLayoutChangeHandler = React.useCallback((newLayout) => {
 		setLayout(newLayout);
@@ -112,45 +63,54 @@ const DayGrid = () => {
 	return (
 		<GridLayout
 			cols={1}
-			layout={layout}
-			rowHeight={500}
-			className="dayview--main-grid"
-			onLayoutChange={onLayoutChangeHandler}
+                        width={600}
+                        rowHeight={100}
+                        layout={layout}
+                        className="layout"
+                        resizeHandles={['s']}
+                        className="dayview--main-grid"
+                        onLayoutChange={onLayoutChange}
 		>
-			{allBoxes.map(({ id, ...rest}) => (
-				<DayCell 
-					id={id} 
-					key={id} 
-					{...rest}
-				/>
+			{/* allBoxes.map(parseBox).map(({ id, ...rest}, cellIdx) => ( */}
+			{layout.map((item, cellIdx) => (
+				<div
+					key={item.i}
+					className="dv-box"
+					data-dv-end-time={8}
+					data-dv-box-index={1}
+					data-dv-start-time={4}
+					data-dv-time-intervals={4}
+					data-dv-box-category="default"
+					data-dv-box-id="lsm06ujyr33rjnw3pm"
+					style={{
+						// top: "50px",
+						// height: "50px",
+						// left: "calc(0% + 0px)",
+						width: "calc((100% - 4px) * 1)",
+						backgroundColor: "rgb(44, 82, 186)",
+					}}
+				>
+					<div className="dv-box__header">
+						<div className="dv-box-title">
+							{item.i}
+						</div>
+					</div>
+					{/*
+					<div className="dv-box__content">
+						<span className="dv-box-time">1 – 2am</span>
+					</div>
+					*/}
+					<div className="dv-box-resize-s" />
+				</div>
+
+				// <DayCell 
+				// 	ref={dayCellRefs[cellIdx]}
+				// 	id={id}  key={id} title={id}
+				// 	{...rest}
+				// />
 			))}
 		</GridLayout>
 	);
-
-	// return (
-	// 	<GridLayout
-	// 		cols={12}
-	// 		isDroppable
-	// 		allowOverlap
-	// 		width={1200}
-	// 		rowHeight={30}
-	// 		onDrop={onDrop}
-	// 		data-dv-top="false"
-	// 		verticalCompact={false}
-	// 		onDragStart={onDragStart}
-	// 		className="dayview--main-grid"
-	// 		onLayoutChange={onLayoutChange}
-	// 		layout={withResizeHandles(layout)}
-	// 	>
-	// 		{allBoxes.map(({ id, ...rest}) => (
-	// 			<DayCell 
-	// 				id={id} 
-	// 				key={id} 
-	// 				{...rest}
-	// 			/>
-	// 		))}
-	// 	</GridLayout>
-	// );
 }
 
 export default DayGrid;
