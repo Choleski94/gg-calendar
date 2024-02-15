@@ -17,8 +17,6 @@ const initialLayout = [
 	{ i: '3', id: '3', x: 2, y: 0, w: 1, h: 1 },
 ];
 
-const DEFAULT_RESIZE_HANDLES = ['s'];
-
 const parseBox = (payload = {}) => ({
 	...payload,
 	i: payload.id, x: 0, y: 0, w: 1, h: 2,
@@ -63,11 +61,11 @@ const DayGrid = () => {
 	return (
 		<GridLayout
 			cols={1}
-                        width={600}
-                        rowHeight={100}
+			rowHeight={50}
                         layout={layout}
-                        className="layout"
+			preventCollision
                         resizeHandles={['s']}
+			verticalCompact={false}
                         className="dayview--main-grid"
                         onLayoutChange={onLayoutChange}
 		>
@@ -76,12 +74,8 @@ const DayGrid = () => {
 				<div
 					key={item.i}
 					className="dv-box"
-					data-dv-end-time={8}
-					data-dv-box-index={1}
-					data-dv-start-time={4}
-					data-dv-time-intervals={4}
+					data-dv-box-id={item.id}
 					data-dv-box-category="default"
-					data-dv-box-id="lsm06ujyr33rjnw3pm"
 					style={{
 						// top: "50px",
 						// height: "50px",
@@ -92,15 +86,15 @@ const DayGrid = () => {
 				>
 					<div className="dv-box__header">
 						<div className="dv-box-title">
-							{item.i}
+							Test {item.i}
 						</div>
 					</div>
 					{/*
 					<div className="dv-box__content">
 						<span className="dv-box-time">1 – 2am</span>
 					</div>
-					*/}
 					<div className="dv-box-resize-s" />
+					*/}
 				</div>
 
 				// <DayCell 
