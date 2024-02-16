@@ -67,8 +67,9 @@ const DayGrid = () => {
 	return (
 		<GridLayout
 			cols={1}
-			rowHeight={50}
+			allowOverlap
                         layout={layout}
+			rowHeight={12.5}
 			preventCollision
                         resizeHandles={['s']}
 			verticalCompact={false}
