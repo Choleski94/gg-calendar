@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { Draggable } from '@components';
 import { setDate } from '@store/actions/app';
 import { selectDate, selectView } from '@store/selectors/app';
 import { CALENDAR_LABELS, BASE_CALENDAR_VIEWS } from '@constants/calendar';
@@ -69,13 +70,15 @@ const DayScheduling = ({
 		<div className="dayview">
 			<div className="calendar__dayview">
 				<DayHeader />
-				<div className="dayview__grid">
-					<div className="dayview__grid--wrapper">
-						<DaySidebar />
-						<DayGrid />
+				<Draggable.Wrapper>
+					<div className="dayview__grid">
+						<div className="dayview__grid--wrapper">
+							<DaySidebar />
+							<DayGrid />
+						</div>
+						<div className="dayview--footer" />
 					</div>
-					<div className="dayview--footer" />
-				</div>
+				</Draggable.Wrapper>
 			</div>
 		</div>
 	);
