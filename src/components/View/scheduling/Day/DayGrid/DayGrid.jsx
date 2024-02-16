@@ -9,7 +9,13 @@ import DayCell from './DayCell';
 import useDayGrid from './useDayGrid';
 import { Day } from './DayGrid.controller';
 
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
+import './App.css';
+
 const GridLayout = WidthProvider(RGL);
+
+const DEFAULT_MARGIN = [0, 0];
 
 const initialLayout = [
 	{ i: '1', id: '1', x: 0, y: 0, w: 1, h: 1 },
@@ -66,6 +72,7 @@ const DayGrid = () => {
 			preventCollision
                         resizeHandles={['s']}
 			verticalCompact={false}
+			margin={DEFAULT_MARGIN}
                         className="dayview--main-grid"
                         onLayoutChange={onLayoutChange}
 		>
@@ -93,8 +100,8 @@ const DayGrid = () => {
 					<div className="dv-box__content">
 						<span className="dv-box-time">1 – 2am</span>
 					</div>
-					<div className="dv-box-resize-s" />
 					*/}
+					<div className="react-resizable-handle react-resizable-handle-s dv-box-resize-s" />
 				</div>
 
 				// <DayCell 
