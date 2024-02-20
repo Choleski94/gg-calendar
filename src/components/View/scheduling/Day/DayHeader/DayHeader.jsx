@@ -27,21 +27,22 @@ const DayHeader = ({}) => {
 	}, []);
 
 	// Evaluate if present date is today.
-	const hasToday = React.useMemo(() => isToday(
+	const now = React.useMemo(() => (
 		new Date(selectedYear, selectedMonth, selectedDay)
 	), [ selectedYear, selectedMonth, selectedDay ]);
 
-	// Get week day.
-	const weekDay = React.useMemo(() => (
-		(new Date(selectedYear, selectedMonth, selectedDay)).getDay() - WEEK_START
-	), [ selectedYear, selectedMonth, selectedDay ]);
+	// Set today.
+	const hasToday = isToday(now);
+
+	// Set week day.
+	const weekDay = (now.getDay() + 7 - WEEK_START) % 7;
 
 	return (
 		<>
 			<div className="dayview--header">
 				<div className="dayview--header-day">
 					<div className="dayview--header-day__title" style={setDayTitleStyle(hasToday)}>
-						{CALENDAR_LABELS.WEEK.SHORT[weekDay]}
+						{CALENDAR_LABELS.WEEK.SHORT[weekDay % 7]}
 					</div>
 					<div className={setDayTitleClassName(hasToday)}>
 						{selectedDay}
