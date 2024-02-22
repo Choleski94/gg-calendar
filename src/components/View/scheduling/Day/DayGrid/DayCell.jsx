@@ -17,7 +17,6 @@ const DayCell = React.forwardRef(({
 			{...coordinates} 
 		>
 			<div
-				className="dv-box"
 				data-dv-box-id={id}
 				data-dv-box-index={1}
 				data-dv-box-category={category}
