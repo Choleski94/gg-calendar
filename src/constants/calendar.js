@@ -129,7 +129,7 @@ const CALENDAR_WEEK_LONG_LABELS = [
 	'Thursday',
 	'Friday',
 	'Saturday',
-	(WEEK_START === 1 ? 'Sunday' : null),
+	(WEEK_START === 0 ? null : 'Sunday'),
 ].filter((wd) => wd);
 
 export const CALENDAR_WEEK_LABELS = {

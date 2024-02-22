@@ -23,6 +23,7 @@ const DayGrid = () => {
 		)
 	), [ selectedYear, selectedMonth, selectedDay ]);
 
+
 	const [ topBoxes, allBoxes ] = React.useMemo(() => {
 		const boxes = new Day(entries.day, entries.allDay);
 		return [ boxes.getBoxesTop(), boxes.getBoxes() ];
@@ -31,6 +32,8 @@ const DayGrid = () => {
 	const dayCellRefs = React.useMemo(() => allBoxes.map(() => (
 		React.createRef())
 	), [ allBoxes ]);
+
+	console.log('ALL BOXED:::', allBoxes);
 
 	return (
 		<div className="dayview--main-grid">

@@ -3,11 +3,18 @@ import React from 'react';
 import { calcTime } from '@utils/time';
 import { Draggable } from '@components';
 
-import { setDayCellStyle } from './DayCell.controller';
-
-const DayCell = React.forwardRef(({ id, category, title, coordinates }, ref) => {
+const DayCell = React.forwardRef(({
+	id, 
+	title, 
+	category, 
+	coordinates,
+	isDragging = true, // false,
+}, ref) => {
 	return (
-		<Draggable.Element lockX x={coordinates?.x} y={coordinates?.y}>
+		<Draggable.Element 
+			lockX 
+			{...coordinates} 
+		>
 			<div
 				className="dv-box"
 				data-dv-box-id={id}
@@ -16,7 +23,7 @@ const DayCell = React.forwardRef(({ id, category, title, coordinates }, ref) => 
 				data-dv-end-time={coordinates.e}
 				data-dv-start-time={coordinates.y}
 				data-dv-time-intervals={coordinates.h}
-				style={setDayCellStyle(coordinates, "rgb(44, 82, 186)")}
+				style={{ backgroundColor: "rgb(44, 82, 186)" }}
 			>
 				<div className="dv-box__header">
 					<div className="dv-box-title">
@@ -28,7 +35,7 @@ const DayCell = React.forwardRef(({ id, category, title, coordinates }, ref) => 
 						{calcTime(coordinates.y, +coordinates.h)}
 					</span>
 				</div>
-				<div className="dv-box-resize-s" />
+				{/* <div className="dv-box-resize-s" /> */}
 			</div>
 		</Draggable.Element>
 	);
