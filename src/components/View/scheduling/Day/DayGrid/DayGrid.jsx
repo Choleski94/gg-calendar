@@ -33,8 +33,6 @@ const DayGrid = () => {
 		React.createRef())
 	), [ allBoxes ]);
 
-	console.log('ALL BOXED:::', allBoxes);
-
 	return (
 		<div className="dayview--main-grid">
 			{allBoxes.map(({ id, ...rest}, cellIdx) => (
