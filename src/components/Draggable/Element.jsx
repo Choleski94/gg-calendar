@@ -19,9 +19,10 @@ const Element = ({
 	children = null, 
 	x = 0,  y = 0, h = 0, 
 }) => {
-	const [ height, setHeight ] = React.useState(0);
+	const isResizingRef = React.useRef(false);
 	const positionRef = React.useRef({ x: 0, y: 0 }); // Use a ref to store the position
-	const [ isResizing, setIsResizing ] = React.useState(false);
+
+	const [ height, setHeight ] = React.useState(0);
 	const [ isDragging, setIsDragging ] = React.useState(false);
 	const [ position, setPosition ] = React.useState({ x: 0, y: 0 });
 	const [ prevPosition, setPrevPosition ] = React.useState({ x: 0, y: 0 });
@@ -38,6 +39,14 @@ const Element = ({
 		setPrevPosition({ x, y });
 		positionRef.current = { x, y };
 	}, [ h, x, y ]);
+
+	const isResizing = React.useMemo(() => {
+		return isResizingRef.current
+	}, [ isResizingRef.current ]);
+
+	const setIsResizing = (flag = false) => {
+		isResizingRef.current = flag;
+	}
 
 	const updatePosition = ({ x, y }) => {
 		setPosition({ x, y });
@@ -65,7 +74,9 @@ const Element = ({
 
 		/** DRAG NORTH SOUTH */
 		const _handleMouseMove = (e) => {
-			if (isResizing) {
+			if (isResizingRef?.current) {
+				console.log('Resizing......................');
+
 				const box = e.target.parentElement;
 				const boxTop = box.offsetTop;
 
@@ -75,18 +86,19 @@ const Element = ({
 					amountScrolled - 
 					boxTop - 
 					headerOffset
-				) / 12.5) * 12.5;
+				) / 12.5);
 
-				if (newHeight <= 12.5) {
-					console.log('Situation A');
-					return;
-				} else if (newHeight + boxTop > 1188) {
-					console.log('Situation B');
-					return;
-				} else {
-					// console.log('Situation C');
-					setHeight(newHeight);
-				}
+				//  if (newHeight <= 12.5) {
+				//  	console.log('Situation A');
+				//  	return;
+				//  } else if (newHeight + boxTop > 1188) {
+				//  	console.log('Situation B');
+				//  	return;
+				//  } else {
+				//  	// console.log('Situation C');
+				//  }
+
+				setHeight(newHeight);
 
 				// const deltaY = e.clientY - startY;
 
@@ -94,11 +106,6 @@ const Element = ({
 				// // 	x: prevPosition.x,
 				// // 	y: lockY ? prevPosition.y : prevPosition.y + deltaY,
 				// // }));
-
-				// if (handleResize) {
-				// 	console.log('Resize.....', id, deltaY)
-				// 	handleResize(id, deltaY);
-				// }
 			} else {
 				sX = Math.abs(e.clientX - tempX);
 				sY = Math.abs(e.clientY - tempY);
@@ -140,7 +147,7 @@ const Element = ({
 	};
 
 	const handleResizeMouseDown = (e) => {
-		e.stopPropagation();
+		// e.stopPropagation();
 		console.log('Handle resize mouse down....');
 		setIsResizing(true);
 	};
@@ -184,6 +191,8 @@ const Element = ({
 			/>
 		]
 	});
+
+	console.log('T DATA::', isResizing, isResizing);
 
 	return (
 		<>
