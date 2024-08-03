@@ -68,6 +68,7 @@ const App = () => {
 				prevFn={handlePrevClick}
 				nextFn={handleNextClick}
 			/>
+
 			<main className="main">
 				{/* hide-sidebar */}
 				<Sidebar />

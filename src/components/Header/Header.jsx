@@ -15,15 +15,14 @@ const Header = ({
 	nextFn = () => null,
 }) => {
 	const dispatch = useDispatch();
-	const { day, month, year } = useSelector(selectDate); 
 
 	const calendarView = useSelector(selectView);
 
+	const { day, month, year } = useSelector(selectDate); 
+
 	const { sidebar: isSidebarCollapsed } = useSelector(selectCollapsed);
 
-	const toggleSidebar = () => {
-		dispatch(toggleCollapsed.sidebar());
-	}
+	const toggleSidebar = () => dispatch(toggleCollapsed.sidebar());
 
 	const onTodayClick = () => {
 		if (calendarView !== BASE_CALENDAR_VIEWS.LIST) {
@@ -211,11 +210,11 @@ const Header = ({
 								data-tooltip={nextString}
 							>
 								<svg
-									xmlns="http://www.w3.org/2000/svg"
+									width="24px"
 									height="24px"
 									viewBox="0 0 24 24"
-									width="24px"
 									fill="var(--white2)"
+									xmlns="http://www.w3.org/2000/svg"
 								>
 									<path d="M0 0h24v24H0z" fill="none" />
 									<path d="M8.59 16.59L10 18l6-6-6-6L8.59 7.41 13.17 12z" />
@@ -224,9 +223,9 @@ const Header = ({
 						</div>
 						<div className={setDatetimeWrapper(isSidebarCollapsed)}>
 							<button
-								className="datetime-content"
-								aria-label="button"
 								role="button"
+								aria-label="button"
+								className="datetime-content"
 							>
 								<div className="datetime-content--title">
 									{title}

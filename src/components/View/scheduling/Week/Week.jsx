@@ -18,8 +18,8 @@ const WeekScheduling = ({
 
 	const {
 		day: selectedDay, 
-		month: selectedMonth, 
 		year: selectedYear,
+		month: selectedMonth, 
 	} = useSelector(selectDate); 
 
 	const calendarView = useSelector(selectView);

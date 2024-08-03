@@ -5,6 +5,7 @@ import { useContext } from './Core';
 export const setElementStyle = (coord = {}, height = 0, isDragging = false, isResizing = false) => ({
 	top: '0px',
 	left: '0px',
+	minHeight: '12.5px',
 	height: `${+height * 12.5}px`,
 	width: 'calc((100% - 4px) * 1)',
 	zIndex: isDragging ? '100' : '0',
@@ -88,16 +89,6 @@ const Element = ({
 					headerOffset
 				) / 12.5);
 
-				//  if (newHeight <= 12.5) {
-				//  	console.log('Situation A');
-				//  	return;
-				//  } else if (newHeight + boxTop > 1188) {
-				//  	console.log('Situation B');
-				//  	return;
-				//  } else {
-				//  	// console.log('Situation C');
-				//  }
-
 				setHeight(newHeight);
 
 				// const deltaY = e.clientY - startY;
@@ -115,12 +106,11 @@ const Element = ({
 
 				let newTop = Math.round((newOffsetY + startTop) / 12.5);
 
-				// if (newTop < 0 || currentCursorY < 0) {
-				// 	newTop = 0;
-				// 	return;
-				// } else if (newTop + boxHeight > 1188) {
-				// 	return;
-				// }
+				if (newTop < 0 || currentCursorY < 0) {
+					newTop = 0;
+					// } else if (newTop + boxHeight > 1188) {
+					// return;
+				}
 
 				updatePosition({
 					x: lockX ? position.x : position.x + deltaX,
@@ -130,8 +120,6 @@ const Element = ({
 		};
 
 		const _handleMouseUp = () => {
-			console.log('Handle resize mouse up....');
-
 			setIsResizing(false);
 			setIsDragging(false);
 
@@ -147,7 +135,6 @@ const Element = ({
 	};
 
 	const handleResizeMouseDown = (e) => {
-		// e.stopPropagation();
 		console.log('Handle resize mouse down....');
 		setIsResizing(true);
 	};

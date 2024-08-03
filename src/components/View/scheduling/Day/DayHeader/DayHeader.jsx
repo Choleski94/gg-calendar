@@ -13,8 +13,8 @@ import {
 const DayHeader = ({}) => {
 	const {
 		day: selectedDay, 
-		month: selectedMonth, 
 		year: selectedYear,
+		month: selectedMonth, 
 	} = useSelector(selectDate);
 
 	// Evaluate gmt offset.

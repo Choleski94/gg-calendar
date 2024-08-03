@@ -10,11 +10,11 @@ const DaySidebar = () => {
 			let md;
 
 			if (i === 0) {
-				hour = "";
-				md = "";
+				hour = '';
+				md = '';
 			} else {
 				hour = i;
-				md = "AM";
+				md = 'AM';
 			}
 
 			if (hour > 12) {
@@ -22,7 +22,7 @@ const DaySidebar = () => {
 			}
 
 			if (i >= 12) {
-				md = "PM";
+				md = 'PM';
 			}
 
 			return `${hour} ${md}`;
