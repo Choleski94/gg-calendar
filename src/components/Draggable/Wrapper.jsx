@@ -41,11 +41,9 @@ const Wrapper = ({ children }) => {
 		};
 	}, []);
 
-	return (
-		React.cloneElement(children, {
-			ref: parentRef
-		})
-	);
+	return React.cloneElement(children, {
+		ref: parentRef
+	});
 };
 
 export default withProvider(Wrapper);

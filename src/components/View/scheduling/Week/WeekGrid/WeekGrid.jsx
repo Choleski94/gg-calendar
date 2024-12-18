@@ -11,9 +11,7 @@ const filterCoordinate = (data = [], colIdx) => {
 		coordinates?.x === colIdx
 	));
 
-	return (
-		colData && colData.length ? colData : []
-	);
+	return colData && colData.length ? colData : []
 }
 
 const WeekGrid = ({ weekArray = [] }) => {

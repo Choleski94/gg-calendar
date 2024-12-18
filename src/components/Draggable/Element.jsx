@@ -8,7 +8,7 @@ export const setElementStyle = (coord = {}, height = 0, isDragging = false, isRe
 	minHeight: '12.5px',
 	height: `${+height * 12.5}px`,
 	width: 'calc((100% - 4px) * 1)',
-	zIndex: isDragging ? '100' : '0',
+	zIndex: (isDragging || isResizing) ? '100' : '0',
 	cursor: isResizing ? 'row-resize' : 'move', // Adjust cursor for resizing
 	transform: `translate(calc((100% - 0px) * 0 + 0px), ${+coord.y * 12.5}px)`,
 });
@@ -41,9 +41,9 @@ const Element = ({
 		positionRef.current = { x, y };
 	}, [ h, x, y ]);
 
-	const isResizing = React.useMemo(() => {
-		return isResizingRef.current
-	}, [ isResizingRef.current ]);
+	const isResizing = React.useMemo(() => (
+		isResizingRef.current
+	), [ isResizingRef.current ]);
 
 	const setIsResizing = (flag = false) => {
 		isResizingRef.current = flag;
@@ -78,10 +78,12 @@ const Element = ({
 			if (isResizingRef?.current) {
 				console.log('Resizing......................');
 
+				setIsResizing(true);
+
+				// Set new height.
 				const box = e.target.parentElement;
 				const boxTop = box.offsetTop;
 
-				// TODO
 				const newHeight = Math.round((
 					e.pageY + 
 					amountScrolled - 
@@ -90,13 +92,6 @@ const Element = ({
 				) / 12.5);
 
 				setHeight(newHeight);
-
-				// const deltaY = e.clientY - startY;
-
-				// // setPosition((prevPosition) => ({
-				// // 	x: prevPosition.x,
-				// // 	y: lockY ? prevPosition.y : prevPosition.y + deltaY,
-				// // }));
 			} else {
 				sX = Math.abs(e.clientX - tempX);
 				sY = Math.abs(e.clientY - tempY);
@@ -123,7 +118,6 @@ const Element = ({
 			setIsResizing(false);
 			setIsDragging(false);
 
-			// Save the previous position.
 			setPrevPosition(positionRef.current);
 
 			document.removeEventListener('mousemove', _handleMouseMove);
@@ -140,20 +134,18 @@ const Element = ({
 	};
 
 	// Clone element.
-	const cloneElement = React.cloneElement(children, {
+	const ghostElement = React.cloneElement(children, {
 		className: [
 			children.props.className, 'dv-box',
 			isDragging ? 'dv-box-dragging' : null,
-			isResizing ? 'dv-box-resizing' : null,
+			// isResizing ? 'dv-box-resizing' : null,
 			'dv-temporary-box'
 		].join(' ').trim(),
 		style: {
 			...children.props.style,
 			...setElementStyle(prevPosition, height, isDragging, isResizing),
 		},
-		children: [
-			children.props.children,
-		],
+		onMouseDown: (e) => e.stopPropagation(),
 	});
 
 	// Set main element.
@@ -179,12 +171,14 @@ const Element = ({
 		]
 	});
 
-	console.log('T DATA::', isResizing, isResizing);
+	React.useEffect(() => {
+		console.log('T DATA::', isResizing, isResizing);
+	}, [ isResizing, isResizing ]);
 
 	return (
 		<>
 			{(isDragging || isResizing) ? (
-				cloneElement
+				ghostElement
 			) : null}
 			{mainElement}
 			{isDragging ? (

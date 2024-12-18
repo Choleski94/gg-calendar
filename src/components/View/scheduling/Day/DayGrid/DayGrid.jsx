@@ -30,15 +30,16 @@ const DayGrid = () => {
 	}, [ entries ]);
 
 	const dayCellRefs = React.useMemo(() => allBoxes.map(() => (
-		React.createRef())
-	), [ allBoxes ]);
+		React.createRef()
+	)), [ allBoxes ]);
 
 	return (
 		<div className="dayview--main-grid">
 			{allBoxes.map(({ id, ...rest}, cellIdx) => (
 				<DayCell 
+					id={id} 
+					key={id} title={id}
 					ref={dayCellRefs[cellIdx]}
-					id={id}  key={id} title={id}
 					{...rest}
 				/>
 			))}

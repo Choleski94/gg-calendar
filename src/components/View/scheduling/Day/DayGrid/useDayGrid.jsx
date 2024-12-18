@@ -4,56 +4,56 @@ import { WEEK_START } from '@constants/calendar';
 import { testDate, compareDates } from '@utils/dates';
 
 const ctg = {
-	"default": {
-		"color": "#2C52BA",
-		"active": true
+	'default': {
+		'color': '#2C52BA',
+		'active': true
 	},
-	"Testing": {
-		"color": "#C20000",
-		"active": true
+	'Testing': {
+		'color': '#C20000',
+		'active': true
 	}
 }
 
 const store = [
 	{
-		"category": "default",
-		"completed": false,
-		"description": "",
-		"end": "2024-02-14T07:00:00.000Z",
-		"id": "lsm06ujyr33rjnw3pm",
-		"start": "2024-02-14T06:00:00.000Z",
-		"title": "First entry",
-		// "coordinates": {
-		// 	"allDay": false,
-		// 	"x": 3,
-		// 	"y": 4,
-		// 	"h": 4,
-		// 	"e": 8
+		category: 'default',
+		completed: false,
+		description: '',
+		end: '2024-11-27T07:00:00.000Z',
+		id: 'lsm06ujyr33rjnw3pm',
+		start: '2024-11-27T06:00:00.000Z',
+		title: 'First entry',
+		// 'coordinates': {
+		// 	allDay: false,
+		// 	x: 3,
+		// 	y: 4,
+		// 	h: 4,
+		// 	e: 8
 		// }
 	},
 	{
-		"category": "default",
-		"completed": false,
-		"description": "",
-		"end": "2024-02-14T15:00:00.000Z",
-		"id": "lsm075xmwbzyx9lupk",
-		"start": "2024-02-14T13:00:00.000Z",
-		"title": "Second entry",
-		// "coordinates": {
-		// 	"x": 1,
-		// 	"y": 32,
-		// 	"h": 8,
-		// 	"e": 40
+		category: 'default',
+		completed: false,
+		description: '',
+		end: '2024-11-27T15:00:00.000Z',
+		id: 'lsm075xmwbzyx9lupk',
+		start: '2024-11-27T13:00:00.000Z',
+		title: 'Second entry',
+		// 'coordinates': {
+		// 	x: 1,
+		// 	y: 32,
+		// 	h: 8,
+		// 	e: 40
 		// }
 	},
 	{
-		"category": "default",
-		"completed": false,
-		"description": "",
-		"end": "2024-02-14T23:00:00.000Z",
-		"id": "lsm07fg3ihs1bgdvpig",
-		"start": "2024-02-14T22:00:00.000Z",
-		"title": "Third entry"
+		category: 'default',
+		completed: false,
+		description: '',
+		end: '2024-11-27T23:00:00.000Z',
+		id: 'lsm07fg3ihs1bgdvpig',
+		start: '2024-11-27T22:00:00.000Z',
+		title: 'Third entry'
 	}
 ];
 

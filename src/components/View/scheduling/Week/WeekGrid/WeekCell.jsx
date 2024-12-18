@@ -7,8 +7,8 @@ import { setWeekCellStyle } from './WeekCell.controller';
 const WeekCell = ({ data = [], colIdx = 0 }) => {
 	return (
 		<div
-			className="week--col"
 			data-wv-top="false"
+			className="week--col"
 			data-column-index={colIdx}
 		>
 			{data.map(({ id, category, title, coordinates }, rowIdx) => (

@@ -100,6 +100,7 @@ class Day {
 				}
 			}
 		}
+
 		return overlaps.sort((a, b) => +a.coordinates.y - +b.coordinates.y)
 	}
 
